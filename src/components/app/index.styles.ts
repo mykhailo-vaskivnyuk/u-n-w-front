@@ -1,29 +1,39 @@
-import { createUseStyles as makeStyles } from 'react-jss';
+import { createUseStyles } from 'react-jss';
 
-export const useStyles = makeStyles(({ palette }) => ({
-  '@global': {
-    '*': {
-      boxSizing: 'border-box',
+export const useStyles = createUseStyles(
+  ({ palette, breakpoints }) => ({
+    // '@global': {
+    //   '*': {
+    //     boxSizing: 'border-box',
+    //   },
+    //   'ul, body': {
+    //     margin: 0,
+    //   },
+    //   img: {
+    //     maxWidth: '100%',
+    //   },
+    // },
+    root: {
+      width: '100%',
+      height: '100%',
+      margin: '0 auto',
+      display: 'grid',
+      gridTemplateRows: '60px 1fr 40px',
+      gap: 5,
+      //
+      // textAlign: 'center',
+      background: palette.cm_background.main,
+      position: 'relative',
+      overflow: 'hidden',
+      borderRadius: 12,
+      [breakpoints.up(480)]: {
+        width: 480,
+      },
     },
-    ul: {
-      margin: 0,
+    gallery: {
+      height: 550,
+      position: 'relative',
     },
-    img: {
-      maxWidth: '100%',
-    },
-  },
-  root: {
-    width: "100%",
-    textAlign: "center",
-    background: palette.cm_primary.main,
-    position: 'relative',
-    overflow: 'hidden',
-    '& pre': {
-      textAlign: "left",
-    }
-  },
-  gallery: {
-    height: 550,
-    position: 'relative',
-  }
-}), { name: "appRoot" });
+  }),
+  { name: 'appRoot' },
+);

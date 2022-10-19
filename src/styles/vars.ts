@@ -2,7 +2,7 @@ import { Vars } from './types';
 
 const vars: Vars = {
   font: {
-    main: '"ProximaNova", Arial, Helvetica, sans-serif',
+    main: "'Alumni Sans', Arial, sans-serif", // '"ProximaNova", Arial, Helvetica, sans-serif',
     proxima: '"ProximaNova", Arial, Helvetica, sans-serif',
   },
 
@@ -11,8 +11,8 @@ const vars: Vars = {
     extraSmall: 8,
     small: 12,
     medium: 16,
-    large: 18,
-    extraLarge: 24,
+    large: 22,
+    extraLarge: 26,
   },
 
   fontWeight: {

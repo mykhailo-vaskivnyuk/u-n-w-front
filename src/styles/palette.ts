@@ -3,17 +3,17 @@ import { Palette } from '@styles/types';
 // main shade of the color is formed from medium or dark based on the palette in figma
 const palette: Palette = {
   cm_primary: {
-    main: '#FF8522',
+    main: '#068408',
     // extraDark?: string;
     // dark?: string;
-    medToDark: '#EB7617',
+    medToDark: '#068408',
     medium: '#FF8522',
     medToLight: '#FFA65F',
     // light: '#FFA65F',
     // extraLight?: string;
   },
   cm_secondary: {
-    main: '#3f4141',
+    main: '#b90909',
     dark: '#3f4141', // #393D3E (main design bg)
     medToDark: '#4B4B4B', // #4C5254 (scroll bar bg)
     medium: '#535353',
@@ -22,7 +22,7 @@ const palette: Palette = {
     extraLight: '#C2C2C2',
   },
   cm_background: {
-    main: '#3f4141',
+    main: '#f1f4f0',
     dark: '#3f4141',
     light: '#FFFFFF',
   },
