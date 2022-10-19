@@ -1,7 +1,7 @@
 import { createUseStyles } from 'react-jss';
 
 export const useStyles = createUseStyles(
-  ({ palette, mixins, breakpoints }) => ({
+  ({ mixins }) => ({
     root: {
       ...mixins.size(42),
       ...mixins.flexCenter,

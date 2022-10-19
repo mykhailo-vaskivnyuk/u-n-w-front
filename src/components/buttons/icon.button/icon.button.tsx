@@ -1,6 +1,6 @@
 import React, { FC, memo, MouseEvent } from 'react';
-import { Icon, ICONS } from '@components/icon/icon';
 import clsx from 'clsx';
+import { Icon, ICONS } from '@components/icon/icon';
 import { useStyles } from './icon.button.styles';
 
 interface IconButtonProps {

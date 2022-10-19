@@ -5,12 +5,39 @@ export const useStyles = createUseStyles(
   ({ palette, vars, mixins }) => ({
     root: {
       ...mixins.size('100%'),
+      ...mixins.flexCenter,
+      flexDirection: 'column',
       position: 'absolute',
       top: 0,
       left: 0,
-      ...mixins.flexCenter,
-      flexDirection: 'column',
       overflow: 'hidden',
+      '&.close': {
+        '& $modal': {
+          top: '100%',
+        },
+        '& $backdrop': {
+          opacity: 0,
+        },
+      },
+    },
+
+    '@global': {
+      '@keyframes modal': {
+        from: {
+          top: '100%',
+        },
+        to: {
+          top: 0,
+        },
+      },
+      '@keyframes backdrop': {
+        from: {
+          opacity: 0,
+        },
+        to: {
+          opacity: 1,
+        },
+      },
     },
 
     backdrop: {
@@ -22,37 +49,39 @@ export const useStyles = createUseStyles(
       zIndex: vars.zIndex.backdrop,
       opacity: 1,
       visibility: 'visible',
+      animationName: 'backdrop',
+      animationDuration: '0.75s',
+      transitionProperty: 'top opacity',
+      transitionDuration: vars.transition.long,
+      transitionTimingFunction: vars.cubicBezier.easeInCirc,
       '&:focus': {
         outline: 'none',
       },
     },
 
     modal: {
-      // height: 'auto',
-      // ...mixins.size('100%'),
       width: '100%',
       position: 'relative',
+      top: 0,
       marginTop: 60,
       flex: '1 0 0',
       background: 'white',
       borderRadius: '12px 12px 0px 0px',
-      // minHeight: 250,
-      // maxHeight: 'calc(100vh - 50px)',
-      // width: '100%',
-      // minWidth: 300,
-      // maxWidth: 690,
-      // margin: 25,
       display: 'flex',
       flexDirection: 'column',
       zIndex: vars.zIndex.modal,
-      // background: palette.cm_light.main,
-      overflow: 'hidden', // overflowY: 'auto',
+      overflow: 'hidden',
+      animationName: 'modal',
+      animationDuration: '0.75s',
+      transitionProperty: 'top opacity',
+      transitionDuration: vars.transition.normal,
+      transitionTimingFunction: vars.cubicBezier.easeInCirc,
     },
 
     /* custom modal elements */
     content: {
       height: '100%',
-      overflow: 'hidden', // overflow: 'auto',
+      overflow: 'hidden',
       display: 'flex',
       flexDirection: 'column',
     },

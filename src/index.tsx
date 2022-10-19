@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { ThemeProvider } from 'react-jss';
 import { defaultTheme } from '@styles/theme';
 import { ErrorBoundary } from '@components/error/error.boundary';
-import { App } from './components/app';
+import { App } from './components/app/app';
 
 ReactDOM.render(
   <ErrorBoundary level="top">

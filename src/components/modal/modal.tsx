@@ -1,7 +1,8 @@
-import React, { FC, PropsWithChildren } from 'react';
+import React, { FC, PropsWithChildren, useEffect, useState } from 'react';
+import clsx from 'clsx';
 import { Classes } from 'jss';
-import { Icon, ICONS } from '@components/icon/icon';
 import { mergeClasses } from '@styles/utils/mergeClasses';
+import { Icon, ICONS } from '@components/icon/icon';
 import { useStyles } from './modal.styles';
 
 export interface GeneralModalProps {
@@ -36,15 +37,25 @@ export const Modal: FC<PropsWithChildren<ModalProps>> = ({
     closeOnBackdropClick && onClose();
   };
 
-  if (!open) {
+  const [close, setClose] = useState(true);
+  const closeHandler = () => setClose(true);
+  useEffect(
+    () =>
+      setClose((value) => {
+        return open ? false : value;
+      }),
+    [open],
+  );
+
+  if (close) {
     return null;
   }
 
   return (
-    <div className={classes.root}>
+    <div className={clsx(classes.root, { close: !open })}>
       <div className={classes.backdrop} onMouseDown={onOverlayClickHandler} />
 
-      <div className={classes.modal}>
+      <div className={classes.modal} onTransitionEnd={closeHandler}>
         {showCloseIcon && (
           <Icon icon={ICONS.cross} onMouseDown={onClose} className={classes.closeBtn} />
         )}

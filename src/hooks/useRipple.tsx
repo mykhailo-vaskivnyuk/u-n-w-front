@@ -5,7 +5,7 @@ import { ArrayMap } from '@utils/array.map.class';
 const MINIMUM_RIPPLE_SIZE = 50;
 
 export const useStyles = makeStyles(
-  () => ({
+  {
     '@global': {
       '@keyframes useRippleAnimation': {
         from: {
@@ -27,7 +27,7 @@ export const useStyles = makeStyles(
       animationName: 'useRippleAnimation',
       animationDuration: '0.75s',
     },
-  }),
+  },
   {
     name: 'UseRipple',
   },

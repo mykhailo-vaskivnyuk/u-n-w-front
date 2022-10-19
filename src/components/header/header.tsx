@@ -1,7 +1,7 @@
-import { IconButton } from '@components/buttons/icon.button/icon.button';
-import { ICONS } from '@components/icon/icon';
-import { Modal } from '@components/modal/modal';
 import React, { FC, useState } from 'react';
+import { ICONS } from '@components/icon/icon';
+import { IconButton } from '@components/buttons/icon.button/icon.button';
+import { Modal } from '@components/modal/modal';
 import { useStyles } from './header.styles';
 
 export const Header: FC = () => {

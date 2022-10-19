@@ -1,11 +1,12 @@
-import { Button } from '@components/buttons/button/button';
-import { Input } from '@components/input/input';
-import { SubTitle } from '@components/subtitle/subtitle';
 import React, { FC } from 'react';
+import { Button } from '@components/buttons/button/button';
+import { Input } from '@components/controls/input/input';
+import { SubTitle } from '@components/subtitle/subtitle';
 import { useStyles } from './auth.styles';
 
 export const Auth: FC = () => {
   const { root, buttons } = useStyles();
+
   return (
     <div className={root}>
       <SubTitle text="Авторизація" />
