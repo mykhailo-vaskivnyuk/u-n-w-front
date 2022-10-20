@@ -22,11 +22,22 @@ export const useStyles = createUseStyles(
         borderWidth: 2,
         padding: 4,
       },
+      '&:-webkit-autofill': {
+        '-webkit-text-fill-color': `${palette.cm_secondary.main} !important`,
+        '-webkit-box-shadow': '0 0 0 30px #ffffff inset !important',
+      },
     },
     label: {
       lineHeight: vars.lineHeight.dense,
       fontWeight: vars.fontWeight.semiBold,
       color: palette.cm_primary.main,
+    },
+    error: {
+      padding: '0 5px',
+      marginTop: 5,
+      borderRadius: 4,
+      color: palette.cm_background.light,
+      background: `${palette.cm_secondary.main}aa`,
     },
   }),
   { name: 'Input' },

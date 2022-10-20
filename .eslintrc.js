@@ -50,6 +50,8 @@ module.exports = {
     'react/require-default-props': 'off',
     'react/function-component-definition': 'off',
     'react-hooks/exhaustive-deps': 'warn',
+    'react/jsx-props-no-spreading': 'off',
+    'react/button-has-type': 'off',
     'import/prefer-default-export': 'off',
     'import/no-extraneous-dependencies': 'off',
     'jsx-a11y/no-static-element-interactions': 'off',
