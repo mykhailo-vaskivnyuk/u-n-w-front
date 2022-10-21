@@ -6,7 +6,7 @@ interface IconProps {
   icon: ICONS;
   raw?: boolean;
   className?: string;
-  onMouseDown?: ((e: SyntheticEvent) => void) | (() => void);
+  onClick?: ((e: SyntheticEvent) => void) | (() => void);
 }
 
 const getAsyncIconComponent = (icon: ICONS) =>
@@ -44,6 +44,7 @@ export enum ICONS {
   earth = 'earth',
   home = 'home',
   info = 'info',
+  logout = 'logout',
   menu = 'menu',
   printer = 'printer',
   scale = 'scale',
@@ -52,6 +53,7 @@ export enum ICONS {
   shortArrowLeft = 'short-arrow-left',
   shortArrowRight = 'short-arrow-right',
   shortArrowUp = 'short-arrow-up',
+  signin = 'signin',
   spinner = 'spinner',
   trash = 'trash',
   user = 'user',

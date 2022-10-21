@@ -1,29 +1,20 @@
 import { createUseStyles } from 'react-jss';
 
 export const useStyles = createUseStyles(
-  ({ palette, mixins }) => ({
-    '@global': {
-      '@keyframes spin': {
-        to: { transform: 'rotate(360deg)' },
-      },
-    },
+  ({ palette, mixins, vars }) => ({
     root: {
-      // position: 'absolute',
-      // ...mixins.size('100%'),
-      // ...mixins.flexCenter,
-      // background: `${palette.cm_background.main}aa`,
+      display: 'flex',
+      alignItems: 'center',
+      gap: 10,
+      color: palette.cm_primary.main,
+      marginLeft: -40,
+      fontSize: 36,
+      fontWeight: vars.fontWeight.semiBold,
     },
     icon: {
-      // ...mixins.size(100),
-      // color: palette.cm_primary.main,
-      // animationName: 'spin',
-      // animationIterationCount: 'infinite',
-      // animationTimingFunction: 'linear',
-      // animationDuration: '3s',
-      // '& path:first-child': {
-      //   color: palette.cm_secondary.main,
-      // },
+      ...mixins.size(30),
+      color: palette.cm_secondary.main,
     },
   }),
-  { name: 'Loading' },
+  { name: 'MenuItem' },
 );

@@ -1,15 +1,11 @@
 import { createUseStyles } from 'react-jss';
 
 export const useStyles = createUseStyles(
-  ({ palette, mixins }) => ({
-    '@global': {
-      '@keyframes spin': {
-        to: { transform: 'rotate(360deg)' },
-      },
-    },
+  {
     root: {
-      //
+      display: 'grid',
+      // gridGap: 7,
     },
-  }),
-  { name: 'Loading' },
+  },
+  { name: 'Menu' },
 );

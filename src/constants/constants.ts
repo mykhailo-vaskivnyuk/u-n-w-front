@@ -4,18 +4,24 @@ import { MenuItemProps } from '@components/menu/menu.item';
 export const MENU_ITEMS: Omit<MenuItemProps, 'onClick'>[] = [
   {
     id: 1,
-    label: 'Authorization',
+    label: 'Авторизуватись',
     pathname: '/auth',
-    icon: ICONS.spinner,
+    icon: ICONS.signin,
   },
   {
     id: 2,
+    label: 'Вийти',
+    pathname: '/logout',
+    icon: ICONS.logout,
+  },
+  {
+    id: 3,
     label: 'Restore',
     pathname: '/overmail',
     icon: ICONS.spinner,
   },
   {
-    id: 3,
+    id: 4,
     label: 'Registratison',
     pathname: '/signup',
     icon: ICONS.spinner,

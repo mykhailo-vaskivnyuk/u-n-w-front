@@ -1,40 +1,49 @@
-import React, { FC, PropsWithChildren, useEffect, useState } from 'react';
+import React, { FC, ReactElement, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import clsx from 'clsx';
 import { Classes } from 'jss';
+import modalService from '@services/modal.service';
 import { mergeClasses } from '@styles/utils/mergeClasses';
 import { Icon, ICONS } from '@components/icon/icon';
 import { useStyles } from './modal.styles';
 
-export interface GeneralModalProps {
-  open: boolean;
-  onClose: () => void;
-}
-
-export type ModalProps = GeneralModalProps & {
+export interface ModalProps {
+  onClose?: () => void;
   classes?: Partial<Classes<'root' | 'backdrop' | 'modal' | 'content' | 'closeBtn'>>;
   onBackdropClick?: () => void;
   showCloseIcon?: boolean;
   closeOnBackdropClick?: boolean;
-};
+}
 
-export const Modal: FC<PropsWithChildren<ModalProps>> = ({
-  open,
+export const Modal: FC<ModalProps> = ({
   onClose,
   classes: classesProp,
   onBackdropClick,
-  showCloseIcon = false,
+  showCloseIcon = true,
   closeOnBackdropClick = true,
-  children,
 }) => {
   const classesOwn = useStyles();
   const classes = classesProp ? mergeClasses(classesOwn, classesProp) : classesOwn;
 
-  /**
-   * handles click on overlay
-   */
+  const [content, setContent] = useState<ReactElement | null>(null);
+  const location = useLocation();
+  useEffect(() => {
+    modalService.setCallback(setContent);
+  }, []);
+
+  useEffect(() => {
+    setContent(null);
+  }, [location]);
+
+  /* handles click on overlay */
   const onOverlayClickHandler = () => {
     onBackdropClick?.();
-    closeOnBackdropClick && onClose();
+    closeOnBackdropClick && (setContent(null), onClose?.());
+  };
+
+  const onCloseHandler = () => {
+    setContent(null);
+    onClose?.();
   };
 
   const [close, setClose] = useState(true);
@@ -42,9 +51,9 @@ export const Modal: FC<PropsWithChildren<ModalProps>> = ({
   useEffect(
     () =>
       setClose((value) => {
-        return open ? false : value;
+        return content ? false : value;
       }),
-    [open],
+    [content],
   );
 
   if (close) {
@@ -52,14 +61,14 @@ export const Modal: FC<PropsWithChildren<ModalProps>> = ({
   }
 
   return (
-    <div className={clsx(classes.root, { close: !open })}>
+    <div className={clsx(classes.root, { close: !content })}>
       <div className={classes.backdrop} onMouseDown={onOverlayClickHandler} />
 
       <div className={classes.modal} onTransitionEnd={closeHandler}>
         {showCloseIcon && (
-          <Icon icon={ICONS.cross} onMouseDown={onClose} className={classes.closeBtn} />
+          <Icon icon={ICONS.cross} onClick={onCloseHandler} className={classes.closeBtn} />
         )}
-        <div className={classes.content}>{children}</div>
+        <div className={classes.content}>{content}</div>
       </div>
     </div>
   );

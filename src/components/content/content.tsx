@@ -14,6 +14,7 @@ export const Content: FC = () => {
       <Routes>
         <Route path="/">
           <Route path="" element={<Main />} />
+          <Route path="logout" element={<Main />} />
           <Route path="auth" element={<AuthForm />} />
           <Route path="signup" element={<SignupForm />} />
           <Route path="overmail" element={<OvermailForm />} />
