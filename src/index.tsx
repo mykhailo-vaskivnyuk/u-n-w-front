@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { HashRouter } from 'react-router-dom';
 import { ThemeProvider } from 'react-jss';
 import { defaultTheme } from '@styles/theme';
 import { ErrorBoundary } from '@components/error/error.boundary';
@@ -12,7 +13,9 @@ root &&
     <ErrorBoundary level="top">
       <ThemeProvider theme={defaultTheme}>
         <ErrorBoundary level="app">
-          <App />
+          <HashRouter>
+            <App />
+          </HashRouter>
         </ErrorBoundary>
       </ThemeProvider>
     </ErrorBoundary>,

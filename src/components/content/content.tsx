@@ -1,6 +1,9 @@
 import React, { FC } from 'react';
-// import { AuthForm } from '@components/forms/auth/auth';
-import { Router } from './content.router';
+import { Route, Routes } from 'react-router-dom';
+import { Main } from '@components/views/main/main';
+import { AuthForm } from '@components/forms/auth/auth';
+import { OvermailForm } from '@components/forms/overmail/overmail';
+import { SignupForm } from '@components/forms/signup/signup';
 import { useStyles } from './content.styles';
 
 export const Content: FC = () => {
@@ -8,7 +11,14 @@ export const Content: FC = () => {
 
   return (
     <div className={root}>
-      <Router />
+      <Routes>
+        <Route path="/">
+          <Route path="" element={<Main />} />
+          <Route path="auth" element={<AuthForm />} />
+          <Route path="signup" element={<SignupForm />} />
+          <Route path="overmail" element={<OvermailForm />} />
+        </Route>
+      </Routes>
     </div>
   );
 };

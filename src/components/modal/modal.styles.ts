@@ -80,10 +80,16 @@ export const useStyles = createUseStyles(
 
     /* custom modal elements */
     content: {
-      height: '100%',
+      // height: '100%',
+      flex: '1 0 0',
       overflow: 'hidden',
       display: 'flex',
       flexDirection: 'column',
+      alignItems: 'center',
+      color: 'black',
+      margin: '50px 0 20px 20px',
+      paddingRight: 20,
+      // background: 'grey',
     },
 
     closeBtn: {
