@@ -12,7 +12,7 @@ export const App: FC = () => {
 
   useEffect(() => {
     const app = new ClientApp('http://localhost:8000/api');
-    app.testRequest();
+    app.testRequest().catch(() => console.log('testRequestError'));
   });
 
   return (

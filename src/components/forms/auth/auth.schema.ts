@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 
 export const AuthSchema = yup.object().shape({
-  email: yup.string().email(),
+  email: yup.string().required().email(),
   password: yup.string().required(),
 });
 

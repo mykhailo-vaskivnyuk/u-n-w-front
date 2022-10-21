@@ -7,6 +7,7 @@ export const useStyles = createUseStyles(
       ...mixins.flexCenter,
       background: 'transparent',
       padding: 6,
+      cursor: 'pointer',
     },
   }),
   {

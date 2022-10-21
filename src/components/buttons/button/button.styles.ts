@@ -10,8 +10,12 @@ export const useStyles = createUseStyles(
       padding: 6,
       borderRadius: 4,
       textTransform: 'uppercase',
+      cursor: 'pointer',
       '&.secondary': {
         background: palette.cm_secondary.main,
+      },
+      '&:link, &:visited': {
+        color: palette.cm_background.light,
       },
     },
   }),

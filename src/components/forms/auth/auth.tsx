@@ -18,17 +18,17 @@ const Auth: FC = () => {
   return (
     <form className={root} onSubmit={handleSubmit}>
       <SubTitle text="Авторизація" />
-      <Input type="text" label="Логін" name="email" />
+      <Input type="text" label="Email" name="email" />
       <Input type="password" label="Пароль" name="password" />
       <div className={buttons}>
-        <Button type="submit" onClick={() => {}} btnType="secondary">
+        <Button type="submit" btnType="secondary">
           ok
         </Button>
         <div />
-        <Button onClick={() => {}} btnType="primary">
+        <Button href="/overmail" btnType="primary">
           over mail
         </Button>
-        <Button onClick={() => {}} btnType="primary">
+        <Button href="/signup" btnType="primary">
           sing up
         </Button>
       </div>

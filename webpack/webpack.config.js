@@ -29,7 +29,7 @@ const config = {
 	},
 	output: {
 		path: PATHS.appBuild,
-		filename: IS_PROD ? "assets/js/[name].[contenthash:8].js" : "assets/js/[name].js",
+		filename: IS_PROD ? "assets/js/[name].js" : "assets/js/[name].js",
 		// chunkFilename: IS_PROD ? "assets/js/[name].[contenthash:8].chunk.js" : "assets/js/[name].chunk.js",
 		// publicPath: IS_DEV ? "/" : "./",
 	},
