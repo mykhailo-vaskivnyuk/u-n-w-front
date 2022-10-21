@@ -11,7 +11,7 @@ export const useStyles = createUseStyles(
       top: 0,
       left: 0,
       overflow: 'hidden',
-      '&.close': {
+      '&.closing': {
         '& $modal': {
           top: '100%',
         },
@@ -51,7 +51,7 @@ export const useStyles = createUseStyles(
       visibility: 'visible',
       animationName: 'backdrop',
       animationDuration: '0.75s',
-      transitionProperty: 'top opacity',
+      transitionProperty: 'opacity',
       transitionDuration: vars.transition.long,
       transitionTimingFunction: vars.cubicBezier.easeInCirc,
       '&:focus': {
@@ -73,14 +73,13 @@ export const useStyles = createUseStyles(
       overflow: 'hidden',
       animationName: 'modal',
       animationDuration: '0.75s',
-      transitionProperty: 'top opacity',
+      transitionProperty: 'top',
       transitionDuration: vars.transition.normal,
       transitionTimingFunction: vars.cubicBezier.easeInCirc,
     },
 
     /* custom modal elements */
     content: {
-      // height: '100%',
       flex: '1 0 0',
       overflow: 'hidden',
       display: 'flex',
@@ -89,7 +88,6 @@ export const useStyles = createUseStyles(
       color: 'black',
       margin: '50px 0 20px 20px',
       paddingRight: 20,
-      // background: 'grey',
     },
 
     closeBtn: {

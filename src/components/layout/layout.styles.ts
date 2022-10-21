@@ -18,5 +18,5 @@ export const useStyles = createUseStyles(
       },
     },
   }),
-  { name: 'App' },
+  { name: 'Layout' },
 );

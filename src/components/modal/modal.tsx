@@ -41,27 +41,23 @@ export const Modal: FC<ModalProps> = ({
     closeOnBackdropClick && (setContent(null), onClose?.());
   };
 
-  const onCloseHandler = () => {
+  const [closing, setClosing] = useState(false);
+  const closeHandler = () => {
+    setClosing(false);
     setContent(null);
+  };
+
+  const onCloseHandler = () => {
+    setClosing(true);
     onClose?.();
   };
 
-  const [close, setClose] = useState(true);
-  const closeHandler = () => setClose(true);
-  useEffect(
-    () =>
-      setClose((value) => {
-        return content ? false : value;
-      }),
-    [content],
-  );
-
-  if (close) {
+  if (!content) {
     return null;
   }
 
   return (
-    <div className={clsx(classes.root, { close: !content })}>
+    <div className={clsx(classes.root, { closing })}>
       <div className={classes.backdrop} onMouseDown={onOverlayClickHandler} />
 
       <div className={classes.modal} onTransitionEnd={closeHandler}>

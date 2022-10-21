@@ -22,7 +22,7 @@ export const MENU_ITEMS: Omit<MenuItemProps, 'onClick'>[] = [
   },
   {
     id: 4,
-    label: 'Registratison',
+    label: 'Registration',
     pathname: '/signup',
     icon: ICONS.spinner,
   },
