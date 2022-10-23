@@ -6,30 +6,38 @@ interface Props {
 
 interface State {
   hasError: boolean;
+  error: Error | null;
 }
 
 export class ErrorBoundary extends React.Component<PropsWithChildren<Props>, State> {
   constructor(props: Props) {
     super(props);
-    this.state = { hasError: false };
+    this.state = { hasError: false, error: null };
   }
 
   static getDerivedStateFromError(error: Error) {
     // Update state so the next render will show the fallback UI.
-    return { hasError: true };
+    return { hasError: true, error };
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     // You can also log the error to an error reporting service
-    console.log("ERROR BOUNDARY:\n", error, "\n", errorInfo);
+    console.log('ERROR:\n', error, '\n', errorInfo);
   }
 
   render() {
-    if (this.state.hasError) {
+    const { hasError, error } = this.state;
+    const { level, children } = this.props;
+    if (hasError) {
       // You can render any custom fallback UI
-      return <h1>Something went wrong on LEVEL {this.props.level}.</h1>;
+      return (
+        <>
+          <h1>Something went wrong on LEVEL {level}.</h1>
+          <div>{error?.message}</div>
+        </>
+      );
     }
 
-    return this.props.children; 
+    return children;
   }
 }

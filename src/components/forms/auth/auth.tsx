@@ -1,5 +1,8 @@
 import React, { FC, FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Formik, useFormikContext } from 'formik';
+import { app } from '@api/client.app';
+import modalService from '@services/modal.service';
 import { Button } from '@components/buttons/button/button';
 import { Input } from '@components/controls/input/input';
 import { SubTitle } from '@components/subtitle/subtitle';
@@ -39,11 +42,19 @@ const Auth: FC = () => {
 const FormikProvider = Formik<AuthFormValues>;
 
 export const AuthForm = () => {
+  const navigate = useNavigate();
+
   return (
     <FormikProvider
       initialValues={{ email: '', password: '' }}
       validationSchema={AuthSchema}
-      onSubmit={(values) => console.log(values)}
+      onSubmit={async (values, actions) => {
+        console.log(values);
+        const success = await app.login(values);
+        if (!success) return modalService.showMessage('Невірний email або пароль');
+        actions.resetForm;
+        navigate('/');
+      }}
     >
       <Auth />
     </FormikProvider>

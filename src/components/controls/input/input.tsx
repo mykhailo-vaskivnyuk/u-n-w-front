@@ -10,13 +10,13 @@ export const Input: FC<InputProps> = (props) => {
   const { root, input, label: clsLabel, error: clsError } = useStyles();
   const { label, ...rest } = props;
   const { name = '' } = rest;
-  const [formikProps, { error }] = useField({ name });
+  const [formikProps, { error, touched }] = useField({ name });
 
   return (
     <div className={root}>
       <div className={clsLabel}>{label}</div>
       <input {...rest} className={input} {...formikProps} />
-      {error && <div className={clsError}>{error}</div>}
+      {error && touched && <div className={clsError}>{error}</div>}
     </div>
   );
 };

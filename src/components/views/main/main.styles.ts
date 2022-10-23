@@ -5,6 +5,7 @@ export const useStyles = createUseStyles(
     root: {
       height: '100%',
       ...mixins.flexCenter,
+      flexDirection: 'column',
     },
     content: {
       fontSize: 50,

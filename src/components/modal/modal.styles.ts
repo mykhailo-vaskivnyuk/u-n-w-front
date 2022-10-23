@@ -5,15 +5,12 @@ export const useStyles = createUseStyles(
   ({ palette, vars, mixins }) => ({
     root: {
       ...mixins.size('100%'),
-      ...mixins.flexCenter,
-      flexDirection: 'column',
       position: 'absolute',
       top: 0,
       left: 0,
-      overflow: 'hidden',
       '&.closing': {
         '& $modal': {
-          top: '100%',
+          transform: 'translateY(-100%)',
         },
         '& $backdrop': {
           opacity: 0,
@@ -24,10 +21,10 @@ export const useStyles = createUseStyles(
     '@global': {
       '@keyframes modal': {
         from: {
-          top: '100%',
+          transform: 'translateY(-100%)',
         },
         to: {
-          top: 0,
+          transform: 'translateY(60px)',
         },
       },
       '@keyframes backdrop': {
@@ -46,7 +43,6 @@ export const useStyles = createUseStyles(
       position: 'absolute',
       top: 0,
       left: 0,
-      zIndex: vars.zIndex.backdrop,
       opacity: 1,
       visibility: 'visible',
       animationName: 'backdrop',
@@ -60,35 +56,21 @@ export const useStyles = createUseStyles(
     },
 
     modal: {
-      width: '100%',
-      position: 'relative',
-      top: 0,
-      marginTop: 60,
-      flex: '1 0 0',
-      background: 'white',
-      borderRadius: '12px 12px 0px 0px',
-      display: 'flex',
-      flexDirection: 'column',
-      zIndex: vars.zIndex.modal,
+      maxHeight: 'calc(100% - 60px)',
+      transform: 'translateY(60px)',
+      background: palette.cm_background.main,
+      margin: '0 12px',
+      borderRadius: 12,
       overflow: 'hidden',
       animationName: 'modal',
       animationDuration: '0.75s',
-      transitionProperty: 'top',
+      transitionProperty: 'transform',
       transitionDuration: vars.transition.normal,
       transitionTimingFunction: vars.cubicBezier.easeInCirc,
     },
 
     /* custom modal elements */
-    content: {
-      flex: '1 0 0',
-      overflow: 'hidden',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      color: 'black',
-      margin: '50px 0 20px 20px',
-      paddingRight: 20,
-    },
+    content: {},
 
     closeBtn: {
       position: 'absolute',

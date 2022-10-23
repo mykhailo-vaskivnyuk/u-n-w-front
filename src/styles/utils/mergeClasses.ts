@@ -1,14 +1,10 @@
 import type { Classes } from 'jss';
 
-export const mergeClasses = (baseClasses: Classes, additionalClasses: Classes): Classes => {
+export const mergeClasses = (baseClasses: Classes, additionalClasses: Classes = {}): Classes => {
   const combinedClasses = { ...baseClasses };
 
-  // eslint-disable-next-line guard-for-in
-  for (const name in additionalClasses) {
-    combinedClasses[name] =
-      name in combinedClasses
-        ? `${combinedClasses[name]} ${additionalClasses[name]}`
-        : additionalClasses[name];
+  for (const name of Object.keys(additionalClasses)) {
+    combinedClasses[name] = `${combinedClasses[name] || ''} ${additionalClasses[name]}`.trimStart();
   }
 
   return combinedClasses;

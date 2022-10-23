@@ -1,6 +1,7 @@
-import { SetStateAction, Dispatch, ReactElement } from 'react';
+import { SetStateAction, Dispatch } from 'react';
+import { EModalContent, ModalContentPropsMap, TContent } from '@components/modal/modal.types';
 
-type TCallback = Dispatch<SetStateAction<ReactElement | null>>;
+type TCallback = Dispatch<SetStateAction<TContent | null>>;
 
 class ModalService {
   private callback: TCallback | null = null;
@@ -9,8 +10,12 @@ class ModalService {
     this.callback = callback;
   }
 
-  openModal(content: ReactElement) {
-    this.callback && this.callback(content);
+  openModal(data: ModalContentPropsMap[EModalContent.general]) {
+    this.callback && this.callback({ type: EModalContent.general, data });
+  }
+
+  showMessage(data: ModalContentPropsMap[EModalContent.message]) {
+    this.callback && this.callback({ type: EModalContent.message, data });
   }
 }
 
