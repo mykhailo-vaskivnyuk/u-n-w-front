@@ -53,7 +53,7 @@ let baseUrl = process.env.API;
 
 if (!baseUrl) {
   const { protocol, host } = window.location;
-  baseUrl = `${protocol}//${host}`;
+  baseUrl = `${protocol}//${host}/api`;
 }
 
 export const app = new ClientApp(baseUrl);
