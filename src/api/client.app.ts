@@ -73,6 +73,19 @@ class ClientApp extends EventEmmiter {
     this.setState(AppState.READY);
     return user;
   }
+
+  async overmail(...args: Parameters<typeof this.clientApi.auth.signup>) {
+    this.setState(AppState.LOADING);
+    let user = null;
+    try {
+      user = await this.clientApi.auth.ovremail(...args);
+    } catch (e) {
+      console.log(e);
+    }
+    this.user = user;
+    this.setState(AppState.READY);
+    return user;
+  }
 }
 
 let baseUrl = process.env.API;
