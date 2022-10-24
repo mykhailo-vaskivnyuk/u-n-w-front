@@ -3,8 +3,11 @@ import { Formik, useFormikContext } from 'formik';
 import { Button } from '@components/buttons/button/button';
 import { Input } from '@components/controls/input/input';
 import { SubTitle } from '@components/subtitle/subtitle';
-import { SignupField, SignupFormValues, SignupSchema } from './signup.schema';
+import { app } from '@api/client.app';
+import modalService from '@services/modal.service';
+import { useNavigate } from 'react-router-dom';
 import { useStyles } from './signup.styles';
+import { SignupField, SignupFormValues, SignupSchema } from './signup.schema';
 
 const Signup: FC = () => {
   const { root, buttons } = useStyles();
@@ -35,11 +38,19 @@ const Signup: FC = () => {
 const FormikProvider = Formik<SignupFormValues>;
 
 export const SignupForm = () => {
+  const navigate = useNavigate();
+
   return (
     <FormikProvider
-      initialValues={{ [SignupField.EMAIL]: '' }}
+      initialValues={{ email: '' }}
       validationSchema={SignupSchema}
-      onSubmit={(values) => console.log(values)}
+      onSubmit={async (values, actions) => {
+        console.log(values);
+        const success = await app.signup(values);
+        if (!success) return modalService.showMessage('Користувач з таким email вже зареєстрований');
+        actions.resetForm;
+        navigate('/');
+      }}
     >
       <Signup />
     </FormikProvider>
