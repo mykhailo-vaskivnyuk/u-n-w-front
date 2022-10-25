@@ -78,7 +78,20 @@ class ClientApp extends EventEmmiter {
     this.setState(AppState.LOADING);
     let user = null;
     try {
-      user = await this.clientApi.auth.ovremail(...args);
+      user = null; // await this.clientApi.auth.ovremail(...args);
+    } catch (e) {
+      console.log(e);
+    }
+    this.user = user;
+    this.setState(AppState.READY);
+    return user;
+  }
+
+  async confirm(...args: Parameters<typeof this.clientApi.auth.confirm>) {
+    this.setState(AppState.LOADING);
+    let user = null;
+    try {
+      user = await this.clientApi.auth.confirm(...args);
     } catch (e) {
       console.log(e);
     }

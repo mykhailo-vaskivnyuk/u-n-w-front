@@ -5,6 +5,7 @@ import { AuthForm } from '@components/forms/auth/auth';
 import { OvermailForm } from '@components/forms/overmail/overmail';
 import { SignupForm } from '@components/forms/signup/signup';
 import { Logout } from '@components/logout/logout';
+import { Confirm } from '@components/confirm/confirm';
 import { useStyles } from './content.styles';
 
 export const Content: FC = () => {
@@ -19,6 +20,7 @@ export const Content: FC = () => {
           <Route path="auth" element={<AuthForm />} />
           <Route path="signup" element={<SignupForm />} />
           <Route path="overmail" element={<OvermailForm />} />
+          <Route path="confirm/*" element={<Confirm />} />
         </Route>
       </Routes>
     </div>
