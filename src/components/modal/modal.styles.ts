@@ -8,6 +8,7 @@ export const useStyles = createUseStyles(
       position: 'absolute',
       top: 0,
       left: 0,
+      zIndex: 100,
       '&.closing': {
         '& $modal': {
           transform: 'translateY(-100%)',

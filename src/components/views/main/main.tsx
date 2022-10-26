@@ -9,7 +9,7 @@ export const Main: FC = () => {
   return (
     <div className={root}>
       <div className={content}>START PAGE</div>
-      {user && <div className={content}>HELLO, {user.name}!</div>}
+      {user && <div className={content}>{user.name || user.net_name || user.email}</div>}
       {/* {user && <pre>{JSON.stringify(user, null, ' ')}</pre>} */}
     </div>
   );

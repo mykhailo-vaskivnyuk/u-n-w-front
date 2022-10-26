@@ -40,12 +40,13 @@ class ClientApp extends EventEmmiter {
     let user = null;
     try {
       user = await this.clientApi.auth.login(...args);
+      this.setUser(user);
+      this.setState(AppState.READY);
+      return Boolean(user);
     } catch (e) {
-      console.log(e);
+      this.setState(AppState.ERROR);
+      throw new Error();
     }
-    this.setUser(user);
-    this.setState(AppState.READY);
-    return Boolean(user);
   }
 
   async logout(...args: Parameters<typeof this.clientApi.auth.logout>) {
@@ -54,7 +55,7 @@ class ClientApp extends EventEmmiter {
     try {
       result = await this.clientApi.auth.logout(...args);
     } catch (e) {
-      console.log(e);
+      this.state = AppState.ERROR;
     }
     this.user = null;
     this.setState(AppState.READY);
@@ -67,7 +68,7 @@ class ClientApp extends EventEmmiter {
     try {
       user = await this.clientApi.auth.signup(...args);
     } catch (e) {
-      console.log(e);
+      this.state = AppState.ERROR;
     }
     this.user = user;
     this.setState(AppState.READY);
@@ -80,7 +81,7 @@ class ClientApp extends EventEmmiter {
     try {
       user = null; // await this.clientApi.auth.ovremail(...args);
     } catch (e) {
-      console.log(e);
+      this.state = AppState.ERROR;
     }
     this.user = user;
     this.setState(AppState.READY);
@@ -93,7 +94,7 @@ class ClientApp extends EventEmmiter {
     try {
       user = await this.clientApi.auth.confirm(...args);
     } catch (e) {
-      console.log(e);
+      this.state = AppState.ERROR;
     }
     this.user = user;
     this.setState(AppState.READY);

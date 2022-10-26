@@ -1,28 +1,8 @@
-import React, { FC } from 'react';
-import { Route, Routes } from 'react-router-dom';
-import { Main } from '@components/views/main/main';
-import { AuthForm } from '@components/forms/auth/auth';
-import { OvermailForm } from '@components/forms/overmail/overmail';
-import { SignupForm } from '@components/forms/signup/signup';
-import { Logout } from '@components/logout/logout';
-import { Confirm } from '@components/confirm/confirm';
+import React, { FC, PropsWithChildren } from 'react';
 import { useStyles } from './content.styles';
 
-export const Content: FC = () => {
+export const Content: FC<PropsWithChildren> = ({ children }) => {
   const { root } = useStyles();
 
-  return (
-    <div className={root}>
-      <Routes>
-        <Route path="/">
-          <Route path="" element={<Main />} />
-          <Route path="logout" element={<Logout />} />
-          <Route path="auth" element={<AuthForm />} />
-          <Route path="signup" element={<SignupForm />} />
-          <Route path="overmail" element={<OvermailForm />} />
-          <Route path="confirm/*" element={<Confirm />} />
-        </Route>
-      </Routes>
-    </div>
-  );
+  return <div className={root}>{children}</div>;
 };

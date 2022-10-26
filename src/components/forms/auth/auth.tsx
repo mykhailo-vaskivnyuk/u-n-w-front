@@ -50,10 +50,14 @@ export const AuthForm = () => {
       validationSchema={AuthSchema}
       onSubmit={async (values, actions) => {
         console.log(values);
-        const success = await app.login(values);
-        if (!success) return modalService.showMessage('Невірний email або пароль');
-        actions.resetForm;
-        navigate('/');
+        await app
+          .login(values)
+          .then((success) => {
+            if (!success) return modalService.showMessage('Невірний email або пароль');
+            actions.resetForm;
+            navigate('/');
+          })
+          .catch(() => {});
       }}
     >
       <Auth />
