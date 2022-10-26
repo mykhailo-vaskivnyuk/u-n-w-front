@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { FC, PropsWithChildren, useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import clsx from 'clsx';
@@ -25,6 +24,7 @@ export const Modal: FC<PropsWithChildren<ModalProps>> = (props) => {
   useEffect(() => {
     if (!children) return;
     setClosing(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
   const onBackdropClickHandler = () => {
@@ -35,11 +35,11 @@ export const Modal: FC<PropsWithChildren<ModalProps>> = (props) => {
   const closeHandler = useCallback(() => {
     onClose?.();
     setClosing(false);
-  }, []);
+  }, [onClose]);
 
   const onCloseHandler = useCallback(() => {
     setClosing(true);
-  }, [onClose]);
+  }, []);
 
   if (!children) return null;
 

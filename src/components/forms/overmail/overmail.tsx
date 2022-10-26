@@ -44,12 +44,16 @@ export const OvermailForm = () => {
     <FormikProvider
       initialValues={{ email: '' }}
       validationSchema={OvermailSchema}
-      onSubmit={async (values, actions) => {
+      onSubmit={(values) => {
         console.log(values);
-        const success = await app.overmail(values);
-        modalService.showMessage('Email відправлено');
-        actions.resetForm;
-        navigate('/');
+        app
+          .overmail(values)
+          .then((success) => {
+            if (success) {
+              modalService.showMessage(`Лінк відправлено на ${values[OvermailField.EMAIL]}`, () => navigate('/auth'));
+            }
+          })
+          .catch();
       }}
     >
       <Overmail />

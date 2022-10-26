@@ -46,10 +46,13 @@ export const SignupForm = () => {
       validationSchema={SignupSchema}
       onSubmit={async (values) => {
         console.log(values);
-        await app.signup(values).then((success) => {
-          if (success) return navigate('/account');
-          modalService.showMessage('Невірний email або пароль');
-        });
+        await app
+          .signup(values)
+          .then((success) => {
+            if (success) return navigate('/account');
+            modalService.showMessage('Користувач з таким email вже зареєстрований');
+          })
+          .catch();
       }}
     >
       <Signup />

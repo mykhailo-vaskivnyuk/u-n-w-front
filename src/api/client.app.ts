@@ -81,10 +81,9 @@ class ClientApp extends EventEmmiter {
     this.setState(AppState.LOADING);
     try {
       const user = await this.clientApi.auth.signup(...args);
-      if (!user) throw new Error('Wrong credentials');
-      this.setUser(user);
+      user && this.setUser(user);
       this.setState(AppState.READY);
-      return true;
+      return Boolean(user);
     } catch (e) {
       this.setState(AppState.ERROR);
       throw e;
@@ -93,28 +92,40 @@ class ClientApp extends EventEmmiter {
 
   async overmail(...args: Parameters<typeof this.clientApi.auth.signup>) {
     this.setState(AppState.LOADING);
-    let user = null;
     try {
-      user = null; // await this.clientApi.auth.ovremail(...args);
+      const success = await this.clientApi.auth.overmail(...args);
+      if (!success) return false;
+      this.setState(AppState.READY);
+      return true;
     } catch (e) {
       this.state = AppState.ERROR;
     }
-    this.user = user;
-    this.setState(AppState.READY);
-    return user;
   }
 
   async confirm(...args: Parameters<typeof this.clientApi.auth.confirm>) {
     this.setState(AppState.LOADING);
-    let user = null;
     try {
-      user = await this.clientApi.auth.confirm(...args);
+      const user = await this.clientApi.auth.confirm(...args);
+      user && this.setUser(user);
+      this.setState(AppState.READY);
+      return Boolean(user);
     } catch (e) {
-      this.state = AppState.ERROR;
+      this.setState(AppState.ERROR);
+      throw e;
     }
-    this.user = user;
-    this.setState(AppState.READY);
-    return user;
+  }
+
+  async restore(...args: Parameters<typeof this.clientApi.auth.restore>) {
+    this.setState(AppState.LOADING);
+    try {
+      const user = await this.clientApi.auth.restore(...args);
+      user && this.setUser(user);
+      this.setState(AppState.READY);
+      return Boolean(user);
+    } catch (e) {
+      this.setState(AppState.ERROR);
+      throw e;
+    }
   }
 }
 

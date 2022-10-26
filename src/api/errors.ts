@@ -11,8 +11,11 @@ export type ErrorCodeType = keyof typeof HttpResponseErrorMap;
 export const HttpResponseErrorEnum = getEnumFromMap(HttpResponseErrorMap);
 
 export class HttpResponseError extends Error {
+  statusCode = 500;
+
   constructor(code: ErrorCodeType) {
-    super(HttpResponseErrorMap[code || 500]);
+    super(HttpResponseErrorMap[code]);
+    this.statusCode = code;
     this.name = this.constructor.name;
   }
 }

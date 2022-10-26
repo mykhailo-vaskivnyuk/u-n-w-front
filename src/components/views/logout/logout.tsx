@@ -4,9 +4,10 @@ import { useNavigate } from 'react-router-dom';
 
 export const Logout: FC = () => {
   const navigate = useNavigate();
+
   useEffect(() => {
     app.logout({}).then((success) => {
-      success && navigate('/auth');
+      success ? navigate('/auth') : window.history.back();
     });
   }, [navigate]);
   return null;

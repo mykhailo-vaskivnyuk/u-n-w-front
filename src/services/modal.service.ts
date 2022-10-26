@@ -14,8 +14,11 @@ class ModalService {
     this.callback && this.callback({ type: EModalContent.general, data });
   }
 
-  showMessage(data: ModalContentPropsMap[EModalContent.message]) {
-    this.callback && this.callback({ type: EModalContent.message, data });
+  showMessage(
+    text: ModalContentPropsMap[EModalContent.message]['text'],
+    onClose?: ModalContentPropsMap[EModalContent.message]['onClose'],
+  ) {
+    this.callback && this.callback({ type: EModalContent.message, data: { text, onClose } });
   }
 }
 

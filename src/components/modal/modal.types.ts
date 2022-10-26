@@ -15,7 +15,7 @@ export enum EModalContent {
 }
 export interface ModalContentPropsMap {
   [EModalContent.general]: ReactElement;
-  [EModalContent.message]: string;
+  [EModalContent.message]: { text: string; onClose?: () => void };
 }
 type CreateMapFromMap<T extends EModalContent = EModalContent> = {
   [Q in T]: { type: Q; data: ModalContentPropsMap[Q] };

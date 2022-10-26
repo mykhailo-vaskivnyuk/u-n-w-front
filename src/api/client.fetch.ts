@@ -16,6 +16,6 @@ export const getConnection =
     } catch (e) {
       console.log(e);
       if (e instanceof HttpResponseError) throw e;
-      throw new Error('Server connection lost');
+      throw new HttpResponseError(503);
     }
   };
