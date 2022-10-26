@@ -5,7 +5,7 @@ export const useStyles = createUseStyles(
     root: {
       height: '100%',
       overflow: 'auto',
-      paddingBottom: 10,
+      padding: 12,
     },
   },
   { name: 'Content' },

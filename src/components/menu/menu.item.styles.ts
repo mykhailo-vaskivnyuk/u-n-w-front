@@ -4,7 +4,7 @@ export const useStyles = createUseStyles(
   ({ palette, mixins, vars }) => ({
     root: {
       color: palette.cm_primary.main,
-      fontSize: 36,
+      fontSize: 32,
       fontWeight: vars.fontWeight.semiBold,
     },
     link: {
@@ -15,6 +15,7 @@ export const useStyles = createUseStyles(
     icon: {
       ...mixins.size(30),
       color: palette.cm_secondary.main,
+      marginRight: 12,
     },
   }),
   { name: 'MenuItem' },

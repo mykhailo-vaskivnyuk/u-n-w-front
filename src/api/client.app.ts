@@ -18,7 +18,12 @@ class ClientApp extends EventEmmiter {
   }
 
   async init() {
+    await this.readUser({});
     this.setState(AppState.READY);
+  }
+
+  getUser() {
+    return this.user;
   }
 
   private setUser(user: IUser | null) {
@@ -26,20 +31,16 @@ class ClientApp extends EventEmmiter {
     this.emit('user', this.user);
   }
 
-  getUser() {
-    return this.user;
-  }
-
   private setState(state: AppState) {
     this.state = state;
     this.emit('statechanged', this.state);
   }
 
-  async login(...args: Parameters<typeof this.clientApi.auth.login>) {
+  private async readUser(...args: Parameters<typeof this.clientApi.user.read>) {
     this.setState(AppState.LOADING);
     let user = null;
     try {
-      user = await this.clientApi.auth.login(...args);
+      user = await this.clientApi.user.read(...args);
       this.setUser(user);
       this.setState(AppState.READY);
       return Boolean(user);
@@ -49,30 +50,45 @@ class ClientApp extends EventEmmiter {
     }
   }
 
+  async login(...args: Parameters<typeof this.clientApi.auth.login>) {
+    this.setState(AppState.LOADING);
+    let user = null;
+    try {
+      user = await this.clientApi.auth.login(...args);
+      this.setState(AppState.READY);
+      if (!user) return false;
+      this.setUser(user);
+      return true;
+    } catch (e) {
+      this.setState(AppState.ERROR);
+      return false;
+    }
+  }
+
   async logout(...args: Parameters<typeof this.clientApi.auth.logout>) {
     this.setState(AppState.LOADING);
-    let result = false;
     try {
-      result = await this.clientApi.auth.logout(...args);
+      await this.clientApi.auth.logout(...args);
+      this.setUser(null);
+      this.setState(AppState.READY);
+      return true;
     } catch (e) {
-      this.state = AppState.ERROR;
+      this.setState(AppState.ERROR);
     }
-    this.user = null;
-    this.setState(AppState.READY);
-    return result;
   }
 
   async signup(...args: Parameters<typeof this.clientApi.auth.signup>) {
     this.setState(AppState.LOADING);
-    let user = null;
     try {
-      user = await this.clientApi.auth.signup(...args);
+      const user = await this.clientApi.auth.signup(...args);
+      if (!user) throw new Error('Wrong credentials');
+      this.setUser(user);
+      this.setState(AppState.READY);
+      return true;
     } catch (e) {
-      this.state = AppState.ERROR;
+      this.setState(AppState.ERROR);
+      throw e;
     }
-    this.user = user;
-    this.setState(AppState.READY);
-    return user;
   }
 
   async overmail(...args: Parameters<typeof this.clientApi.auth.signup>) {

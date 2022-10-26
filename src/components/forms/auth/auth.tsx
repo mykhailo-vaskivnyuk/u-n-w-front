@@ -48,16 +48,13 @@ export const AuthForm = () => {
     <FormikProvider
       initialValues={{ email: '', password: '' }}
       validationSchema={AuthSchema}
-      onSubmit={async (values, actions) => {
+      onSubmit={(values, actions) => {
         console.log(values);
-        await app
-          .login(values)
-          .then((success) => {
-            if (!success) return modalService.showMessage('Невірний email або пароль');
-            actions.resetForm;
-            navigate('/');
-          })
-          .catch(() => {});
+        app.login(values).then((success) => {
+          if (!success) return modalService.showMessage('Невірний email або пароль');
+          // actions.resetForm();
+          navigate('/');
+        });
       }}
     >
       <Auth />

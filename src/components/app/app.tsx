@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { HashRouter } from 'react-router-dom';
 import { Theme } from '@styles/theme';
 import { ErrorBoundary } from '@components/error/error.boundary';
@@ -11,6 +11,7 @@ import { Router } from './router';
 
 export const App: FC = () => {
   const state = useAppState();
+
   return (
     <ErrorBoundary level="top">
       <Theme>

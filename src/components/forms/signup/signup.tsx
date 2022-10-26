@@ -44,12 +44,12 @@ export const SignupForm = () => {
     <FormikProvider
       initialValues={{ email: '' }}
       validationSchema={SignupSchema}
-      onSubmit={async (values, actions) => {
+      onSubmit={async (values) => {
         console.log(values);
-        const success = await app.signup(values);
-        if (!success) return modalService.showMessage('Користувач з таким email вже зареєстрований');
-        actions.resetForm;
-        navigate('/');
+        await app.signup(values).then((success) => {
+          if (success) return navigate('/account');
+          modalService.showMessage('Невірний email або пароль');
+        });
       }}
     >
       <Signup />

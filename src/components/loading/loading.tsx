@@ -9,9 +9,17 @@ export const Loading: FC<{ state: AppState }> = ({ state }) => {
 
   useEffect(() => {
     const isLoading = state === AppState.LOADING || state === AppState.INIT;
-    if (isLoading) return setLoading(isLoading);
-    const timer = setTimeout(() => setLoading(isLoading), 1000);
-    return () => clearTimeout(timer);
+    let timer: ReturnType<typeof setTimeout> | null = null;
+    if (isLoading) {
+      if (loading) return;
+      timer = setTimeout(() => setLoading(isLoading), 500);
+    } else if (loading) {
+      timer = setTimeout(() => setLoading(isLoading), 500);
+    }
+    return () => {
+      timer && clearTimeout(timer);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
 
   if (!loading) return null;

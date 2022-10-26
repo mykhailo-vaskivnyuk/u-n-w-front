@@ -5,9 +5,8 @@ import { useEffect, useState } from 'react';
 
 export const useAppState = () => {
   const [state, setState] = useState<AppState>(AppState.INIT);
-
   useEffect(() => {
-    const handler = (data: any) => {
+    const handler = (data: AppState) => {
       if (data === AppState.ERROR) {
         modalService.showMessage('Server connection is lost');
       }

@@ -5,10 +5,9 @@ import { useNavigate } from 'react-router-dom';
 export const Logout: FC = () => {
   const navigate = useNavigate();
   useEffect(() => {
-    app
-      .logout({})
-      .then(() => navigate('/auth'))
-      .catch((e) => console.log(e));
+    app.logout({}).then((success) => {
+      success && navigate('/auth');
+    });
   }, [navigate]);
   return null;
 };
