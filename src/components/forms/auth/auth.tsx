@@ -1,7 +1,7 @@
 import React, { FC, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, useFormikContext } from 'formik';
-import { app } from '@api/client.app';
+import { app } from '@api/client.app/client.app';
 import { modalService } from '@services/modal.service';
 import { Button } from '@components/buttons/button/button';
 import { Input } from '@components/controls/input/input';
@@ -50,8 +50,8 @@ export const AuthForm = () => {
       validationSchema={AuthSchema}
       onSubmit={(values) => {
         console.log(values);
-        app.login(values).then((success) => {
-          if (!success) return modalService.showMessage('Невірний email або пароль');
+        app.account.login(values).then((success) => {
+          if (!success) return modalService.showError('Невірний email або пароль');
           navigate('/');
         });
       }}

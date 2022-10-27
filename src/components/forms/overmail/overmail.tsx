@@ -1,6 +1,6 @@
 import React, { FC, FormEvent } from 'react';
 import { Formik, useFormikContext } from 'formik';
-import { app } from '@api/client.app';
+import { app } from '@api/client.app/client.app';
 import { Button } from '@components/buttons/button/button';
 import { Input } from '@components/controls/input/input';
 import { SubTitle } from '@components/subtitle/subtitle';
@@ -46,14 +46,16 @@ export const OvermailForm = () => {
       validationSchema={OvermailSchema}
       onSubmit={(values) => {
         console.log(values);
-        app
+        app.account
           .overmail(values)
           .then((success) => {
             if (success) {
               navigate('/auth');
               const message = `Лінк відправлено на ${values[OvermailField.EMAIL]}`;
-              modalService.showMessage(message);
+              return modalService.showMessage(message);
             }
+            const message = `Не можливо відправити лінк на ${values[OvermailField.EMAIL]}`;
+            modalService.showError(message);
           })
           .catch();
       }}

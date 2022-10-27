@@ -6,13 +6,12 @@ import { Layout } from '@components/layout/layout';
 import { Loading } from '@components/loading/loading';
 import { ModalSet } from '@components/modal/modal.set';
 import { Content } from '@components/content/content';
-import { AppState } from '@api/constants';
-import { useAppState } from './useAppState';
 import { Router } from './router';
+import { useApp } from './useApp';
 
 export const App: FC = () => {
-  const state = useAppState();
-  const isInit = state === AppState.INIT;
+  useApp();
+
   return (
     <ErrorBoundary level="top">
       <Theme>
@@ -20,8 +19,10 @@ export const App: FC = () => {
           <HashRouter>
             <Layout>
               <ModalSet />
-              <Loading state={state} />
-              <Content>{!isInit && <Router />}</Content>
+              <Loading />
+              <Content>
+                <Router />
+              </Content>
             </Layout>
           </HashRouter>
         </ErrorBoundary>

@@ -3,7 +3,7 @@ import { Formik, useFormikContext } from 'formik';
 import { Button } from '@components/buttons/button/button';
 import { Input } from '@components/controls/input/input';
 import { SubTitle } from '@components/subtitle/subtitle';
-import { app } from '@api/client.app';
+import { app } from '@api/client.app/client.app';
 import { modalService } from '@services/modal.service';
 import { useNavigate } from 'react-router-dom';
 import { useStyles } from './signup.styles';
@@ -46,11 +46,11 @@ export const SignupForm = () => {
       validationSchema={SignupSchema}
       onSubmit={async (values) => {
         console.log(values);
-        await app
+        await app.account
           .signup(values)
           .then((success) => {
             if (success) return navigate('/account');
-            modalService.showMessage('Користувач з таким email вже зареєстрований');
+            modalService.showError('Користувач з таким email вже зареєстрований');
           })
           .catch();
       }}

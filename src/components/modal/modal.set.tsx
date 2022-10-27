@@ -8,6 +8,8 @@ import { useStyles } from './modal.styles';
 const getElement = (content: TContent | null) => {
   if (!content) return null;
   switch (content.type) {
+    case EModalContent.error:
+      return <Message error>{content.data}</Message>;
     case EModalContent.message:
       return <Message>{content.data}</Message>;
     default:
@@ -21,7 +23,6 @@ export const ModalSet: FC = memo(() => {
   const element = getElement(content);
 
   useEffect(() => {
-    console.log('CREATE MODAL');
     modalService.setCallback(setContent);
   }, []);
 

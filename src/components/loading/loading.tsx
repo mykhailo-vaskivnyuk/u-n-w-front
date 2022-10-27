@@ -1,11 +1,13 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Icon, ICONS } from '@components/icon/icon';
 import { AppState } from '@api/constants';
+import { useAppState } from '@hooks/useAppState';
 import { useStyles } from './loading.styles';
 
-export const Loading: FC<{ state: AppState }> = ({ state }) => {
+export const Loading: FC = () => {
   const { root, icon } = useStyles();
   const [loading, setLoading] = useState<boolean>(true);
+  const state = useAppState();
 
   useEffect(() => {
     const isLoading = state === AppState.LOADING || state === AppState.INIT;

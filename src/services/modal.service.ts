@@ -25,6 +25,10 @@ class ModalService {
     this.closeCallback && this.closeCallback();
   }
 
+  showError(data: ModalContentPropsMap[EModalContent.error]) {
+    this.callback && this.callback({ type: EModalContent.error, data });
+  }
+
   showMessage(data: ModalContentPropsMap[EModalContent.message]) {
     this.callback && this.callback({ type: EModalContent.message, data });
   }

@@ -2,7 +2,7 @@ export default class EventEmmiter {
   private events: Record<string, ((args: any) => void)[]> = {};
 
   on(event: string, cb: (args: any) => void) {
-    this.events[event]?.push(cb) || (this.events[event] = [cb]);
+    this.events[event] ? this.events[event].push(cb) : (this.events[event] = [cb]);
   }
 
   emit(event: string, data: any) {

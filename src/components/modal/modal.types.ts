@@ -12,10 +12,12 @@ export interface ModalProps {
 export enum EModalContent {
   general,
   message,
+  error,
 }
 export interface ModalContentPropsMap {
   [EModalContent.general]: ReactElement;
   [EModalContent.message]: string;
+  [EModalContent.error]: string;
 }
 type CreateMapFromMap<T extends EModalContent = EModalContent> = {
   [Q in T]: { type: Q; data: ModalContentPropsMap[Q] };

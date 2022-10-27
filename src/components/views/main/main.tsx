@@ -1,16 +1,15 @@
 import React, { FC } from 'react';
-import { app } from '@api/client.app';
+import { useUser } from '@hooks/useUser';
 import { useStyles } from './main.styles';
 
 export const Main: FC = () => {
   const { root, content } = useStyles();
-  const user = app.getUser();
+  const user = useUser();
 
   return (
     <div className={root}>
       <div className={content}>START PAGE</div>
       {user && <div className={content}>{user.name || user.net_name || user.email}</div>}
-      {/* {user && <pre>{JSON.stringify(user, null, ' ')}</pre>} */}
     </div>
   );
 };
