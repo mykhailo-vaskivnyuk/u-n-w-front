@@ -4,7 +4,8 @@ import { Button } from '@components/buttons/button/button';
 import { Input } from '@components/controls/input/input';
 import { SubTitle } from '@components/subtitle/subtitle';
 import { app } from '@api/client.app';
-import { ITableUsers } from '@api/db.types';
+import { modalService } from '@services/modal.service';
+import { useNavigate } from 'react-router-dom';
 import { AccountField, AccountFormValues, AccountSchema } from './account.schema';
 import { useStyles } from './account.styles';
 
@@ -26,13 +27,13 @@ const Account: FC = () => {
       <Input type="text" label="Mobile" name={AccountField.MOBILE} />
       <Input type="text" label="Password" name={AccountField.PASSWORD} />
       <div className={buttons}>
-        <Button type="submit" btnType="primary">
+        {/* <Button type="submit" btnType="primary">
           save
         </Button>
         <Button type="reset" btnType="secondary">
           cancel
-        </Button>
-        <Button type="button" btnType="secondary">
+        </Button> */}
+        <Button type="submit" btnType="secondary">
           delete
         </Button>
         <div />
@@ -52,12 +53,18 @@ export const AccountForm = () => {
     net_name: netName || undefined,
     mobile: mobile || undefined,
   };
+  const navigate = useNavigate();
+
   return (
     <FormikProvider
       initialValues={initialValue}
-      validationSchema={AccountSchema}
+      // validationSchema={AccountSchema}
       onSubmit={(values) => {
         console.log(values);
+        app.removeUser().then((success) => {
+          if (!success) return modalService.showMessage('Не вдалося видалити акаунт');
+          navigate('/');
+        });
       }}
     >
       <Account />

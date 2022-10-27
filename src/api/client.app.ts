@@ -18,8 +18,7 @@ class ClientApp extends EventEmmiter {
   }
 
   async init() {
-    await this.readUser({});
-    this.setState(AppState.READY);
+    await this.readUser();
   }
 
   getUser() {
@@ -124,6 +123,23 @@ class ClientApp extends EventEmmiter {
     } catch (e) {
       this.setState(AppState.ERROR);
       throw e;
+    }
+  }
+
+  async removeUser() {
+    this.setState(AppState.LOADING);
+    try {
+      const success = await this.clientApi.auth.remove();
+      if (success) {
+        this.setUser(null);
+        this.setState(AppState.READY);
+        return true;
+      }
+
+      this.setState(AppState.READY);
+      return false;
+    } catch (e) {
+      this.setState(AppState.ERROR);
     }
   }
 }

@@ -6,7 +6,7 @@ export const Logout: FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    app.logout({}).then((success) => {
+    app.logout().then((success) => {
       success ? navigate('/auth') : window.history.back();
     });
   }, [navigate]);
