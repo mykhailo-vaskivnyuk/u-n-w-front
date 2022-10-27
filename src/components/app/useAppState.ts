@@ -1,6 +1,6 @@
 import { app } from '@api/client.app';
 import { AppState } from '@api/constants';
-import modalService from '@services/modal.service';
+import { modalService } from '@services/modal.service';
 import { useEffect, useState } from 'react';
 
 export const useAppState = () => {

@@ -13,11 +13,11 @@ export interface MenuItemProps {
 
 export const MenuItem: FC<Omit<MenuItemProps, 'id'>> = (props) => {
   const { root, link, icon: clsIcon } = useStyles();
-  const { label, pathname, icon } = props;
+  const { label, pathname, icon, onClick } = props;
 
   return (
     <li className={root}>
-      <Link to={pathname} className={link}>
+      <Link to={pathname} className={link} onClick={onClick}>
         <Icon icon={icon} className={clsIcon} />
         {label}
       </Link>

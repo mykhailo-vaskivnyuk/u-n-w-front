@@ -1,7 +1,7 @@
 import { FC, useEffect } from 'react';
 import { app } from '@api/client.app';
 import { useMatch, useNavigate } from 'react-router-dom';
-import modalService from '@services/modal.service';
+import { modalService } from '@services/modal.service';
 
 export const Confirm: FC = () => {
   const navigate = useNavigate();

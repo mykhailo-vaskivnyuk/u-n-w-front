@@ -2,7 +2,7 @@ import React, { FC, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, useFormikContext } from 'formik';
 import { app } from '@api/client.app';
-import modalService from '@services/modal.service';
+import { modalService } from '@services/modal.service';
 import { Button } from '@components/buttons/button/button';
 import { Input } from '@components/controls/input/input';
 import { SubTitle } from '@components/subtitle/subtitle';

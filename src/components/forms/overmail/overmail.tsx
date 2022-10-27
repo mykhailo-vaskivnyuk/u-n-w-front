@@ -5,7 +5,7 @@ import { Button } from '@components/buttons/button/button';
 import { Input } from '@components/controls/input/input';
 import { SubTitle } from '@components/subtitle/subtitle';
 import { useNavigate } from 'react-router-dom';
-import modalService from '@services/modal.service';
+import { modalService } from '@services/modal.service';
 import { OvermailField, OvermailFormValues, OvermailSchema } from './overmail.schema';
 import { useStyles } from './overmail.styles';
 
@@ -50,7 +50,9 @@ export const OvermailForm = () => {
           .overmail(values)
           .then((success) => {
             if (success) {
-              modalService.showMessage(`Лінк відправлено на ${values[OvermailField.EMAIL]}`, () => navigate('/auth'));
+              navigate('/auth');
+              const message = `Лінк відправлено на ${values[OvermailField.EMAIL]}`;
+              modalService.showMessage(message);
             }
           })
           .catch();

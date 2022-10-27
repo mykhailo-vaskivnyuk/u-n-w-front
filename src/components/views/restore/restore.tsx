@@ -1,7 +1,7 @@
 import { FC, useEffect } from 'react';
 import { app } from '@api/client.app';
 import { useMatch, useNavigate } from 'react-router-dom';
-import modalService from '@services/modal.service';
+import { modalService } from '@services/modal.service';
 
 export const Restore: FC = () => {
   const navigate = useNavigate();
@@ -17,7 +17,8 @@ export const Restore: FC = () => {
       .restore({ link })
       .then((success) => {
         if (success) return navigate('/account');
-        modalService.showMessage('Невірний лінк', () => navigate('/'));
+        navigate('/')
+        modalService.showMessage('Невірний лінк');
       })
       .catch();
     // eslint-disable-next-line react-hooks/exhaustive-deps

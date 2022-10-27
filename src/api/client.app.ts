@@ -1,6 +1,6 @@
 import { AppState } from './constants';
-import EventEmmiter from './event.emmiter';
 import { IUser } from './types';
+import EventEmmiter from './event.emmiter';
 import { api } from './client.api';
 import { getConnection } from './client.fetch';
 
@@ -46,7 +46,6 @@ class ClientApp extends EventEmmiter {
       return Boolean(user);
     } catch (e) {
       this.setState(AppState.ERROR);
-      throw new Error();
     }
   }
 

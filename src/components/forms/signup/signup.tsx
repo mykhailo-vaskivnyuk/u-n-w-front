@@ -4,7 +4,7 @@ import { Button } from '@components/buttons/button/button';
 import { Input } from '@components/controls/input/input';
 import { SubTitle } from '@components/subtitle/subtitle';
 import { app } from '@api/client.app';
-import modalService from '@services/modal.service';
+import { modalService } from '@services/modal.service';
 import { useNavigate } from 'react-router-dom';
 import { useStyles } from './signup.styles';
 import { SignupField, SignupFormValues, SignupSchema } from './signup.schema';

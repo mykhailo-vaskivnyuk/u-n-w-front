@@ -1,8 +1,8 @@
 import React, { FC, PropsWithChildren, useCallback, useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import clsx from 'clsx';
 import { mergeClasses } from '@styles/utils/mergeClasses';
 import { Icon, ICONS } from '@components/icon/icon';
+import { modalService } from '@services/modal.service';
 import { ModalProps } from './modal.types';
 import { useStyles } from './modal.styles';
 
@@ -17,20 +17,12 @@ export const Modal: FC<PropsWithChildren<ModalProps>> = (props) => {
   } = props;
   const baseClasses = useStyles();
   const { root, backdrop, modal, closeBtn } = mergeClasses(baseClasses, classes);
-
   const [closing, setClosing] = useState(false);
-  const location = useLocation();
 
-  useEffect(() => {
-    if (!children) return;
-    setClosing(true);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location]);
-
-  const onBackdropClickHandler = () => {
+  const onBackdropClickHandler = useCallback(() => {
     onBackdropClick?.();
     closeOnBackdropClick && setClosing(true);
-  };
+  }, [closeOnBackdropClick, onBackdropClick]);
 
   const closeHandler = useCallback(() => {
     onClose?.();
@@ -40,6 +32,10 @@ export const Modal: FC<PropsWithChildren<ModalProps>> = (props) => {
   const onCloseHandler = useCallback(() => {
     setClosing(true);
   }, []);
+
+  useEffect(() => {
+    modalService.setCloseCallback(onCloseHandler);
+  }, [onCloseHandler]);
 
   if (!children) return null;
 

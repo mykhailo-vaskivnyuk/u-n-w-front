@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import modalService from '@services/modal.service';
+import { modalService } from '@services/modal.service';
 import { ICONS } from '@components/icon/icon';
 import { IconButton } from '@components/buttons/icon.button/icon.button';
 import { MENU_ITEMS } from '@constants/constants';
@@ -13,7 +13,7 @@ export const Header: FC = () => {
     <div className={root}>
       <IconButton
         icon={ICONS.menu}
-        onClick={() => modalService.openModal(<Menu items={MENU_ITEMS} onSelect={() => {}} />)}
+        onClick={() => modalService.openModal(<Menu items={MENU_ITEMS} />)}
         className={button}
       />
       <div className={title}>header very long header very very long header</div>
