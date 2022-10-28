@@ -5,17 +5,17 @@ export const useStyles = createUseStyles(
     root: {
       ...mixins.size('100%', 36),
       ...mixins.flexCenter,
-      background: palette.cm_primary.main,
-      color: palette.cm_background.light,
+      background: palette.bg.first,
+      color: palette.font.light,
       padding: 6,
       borderRadius: 4,
       textTransform: 'uppercase',
       cursor: 'pointer',
       '&.secondary': {
-        background: palette.cm_secondary.main,
+        background: palette.bg.second,
       },
       '&:link, &:visited': {
-        color: palette.cm_background.light,
+        color: palette.font.light,
       },
     },
   }),

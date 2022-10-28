@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { Palette } from '@components/palette/palette';
 import { Main } from '@components/views/main/main';
 import { AuthForm } from '@components/forms/auth/auth';
 import { OvermailForm } from '@components/forms/overmail/overmail';
@@ -13,6 +14,7 @@ export const Router: FC = () => {
   return (
     <Routes>
       <Route path="/">
+        <Route path="palette" element={<Palette />} />
         <Route path="" element={<Main />} />
         <Route path="account" element={<AccountForm />} />
         <Route path="logout" element={<Logout />} />

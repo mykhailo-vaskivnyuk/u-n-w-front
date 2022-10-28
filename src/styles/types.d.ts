@@ -1,5 +1,4 @@
 import { CSSProperties as Properties } from 'react';
-import { ScalesStyleConfig } from '@styles/scales';
 
 export interface CSSProperties extends Properties {
   [k: string]: unknown | CSSProperties;
@@ -19,6 +18,7 @@ export interface Vars {
   borderRadius: BorderRadiusVarsType;
   zIndex: ZIndexVarsType;
   boxShadow: BoxShadowVarsType;
+  opacityA: OpacityAVarsType;
 }
 
 export type FontVarsType = {
@@ -119,6 +119,15 @@ export type BoxShadowVarsType = {
   button: string;
 };
 
+export type OpacityAVarsType = {
+  extraLight: string;
+  light: string;
+  medium: string;
+  main: string;
+  dark: string;
+  extraDark: string;
+};
+
 /* ===================== Breakpoints declare ========================== */
 export type Breakpoint = 's_800_s' | 's_800' | 'm_1024' | 'l_1366';
 export type BreakpointValues = { [key in Breakpoint]: number };
@@ -161,35 +170,39 @@ export interface Mixins {
 
 /* ===================== Palette declare ========================== */
 export interface PaletteColor {
-  main: string;
-  extraDark?: string;
-  dark?: string;
-  medToDark?: string;
-  medium?: string;
-  medToLight?: string;
-  light?: string;
   extraLight?: string;
+  light?: string;
+  medium?: string;
+  main: string;
+  dark?: string;
+  extraDark?: string;
 }
 
 export interface BackgroundColor {
+  light: string;
   main: string;
   dark: string;
-  light: string;
+  extraDark: string;
   disabled?: string;
-  backdrop?: string;
+  first: string;
+  second: string;
+}
+
+export interface FontColor {
+  light: string;
+  dark: string;
+  first: string;
+  second: string;
 }
 
 export interface Palette {
-  cm_primary: PaletteColor;
-  cm_secondary: PaletteColor;
-  cm_background: BackgroundColor;
-
-  cm_orange: PaletteColor;
-  cm_grey: PaletteColor;
-  cm_red: PaletteColor;
-  cm_green: PaletteColor;
-  cm_light: PaletteColor;
-  cm_dark: PaletteColor;
+  first: PaletteColor;
+  second: PaletteColor;
+  add: PaletteColor;
+  bg: BackgroundColor;
+  font: FontColor;
+  light: PaletteColor;
+  dark: PaletteColor;
 }
 
 /* ===================== Theme declare ========================== */

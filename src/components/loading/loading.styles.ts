@@ -1,7 +1,7 @@
 import { createUseStyles } from 'react-jss';
 
 export const useStyles = createUseStyles(
-  ({ palette, mixins }) => ({
+  ({ palette, mixins, vars }) => ({
     '@global': {
       '@keyframes spin': {
         to: { transform: 'rotate(360deg)' },
@@ -11,18 +11,18 @@ export const useStyles = createUseStyles(
       position: 'absolute',
       ...mixins.size('100%'),
       ...mixins.flexCenter,
-      background: `${palette.cm_background.main}cc`,
+      background: `${palette.bg.main}${vars.opacityA.light}`,
       zIndex: 200,
     },
     icon: {
       ...mixins.size(100),
-      color: palette.cm_primary.main,
+      color: palette.font.first,
       animationName: 'spin',
       animationIterationCount: 'infinite',
       animationTimingFunction: 'linear',
       animationDuration: '3s',
       '& path:first-child': {
-        color: palette.cm_secondary.main,
+        color: palette.font.second,
       },
     },
   }),

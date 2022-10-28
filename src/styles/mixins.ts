@@ -56,8 +56,8 @@ const mixins: Mixins = {
     width: number = 6,
     height: number = 8,
     thumbBorderRadius: number = 4,
-    trackBgHex: string = palette.cm_background.main,
-    thumbBgHex: string = palette.cm_background.main,
+    trackBgHex: string = palette.bg.main,
+    thumbBgHex: string = palette.bg.main,
   ) => ({
     /* custom scroll bar */
     '&::-webkit-scrollbar': {

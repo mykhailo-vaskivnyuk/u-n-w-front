@@ -1,4 +1,3 @@
-import Color from 'color';
 import { createUseStyles } from 'react-jss';
 
 export const useStyles = createUseStyles(
@@ -40,7 +39,7 @@ export const useStyles = createUseStyles(
 
     backdrop: {
       ...mixins.size('100%'),
-      backgroundColor: Color(palette.cm_dark.main).alpha(0.75).rgb().toString(),
+      backgroundColor: `${palette.bg.dark}${vars.opacityA.medium}`,
       position: 'absolute',
       top: 0,
       left: 0,
@@ -59,7 +58,7 @@ export const useStyles = createUseStyles(
     modal: {
       maxHeight: 'calc(100% - 60px)',
       transform: 'translateY(60px)',
-      background: palette.cm_background.main,
+      background: palette.bg.main,
       margin: '0 12px',
       borderRadius: 12,
       overflow: 'hidden',
@@ -77,7 +76,7 @@ export const useStyles = createUseStyles(
       position: 'absolute',
       top: 16,
       right: 24,
-      color: palette.cm_grey.dark,
+      color: palette.font.dark,
       cursor: 'pointer',
     },
   }),

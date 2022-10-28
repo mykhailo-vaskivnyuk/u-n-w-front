@@ -11,8 +11,6 @@ import { createUseStyles } from 'react-jss';
 // } from '@styles/fonts';
 import { palette } from '@styles/palette';
 import { vars } from '@styles/vars';
-import { mixins } from '@styles/mixins';
-import { breakpoints } from '@styles/breakpoints';
 
 export const useCssBaseline = createUseStyles(
   {
@@ -129,12 +127,12 @@ export const useCssBaseline = createUseStyles(
       },
 
       body: {
-        backgroundColor: palette.cm_background.light,
+        backgroundColor: palette.bg.light,
         fontFamily: vars.font.main,
         fontSize: vars.fontSize.main,
         lineHeight: vars.lineHeight.main,
         fontWeight: vars.fontWeight.main,
-        color: palette.cm_dark.main,
+        color: palette.font.dark,
         '-webkit-font-smoothing': 'antialiased',
         '-moz-osx-font-smoothing': 'grayscale',
       },

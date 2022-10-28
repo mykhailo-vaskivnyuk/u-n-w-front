@@ -6,7 +6,7 @@ export const useStyles = createUseStyles(
       ...mixins.flexCenter,
       fontWeight: vars.fontWeight.bold,
       fontSize: vars.fontSize.extraLarge,
-      color: palette.cm_secondary.main,
+      color: palette.font.second,
       margin: '20px 0',
     },
   }),

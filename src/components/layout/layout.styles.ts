@@ -8,10 +8,10 @@ export const useStyles = createUseStyles(
       margin: '0 auto',
       display: 'grid',
       gridTemplateRows: '60px 1fr 40px',
-      background: palette.cm_background.main,
+      background: palette.bg.main,
       position: 'relative',
       borderRadius: 12,
-      border: `1px solid ${palette.cm_primary.main}`,
+      border: `1px solid ${palette.first.main}`,
       overflow: 'hidden',
       [breakpoints.up(480)]: {
         width: 480,

@@ -3,7 +3,7 @@ import { createUseStyles } from 'react-jss';
 export const useStyles = createUseStyles(
   ({ palette, mixins, vars }) => ({
     root: {
-      color: palette.cm_primary.main,
+      color: palette.font.first,
       fontSize: 32,
       fontWeight: vars.fontWeight.semiBold,
     },
@@ -14,7 +14,7 @@ export const useStyles = createUseStyles(
     },
     icon: {
       ...mixins.size(30),
-      color: palette.cm_secondary.main,
+      color: palette.font.second,
       marginRight: 12,
     },
   }),

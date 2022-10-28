@@ -10,7 +10,7 @@ export const useStyles = createUseStyles(
     content: {
       fontSize: 50,
       fontWeight: vars.fontWeight.bold,
-      color: palette.cm_secondary.main,
+      color: palette.font.second,
     },
   }),
   { name: 'Main' },

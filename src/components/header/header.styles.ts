@@ -5,8 +5,8 @@ export const useStyles = createUseStyles(
     root: {
       height: '100%',
       ...mixins.flexCenter,
-      color: palette.cm_background.light,
-      background: palette.cm_primary.main,
+      color: palette.font.light,
+      background: palette.bg.first,
       padding: 12,
     },
     title: {
@@ -20,7 +20,7 @@ export const useStyles = createUseStyles(
       width: 'auto',
       height: 'auto',
       padding: 0,
-      color: palette.cm_background.light,
+      color: palette.font.light,
     },
   }),
   { name: 'Header' },

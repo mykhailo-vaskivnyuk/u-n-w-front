@@ -1,70 +1,74 @@
 import { Palette } from '@styles/types';
+import Color from 'color';
 
-// main shade of the color is formed from medium or dark based on the palette in figma
+const getColor = (color: string) => (value?: number) => {
+  if (!value || value === 100) return color;
+  if (value < 100)
+    return Color(color)
+      .lighten((100 - value) / 100)
+      .hex();
+  return Color(color)
+    .darken((value - 100) / 100)
+    .hex();
+};
+
+const first = getColor('#068408');
+const second = getColor('#b90909');
+const add = getColor('#ef6c1a');
+const light = getColor('#ffffff');
+const dark = getColor('#3f4141');
+const bg = getColor('#f1f4f0');
+
 const palette: Palette = {
-  cm_primary: {
-    main: '#068408',
-    // extraDark?: string;
-    // dark?: string;
-    medToDark: '#068408',
-    medium: '#FF8522',
-    medToLight: '#FFA65F',
-    // light: '#FFA65F',
-    // extraLight?: string;
-  },
-  cm_secondary: {
-    main: '#b90909',
-    dark: '#3f4141', // #393D3E (main design bg)
-    medToDark: '#4B4B4B', // #4C5254 (scroll bar bg)
-    medium: '#535353',
-    medToLight: '#636363',
-    light: '#929292', // my own, not in the design
-    extraLight: '#C2C2C2',
-  },
-  cm_background: {
-    main: '#f1f4f0',
-    dark: '#3f4141',
-    light: '#FFFFFF',
+  first: {
+    extraLight: first(25),
+    light: first(50),
+    medium: first(75),
+    main: first(),
+    dark: first(125),
+    extraDark: first(150),
   },
 
-  cm_orange: {
-    main: '#FF8522',
-    // extraDark?: string;
-    // dark?: string;
-    medToDark: '#EB7617',
-    medium: '#FF8522',
-    medToLight: '#FFA65F',
-    // light: '#FFA65F',
-    // extraLight?: string;
+  second: {
+    extraLight: second(25),
+    light: second(50),
+    medium: second(75),
+    main: second(),
+    dark: second(125),
+    extraDark: second(150),
   },
-  cm_grey: {
-    main: '#3f4141',
-    dark: '#3f4141', // #393D3E (main design bg)
-    medToDark: '#4B4B4B', // #4C5254 (scroll bar bg)
-    medium: '#535353',
-    medToLight: '#636363',
-    light: '#929292', // my own, not in the design
-    extraLight: '#C2C2C2',
+
+  add: {
+    extraLight: add(25),
+    light: add(50),
+    medium: add(75),
+    main: add(),
+    dark: add(125),
+    extraDark: add(150),
   },
-  cm_green: {
-    main: '#7AB929',
-    medium: '#A4DC5C',
-    medToLight: '#B3DC7E',
-    light: '#E8F6D0',
-    extraLight: '#EFF7E5',
+
+  bg: {
+    light: light(),
+    main: bg(),
+    dark: dark(),
+    extraDark: dark(125),
+    first: first(),
+    second: second(),
   },
-  cm_red: {
-    main: '#EF4237',
-    dark: '#CB0C00',
-    medium: '#FF6A4A',
-    medToLight: '#E5765F',
-    light: '#FCE1DF',
+
+  font: {
+    first: first(),
+    second: second(),
+    light: light(),
+    dark: dark(),
   },
-  cm_light: {
-    main: '#FFFFFF',
+
+  light: {
+    main: light(),
   },
-  cm_dark: {
-    main: '#3f4141',
+
+  dark: {
+    main: dark(),
   },
 };
 
