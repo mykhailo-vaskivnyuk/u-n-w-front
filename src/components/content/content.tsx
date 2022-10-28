@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import { useLocation } from 'react-router-dom';
 import { useAppState } from '@hooks/useAppState';
 import { AppState } from '@api/constants';
+import { Redirect } from '@components/content/redirect/redirect';
 import { useStyles } from './content.styles';
 
 export const Content: FC<PropsWithChildren> = ({ children }) => {
@@ -20,6 +21,7 @@ export const Content: FC<PropsWithChildren> = ({ children }) => {
   const isInit = state === AppState.INIT;
   return (
     <div key={key} className={clsx(root, animation)} ref={ref} onAnimationEnd={handleAnimation}>
+      <Redirect />
       {!isInit && children}
     </div>
   );
