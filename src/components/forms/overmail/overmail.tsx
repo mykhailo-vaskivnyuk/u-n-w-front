@@ -6,7 +6,7 @@ import { Input } from '@components/controls/input/input';
 import { SubTitle } from '@components/subtitle/subtitle';
 import { useNavigate } from 'react-router-dom';
 import { modalService } from '@services/modal.service';
-import { RoutesMap } from '@components/app/router';
+import { RoutesMap } from '@components/router/router';
 import { OvermailField, OvermailFormValues, OvermailSchema } from './overmail.schema';
 import { useStyles } from './overmail.styles';
 
@@ -28,7 +28,7 @@ const Overmail: FC = () => {
           надіслати
         </Button>
         <div />
-        <Button href={RoutesMap.ACCOUNT.LOGIN.full} btnType="primary">
+        <Button href={RoutesMap.ACCOUNT.LOGIN} btnType="primary">
           авторизуватись
         </Button>
       </div>
@@ -51,7 +51,7 @@ export const OvermailForm = () => {
           .overmail(values)
           .then((success) => {
             if (success) {
-              navigate(RoutesMap.ACCOUNT.LOGIN.full);
+              navigate(RoutesMap.ACCOUNT.LOGIN);
               const message = `Лінк відправлено на ${values[OvermailField.EMAIL]}`;
               return modalService.showMessage(message);
             }

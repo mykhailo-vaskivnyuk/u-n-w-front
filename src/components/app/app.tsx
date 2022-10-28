@@ -7,7 +7,7 @@ import { Loading } from '@components/loading/loading';
 import { ModalSet } from '@components/modal/modal.set';
 import { Content } from '@components/content/content';
 import { ErrorCatch } from '@components/error/error.catch';
-import { Router } from './router';
+import { Router } from '../router/router';
 import { useApp } from './useApp';
 
 export const App: FC = () => {

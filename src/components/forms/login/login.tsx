@@ -6,7 +6,7 @@ import { modalService } from '@services/modal.service';
 import { Button } from '@components/buttons/button/button';
 import { Input } from '@components/controls/input/input';
 import { SubTitle } from '@components/subtitle/subtitle';
-import { RoutesMap } from '@components/app/router';
+import { RoutesMap } from '@components/router/router';
 // import { useUser } from '@hooks/useUser';
 import { LoginField, LoginFormValues, LoginSchema } from './login.schema';
 import { useStyles } from './login.styles';
@@ -30,10 +30,10 @@ const Login: FC = () => {
           увійти
         </Button>
         <div />
-        <Button href={RoutesMap.ACCOUNT.OVERMAIL.full} btnType="primary">
+        <Button href={RoutesMap.ACCOUNT.OVERMAIL} btnType="primary">
           увійти через email
         </Button>
-        <Button href={RoutesMap.ACCOUNT.SIGNUP.full} btnType="primary">
+        <Button href={RoutesMap.ACCOUNT.SIGNUP} btnType="primary">
           створити акаунт
         </Button>
       </div>

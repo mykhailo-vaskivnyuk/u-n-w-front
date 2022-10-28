@@ -1,7 +1,7 @@
 import { FC, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useUser } from '@hooks/useUser';
-import { RoutesMap } from '@components/app/router';
+import { RoutesMap } from '@components/router/router';
 import { AppState } from '@api/constants';
 import { useAppState } from '@hooks/useAppState';
 
@@ -20,19 +20,13 @@ export const Redirect: FC = () => {
     if (state === AppState.INIT) return;
     switch (pathname) {
       case RoutesMap.INDEX:
-      case RoutesMap.ACCOUNT.INDEX.full:
-        !user && navigate(RoutesMap.ACCOUNT.LOGIN.full);
+      case RoutesMap.ACCOUNT.INDEX:
+        !user && navigate(RoutesMap.ACCOUNT.LOGIN);
         break;
-      case RoutesMap.ACCOUNT.SIGNUP.full:
-      case RoutesMap.ACCOUNT.LOGIN.full:
-      case RoutesMap.ACCOUNT.OVERMAIL.full:
+      case RoutesMap.ACCOUNT.SIGNUP:
+      case RoutesMap.ACCOUNT.LOGIN:
+      case RoutesMap.ACCOUNT.OVERMAIL:
         user && navigate(RoutesMap.INDEX);
-        break;
-        // case RoutesMap.ACCOUNT.LOGOUT.full:
-        //   break;
-        // case RoutesMap.ACCOUNT.CONFIRM.full:
-        //   break;
-        // case RoutesMap.ACCOUNT.RESTORE.full:
         break;
       default:
     }
