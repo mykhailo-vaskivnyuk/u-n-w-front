@@ -1,5 +1,6 @@
 import { SetStateAction, Dispatch } from 'react';
 import { EModalContent, ModalContentPropsMap, TContent } from '@components/modal/modal.types';
+import { IMenuItem } from '@components/menu/types';
 
 type TCallback = Dispatch<SetStateAction<TContent | null>>;
 type TCloseCallback = () => void;
@@ -23,6 +24,10 @@ class ModalService {
 
   closeModal() {
     this.closeCallback && this.closeCallback();
+  }
+
+  openMenu(data: IMenuItem[]) {
+    this.callback && this.callback({ type: EModalContent.menu, data });
   }
 
   showError(data: ModalContentPropsMap[EModalContent.error]) {

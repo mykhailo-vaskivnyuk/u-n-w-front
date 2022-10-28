@@ -2,7 +2,7 @@ import { FC, useEffect } from 'react';
 import { app } from '@api/client.app/client.app';
 import { useMatch, useNavigate } from 'react-router-dom';
 import { modalService } from '@services/modal.service';
-import { RoutesMap } from '@components/router/router';
+import { RoutesMap } from '@components/router/constants';
 
 export const Restore: FC = () => {
   const navigate = useNavigate();

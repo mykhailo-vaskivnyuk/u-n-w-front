@@ -1,10 +1,11 @@
 import { modalService } from '@services/modal.service';
 import React, { FC, useCallback } from 'react';
-import { MenuItem, MenuItemProps } from './menu.item';
+import { IMenuItem } from './types';
+import { MenuItem } from './menu.item';
 import { useStyles } from './menu.styles';
 
 export interface MenuProps {
-  items: Omit<MenuItemProps, 'onClick'>[];
+  items: IMenuItem[];
 }
 
 export const Menu: FC<MenuProps> = (props) => {

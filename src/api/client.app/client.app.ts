@@ -1,7 +1,7 @@
 /* eslint-disable import/no-cycle */
 import { AppState } from '../constants';
 import { IUser } from '../types';
-import EventEmmiter from '../event.emmiter';
+import EventEmitter from '../event.emitter';
 import { api } from '../client.api';
 import { getConnection } from '../client.fetch';
 import { getAccountMethods } from './account';
@@ -13,7 +13,7 @@ export type ClientAppThis = ClientApp & {
   setUser: (user: IUser | null) => void;
 };
 
-export class ClientApp extends EventEmmiter {
+export class ClientApp extends EventEmitter {
   protected clientApi;
 
   protected state: AppState = AppState.INIT;
@@ -44,7 +44,7 @@ export class ClientApp extends EventEmmiter {
 
   protected setUser(user: IUser | null) {
     this.user = user;
-    this.emit('user', this.user);
+    this.emit('user', user);
   }
 
   protected setState(state: AppState) {
@@ -66,7 +66,7 @@ export class ClientApp extends EventEmmiter {
     }
   }
 
-  override on(...args: Parameters<EventEmmiter['on']>) {
+  override on(...args: Parameters<EventEmitter['on']>) {
     super.on(...args);
     const eventsMap = {
       user: this.user,

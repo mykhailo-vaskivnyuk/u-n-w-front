@@ -1,4 +1,4 @@
-export default class EventEmmiter {
+export default class EventEmitter {
   private events: Record<string, ((args: any) => void)[]> = {};
 
   on(event: string, cb: (args: any) => void) {

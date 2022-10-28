@@ -6,7 +6,7 @@ import { SubTitle } from '@components/subtitle/subtitle';
 import { app } from '@api/client.app/client.app';
 import { modalService } from '@services/modal.service';
 import { useNavigate } from 'react-router-dom';
-import { RoutesMap } from '@components/router/router';
+import { RoutesMap } from '@components/router/constants';
 import { useStyles } from './signup.styles';
 import { SignupField, SignupFormValues, SignupSchema } from './signup.schema';
 

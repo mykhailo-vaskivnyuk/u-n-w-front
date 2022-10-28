@@ -6,7 +6,7 @@ import { Input } from '@components/controls/input/input';
 import { SubTitle } from '@components/subtitle/subtitle';
 import { useNavigate } from 'react-router-dom';
 import { modalService } from '@services/modal.service';
-import { RoutesMap } from '@components/router/router';
+import { RoutesMap } from '@components/router/constants';
 import { OvermailField, OvermailFormValues, OvermailSchema } from './overmail.schema';
 import { useStyles } from './overmail.styles';
 

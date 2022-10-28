@@ -1,4 +1,4 @@
-import React, { FC, FormEvent, useEffect } from 'react';
+import React, { FC, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, useFormikContext } from 'formik';
 import { app } from '@api/client.app/client.app';
@@ -6,8 +6,7 @@ import { modalService } from '@services/modal.service';
 import { Button } from '@components/buttons/button/button';
 import { Input } from '@components/controls/input/input';
 import { SubTitle } from '@components/subtitle/subtitle';
-import { RoutesMap } from '@components/router/router';
-// import { useUser } from '@hooks/useUser';
+import { RoutesMap } from '@components/router/constants';
 import { LoginField, LoginFormValues, LoginSchema } from './login.schema';
 import { useStyles } from './login.styles';
 
@@ -45,11 +44,6 @@ const FormikProvider = Formik<LoginFormValues>;
 
 export const LoginForm = () => {
   const navigate = useNavigate();
-  // const user = useUser();
-
-  // useEffect(() => {
-  //   user && navigate(RoutesMap.INDEX);
-  // }, [navigate, user]);
 
   return (
     <FormikProvider

@@ -1,17 +1,10 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { Icon, ICONS } from '@components/icon/icon';
+import { Icon } from '@components/icon/icon';
+import { MenuItemProps } from './types';
 import { useStyles } from './menu.item.styles';
 
-export interface MenuItemProps {
-  id: number;
-  label: string;
-  pathname: string;
-  icon: ICONS;
-  onClick: () => void;
-}
-
-export const MenuItem: FC<Omit<MenuItemProps, 'id'>> = (props) => {
+export const MenuItem: FC<MenuItemProps> = (props) => {
   const { root, link, icon: clsIcon } = useStyles();
   const { label, pathname, icon, onClick } = props;
 
