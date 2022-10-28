@@ -6,7 +6,7 @@ export const useStyles = createUseStyles(
       height: '100%',
       ...mixins.flexCenter,
       fontWeight: vars.fontWeight.bold,
-      fontSize: vars.fontSize.extraLarge,
+      fontSize: vars.fontSize.large,
       lineHeight: vars.lineHeight.dense,
       color: palette.font.light,
       background: palette.bg.first,

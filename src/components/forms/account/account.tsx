@@ -21,7 +21,7 @@ const Account: FC = () => {
 
   return (
     <form className={root} onSubmit={handleSubmit}>
-      <SubTitle text="Аккаунт" />
+      <SubTitle text="Акаунт" />
       <Input type="text" label="Email" name={AccountField.EMAIL} />
       <Input type="text" label="Name" name={AccountField.NAME} />
       <Input type="text" label="Net name" name={AccountField.NET_NAME} />

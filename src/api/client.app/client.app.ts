@@ -35,6 +35,13 @@ export class ClientApp extends EventEmmiter {
     this.emit('statechanged', this.state);
   }
 
+  getState() {
+    return {
+      state: this.state,
+      user: this.user,
+    };
+  }
+
   protected setUser(user: IUser | null) {
     this.user = user;
     this.emit('user', this.user);

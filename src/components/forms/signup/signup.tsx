@@ -6,6 +6,7 @@ import { SubTitle } from '@components/subtitle/subtitle';
 import { app } from '@api/client.app/client.app';
 import { modalService } from '@services/modal.service';
 import { useNavigate } from 'react-router-dom';
+import { RoutesMap } from '@components/app/router';
 import { useStyles } from './signup.styles';
 import { SignupField, SignupFormValues, SignupSchema } from './signup.schema';
 
@@ -24,11 +25,11 @@ const Signup: FC = () => {
       <Input type="text" label="Email" name={SignupField.EMAIL} />
       <div className={buttons}>
         <Button type="submit" onClick={() => {}} btnType="secondary">
-          ok
+          створити
         </Button>
         <div />
-        <Button href="/auth" btnType="primary">
-          sing in
+        <Button href={RoutesMap.ACCOUNT.LOGIN.full} btnType="primary">
+          авторизуватись
         </Button>
       </div>
     </form>
@@ -49,7 +50,7 @@ export const SignupForm = () => {
         await app.account
           .signup(values)
           .then((success) => {
-            if (success) return navigate('/account');
+            if (success) return navigate(RoutesMap.ACCOUNT.INDEX.full);
             modalService.showError('Користувач з таким email вже зареєстрований');
           })
           .catch();

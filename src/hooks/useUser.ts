@@ -3,7 +3,7 @@ import { IUser } from '@api/types';
 import { app } from '@api/client.app/client.app';
 
 export const useUser = () => {
-  const [user, setUser] = useState<IUser | null>(null);
+  const [user, setUser] = useState<IUser | null>(() => app.getState().user);
 
   useEffect(() => {
     const handler = (data: IUser | null) => setUser(data);

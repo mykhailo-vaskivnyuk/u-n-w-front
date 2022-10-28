@@ -3,5 +3,5 @@ import { useStyles } from './footer.styles';
 
 export const Footer: FC = () => {
   const { root } = useStyles();
-  return <div className={root}>footer</div>;
+  return <div className={root}>YOU & WORLD</div>;
 };

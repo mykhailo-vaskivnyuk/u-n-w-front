@@ -4,7 +4,7 @@ export const useStyles = createUseStyles(
   {
     root: {
       width: '100%',
-      padding: '0 48px',
+      padding: '0 36px',
     },
     buttons: {
       display: 'grid',

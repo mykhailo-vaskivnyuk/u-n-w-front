@@ -2,18 +2,9 @@ import { createUseStyles } from 'react-jss';
 
 export const useStyles = createUseStyles(
   {
-    // '@global': {
-    //   '@keyframes show': {
-    //     from: { opacity: 0.5 },
-    //     to: { opacity: 1 },
-    //   },
-    // },
     root: {
       width: '100%',
-      padding: '0 48px',
-      opacity: 1,
-      // animationName: 'show',
-      // animationDuration: '1s',
+      padding: '0 36px',
     },
     buttons: {
       display: 'grid',
@@ -23,5 +14,5 @@ export const useStyles = createUseStyles(
       alignItems: 'end',
     },
   },
-  { name: 'Auth' },
+  { name: 'Login' },
 );

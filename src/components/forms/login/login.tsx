@@ -1,4 +1,4 @@
-import React, { FC, FormEvent } from 'react';
+import React, { FC, FormEvent, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, useFormikContext } from 'formik';
 import { app } from '@api/client.app/client.app';
@@ -6,12 +6,14 @@ import { modalService } from '@services/modal.service';
 import { Button } from '@components/buttons/button/button';
 import { Input } from '@components/controls/input/input';
 import { SubTitle } from '@components/subtitle/subtitle';
-import { AuthFormValues, AuthSchema } from './auth.schema';
-import { useStyles } from './auth.styles';
+import { RoutesMap } from '@components/app/router';
+// import { useUser } from '@hooks/useUser';
+import { LoginField, LoginFormValues, LoginSchema } from './login.schema';
+import { useStyles } from './login.styles';
 
-const Auth: FC = () => {
+const Login: FC = () => {
   const { root, buttons } = useStyles();
-  const { submitForm } = useFormikContext<AuthFormValues>();
+  const { submitForm } = useFormikContext<LoginFormValues>();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -21,42 +23,47 @@ const Auth: FC = () => {
   return (
     <form className={root} onSubmit={handleSubmit}>
       <SubTitle text="Авторизація" />
-      <Input type="text" label="Email" name="email" />
-      <Input type="password" label="Пароль" name="password" />
+      <Input type="text" label="Email" name={LoginField.EMAIL} />
+      <Input type="password" label="Пароль" name={LoginField.PASSWORD} />
       <div className={buttons}>
         <Button type="submit" btnType="secondary">
-          ok
+          увійти
         </Button>
         <div />
-        <Button href="/overmail" btnType="primary">
-          over mail
+        <Button href={RoutesMap.ACCOUNT.OVERMAIL.full} btnType="primary">
+          увійти через email
         </Button>
-        <Button href="/signup" btnType="primary">
-          sing up
+        <Button href={RoutesMap.ACCOUNT.SIGNUP.full} btnType="primary">
+          створити акаунт
         </Button>
       </div>
     </form>
   );
 };
 
-const FormikProvider = Formik<AuthFormValues>;
+const FormikProvider = Formik<LoginFormValues>;
 
-export const AuthForm = () => {
+export const LoginForm = () => {
   const navigate = useNavigate();
+  // const user = useUser();
+
+  // useEffect(() => {
+  //   user && navigate(RoutesMap.INDEX);
+  // }, [navigate, user]);
 
   return (
     <FormikProvider
       initialValues={{ email: '', password: '' }}
-      validationSchema={AuthSchema}
+      validationSchema={LoginSchema}
       onSubmit={(values) => {
         console.log(values);
         app.account.login(values).then((success) => {
           if (!success) return modalService.showError('Невірний email або пароль');
-          navigate('/');
+          navigate(RoutesMap.INDEX);
         });
       }}
     >
-      <Auth />
+      <Login />
     </FormikProvider>
   );
 };

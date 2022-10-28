@@ -16,7 +16,7 @@ export const Header: FC = () => {
         onClick={() => modalService.openModal(<Menu items={MENU_ITEMS} />)}
         className={button}
       />
-      <div className={title}>header very long header very very long header</div>
+      <div className={title}>НЕ В СПІЛЬНОТІ</div>
     </div>
   );
 };
