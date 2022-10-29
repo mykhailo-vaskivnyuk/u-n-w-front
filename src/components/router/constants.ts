@@ -2,7 +2,7 @@ import { getRoutesMap } from './utils';
 
 export const RelativeRoutesMap = {
   INDEX: '',
-  ABOUTE: 'aboute',
+  ABOUT: 'about',
   ACCOUNT: {
     INDEX: 'account',
     SIGNUP: 'signup',

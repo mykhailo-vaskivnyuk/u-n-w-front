@@ -15,7 +15,7 @@ export const Menu: FC<MenuProps> = (props) => {
   const handleClick = useCallback(() => modalService.closeModal(), []);
 
   const itemsJsx = items.map((itemProps) => (
-    <MenuItem key={itemProps.id} {...itemProps} onClick={handleClick} />
+    <MenuItem key={itemProps.pathname} {...itemProps} onClick={handleClick} />
   ));
   return <ul className={root}>{itemsJsx}</ul>;
 };

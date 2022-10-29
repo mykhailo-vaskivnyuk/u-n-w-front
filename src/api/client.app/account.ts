@@ -3,11 +3,11 @@ import { AppState } from '../constants';
 import { ClientAppThis } from './client.app';
 
 export const getAccountMethods = (parent: ClientAppThis) => ({
-  async login(...args: Parameters<typeof parent.clientApi.auth.login>) {
+  async login(...args: Parameters<typeof parent.clientApi.account.login>) {
     parent.setState(AppState.LOADING);
     let user = null;
     try {
-      user = await parent.clientApi.auth.login(...args);
+      user = await parent.clientApi.account.login(...args);
       parent.setState(AppState.READY);
       if (!user) return false;
       parent.setUser(user);
@@ -18,10 +18,10 @@ export const getAccountMethods = (parent: ClientAppThis) => ({
     }
   },
 
-  async logout(...args: Parameters<typeof parent.clientApi.auth.logout>) {
+  async logout(...args: Parameters<typeof parent.clientApi.account.logout>) {
     parent.setState(AppState.LOADING);
     try {
-      await parent.clientApi.auth.logout(...args);
+      await parent.clientApi.account.logout(...args);
       parent.setUser(null);
       parent.setState(AppState.READY);
       return true;
@@ -30,10 +30,10 @@ export const getAccountMethods = (parent: ClientAppThis) => ({
     }
   },
 
-  async signup(...args: Parameters<typeof parent.clientApi.auth.signup>) {
+  async signup(...args: Parameters<typeof parent.clientApi.account.signup>) {
     parent.setState(AppState.LOADING);
     try {
-      const user = await parent.clientApi.auth.signup(...args);
+      const user = await parent.clientApi.account.signup(...args);
       user && parent.setUser(user);
       parent.setState(AppState.READY);
       return Boolean(user);
@@ -43,10 +43,10 @@ export const getAccountMethods = (parent: ClientAppThis) => ({
     }
   },
 
-  async overmail(...args: Parameters<typeof parent.clientApi.auth.signup>) {
+  async overmail(...args: Parameters<typeof parent.clientApi.account.signup>) {
     parent.setState(AppState.LOADING);
     try {
-      const success = await parent.clientApi.auth.overmail(...args);
+      const success = await parent.clientApi.account.overmail(...args);
       parent.setState(AppState.READY);
       if (!success) return false;
       return true;
@@ -55,10 +55,10 @@ export const getAccountMethods = (parent: ClientAppThis) => ({
     }
   },
 
-  async confirm(...args: Parameters<typeof parent.clientApi.auth.confirm>) {
+  async confirm(...args: Parameters<typeof parent.clientApi.account.confirm>) {
     parent.setState(AppState.LOADING);
     try {
-      const user = await parent.clientApi.auth.confirm(...args);
+      const user = await parent.clientApi.account.confirm(...args);
       user && parent.setUser(user);
       parent.setState(AppState.READY);
       return Boolean(user);
@@ -68,10 +68,10 @@ export const getAccountMethods = (parent: ClientAppThis) => ({
     }
   },
 
-  async restore(...args: Parameters<typeof parent.clientApi.auth.restore>) {
+  async restore(...args: Parameters<typeof parent.clientApi.account.restore>) {
     parent.setState(AppState.LOADING);
     try {
-      const user = await parent.clientApi.auth.restore(...args);
+      const user = await parent.clientApi.account.restore(...args);
       user && parent.setUser(user);
       parent.setState(AppState.READY);
       return Boolean(user);
@@ -84,7 +84,7 @@ export const getAccountMethods = (parent: ClientAppThis) => ({
   async removeUser() {
     parent.setState(AppState.LOADING);
     try {
-      const success = await parent.clientApi.auth.remove();
+      const success = await parent.clientApi.account.remove();
       if (success) {
         parent.setUser(null);
         parent.setState(AppState.READY);

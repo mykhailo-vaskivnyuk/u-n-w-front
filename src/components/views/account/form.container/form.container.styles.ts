@@ -3,9 +3,9 @@ import { createUseStyles } from 'react-jss';
 export const useStyles = createUseStyles(
   {
     root: {
-      flex: '1 0 0',
-      padding: '24px 24px 24px 36px',
+      width: '100%',
+      padding: '0 36px',
     },
   },
-  { name: 'Menu' },
+  { name: 'FormContainer' },
 );

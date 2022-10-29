@@ -5,13 +5,12 @@ import { app } from '@api/client.app/client.app';
 import { modalService } from '@services/modal.service';
 import { Button } from '@components/buttons/button/button';
 import { Input } from '@components/controls/input/input';
-import { SubTitle } from '@components/subtitle/subtitle';
 import { RoutesMap } from '@components/router/constants';
 import { LoginField, LoginFormValues, LoginSchema } from './login.schema';
 import { useStyles } from './login.styles';
 
 const Login: FC = () => {
-  const { root, buttons } = useStyles();
+  const { buttons } = useStyles();
   const { submitForm } = useFormikContext<LoginFormValues>();
 
   const handleSubmit = (e: FormEvent) => {
@@ -20,8 +19,7 @@ const Login: FC = () => {
   };
 
   return (
-    <form className={root} onSubmit={handleSubmit}>
-      <SubTitle text="Авторизація" />
+    <form onSubmit={handleSubmit}>
       <Input type="text" label="Email" name={LoginField.EMAIL} />
       <Input type="password" label="Пароль" name={LoginField.PASSWORD} />
       <div className={buttons}>
@@ -52,8 +50,8 @@ export const LoginForm = () => {
       onSubmit={(values) => {
         console.log(values);
         app.account.login(values).then((success) => {
-          if (!success) return modalService.showError('Невірний email або пароль');
-          navigate(RoutesMap.INDEX);
+          if (success) return navigate(RoutesMap.INDEX);
+          modalService.showError('Невірний email або пароль');
         });
       }}
     >

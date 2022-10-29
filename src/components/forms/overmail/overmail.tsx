@@ -3,7 +3,6 @@ import { Formik, useFormikContext } from 'formik';
 import { app } from '@api/client.app/client.app';
 import { Button } from '@components/buttons/button/button';
 import { Input } from '@components/controls/input/input';
-import { SubTitle } from '@components/subtitle/subtitle';
 import { useNavigate } from 'react-router-dom';
 import { modalService } from '@services/modal.service';
 import { RoutesMap } from '@components/router/constants';
@@ -11,7 +10,7 @@ import { OvermailField, OvermailFormValues, OvermailSchema } from './overmail.sc
 import { useStyles } from './overmail.styles';
 
 const Overmail: FC = () => {
-  const { root, buttons } = useStyles();
+  const { buttons } = useStyles();
   const { submitForm } = useFormikContext<OvermailFormValues>();
 
   const handleSubmit = (e: FormEvent) => {
@@ -20,8 +19,7 @@ const Overmail: FC = () => {
   };
 
   return (
-    <form className={root} onSubmit={handleSubmit}>
-      <SubTitle text="Ввійти через EMAIL" />
+    <form onSubmit={handleSubmit}>
       <Input type="text" label="Email" name={OvermailField.EMAIL} />
       <div className={buttons}>
         <Button type="submit" btnType="secondary">
@@ -51,9 +49,9 @@ export const OvermailForm = () => {
           .overmail(values)
           .then((success) => {
             if (success) {
-              navigate(RoutesMap.ACCOUNT.LOGIN);
               const message = `Лінк відправлено на ${values[OvermailField.EMAIL]}`;
-              return modalService.showMessage(message);
+              modalService.showMessage(message);
+              return navigate(RoutesMap.ACCOUNT.LOGIN);
             }
             const message = `Не можливо відправити лінк на ${values[OvermailField.EMAIL]}`;
             modalService.showError(message);

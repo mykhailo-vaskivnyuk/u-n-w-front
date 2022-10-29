@@ -11,6 +11,9 @@ export const useStyles = createUseStyles(
       display: 'flex',
       alignItems: 'center',
       gap: 10,
+      '&.active': {
+        color: palette.second.main,
+      },
     },
     icon: {
       ...mixins.size(30),

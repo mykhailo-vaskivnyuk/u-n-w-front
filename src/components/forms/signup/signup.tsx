@@ -2,7 +2,6 @@ import React, { FC, FormEvent } from 'react';
 import { Formik, useFormikContext } from 'formik';
 import { Button } from '@components/buttons/button/button';
 import { Input } from '@components/controls/input/input';
-import { SubTitle } from '@components/subtitle/subtitle';
 import { app } from '@api/client.app/client.app';
 import { modalService } from '@services/modal.service';
 import { useNavigate } from 'react-router-dom';
@@ -11,7 +10,7 @@ import { useStyles } from './signup.styles';
 import { SignupField, SignupFormValues, SignupSchema } from './signup.schema';
 
 const Signup: FC = () => {
-  const { root, buttons } = useStyles();
+  const { buttons } = useStyles();
   const { submitForm } = useFormikContext<SignupFormValues>();
 
   const handleSubmit = (e: FormEvent) => {
@@ -20,8 +19,7 @@ const Signup: FC = () => {
   };
 
   return (
-    <form className={root} onSubmit={handleSubmit}>
-      <SubTitle text="Створити акаунт" />
+    <form onSubmit={handleSubmit}>
       <Input type="text" label="Email" name={SignupField.EMAIL} />
       <div className={buttons}>
         <Button type="submit" onClick={() => {}} btnType="secondary">

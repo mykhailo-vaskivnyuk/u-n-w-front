@@ -2,16 +2,16 @@ import React, { FC, FormEvent } from 'react';
 import { Formik, useFormikContext } from 'formik';
 import { Button } from '@components/buttons/button/button';
 import { Input } from '@components/controls/input/input';
-import { SubTitle } from '@components/subtitle/subtitle';
 import { app } from '@api/client.app/client.app';
 import { modalService } from '@services/modal.service';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '@hooks/useUser';
+import { RoutesMap } from '@components/router/constants';
 import { AccountField, AccountFormValues } from './account.schema';
 import { useStyles } from './account.styles';
 
 const Account: FC = () => {
-  const { root, buttons } = useStyles();
+  const { buttons } = useStyles();
   const { submitForm } = useFormikContext<AccountFormValues>();
 
   const handleSubmit = (e: FormEvent) => {
@@ -20,8 +20,7 @@ const Account: FC = () => {
   };
 
   return (
-    <form className={root} onSubmit={handleSubmit}>
-      <SubTitle text="Акаунт" />
+    <form onSubmit={handleSubmit}>
       <Input type="text" label="Email" name={AccountField.EMAIL} />
       <Input type="text" label="Name" name={AccountField.NAME} />
       <Input type="text" label="Net name" name={AccountField.NET_NAME} />
@@ -62,12 +61,11 @@ export const AccountForm = () => {
   return (
     <FormikProvider
       initialValues={initialValue}
-      // validationSchema={AccountSchema}
       onSubmit={(values) => {
         console.log(values);
         app.account.removeUser().then((success) => {
-          if (!success) return modalService.showError('Не вдалося видалити акаунт');
-          navigate('/');
+          if (success) return navigate(RoutesMap.INDEX);
+          modalService.showError('Не вдалося видалити акаунт');
         });
       }}
     >

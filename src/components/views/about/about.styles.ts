@@ -6,8 +6,6 @@ export const useStyles = createUseStyles(
       height: '100%',
       ...mixins.flexCenter,
       flexDirection: 'column',
-      wordBreak: 'break-all',
-      textAlign: 'center',
     },
     content: {
       fontSize: 50,
