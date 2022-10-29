@@ -20,7 +20,7 @@ export const useStyles = createUseStyles(
       animationName: 'spin',
       animationIterationCount: 'infinite',
       animationTimingFunction: 'linear',
-      animationDuration: '3s',
+      animationDuration: vars.transition.XL,
       '& path:first-child': {
         color: palette.font.second,
       },

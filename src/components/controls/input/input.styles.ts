@@ -15,8 +15,8 @@ export const useStyles = createUseStyles(
       padding: 5,
       borderRadius: 4,
       border: `1px solid ${palette.dark.main}`,
-      fontSize: vars.fontSize.medium,
-      fontWeight: vars.fontWeight.bold,
+      fontWeight: vars.fontWeight.semiBold,
+      letterSpacing: 0.5,
       '&:focus': {
         borderColor: palette.first.main,
         borderWidth: 2,
@@ -31,6 +31,7 @@ export const useStyles = createUseStyles(
       lineHeight: vars.lineHeight.dense,
       fontWeight: vars.fontWeight.semiBold,
       color: palette.font.first,
+      fontSize: vars.fontSize.S,
     },
     error: {
       padding: '0 5px',
@@ -38,7 +39,8 @@ export const useStyles = createUseStyles(
       borderRadius: 4,
       color: palette.font.light,
       background: palette.bg.extraDark,
-      // letterSpacing: 1.25,
+      letterSpacing: 0.5,
+      fontSize: vars.fontSize.S,
     },
   }),
   { name: 'Input' },

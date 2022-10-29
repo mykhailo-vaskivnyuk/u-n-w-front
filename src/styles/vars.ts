@@ -3,7 +3,6 @@ import { Vars } from './types';
 const vars: Vars = {
   font: {
     main: "'Alumni Sans', Arial, sans-serif",
-    proxima: '"ProximaNova", Arial, Helvetica, sans-serif',
   },
 
   opacityA: {
@@ -16,25 +15,20 @@ const vars: Vars = {
   },
 
   fontSize: {
-    main: 16,
-    extraSmall: 8,
-    small: 12,
-    medium: 16,
-    large: 22,
-    extraLarge: 26,
+    SS: 12, // ?
+    S: 16,
+    main: 20,
+    M: 24,
+    L: 28,
+    XL: 32,
+    XXL: 48,
   },
 
   fontWeight: {
-    main: 400,
-    hairline: 100,
-    thin: 200,
     light: 300,
     regular: 400,
-    medium: 500,
     semiBold: 600,
     bold: 700,
-    heavy: 800,
-    black: 900,
   },
 
   lineHeight: {
@@ -50,8 +44,9 @@ const vars: Vars = {
     quick: '0.2s',
     normal: '0.35s',
     smooth: '0.5s',
-    long: '0.7s',
-    longer: '1s',
+    L: '0.75s',
+    XL: '1s',
+    XXL: '3s',
   },
 
   cubicBezier: {

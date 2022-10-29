@@ -23,29 +23,23 @@ export interface Vars {
 
 export type FontVarsType = {
   main: string;
-  proxima: string;
 };
 
 export type FontSizeVarsType = {
+  SS: number;
+  S: number;
   main: number;
-  extraSmall: number;
-  small: number;
-  medium: number;
-  large: number;
-  extraLarge: number;
+  M: number;
+  L: number;
+  XL: number;
+  XXL: number;
 };
 
 export type FontWeightVarsType = {
-  main: number;
-  hairline: number;
-  thin: number;
   light: number;
   regular: number;
-  medium: number;
   semiBold: number;
   bold: number;
-  heavy: number;
-  black: number;
 };
 
 export type LineHeightVarsType = {
@@ -61,8 +55,9 @@ export type TransitionVarsType = {
   quick: string;
   normal: string;
   smooth: string;
-  long: string;
-  longer: string;
+  L: string;
+  XL: string;
+  XXL: string;
 };
 
 export type CubicBezierVarsType = {

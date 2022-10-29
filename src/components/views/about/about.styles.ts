@@ -8,10 +8,10 @@ export const useStyles = createUseStyles(
       flexDirection: 'column',
     },
     content: {
-      fontSize: 50,
+      fontSize: vars.fontSize.XXL,
       fontWeight: vars.fontWeight.bold,
       color: palette.font.second,
     },
   }),
-  { name: 'Main' },
+  { name: 'About' },
 );

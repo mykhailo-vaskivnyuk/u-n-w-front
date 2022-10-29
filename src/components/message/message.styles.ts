@@ -8,8 +8,8 @@ export const useStyles = createUseStyles(
       borderRadius: 5,
       color: palette.font.light,
       background: palette.bg.second,
-      fontSize: vars.fontSize.large,
-      fontWeight: vars.fontWeight.bold,
+      fontSize: vars.fontSize.M,
+      fontWeight: vars.fontWeight.semiBold,
       ...mixins.flexCenter,
       '&.error': {
         background: palette.bg.extraDark,

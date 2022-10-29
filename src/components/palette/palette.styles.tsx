@@ -15,7 +15,6 @@ export const useStyles = createUseStyles(
       '& div': {
         height: 50,
         ...mixins.flexCenter,
-        fontSize: 20,
       },
     },
   }),

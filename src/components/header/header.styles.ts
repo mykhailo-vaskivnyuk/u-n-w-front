@@ -13,7 +13,7 @@ export const useStyles = createUseStyles(
       flex: '1 0 0',
       padding: '0 36px 0 12px',
       fontWeight: vars.fontWeight.bold,
-      fontSize: vars.fontSize.large,
+      fontSize: vars.fontSize.M,
       lineHeight: vars.lineHeight.dense,
     },
     button: {

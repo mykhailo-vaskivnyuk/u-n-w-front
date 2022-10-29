@@ -1,11 +1,9 @@
 import { createUseStyles } from 'react-jss';
 
 export const useStyles = createUseStyles(
-  {
+  ({ vars }) => ({
     '@global': {
-      '@keyframes show': {
-        // from: { transform: 'scale(0.95)' },
-        // to: { transform: 'scale(1)' },
+      '@keyframes showContent': {
         from: { opacity: 0 },
         to: { opacity: 1 },
       },
@@ -16,9 +14,9 @@ export const useStyles = createUseStyles(
       padding: 12,
     },
     animation: {
-      animationName: 'show',
-      animationDuration: '2s',
+      animationName: 'showContent',
+      animationDuration: vars.transition.XL,
     },
-  },
+  }),
   { name: 'Content' },
 );

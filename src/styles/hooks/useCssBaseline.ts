@@ -131,7 +131,7 @@ export const useCssBaseline = createUseStyles(
         fontFamily: vars.font.main,
         fontSize: vars.fontSize.main,
         lineHeight: vars.lineHeight.main,
-        fontWeight: vars.fontWeight.main,
+        fontWeight: vars.fontWeight.regular,
         color: palette.font.dark,
         '-webkit-font-smoothing': 'antialiased',
         '-moz-osx-font-smoothing': 'grayscale',

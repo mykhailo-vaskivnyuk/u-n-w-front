@@ -17,33 +17,40 @@ export const Modal: FC<PropsWithChildren<ModalProps>> = (props) => {
   } = props;
   const baseClasses = useStyles();
   const { root, backdrop, modal, closeBtn } = mergeClasses(baseClasses, classes);
-  const [closing, setClosing] = useState(false);
+  const [state, setState] = useState<'closed' | 'opened' | 'closing'>('closed');
 
   const onBackdropClickHandler = useCallback(() => {
-    onBackdropClick?.();
-    closeOnBackdropClick && setClosing(true);
-  }, [closeOnBackdropClick, onBackdropClick]);
+    setState((curState) => {
+      if (curState !== 'opened') return curState;
+      onBackdropClick?.();
+      return closeOnBackdropClick ? 'closing' : curState;
+    });
+  }, []);
 
-  const closeHandler = useCallback(() => {
+  const closeEndHandler = useCallback(() => {
     onClose?.();
-    setClosing(false);
+    setState('closed');
   }, [onClose]);
 
-  const onCloseHandler = useCallback(() => {
-    setClosing(true);
+  const closeHandler = useCallback(() => {
+    setState('closing');
   }, []);
 
   useEffect(() => {
-    modalService.setCloseCallback(onCloseHandler);
-  }, [onCloseHandler]);
+    modalService.setCloseCallback(closeHandler);
+  }, [closeHandler]);
+
+  const openEndHandler = useCallback(() => {
+    setState('opened');
+  }, []);
 
   if (!children) return null;
 
   return (
-    <div className={clsx(root, { closing })}>
+    <div className={clsx(root, state)}>
       <div className={backdrop} onMouseDown={onBackdropClickHandler} />
-      <div className={modal} onTransitionEnd={closeHandler}>
-        {showCloseIcon && <Icon icon={ICONS.cross} onClick={onCloseHandler} className={closeBtn} />}
+      <div className={modal} onTransitionEnd={closeEndHandler} onAnimationEnd={openEndHandler}>
+        {showCloseIcon && <Icon icon={ICONS.cross} onClick={closeHandler} className={closeBtn} />}
         {children}
       </div>
     </div>
