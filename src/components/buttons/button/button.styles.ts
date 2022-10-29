@@ -1,14 +1,14 @@
 import { createUseStyles } from 'react-jss';
 
 export const useStyles = createUseStyles(
-  ({ palette, mixins }) => ({
+  ({ palette, mixins, vars }) => ({
     root: {
       ...mixins.size('100%', 36),
       ...mixins.flexCenter,
       background: palette.bg.first,
       color: palette.font.light,
-      padding: 6,
-      borderRadius: 4,
+      padding: vars.gap.SS,
+      borderRadius: vars.radius.SS,
       textTransform: 'uppercase',
       cursor: 'pointer',
       '&.secondary': {

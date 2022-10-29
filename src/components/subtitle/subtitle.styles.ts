@@ -7,7 +7,7 @@ export const useStyles = createUseStyles(
       fontWeight: vars.fontWeight.semiBold,
       fontSize: vars.fontSize.XL,
       color: palette.font.second,
-      margin: '20px 0',
+      margin: `${vars.gap.M} 0`,
     },
   }),
   { name: 'Subtitle' },

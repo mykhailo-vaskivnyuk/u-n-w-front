@@ -3,9 +3,9 @@ import { createUseStyles } from 'react-jss';
 export const useStyles = createUseStyles(
   ({ palette, mixins, vars }) => ({
     root: {
-      margin: 12,
-      padding: 10,
-      borderRadius: 5,
+      margin: vars.gap.S,
+      padding: vars.gap.main,
+      borderRadius: vars.radius.S,
       color: palette.font.light,
       background: palette.bg.second,
       fontSize: vars.fontSize.M,

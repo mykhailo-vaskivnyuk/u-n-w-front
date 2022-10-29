@@ -7,7 +7,7 @@ export const useStyles = createUseStyles(
       position: 'absolute',
       top: 0,
       left: 0,
-      zIndex: 100,
+      zIndex: vars.zIndex.modal,
       '&.closing': {
         '& $modal': {
           transform: 'translateY(-100%)',
@@ -59,8 +59,8 @@ export const useStyles = createUseStyles(
       maxHeight: 'calc(100% - 60px)',
       transform: 'translateY(60px)',
       background: palette.bg.main,
-      margin: '0 12px',
-      borderRadius: 12,
+      margin: `0 ${vars.gap.main}`,
+      borderRadius: vars.radius.main,
       overflow: 'hidden',
       animationName: 'modal',
       animationDuration: vars.transition.L,

@@ -11,7 +11,7 @@ export const useStyles = createUseStyles(
     root: {
       height: '100%',
       overflow: 'auto',
-      padding: 12,
+      padding: vars.gap.main,
     },
     animation: {
       animationName: 'showContent',

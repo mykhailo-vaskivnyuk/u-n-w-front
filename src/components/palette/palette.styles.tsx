@@ -1,16 +1,16 @@
 import { createUseStyles } from 'react-jss';
 
 export const useStyles = createUseStyles(
-  ({ palette, mixins }) => ({
+  ({ palette, mixins, vars }) => ({
     root: {
       display: 'grid',
       gridTemplateColumns: '1fr 1fr 1fr',
-      gridGap: 5,
-      margin: 5,
+      gridGap: vars.gap.S,
+      margin: vars.gap.S,
     },
     color: {
       display: 'grid',
-      gridGap: 5,
+      gridGap: vars.gap.SS,
       border: `1px solid ${palette.dark.main}`,
       '& div': {
         height: 50,

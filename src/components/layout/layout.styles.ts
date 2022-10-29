@@ -1,7 +1,7 @@
 import { createUseStyles } from 'react-jss';
 
 export const useStyles = createUseStyles(
-  ({ palette, breakpoints }) => ({
+  ({ palette, breakpoints, vars }) => ({
     root: {
       width: '100%',
       height: '100%',
@@ -10,11 +10,11 @@ export const useStyles = createUseStyles(
       gridTemplateRows: '60px 1fr 40px',
       background: palette.bg.main,
       position: 'relative',
-      borderRadius: 12,
+      borderRadius: vars.radius.main,
       border: `1px solid ${palette.first.main}`,
       overflow: 'hidden',
-      [breakpoints.up(480)]: {
-        width: 480,
+      [breakpoints.maxWidth]: {
+        width: vars.width.maxWidth,
       },
     },
   }),

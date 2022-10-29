@@ -10,7 +10,7 @@ export const useStyles = createUseStyles(
     link: {
       display: 'flex',
       alignItems: 'center',
-      gap: 10,
+      gap: vars.gap.S,
       '&.active': {
         color: palette.second.main,
       },
@@ -18,7 +18,7 @@ export const useStyles = createUseStyles(
     icon: {
       ...mixins.size(30),
       color: palette.font.second,
-      marginRight: 12,
+      marginRight: vars.gap.main,
     },
   }),
   { name: 'MenuItem' },

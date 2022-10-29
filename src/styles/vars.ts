@@ -15,7 +15,7 @@ const vars: Vars = {
   },
 
   fontSize: {
-    SS: 12, // ?
+    SS: 12,
     S: 16,
     main: 20,
     M: 24,
@@ -59,46 +59,39 @@ const vars: Vars = {
   },
 
   width: {
-    l: 1366,
-    m: 1024,
-    s: 800,
-
-    maxContentWidth: 936,
-    maxContentLayoutWidth: 1366,
-  },
-
-  height: {
-    l: 768,
-    m: 600,
-    s: 480,
+    maxWidth: 480,
+    minWidth: 320,
   },
 
   gap: {
-    main: '15px',
-    extraSmall: '5px',
-    small: '10px',
-    medium: '20px',
-    large: '25px',
-    extraLarge: '30px',
-    doubleExtraLarge: '40px',
+    SS: '4px',
+    S: '8px',
+    main: '12px',
+    M: '16px',
+    L: '24px',
+    XL: '36px',
+    XXL: '48px',
   },
 
-  borderRadius: {
-    main: '5px',
-    button: '12px 0px',
+  radius: {
+    SS: '4px',
+    S: '6px',
+    main: '12px',
   },
 
   zIndex: {
-    paginationButtons: 50,
-    galleryViewer: 75,
-    backdrop: 100,
-    popup: 150,
-    modal: 250,
+    modal: 100,
+    loading: 200,
   },
 
   boxShadow: {
     box: '0 15px 20px rgba(0, 0, 0, 0.13)',
     button: '0px 2px 4px rgba(0, 0, 0, 0.16)',
+  },
+
+  letterGap: {
+    M: 0.3,
+    L: 0.5,
   },
 };
 

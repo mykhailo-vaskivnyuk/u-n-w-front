@@ -12,7 +12,7 @@ export const useStyles = createUseStyles(
       ...mixins.size('100%'),
       ...mixins.flexCenter,
       background: `${palette.bg.main}${vars.opacityA.light}`,
-      zIndex: 200,
+      zIndex: vars.zIndex.loading,
     },
     icon: {
       ...mixins.size(100),

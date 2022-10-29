@@ -13,12 +13,12 @@ export interface Vars {
   transition: TransitionVarsType;
   cubicBezier: CubicBezierVarsType;
   width: WidthVarsType;
-  height: HeightVarsType;
   gap: GapVarsType;
-  borderRadius: BorderRadiusVarsType;
+  radius: BorderRadiusVarsType;
   zIndex: ZIndexVarsType;
   boxShadow: BoxShadowVarsType;
   opacityA: OpacityAVarsType;
+  letterGap: LetterGapType;
 }
 
 export type FontVarsType = {
@@ -70,42 +70,28 @@ export type CubicBezierVarsType = {
 };
 
 export type WidthVarsType = {
-  l: number;
-  // m_to_l: number;
-  m: number;
-  // m_to_s: number;
-  s: number;
-
-  maxContentWidth: number;
-  maxContentLayoutWidth: number;
-};
-
-export type HeightVarsType = {
-  l: number;
-  m: number;
-  s: number;
+  maxWidth: number;
+  minWidth: number;
 };
 
 export type GapVarsType = {
+  SS: string;
+  S: string;
   main: string;
-  extraSmall: string;
-  small: string;
-  medium: string;
-  large: string;
-  extraLarge: string;
-  doubleExtraLarge: string;
+  M: string;
+  L: string;
+  XL: string;
+  XXL: string;
 };
 
 export type BorderRadiusVarsType = {
+  SS: string;
+  S: string;
   main: string;
-  button: string;
 };
 
 export type ZIndexVarsType = {
-  paginationButtons: number;
-  galleryViewer: number;
-  backdrop: number;
-  popup: number;
+  loading: number;
   modal: number;
 };
 
@@ -123,8 +109,13 @@ export type OpacityAVarsType = {
   extraDark: string;
 };
 
+export type LetterGapType = {
+  M: number;
+  L: number;
+};
+
 /* ===================== Breakpoints declare ========================== */
-export type Breakpoint = 's_800_s' | 's_800' | 'm_1024' | 'l_1366';
+export type Breakpoint = 'maxWidth';
 export type BreakpointValues = { [key in Breakpoint]: number };
 
 export interface Breakpoints {
@@ -140,10 +131,7 @@ export interface Breakpoints {
 
   downInclusive: (key: number) => string;
 
-  l_1366: string;
-  m_1024: string;
-  s_800: string;
-  s_800_s: string;
+  maxWidth: string;
 }
 
 /* ===================== Mixins declare ========================== */

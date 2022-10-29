@@ -7,11 +7,11 @@ export const useStyles = createUseStyles(
       ...mixins.flexCenter,
       color: palette.font.light,
       background: palette.bg.first,
-      padding: 12,
+      padding: vars.gap.main,
     },
     title: {
       flex: '1 0 0',
-      padding: '0 36px 0 12px',
+      padding: `0 ${vars.gap.XL} 0 ${vars.gap.main}`,
       fontWeight: vars.fontWeight.bold,
       fontSize: vars.fontSize.M,
       lineHeight: vars.lineHeight.dense,

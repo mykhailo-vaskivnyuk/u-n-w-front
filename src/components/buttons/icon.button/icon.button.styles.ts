@@ -1,12 +1,12 @@
 import { createUseStyles } from 'react-jss';
 
 export const useStyles = createUseStyles(
-  ({ mixins }) => ({
+  ({ mixins, vars }) => ({
     root: {
       ...mixins.size(42),
       ...mixins.flexCenter,
       background: 'transparent',
-      padding: 6,
+      padding: vars.gap.SS,
       cursor: 'pointer',
     },
   }),
