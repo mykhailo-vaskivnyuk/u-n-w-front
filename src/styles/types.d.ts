@@ -169,6 +169,7 @@ export interface BackgroundColor {
   disabled?: string;
   first: string;
   second: string;
+  add: string;
 }
 
 export interface FontColor {

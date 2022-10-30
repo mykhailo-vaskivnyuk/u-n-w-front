@@ -54,6 +54,7 @@ const palette: Palette = {
     extraDark: dark(125),
     first: first(),
     second: second(),
+    add: add(),
   },
 
   font: {

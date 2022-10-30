@@ -13,6 +13,7 @@ export const RelativeRoutesMap = {
     RESTORE: 'restore/*',
   },
   PALETTE: 'palette',
+  MAIL: 'mail',
 };
 
 export const RoutesMap = getRoutesMap(RelativeRoutesMap) as typeof RelativeRoutesMap;
