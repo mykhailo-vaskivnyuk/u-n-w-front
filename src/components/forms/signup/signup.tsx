@@ -46,7 +46,7 @@ export const SignupForm = () => {
       onSubmit={async (values) => {
         console.log(values);
         await app.account
-          .signup(values)
+          .loginOrSignup('signup', values)
           .then((success) => {
             if (success) return navigate(RoutesMap.ACCOUNT.INDEX);
             modalService.showError('Користувач з таким email вже зареєстрований');

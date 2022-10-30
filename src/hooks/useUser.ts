@@ -7,7 +7,7 @@ export const useUser = () => {
   useEffect(() => {
     const handler = (data: IUser | null) => setUser(data);
     app.on('user', handler);
-    return app.remove('user', handler);
+    return () => app.remove('user', handler);
   }, []);
 
   return user;

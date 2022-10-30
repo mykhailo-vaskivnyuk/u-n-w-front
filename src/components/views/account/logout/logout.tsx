@@ -7,9 +7,13 @@ export const Logout: FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    app.account.logout().then((success) => {
-      success ? navigate(RoutesMap.ACCOUNT.LOGIN) : window.history.back();
-    });
+    app.account
+      .logoutOrRemove('logout')
+      .then((success) => {
+        if (success) return navigate(RoutesMap.ACCOUNT.LOGIN);
+        window.history.back();
+      })
+      .catch(() => window.history.back());
   }, [navigate]);
   return null;
 };

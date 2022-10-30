@@ -63,7 +63,7 @@ export const AccountForm = () => {
       initialValues={initialValue}
       onSubmit={(values) => {
         console.log(values);
-        app.account.removeUser().then((success) => {
+        app.account.logoutOrRemove('remove').then((success) => {
           if (success) return navigate(RoutesMap.INDEX);
           modalService.showError('Не вдалося видалити акаунт');
         });

@@ -50,7 +50,12 @@ export class ClientApp extends EventEmitter {
   protected setState(state: AppState) {
     if (this.state === AppState.INIT) return;
     this.state = state;
-    this.emit('statechanged', this.state);
+    if (state !== AppState.READY) {
+      return this.emit('statechanged', this.state);
+    }
+    Promise.resolve()
+      .then(() => this.emit('statechanged', this.state))
+      .catch((e) => console.log(e));
   }
 
   private async readUser(...args: Parameters<typeof this.clientApi.user.read>) {

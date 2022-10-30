@@ -49,10 +49,13 @@ export const LoginForm = () => {
       validationSchema={LoginSchema}
       onSubmit={(values) => {
         console.log(values);
-        app.account.login(values).then((success) => {
-          if (success) return navigate(RoutesMap.INDEX);
-          modalService.showError('Невірний email або пароль');
-        });
+        app.account
+          .loginOrSignup('login', values)
+          .then((success) => {
+            if (success) return navigate(RoutesMap.INDEX);
+            modalService.showError('Невірний email або пароль');
+          })
+          .catch();
       }}
     >
       <Login />

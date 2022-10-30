@@ -15,7 +15,7 @@ export const Restore: FC = () => {
       return modalService.showError('Невірний лінк');
     }
     app.account
-      .restore({ link })
+      .loginOverLink('restore', { link })
       .then((success) => {
         if (success) return navigate(RoutesMap.ACCOUNT.CONFIRM);
         navigate(RoutesMap.INDEX);

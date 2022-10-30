@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useUser } from '@hooks/useUser';
 import { RoutesMap } from '@components/router/constants';

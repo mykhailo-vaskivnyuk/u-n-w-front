@@ -2,6 +2,7 @@ import { FC, useEffect } from 'react';
 import { app } from '@api/client.app/client.app';
 import { useMatch, useNavigate } from 'react-router-dom';
 import { modalService } from '@services/modal.service';
+import { RoutesMap } from '@components/router/constants';
 
 export const Confirm: FC = () => {
   const navigate = useNavigate();
@@ -10,11 +11,11 @@ export const Confirm: FC = () => {
   useEffect(() => {
     const { link } = params || {};
     if (!link) {
-      navigate('/');
+      navigate(RoutesMap.INDEX);
       return modalService.showError('Невірний лінк');
     }
     app.account
-      .confirm({ link })
+      .loginOverLink('confirm', { link })
       .then((success) => {
         if (success) return navigate('/account');
         navigate('/');
