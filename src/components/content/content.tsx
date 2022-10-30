@@ -7,9 +7,9 @@ import { useStyles } from './content.styles';
 
 export const Content: FC<PropsWithChildren> = ({ children }) => {
   const { root, animation } = useStyles();
-  const state = useAppState();
+  const isInit = useAppState() === AppState.INIT;
   const ref = useRef<HTMLDivElement>(null);
-  const key = useLocation().key;
+  const { key } = useLocation();
 
   const handleAnimation = useCallback(() => {
     const el = ref.current;
@@ -17,7 +17,6 @@ export const Content: FC<PropsWithChildren> = ({ children }) => {
     el.classList.remove(animation);
   }, [animation]);
 
-  const isInit = state === AppState.INIT;
   return (
     <div key={key} className={clsx(root, animation)} ref={ref} onAnimationEnd={handleAnimation}>
       {!isInit && children}

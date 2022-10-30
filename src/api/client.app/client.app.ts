@@ -70,15 +70,6 @@ export class ClientApp extends EventEmitter {
       this.setState(AppState.ERROR);
     }
   }
-
-  override on(...args: Parameters<EventEmitter['on']>) {
-    super.on(...args);
-    const eventsMap = {
-      user: this.user,
-    };
-    const [event, cb] = args;
-    event in eventsMap && cb(eventsMap[event as keyof typeof eventsMap]);
-  }
 }
 
 let baseUrl = process.env.API;

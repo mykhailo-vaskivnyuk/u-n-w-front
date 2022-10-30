@@ -1,12 +1,14 @@
 /* eslint-disable import/no-cycle */
 import { AppState } from '../constants';
 import { ClientAppThis } from './client.app';
+import { api } from '../client.api';
+
+type TLoginOrSignup =
+  | ['login', Parameters<ReturnType<typeof api>['account']['login']>[0]]
+  | ['signup', Parameters<ReturnType<typeof api>['account']['signup']>[0]];
 
 export const getAccountMethods = (parent: ClientAppThis) => ({
-  async loginOrSignup(
-    type: 'login' | 'signup',
-    args: Parameters<typeof parent.clientApi.account[typeof type]>[0],
-  ) {
+  async loginOrSignup(...[type, args]: TLoginOrSignup) {
     parent.setState(AppState.LOADING);
     try {
       const user = await parent.clientApi.account[type](args as any);
