@@ -1,9 +1,9 @@
-import { FC, useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useUser } from '@hooks/useUser';
-import { RoutesMap } from '@components/router/constants';
 import { AppState } from '@api/constants';
 import { useAppState } from '@hooks/useAppState';
+import { useUser } from '@hooks/useUser';
+import { RoutesMap } from '@components/router/constants';
 
 const endingOnSlash = /\/$/;
 

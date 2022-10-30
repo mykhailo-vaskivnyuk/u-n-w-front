@@ -7,5 +7,6 @@ export interface IMenuItem {
 }
 
 export interface MenuItemProps extends IMenuItem {
+  active: boolean;
   onClick: () => void;
 }

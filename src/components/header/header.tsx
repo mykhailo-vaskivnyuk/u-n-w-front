@@ -1,15 +1,15 @@
 import React, { FC, useCallback } from 'react';
 import { modalService } from '@services/modal.service';
+import { menuNotLogedIn, menuLogedIn } from '@constants/constants';
+import { useUser } from '@hooks/useUser';
 import { ICONS } from '@components/icon/icon';
 import { IconButton } from '@components/buttons/icon.button/icon.button';
-import { menuNotLogin, menuLogin } from '@constants/constants';
-import { useUser } from '@hooks/useUser';
 import { useStyles } from './header.styles';
 
 export const Header: FC = () => {
   const { root, title, button } = useStyles();
   const user = useUser();
-  const menu = user ? menuLogin : menuNotLogin;
+  const menu = user ? menuLogedIn : menuNotLogedIn;
   const openMenu = useCallback(() => modalService.openMenu(menu), [menu]);
 
   return (
