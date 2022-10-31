@@ -1,4 +1,5 @@
 /* eslint-disable import/no-cycle */
+import { IUser } from '@api/types';
 import { AppState } from '../constants';
 import { ClientAppThis } from './client.app';
 import { api } from '../client.api';
@@ -49,13 +50,13 @@ export const getAccountMethods = (parent: ClientAppThis) => ({
   async loginOverLink(
     type: 'confirm' | 'restore',
     ...args: Parameters<typeof parent.clientApi.account.confirm>
-  ) {
+  ): Promise<IUser> {
     parent.setState(AppState.LOADING);
     try {
       const user = await parent.clientApi.account[type](...args);
       user && parent.setUser(user);
       parent.setState(AppState.READY);
-      return Boolean(user);
+      return user;
     } catch (e) {
       parent.setState(AppState.ERROR);
       throw e;

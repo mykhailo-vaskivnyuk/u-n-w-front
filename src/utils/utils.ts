@@ -14,3 +14,7 @@ export const delay = (time: number) =>
   new Promise((rv) => {
     setTimeout(rv, time);
   });
+
+export const format = (str: string, ...values: string[]) => {
+  return values.reduce((result, value) => result.replace('%s', value), str);
+};

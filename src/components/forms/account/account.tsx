@@ -7,6 +7,7 @@ import { modalService } from '@services/modal.service';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '@hooks/useUser';
 import { RoutesMap } from '@components/router/constants';
+import { MessagesMap } from '@constants/messages';
 import { AccountField, AccountFormValues } from './account.schema';
 import { useStyles } from './account.styles';
 
@@ -64,8 +65,11 @@ export const AccountForm = () => {
       onSubmit={(values) => {
         console.log(values);
         app.account.logoutOrRemove('remove').then((success) => {
-          if (success) return navigate(RoutesMap.INDEX);
-          modalService.showError('Не вдалося видалити акаунт');
+          if (success) {
+            modalService.showMessage(MessagesMap.ACCOUNT_DELETED);
+            return navigate(RoutesMap.INDEX);
+          }
+          modalService.showError(MessagesMap.ACCOUNT_NOT_DELETED);
         });
       }}
     >

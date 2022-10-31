@@ -6,6 +6,7 @@ import { modalService } from '@services/modal.service';
 import { Button } from '@components/buttons/button/button';
 import { Input } from '@components/controls/input/input';
 import { RoutesMap } from '@components/router/constants';
+import { MessagesMap } from '@constants/messages';
 import { LoginField, LoginFormValues, LoginSchema } from './login.schema';
 import { useStyles } from './login.styles';
 
@@ -53,7 +54,7 @@ export const LoginForm = () => {
           .loginOrSignup('login', values)
           .then((success) => {
             if (success) return navigate(RoutesMap.INDEX);
-            modalService.showError('Невірний email або пароль');
+            modalService.showError(MessagesMap.LOGIN_FAILED);
           })
           .catch();
       }}

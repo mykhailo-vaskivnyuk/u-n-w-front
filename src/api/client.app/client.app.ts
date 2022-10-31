@@ -18,7 +18,7 @@ export class ClientApp extends EventEmitter {
 
   protected state: AppState = AppState.INIT;
 
-  private user: IUser | null = null;
+  private user: IUser = null;
 
   account: ReturnType<typeof getAccountMethods>;
 
@@ -42,7 +42,7 @@ export class ClientApp extends EventEmitter {
     };
   }
 
-  protected setUser(user: IUser | null) {
+  protected setUser(user: IUser) {
     this.user = user;
     this.emit('user', user);
   }

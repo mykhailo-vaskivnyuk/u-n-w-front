@@ -6,6 +6,8 @@ import { Input } from '@components/controls/input/input';
 import { useNavigate } from 'react-router-dom';
 import { modalService } from '@services/modal.service';
 import { RoutesMap } from '@components/router/constants';
+import { MessagesMap } from '@constants/messages';
+import { format } from '@utils/utils';
 import { OvermailField, OvermailFormValues, OvermailSchema } from './overmail.schema';
 import { useStyles } from './overmail.styles';
 
@@ -49,11 +51,11 @@ export const OvermailForm = () => {
           .overmail(values)
           .then((success) => {
             if (success) {
-              const message = `Лінк відправлено на ${values[OvermailField.EMAIL]}`;
+              const message = format(MessagesMap.RESTORE_LINK_SENT, values[OvermailField.EMAIL]);
               modalService.showMessage(message);
               return navigate(RoutesMap.ACCOUNT.LOGIN);
             }
-            const message = `Не можливо відправити лінк на ${values[OvermailField.EMAIL]}`;
+            const message = format(MessagesMap.RESTORE_LINK_SENT, values[OvermailField.EMAIL]);
             modalService.showError(message);
           })
           .catch();

@@ -24,7 +24,7 @@ export const useStyles = createUseStyles(
           transform: 'translateY(-100%)',
         },
         to: {
-          transform: 'translateY(60px)',
+          transform: `translateY(calc(60px + ${vars.gap.main}))`,
         },
       },
       '@keyframes backdrop': {
@@ -57,7 +57,7 @@ export const useStyles = createUseStyles(
 
     modal: {
       maxHeight: 'calc(100% - 60px)',
-      transform: 'translateY(60px)',
+      transform: `translateY(calc(60px + ${vars.gap.main}))`,
       background: palette.bg.main,
       margin: `0 ${vars.gap.main}`,
       borderRadius: vars.radius.main,

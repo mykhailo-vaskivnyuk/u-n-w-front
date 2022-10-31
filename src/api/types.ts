@@ -1,3 +1,9 @@
-import { ITableUsers } from './db.types';
+import { api } from './client.api';
 
-export type IUser = ITableUsers;
+export type IUser = null | {
+  email: string;
+  name: string | null;
+  mobile: string | null;
+  net_name: string | null;
+  confirmed: boolean;
+};
