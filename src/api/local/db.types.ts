@@ -1,4 +1,4 @@
-import { getEnumFromMap } from '../utils/utils';
+import { getEnumFromMap } from '../../utils/utils';
 
 export const TABLES_MAP = {
   SESSIONS: 'sessions',

@@ -1,4 +1,4 @@
-import React, { FC, useCallback } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import { modalService } from '@services/modal.service';
 import { MENU_ITEMS } from '@constants/constants';
 import { useUser } from '@hooks/useUser';

@@ -1,8 +1,8 @@
 /* eslint-disable import/no-cycle */
 import { AppState } from '../constants';
-import { IUser } from '../types';
+import { IUserResponse } from '../api/types';
 import EventEmitter from '../event.emitter';
-import { api } from '../client.api';
+import { api } from '../api/client.api';
 import { getConnection } from '../client.fetch';
 import { getAccountMethods } from './account';
 
@@ -10,7 +10,7 @@ export type ClientAppThis = ClientApp & {
   state: AppState;
   clientApi: ReturnType<typeof api>;
   setState: (state: AppState) => void;
-  setUser: (user: IUser | null) => void;
+  setUser: (user: IUserResponse) => void;
 };
 
 export class ClientApp extends EventEmitter {
@@ -18,7 +18,7 @@ export class ClientApp extends EventEmitter {
 
   protected state: AppState = AppState.INIT;
 
-  private user: IUser = null;
+  private user: IUserResponse = null;
 
   account: ReturnType<typeof getAccountMethods>;
 
@@ -42,7 +42,7 @@ export class ClientApp extends EventEmitter {
     };
   }
 
-  protected setUser(user: IUser) {
+  protected setUser(user: IUserResponse) {
     this.user = user;
     this.emit('user', user);
   }

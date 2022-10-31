@@ -1,7 +1,7 @@
 import React, { FC, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, useFormikContext } from 'formik';
-import { app } from '@api/client.app/client.app';
+import { app } from '@api/app/client.app';
 import { modalService } from '@services/modal.service';
 import { Button } from '@components/buttons/button/button';
 import { Input } from '@components/controls/input/input';
@@ -52,8 +52,8 @@ export const LoginForm = () => {
         console.log(values);
         app.account
           .loginOrSignup('login', values)
-          .then((success) => {
-            if (success) return navigate(RoutesMap.INDEX);
+          .then((user) => {
+            if (user) return navigate(RoutesMap.INDEX);
             modalService.showError(MessagesMap.LOGIN_FAILED);
           })
           .catch();

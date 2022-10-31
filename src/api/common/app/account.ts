@@ -1,8 +1,8 @@
 /* eslint-disable import/no-cycle */
-import { IUser } from '@api/types';
+import { IUserResponse } from '../api/types';
 import { AppState } from '../constants';
 import { ClientAppThis } from './client.app';
-import { api } from '../client.api';
+import { api } from '../api/client.api';
 
 type TLoginOrSignup =
   | ['login', Parameters<ReturnType<typeof api>['account']['login']>[0]]
@@ -15,7 +15,7 @@ export const getAccountMethods = (parent: ClientAppThis) => ({
       const user = await parent.clientApi.account[type](args as any);
       user && parent.setUser(user);
       parent.setState(AppState.READY);
-      return Boolean(user);
+      return user;
     } catch (e) {
       parent.setState(AppState.ERROR);
       throw e;
@@ -50,7 +50,7 @@ export const getAccountMethods = (parent: ClientAppThis) => ({
   async loginOverLink(
     type: 'confirm' | 'restore',
     ...args: Parameters<typeof parent.clientApi.account.confirm>
-  ): Promise<IUser> {
+  ): Promise<IUserResponse> {
     parent.setState(AppState.LOADING);
     try {
       const user = await parent.clientApi.account[type](...args);

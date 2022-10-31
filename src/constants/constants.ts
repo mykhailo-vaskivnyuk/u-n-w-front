@@ -10,6 +10,12 @@ export const MENU_ITEMS: IMenuItem[] = [
     menu: ['notConfirmed', 'logedIn'],
   },
   {
+    label: 'Акаунт',
+    pathname: RoutesMap.ACCOUNT.INDEX,
+    icon: ICONS.spinner,
+    menu: ['notConfirmed', 'logedIn'],
+  },
+  {
     label: 'Про You & World',
     pathname: RoutesMap.ABOUT,
     icon: ICONS.spinner,

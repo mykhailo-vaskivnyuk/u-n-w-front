@@ -1,6 +1,6 @@
 import React, { FC, FormEvent } from 'react';
 import { Formik, useFormikContext } from 'formik';
-import { app } from '@api/client.app/client.app';
+import { app } from '@api/app/client.app';
 import { Button } from '@components/buttons/button/button';
 import { Input } from '@components/controls/input/input';
 import { useNavigate } from 'react-router-dom';

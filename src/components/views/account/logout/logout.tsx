@@ -1,5 +1,5 @@
 import { FC, useEffect } from 'react';
-import { app } from '@api/client.app/client.app';
+import { app } from '@api/app/client.app';
 import { useNavigate } from 'react-router-dom';
 import { RoutesMap } from '@components/router/constants';
 

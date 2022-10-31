@@ -8,4 +8,5 @@ export const MessagesMap = {
   ACCOUNT_DELETED: 'Акаунт успішно видалено',
   ACCOUNT_NOT_DELETED: 'Не вдалося видалити акаунт',
   BAD_LINK: 'Невірний лінк',
+  CONFIRM_SUCCESS: 'Email успішно підтверджено',
 };

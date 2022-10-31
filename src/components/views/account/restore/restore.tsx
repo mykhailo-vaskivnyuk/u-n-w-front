@@ -1,5 +1,5 @@
 import { FC, useEffect } from 'react';
-import { app } from '@api/client.app/client.app';
+import { app } from '@api/app/client.app';
 import { useMatch, useNavigate } from 'react-router-dom';
 import { modalService } from '@services/modal.service';
 import { RoutesMap } from '@components/router/constants';
@@ -16,8 +16,8 @@ export const Restore: FC = () => {
     }
     app.account
       .loginOverLink('restore', { link })
-      .then((success) => {
-        if (success) return navigate(RoutesMap.ACCOUNT.CONFIRM);
+      .then((user) => {
+        if (user) return navigate(RoutesMap.ACCOUNT.CONFIRM);
         navigate(RoutesMap.INDEX);
         modalService.showError('Невірний лінк');
       })
