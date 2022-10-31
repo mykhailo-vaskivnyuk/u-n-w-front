@@ -1,4 +1,4 @@
-import React, { FC, FormEvent } from 'react';
+import React, { FC, FormEvent, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, useFormikContext } from 'formik';
 import { app } from '@api/app/client.app';
@@ -7,6 +7,7 @@ import { Button } from '@components/buttons/button/button';
 import { Input } from '@components/controls/input/input';
 import { RoutesMap } from '@components/router/constants';
 import { MessagesMap } from '@constants/messages';
+import { format } from '@utils/utils';
 import { LoginField, LoginFormValues, LoginSchema } from './login.schema';
 import { useStyles } from './login.styles';
 
@@ -44,6 +45,16 @@ const FormikProvider = Formik<LoginFormValues>;
 export const LoginForm = () => {
   const navigate = useNavigate();
 
+  const navigateToIndex = useCallback(
+    () => navigate(RoutesMap.INDEX, { replace: true }),
+    [navigate],
+  );
+  const showNotConfirmed = useCallback((values: LoginFormValues) => {
+    const message = format(MessagesMap.NOT_CONFIRMED, values[LoginField.EMAIL]);
+    modalService.showError(message);
+  }, []);
+  const showFailed = useCallback(() => modalService.showError(MessagesMap.LOGIN_FAILED), []);
+
   return (
     <FormikProvider
       initialValues={{ email: '', password: '' }}
@@ -53,8 +64,9 @@ export const LoginForm = () => {
         app.account
           .loginOrSignup('login', values)
           .then((user) => {
-            if (user) return navigate(RoutesMap.INDEX);
-            modalService.showError(MessagesMap.LOGIN_FAILED);
+            if (!user) return showFailed();
+            !user.confirmed && showNotConfirmed(values);
+            navigateToIndex();
           })
           .catch();
       }}

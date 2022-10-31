@@ -1,10 +1,10 @@
-import React, { FC, FormEvent } from 'react';
+import React, { FC, FormEvent, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Formik, useFormikContext } from 'formik';
 import { Button } from '@components/buttons/button/button';
 import { Input } from '@components/controls/input/input';
 import { app } from '@api/app/client.app';
 import { modalService } from '@services/modal.service';
-import { useNavigate } from 'react-router-dom';
 import { RoutesMap } from '@components/router/constants';
 import { MessagesMap } from '@constants/messages';
 import { format } from '@utils/utils';
@@ -41,6 +41,16 @@ const FormikProvider = Formik<SignupFormValues>;
 export const SignupForm = () => {
   const navigate = useNavigate();
 
+  const navigateToAccount = useCallback(
+    () => navigate(RoutesMap.ACCOUNT.INDEX, { replace: true }),
+    [navigate],
+  );
+  const showSuccess = useCallback((values: SignupFormValues) => {
+    const message = format(MessagesMap.CONFIRM_LINK_SENT, values[SignupField.EMAIL]);
+    modalService.showMessage(message);
+  }, []);
+  const showFailed = useCallback(() => modalService.showError(MessagesMap.SIGNUP_FAILED), []);
+
   return (
     <FormikProvider
       initialValues={{ email: '' }}
@@ -49,14 +59,10 @@ export const SignupForm = () => {
         console.log(values);
         await app.account
           .loginOrSignup('signup', values)
-          .then((success) => {
-            if (success) {
-              modalService.showMessage(
-                format(MessagesMap.CONFIRM_LINK_SENT, values[SignupField.EMAIL]),
-              );
-              return navigate(RoutesMap.ACCOUNT.INDEX);
-            }
-            modalService.showError(MessagesMap.SIGNUP_FAILED);
+          .then((user) => {
+            if (!user) return showFailed();
+            showSuccess(values);
+            navigateToAccount();
           })
           .catch();
       }}

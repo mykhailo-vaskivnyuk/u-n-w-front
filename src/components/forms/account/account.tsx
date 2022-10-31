@@ -1,4 +1,4 @@
-import React, { FC, FormEvent } from 'react';
+import React, { FC, FormEvent, useCallback } from 'react';
 import { Formik, useFormikContext } from 'formik';
 import { Button } from '@components/buttons/button/button';
 import { Input } from '@components/controls/input/input';
@@ -47,6 +47,14 @@ const FormikProvider = Formik<AccountFormValues>;
 
 export const AccountForm = () => {
   const navigate = useNavigate();
+
+  const navigateToIndex = useCallback(
+    () => navigate(RoutesMap.INDEX, { replace: true }),
+    [navigate],
+  );
+  const showSuccess = useCallback(() => modalService.showMessage(MessagesMap.ACCOUNT_DELETED), []);
+  const showFailed = useCallback(() => modalService.showError(MessagesMap.ACCOUNT_NOT_DELETED), []);
+
   const user = useUser();
 
   if (!user) return null;
@@ -65,11 +73,9 @@ export const AccountForm = () => {
       onSubmit={(values) => {
         console.log(values);
         app.account.logoutOrRemove('remove').then((success) => {
-          if (success) {
-            modalService.showMessage(MessagesMap.ACCOUNT_DELETED);
-            return navigate(RoutesMap.INDEX);
-          }
-          modalService.showError(MessagesMap.ACCOUNT_NOT_DELETED);
+          if (!success) return showFailed();
+          showSuccess();
+          navigateToIndex();
         });
       }}
     >

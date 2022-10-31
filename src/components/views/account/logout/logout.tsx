@@ -1,19 +1,28 @@
 import { FC, useEffect } from 'react';
-import { app } from '@api/app/client.app';
 import { useNavigate } from 'react-router-dom';
+import { app } from '@api/app/client.app';
 import { RoutesMap } from '@components/router/constants';
+import { MessagesMap } from '@constants/messages';
+import { modalService } from '@services/modal.service';
 
 export const Logout: FC = () => {
   const navigate = useNavigate();
+
+  const navigateToIndex = () => navigate(RoutesMap.INDEX, { replace: true });
+  const navigateBack = () => navigate(-1);
+  const showFailed = () => modalService.showMessage(MessagesMap.LOGOUT_FAILED);
 
   useEffect(() => {
     app.account
       .logoutOrRemove('logout')
       .then((success) => {
-        if (success) return navigate(RoutesMap.ACCOUNT.LOGIN);
-        window.history.back();
+        if (success) return navigateToIndex();
+        showFailed();
+        navigateBack();
       })
-      .catch(() => window.history.back());
-  }, [navigate]);
+      .catch(navigateBack);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return null;
 };

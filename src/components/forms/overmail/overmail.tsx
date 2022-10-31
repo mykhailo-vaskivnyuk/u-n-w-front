@@ -1,4 +1,4 @@
-import React, { FC, FormEvent } from 'react';
+import React, { FC, FormEvent, useCallback } from 'react';
 import { Formik, useFormikContext } from 'formik';
 import { app } from '@api/app/client.app';
 import { Button } from '@components/buttons/button/button';
@@ -41,6 +41,19 @@ const FormikProvider = Formik<OvermailFormValues>;
 export const OvermailForm = () => {
   const navigate = useNavigate();
 
+  const navigateToIndex = useCallback(
+    () => navigate(RoutesMap.INDEX, { replace: true }),
+    [navigate],
+  );
+  const showSuccess = useCallback((values: OvermailFormValues) => {
+    const message = format(MessagesMap.RESTORE_LINK_SENT, values[OvermailField.EMAIL]);
+    modalService.showMessage(message);
+  }, []);
+  const showFailed = useCallback(
+    () => modalService.showError(MessagesMap.RESTORE_LINK_NOT_SENT),
+    [],
+  );
+
   return (
     <FormikProvider
       initialValues={{ email: '' }}
@@ -50,13 +63,9 @@ export const OvermailForm = () => {
         app.account
           .overmail(values)
           .then((success) => {
-            if (success) {
-              const message = format(MessagesMap.RESTORE_LINK_SENT, values[OvermailField.EMAIL]);
-              modalService.showMessage(message);
-              return navigate(RoutesMap.ACCOUNT.LOGIN);
-            }
-            const message = format(MessagesMap.RESTORE_LINK_SENT, values[OvermailField.EMAIL]);
-            modalService.showError(message);
+            if (!success) return showFailed();
+            showSuccess(values);
+            navigateToIndex();
           })
           .catch();
       }}

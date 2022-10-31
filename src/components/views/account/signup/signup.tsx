@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { FormContainer } from '@components/views/account/form.container/form.container';
+import { FormContainer } from '@components/views/form.container/form.container';
 import { SignupForm } from '@components/forms/signup/signup';
 
 export const Signup: FC = () => {

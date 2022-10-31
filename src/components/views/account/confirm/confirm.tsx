@@ -8,26 +8,32 @@ import { MessagesMap } from '@constants/messages';
 export const Confirm: FC = () => {
   const navigate = useNavigate();
   const path = RoutesMap.ACCOUNT.CONFIRM.replace('*', ':link');
-  const { params } = useMatch({ path }) || {};
+  const { params } = useMatch<'link', typeof path>({ path }) || {};
+
+  const navigateToIndex = () => navigate(RoutesMap.INDEX, { replace: true });
+  const navigateToAccount = () => navigate(RoutesMap.ACCOUNT.INDEX, { replace: true });
+  const showSuccess = () => modalService.showMessage(MessagesMap.CONFIRM_SUCCESS);
+  const showFailed = () => modalService.showError(MessagesMap.BAD_LINK);
 
   useEffect(() => {
     const { link } = params || {};
     if (!link) {
-      navigate(RoutesMap.INDEX);
-      return modalService.showError(MessagesMap.BAD_LINK);
+      showFailed();
+      return navigateToIndex();
     }
     app.account
       .loginOverLink('confirm', { link })
       .then((user) => {
         if (user) {
-          modalService.showMessage(MessagesMap.CONFIRM_SUCCESS);
-          return navigate(RoutesMap.ACCOUNT.INDEX);
+          showSuccess();
+          return navigateToAccount();
         }
-        modalService.showError(MessagesMap.BAD_LINK);
-        navigate(RoutesMap.INDEX);
+        showFailed();
+        navigateToIndex();
       })
-      .catch();
+      .catch(navigateToIndex);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return null;
 };
