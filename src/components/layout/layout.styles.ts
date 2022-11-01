@@ -11,7 +11,6 @@ export const useStyles = createUseStyles(
       background: palette.bg.main,
       position: 'relative',
       borderRadius: vars.radius.main,
-      border: `1px solid ${palette.first.main}`,
       overflow: 'hidden',
       [breakpoints.maxWidth]: {
         width: vars.width.maxWidth,

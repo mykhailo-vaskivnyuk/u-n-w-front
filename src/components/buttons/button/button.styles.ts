@@ -5,7 +5,7 @@ export const useStyles = createUseStyles(
     root: {
       ...mixins.size('100%', 36),
       ...mixins.flexCenter,
-      background: palette.bg.first,
+      background: palette.bg.add,
       color: palette.font.light,
       padding: vars.gap.SS,
       borderRadius: vars.radius.SS,

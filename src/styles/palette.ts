@@ -12,9 +12,9 @@ const getColor = (color: string) => (value?: number) => {
     .hex();
 };
 
-const first = getColor('#068408');
-const second = getColor('#b90909');
-const add = getColor('#ef6c1a');
+const first = getColor('#2e7bb3'); // #068408
+const second = getColor('#fc7b03'); // #b90909
+const add = getColor('#119636'); // #ef6c1a
 const light = getColor('#ffffff');
 const dark = getColor('#3f4141');
 const bg = getColor('#f1f4f0');

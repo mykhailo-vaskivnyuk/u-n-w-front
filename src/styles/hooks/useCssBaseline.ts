@@ -1,14 +1,4 @@
 import { createUseStyles } from 'react-jss';
-// import {
-//   proximaNovaBold,
-//   proximaNovaBoldItalic,
-//   proximaNovaLight,
-//   proximaNovaLightItalic,
-//   proximaNovaRegular,
-//   proximaNovaRegularItalic,
-//   proximaNovaSemiBold,
-//   proximaNovaSemiBoldItalic,
-// } from '@styles/fonts';
 import { palette } from '@styles/palette';
 import { vars } from '@styles/vars';
 
@@ -16,16 +6,6 @@ export const useCssBaseline = createUseStyles(
   {
     // @ts-ignore
     '@global': {
-      // '@font-face': [
-      //   proximaNovaLight,
-      //   proximaNovaLightItalic,
-      //   proximaNovaRegular,
-      //   proximaNovaRegularItalic,
-      //   proximaNovaSemiBold,
-      //   proximaNovaSemiBoldItalic,
-      //   proximaNovaBold,
-      //   proximaNovaBoldItalic,
-      // ],
 
       /* =========================== reset section ======================= */
       // Default
@@ -130,7 +110,6 @@ export const useCssBaseline = createUseStyles(
         backgroundColor: palette.bg.light,
         fontFamily: vars.font.main,
         fontSize: vars.fontSize.main,
-        lineHeight: vars.lineHeight.main,
         fontWeight: vars.fontWeight.regular,
         color: palette.font.dark,
         '-webkit-font-smoothing': 'antialiased',
@@ -147,40 +126,6 @@ export const useCssBaseline = createUseStyles(
       'input[type=number]': {
         '-moz-appearance': 'textfield',
       },
-
-      // '::-webkit-scrollbar': {
-      //   ...mixins.size(50),
-      //   [breakpoints.s_800]: {
-      //     ...mixins.size(40),
-      //   },
-      // },
-      // '::-webkit-scrollbar-track': {
-      //   backgroundColor: palette.cm_secondary.medToDark,
-      // },
-      // '::-webkit-scrollbar-thumb': {
-      //   minHeight: 60,
-      //   backgroundColor: palette.cm_light.main,
-      //   background: `${palette.cm_light.main} url("./assets/images/thumb-border-active.svg") no-repeat -100px -100px`, // preload image for active state
-      //   /* top | right | bottom | left */
-      //   borderStyle: 'solid',
-      //   /* <image> values */
-      //   borderImageSource: 'url("./assets/images/thumb-border.svg")',
-      //   /* top | right | bottom | left */
-      //   borderImageWidth: '24px 8px 24px 8px',
-      //   /* top | right | bottom | left */
-      //   borderImageSlice: '24 8 24 8',
-      //   /* top | right | bottom | left */
-      //   // borderImageOutset: '0px 0px 0px 0px',
-      //   /* vertical | horizontal (stretch | repeat | round | space) */
-      //   borderImageRepeat: 'stretch',
-      //   [breakpoints.s_800]: {
-      //     borderImageWidth: '20px 8px 20px 8px',
-      //   },
-      //   '&:active': {
-      //     backgroundColor: palette.cm_secondary.extraLight,
-      //     borderImageSource: 'url("./assets/images/thumb-border-active.svg")',
-      //   },
-      // },
 
       '#root': {
         width: '100%',

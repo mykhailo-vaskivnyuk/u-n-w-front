@@ -37,7 +37,7 @@ export const useStyles = createUseStyles(
       fontSize: vars.fontSize.S,
     },
     error: {
-      padding: `0 ${vars.gap.SS}`,
+      padding: `0 ${vars.gap.S}`,
       marginTop: vars.gap.SS,
       borderRadius: vars.radius.SS,
       color: palette.font.light,

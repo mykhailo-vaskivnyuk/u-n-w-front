@@ -10,6 +10,7 @@ export const useStyles = createUseStyles(
       ...mixins.flexCenter,
       background: palette.bg.dark,
       lineHeight: 'initial',
+      fontFamily: 'Arial',
     },
     content: {
       width: '100%',
@@ -17,20 +18,19 @@ export const useStyles = createUseStyles(
       minWidth: vars.width.minWidth,
       background: palette.bg.add,
       border: `1px solid ${palette.add.main}`,
-      fontFamily: 'Arial',
+      borderRadius: vars.radius.S,
     },
     header: {
       color: palette.font.light,
-      fontSize: vars.fontSize.XL,
+      fontSize: vars.fontSize.L,
       fontWeight: vars.fontWeight.semiBold,
-      padding: vars.gap.M,
+      padding: vars.gap.main,
     },
     body: {
       padding: vars.gap.M,
-      fontSize: vars.fontSize.M,
+      fontSize: vars.fontSize.main,
       background: palette.bg.main,
-      borderRadius: vars.radius.S,
-      color: palette.second.light,
+      color: palette.font.dark,
       '& a': {
         background: palette.bg.first,
         color: palette.font.light,
