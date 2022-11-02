@@ -49,10 +49,10 @@ export const OvermailForm = () => {
     const message = format(MessagesMap.RESTORE_LINK_SENT, values[OvermailField.EMAIL]);
     modalService.showMessage(message);
   }, []);
-  const showFailed = useCallback(
-    () => modalService.showError(MessagesMap.RESTORE_LINK_NOT_SENT),
-    [],
-  );
+  const showFailed = useCallback((values: OvermailFormValues) => {
+    const message = format(MessagesMap.RESTORE_LINK_NOT_SENT, values[OvermailField.EMAIL]);
+    modalService.showError(message);
+  }, []);
 
   return (
     <FormikProvider
@@ -63,7 +63,7 @@ export const OvermailForm = () => {
         app.account
           .overmail(values)
           .then((success) => {
-            if (!success) return showFailed();
+            if (!success) return showFailed(values);
             showSuccess(values);
             navigateToIndex();
           })

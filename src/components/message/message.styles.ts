@@ -11,7 +11,6 @@ export const useStyles = createUseStyles(
       fontSize: vars.fontSize.M,
       fontWeight: vars.fontWeight.semiBold,
       ...mixins.flexCenter,
-      textAlign: 'justify',
       '&.error': {
         background: palette.bg.extraDark,
       },
