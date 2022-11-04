@@ -173,7 +173,7 @@ const config = {
 	plugins: [
 		new HtmlWebpackPlugin(// Object.assign({},
 			{
-        title: 'YOU AND WORLD',
+        title: 'YOU & WORLD',
         filename: "index.html",
         favicon: PATHS.appFavicon,
         template: PATHS.appHtmlTemplate,

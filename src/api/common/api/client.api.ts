@@ -1,7 +1,9 @@
 import { IUserResponse } from './types';
 import * as Types from './client.api.types';
 
-export const api = (fetch: <T>(pathname: string, options?: Record<string, any>) => Promise<T>) => ({
+export const getApi = (
+  fetch: <T>(pathname: string, options?: Record<string, any>) => Promise<T>,
+) => ({
   account: {
     confirm: (options: Types.TAccountConfirm) => fetch<IUserResponse>('/account/confirm', options),
     login: (options: Types.TAccountLogin) => fetch<IUserResponse>('/account/login', options),
