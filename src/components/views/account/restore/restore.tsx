@@ -7,20 +7,20 @@ import { MessagesMap } from '@constants/messages';
 
 export const Restore: FC = () => {
   const navigate = useNavigate();
-  const path = RoutesMap.ACCOUNT.RESTORE.replace('*', ':link');
-  const { params } = useMatch<'link', typeof path>({ path }) || {};
+  const path = RoutesMap.ACCOUNT.RESTORE.replace('*', ':token');
+  const { params } = useMatch<'token', typeof path>({ path }) || {};
 
   const navigateToIndex = () => navigate(RoutesMap.INDEX, { replace: true });
   const showFailed = () => modalService.showError(MessagesMap.BAD_LINK);
 
   useEffect(() => {
-    const { link } = params || {};
-    if (!link) {
+    const { token } = params || {};
+    if (!token) {
       showFailed();
       return navigateToIndex();
     }
     app.account
-      .loginOverLink('restore', { link })
+      .loginOverLink('restore', { token })
       .then((user) => {
         if (!user) showFailed();
         navigateToIndex();
