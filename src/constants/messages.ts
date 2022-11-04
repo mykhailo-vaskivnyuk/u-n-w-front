@@ -11,4 +11,6 @@ export const MessagesMap = {
   BAD_LINK: 'Невірний лінк',
   CONFIRM_SUCCESS: 'Email успішно підтверджено',
   LOGOUT_FAILED: 'Не вдалось вийти з акаунту',
+  BAD_REQUEST: 'Сталася невідома помилка',
+  SERVER_ERROR: 'Сервіс недоступний',
 };

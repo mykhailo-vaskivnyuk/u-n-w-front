@@ -11,8 +11,8 @@ export const getAccountMethods = (parent: ClientAppThis) => ({
       user && parent.setUser(user);
       parent.setState(AppState.READY);
       return user;
-    } catch (e) {
-      parent.setState(AppState.ERROR);
+    } catch (e: any) {
+      parent.setError(e);
       throw e;
     }
   },

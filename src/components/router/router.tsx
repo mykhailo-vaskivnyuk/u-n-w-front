@@ -12,8 +12,8 @@ import { Account } from '@components/views/account/account/account';
 import { Overmail } from '@components/views/account/overmail/overmail';
 import { Signup } from '@components/views/account/signup/signup';
 import { Mail } from '@components/views/mail/mail';
+import { NotFound } from '@components/views/not.found/not.found';
 import { RelativeRoutesMap, RoutesMap } from './constants';
-import { NotFoundRedirect } from './not.found.redirect';
 
 export const Router: FC = () => {
   return (
@@ -33,7 +33,7 @@ export const Router: FC = () => {
         </Route>
         <Route path={RelativeRoutesMap.PALETTE} element={<Palette />} />
         <Route path={RelativeRoutesMap.MAIL} element={<Mail />} />
-        <Route path="*" element={<NotFoundRedirect />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
