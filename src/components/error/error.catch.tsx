@@ -18,15 +18,15 @@ export const ErrorCatch: FC = () => {
   const state = useAppState();
 
   const showError = useCallback(
-    (statusCode: HttpResponseErrorCode) =>
-      modalService.showError(STATUS_TO_MESSAGES_MAP[statusCode]),
+    (statusCode?: HttpResponseErrorCode) =>
+      modalService.showError(STATUS_TO_MESSAGES_MAP[statusCode || 500]),
     [],
   );
 
   useEffect(() => {
     if (state !== AppState.ERROR) return;
     const { error } = app.getState();
-    const { statusCode } = error;
+    const { statusCode } = error || {};
     showError(statusCode);
   }, [showError, state]);
 
