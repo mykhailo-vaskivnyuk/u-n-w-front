@@ -2,3 +2,4 @@
 commitlint*
 webpack*
 jest*
+src/api/common/api
