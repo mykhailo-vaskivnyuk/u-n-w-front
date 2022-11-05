@@ -1,6 +1,6 @@
 import { ICONS } from '@components/icon/icon';
 
-export const MenuTypes = ['notLogedIn', 'notConfirmed', 'logedIn'] as const;
+export const MenuTypes = ['notLogedIn', 'notConfirmed', 'logedIn', 'dev'] as const;
 
 export interface IMenuItem {
   label: string;

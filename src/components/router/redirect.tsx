@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AppState } from '@api/constants';
 import { useAppState } from '@hooks/useAppState';
@@ -6,6 +6,7 @@ import { useUser } from '@hooks/useUser';
 import { RoutesMap } from '@components/router/constants';
 
 const endingOnSlash = /\/$/;
+const isDEV = process.env.NODE_ENV === 'development';
 
 export const Redirect: FC = () => {
   const navigate = useNavigate();
@@ -27,6 +28,10 @@ export const Redirect: FC = () => {
       case RoutesMap.ACCOUNT.LOGIN:
       case RoutesMap.ACCOUNT.OVERMAIL:
         user && navigate(RoutesMap.INDEX);
+        break;
+      case RoutesMap.PALETTE:
+      case RoutesMap.MAIL:
+        !isDEV && navigate(RoutesMap.INDEX);
         break;
       default:
     }

@@ -37,12 +37,12 @@ export const MENU_ITEMS: IMenuItem[] = [
     label: 'Палітра',
     pathname: RoutesMap.PALETTE,
     icon: ICONS.logout,
-    menu: ['notLogedIn', 'notConfirmed', 'logedIn'],
+    menu: ['dev'],
   },
   {
     label: 'Шаблон email',
     pathname: RoutesMap.MAIL,
     icon: ICONS.logout,
-    menu: ['notLogedIn', 'notConfirmed', 'logedIn'],
+    menu: ['dev'],
   },
 ];
