@@ -3,8 +3,8 @@ import { HttpResponseError } from '../errors';
 import { AppState } from '../constants';
 import { IUserResponse } from '../api/types';
 import EventEmitter from '../event.emitter';
-import { getApi } from '../api/client.api';
-import { getConnection } from '../client.fetch';
+import { getApi, IClientApi } from '../api/client.api';
+import { getConnection } from '../client.ws';
 import { getAccountMethods } from './account';
 
 export type ClientAppThis = ClientApp & {
@@ -16,7 +16,9 @@ export type ClientAppThis = ClientApp & {
 };
 
 export class ClientApp extends EventEmitter {
-  protected clientApi;
+  protected clientApi: IClientApi | null;
+
+  private baseUrl = process.env.API || '';
 
   protected state: AppState = AppState.INIT;
 
@@ -26,14 +28,19 @@ export class ClientApp extends EventEmitter {
 
   account: ReturnType<typeof getAccountMethods>;
 
-  constructor(baseUrl: string) {
+  constructor() {
     super();
-    const connection = getConnection(baseUrl);
-    this.clientApi = getApi(connection);
     this.account = getAccountMethods(this as unknown as ClientAppThis);
+    if (!this.baseUrl) {
+      const { protocol, host } = window.location;
+      this.baseUrl = `${protocol}//${host}/api`;
+    }
+    this.init();
   }
 
-  async init() {
+  private async init() {
+    const connection = await getConnection(this.baseUrl);
+    this.clientApi = getApi(connection);
     await this.readUser();
     this.state = AppState.READY;
     this.emit('statechanged', this.state);
@@ -72,7 +79,7 @@ export class ClientApp extends EventEmitter {
   private async readUser() {
     this.setState(AppState.LOADING);
     try {
-      const user = await this.clientApi.user.read();
+      const user = await this.clientApi!.user.read();
       this.setUser(user);
       this.setState(AppState.READY);
       return user;
@@ -82,11 +89,4 @@ export class ClientApp extends EventEmitter {
   }
 }
 
-let baseUrl = process.env.API;
-
-if (!baseUrl) {
-  const { protocol, host } = window.location;
-  baseUrl = `${protocol}//${host}/api`;
-}
-
-export const app = new ClientApp(baseUrl);
+export const app = new ClientApp();
