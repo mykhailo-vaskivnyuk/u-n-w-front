@@ -14,9 +14,9 @@ export const Loading: FC = () => {
     let timer: ReturnType<typeof setTimeout> | null = null;
     if (isLoading) {
       if (loading) return;
-      timer = setTimeout(() => setLoading(isLoading), 500);
+      timer = setTimeout(() => setLoading(true), 500);
     } else if (loading) {
-      timer = setTimeout(() => setLoading(isLoading), 500);
+      timer = setTimeout(() => setLoading(false), 500);
     }
     return () => {
       timer && clearTimeout(timer);

@@ -72,11 +72,14 @@ export const AccountForm = () => {
       initialValues={initialValue}
       onSubmit={(values) => {
         console.log(values);
-        app.account.logoutOrRemove('remove').then((success) => {
-          if (!success) return showFailed();
-          showSuccess();
-          navigateToIndex();
-        });
+        app.account
+          .logoutOrRemove('remove')
+          .then((success) => {
+            if (!success) return showFailed();
+            showSuccess();
+            navigateToIndex();
+          })
+          .catch(() => {});
       }}
     >
       <Account />

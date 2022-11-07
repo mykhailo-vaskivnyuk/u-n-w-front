@@ -29,6 +29,8 @@ export const getApi = (
   },
   'index': () => fetch<string>('/index'),
 
+  'health': () => fetch<string>('/health'),
+
   'merega': {
     'read': () => fetch<Q.TMeregaReadResponse>('/merega/read'),
 

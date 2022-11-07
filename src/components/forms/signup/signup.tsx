@@ -64,7 +64,7 @@ export const SignupForm = () => {
             showSuccess(values);
             navigateToAccount();
           })
-          .catch();
+          .catch(() => {});
       }}
     >
       <Signup />

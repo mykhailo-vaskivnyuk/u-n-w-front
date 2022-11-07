@@ -68,7 +68,7 @@ export const LoginForm = () => {
             !user.confirmed && showNotConfirmed(values);
             navigateToIndex();
           })
-          .catch();
+          .catch(() => {});
       }}
     >
       <Login />

@@ -1,11 +1,12 @@
 import { HttpResponseErrorCode, HttpResponseError } from './errors';
 
 export const getConnection =
-  (baseUrl: string) => async (url: string, data?: Record<string, any>) => {
+  (baseUrl: string) =>
+  async (url: string, data: Record<string, any> = {}) => {
     const options: RequestInit = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data || {}),
+      body: JSON.stringify(data),
       credentials: 'include',
     };
     try {

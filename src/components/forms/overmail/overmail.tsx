@@ -67,7 +67,7 @@ export const OvermailForm = () => {
             showSuccess(values);
             navigateToIndex();
           })
-          .catch();
+          .catch(() => {});
       }}
     >
       <Overmail />

@@ -1,7 +1,9 @@
 import { ITableUsers } from '../../local/imports';
 import { TAccountLogin } from './client.api.types';
 
-export type TFetch = <T>(pathname: string, options?: Record<string, any>) => Promise<T>;
+export type TFetch = <T>(
+  pathname: string, options?: Record<string, any>,
+) => Promise<T>;
 
 export type IUserResponse =
   | null
