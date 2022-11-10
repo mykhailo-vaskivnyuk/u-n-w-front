@@ -15,7 +15,7 @@ export const Redirect: FC = () => {
   const user = useUser();
 
   useEffect(() => {
-    if (state === AppState.INIT) return;
+    if (state === AppState.INITING) return;
     if (pathname !== RoutesMap.INDEX && endingOnSlash.test(pathname)) {
       return navigate(pathname.replace(endingOnSlash, ''));
     }

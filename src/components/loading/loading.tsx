@@ -10,7 +10,7 @@ export const Loading: FC = () => {
   const state = useAppState();
 
   useEffect(() => {
-    const isLoading = state === AppState.LOADING || state === AppState.INIT;
+    const isLoading = state === AppState.LOADING || state === AppState.INITING;
     let timer: ReturnType<typeof setTimeout> | null = null;
     if (isLoading) {
       if (loading) return;

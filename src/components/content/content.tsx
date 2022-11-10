@@ -7,7 +7,7 @@ import { useStyles } from './content.styles';
 
 export const Content: FC<PropsWithChildren> = ({ children }) => {
   const { root, animation } = useStyles();
-  const isInit = useAppState() === AppState.INIT;
+  const isInit = useAppState() === AppState.INITING;
   const ref = useRef<HTMLDivElement>(null);
   const { key } = useLocation();
 
