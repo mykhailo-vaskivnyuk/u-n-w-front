@@ -54,8 +54,6 @@ export class ClientApp extends EventEmitter {
       }
     }
     await this.readUser();
-    this.state = AppState.READY;
-    this.emit('statechanged', this.state);
   }
 
   getState() {
@@ -96,6 +94,7 @@ export class ClientApp extends EventEmitter {
       this.setState(AppState.READY);
       return user;
     } catch (e) {
+      console.log('readUser', e);
       this.setState(AppState.ERROR);
     }
   }

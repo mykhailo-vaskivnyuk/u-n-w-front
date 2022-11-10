@@ -28,7 +28,7 @@ export const useStyles = createUseStyles(
     },
     body: {
       padding: vars.gap.M,
-      fontSize: vars.fontSize.main,
+      fontSize: vars.fontSize.S,
       background: palette.bg.main,
       color: palette.font.dark,
       '& a': {
