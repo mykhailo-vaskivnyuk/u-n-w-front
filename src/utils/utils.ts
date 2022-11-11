@@ -25,5 +25,6 @@ export const logData = (data: any, message?: string) => {
     const password = 'password' in data ? { password: '*****' } : undefined;
     log = { ...data, ...password };
   }
-  message ? console.log(message, log) : console.log(log);
+  message && console.log(`${message}\n`);
+  console.log(log);
 };

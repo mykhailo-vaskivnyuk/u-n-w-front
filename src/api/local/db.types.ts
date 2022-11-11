@@ -1,5 +1,3 @@
-import { getEnumFromMap } from '../../utils/utils';
-
 export const TABLES_MAP = {
   SESSIONS: 'sessions',
   USERS: 'users',
@@ -13,9 +11,7 @@ export const TABLES_MAP = {
   NODES_TMP: 'nodes_tmp',
   NODES_USERS: 'nodes_users',
   NOTIFICATIONS_TPL: 'notifications_tpl',
-}
-
-export const TABLES_ENUM = getEnumFromMap(TABLES_MAP);
+};
 
 export type ITableUsers = {
   user_id: number;
