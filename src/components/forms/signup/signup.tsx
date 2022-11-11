@@ -56,7 +56,6 @@ export const SignupForm = () => {
       initialValues={{ email: '' }}
       validationSchema={SignupSchema}
       onSubmit={async (values) => {
-        console.log(values);
         await app.account
           .loginOrSignup('signup', values)
           .then((user) => {

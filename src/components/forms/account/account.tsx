@@ -70,8 +70,7 @@ export const AccountForm = () => {
   return (
     <FormikProvider
       initialValues={initialValue}
-      onSubmit={(values) => {
-        console.log(values);
+      onSubmit={() => {
         app.account
           .logoutOrRemove('remove')
           .then((success) => {

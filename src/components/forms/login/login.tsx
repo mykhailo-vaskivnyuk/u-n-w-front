@@ -60,7 +60,6 @@ export const LoginForm = () => {
       initialValues={{ email: '', password: '' }}
       validationSchema={LoginSchema}
       onSubmit={(values) => {
-        console.log(values);
         app.account
           .loginOrSignup('login', values)
           .then((user) => {

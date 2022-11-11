@@ -46,6 +46,7 @@ module.exports = {
         endOfLine: 'auto',
       },
     ],
+    "@typescript-eslint/lines-between-class-members": 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
     'no-console': 'off',
     'react/prop-types': 'off',

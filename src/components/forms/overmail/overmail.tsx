@@ -59,7 +59,6 @@ export const OvermailForm = () => {
       initialValues={{ email: '' }}
       validationSchema={OvermailSchema}
       onSubmit={(values) => {
-        console.log(values);
         app.account
           .overmail(values)
           .then((success) => {
