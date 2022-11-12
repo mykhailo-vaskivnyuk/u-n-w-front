@@ -20,10 +20,10 @@ export const format = (str: string, ...values: string[]) => {
 };
 
 export const logData = (data: any, message?: string) => {
-  let log = data;
-  if (typeof data === 'object') {
-    const password = 'password' in data ? { password: '*****' } : undefined;
-    log = { ...data, ...password };
+  let log = data?.data || data;
+  if (log && typeof log === 'object') {
+    const password = 'password' in log ? { password: '*****' } : undefined;
+    log = { ...data, data: { ...log, ...password } };
   }
   message && console.log(`${message}\n`);
   console.log(log);
