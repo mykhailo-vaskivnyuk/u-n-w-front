@@ -2,7 +2,7 @@ import { Breakpoint, Breakpoints, BreakpointValues } from '@styles/types';
 import { vars } from './vars';
 
 const { maxWidth } = vars.width;
-
+const { minHeight } = vars.height;
 /**
  * creates custom breakpoint options for createBreakpoints function
  */
@@ -62,6 +62,7 @@ function createBreakpoints(): Breakpoints {
 
     downInclusive,
     maxWidth: up('maxWidth'),
+    minHeight: `@media (max-height:${minHeight}${unit})`,
   };
 }
 

@@ -63,6 +63,10 @@ const vars: Vars = {
     minWidth: 320,
   },
 
+  height: {
+    minHeight: 520,
+  },
+
   gap: {
     SS: '4px',
     S: '8px',

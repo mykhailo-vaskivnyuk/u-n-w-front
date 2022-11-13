@@ -15,6 +15,9 @@ export const useStyles = createUseStyles(
       [breakpoints.maxWidth]: {
         width: vars.width.maxWidth,
       },
+      [breakpoints.minHeight]: {
+        height: 'calc(100% + 52px)',
+      },
     },
   }),
   { name: 'Layout' },

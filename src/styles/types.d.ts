@@ -13,6 +13,7 @@ export interface Vars {
   transition: TransitionVarsType;
   cubicBezier: CubicBezierVarsType;
   width: WidthVarsType;
+  height: HeightVarsType;
   gap: GapVarsType;
   radius: BorderRadiusVarsType;
   zIndex: ZIndexVarsType;
@@ -74,6 +75,10 @@ export type WidthVarsType = {
   minWidth: number;
 };
 
+export type HeightVarsType = {
+  minHeight: number;
+};
+
 export type GapVarsType = {
   SS: string;
   S: string;
@@ -132,6 +137,7 @@ export interface Breakpoints {
   downInclusive: (key: number) => string;
 
   maxWidth: string;
+  minHeight: string;
 }
 
 /* ===================== Mixins declare ========================== */

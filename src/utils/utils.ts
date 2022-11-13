@@ -18,13 +18,3 @@ export const delay = (time: number) =>
 export const format = (str: string, ...values: string[]) => {
   return values.reduce((result, value) => result.replace('%s', value), str);
 };
-
-export const logData = (data: any, message?: string) => {
-  let log = data?.data || data;
-  if (log && typeof log === 'object') {
-    const password = 'password' in log ? { password: '*****' } : undefined;
-    log = { ...data, data: { ...log, ...password } };
-  }
-  message && console.log(`${message}\n`);
-  console.log(log);
-};

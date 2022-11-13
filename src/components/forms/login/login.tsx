@@ -1,4 +1,4 @@
-import React, { FC, FormEvent, useCallback } from 'react';
+import React, { FC, FormEvent, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, useFormikContext } from 'formik';
 import { app } from '@api/app/client.app';
@@ -14,16 +14,18 @@ import { useStyles } from './login.styles';
 const Login: FC = () => {
   const { buttons } = useStyles();
   const { submitForm } = useFormikContext<LoginFormValues>();
+  const ref = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    ref.current?.blur();
     submitForm();
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <Input type="text" label="Email" name={LoginField.EMAIL} />
-      <Input type="password" label="Пароль" name={LoginField.PASSWORD} />
+      <Input type="password" label="Пароль" name={LoginField.PASSWORD} elRef={ref} />
       <div className={buttons}>
         <Button type="submit" btnType="secondary">
           увійти
@@ -59,11 +61,15 @@ export const LoginForm = () => {
     <FormikProvider
       initialValues={{ email: '', password: '' }}
       validationSchema={LoginSchema}
-      onSubmit={(values) => {
+      onSubmit={(values, actions) => {
         app.account
           .loginOrSignup('login', values)
           .then((user) => {
-            if (!user) return showFailed();
+            if (!user) {
+              actions.setFieldValue(LoginField.PASSWORD, '');
+              actions.setFieldTouched(LoginField.PASSWORD, false);
+              return showFailed();
+            }
             !user.confirmed && showNotConfirmed(values);
             navigateToIndex();
           })

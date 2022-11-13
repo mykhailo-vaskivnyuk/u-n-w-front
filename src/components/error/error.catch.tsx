@@ -1,10 +1,8 @@
 import { FC, useCallback, useEffect } from 'react';
-import { useAppState } from '@hooks/useAppState';
-import { AppState } from '@api/constants';
+import { HttpResponseErrorCode } from '@api/errors';
 import { modalService } from '@services/modal.service';
 import { MessagesMap } from '@constants/messages';
-import { app } from '@api/app/client.app';
-import { HttpResponseErrorCode } from '@api/errors';
+import { useAppError } from '../../hooks/useAppError';
 
 const STATUS_TO_MESSAGES_MAP: Record<HttpResponseErrorCode, string> = {
   400: MessagesMap.BAD_REQUEST,
@@ -15,7 +13,7 @@ const STATUS_TO_MESSAGES_MAP: Record<HttpResponseErrorCode, string> = {
 };
 
 export const ErrorCatch: FC = () => {
-  const state = useAppState();
+  const error = useAppError();
 
   const showError = useCallback(
     (statusCode?: HttpResponseErrorCode) =>
@@ -24,11 +22,10 @@ export const ErrorCatch: FC = () => {
   );
 
   useEffect(() => {
-    if (state !== AppState.ERROR) return;
-    const { error } = app.getState();
+    if (!error) return;
     const { statusCode } = error || {};
     showError(statusCode);
-  }, [showError, state]);
+  }, [showError, error]);
 
   return null;
 };
