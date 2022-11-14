@@ -1,6 +1,12 @@
 import React, { FC, useCallback } from 'react';
 import { modalService } from '@services/modal.service';
-import { MENU_CHILD_NET_ITEMS, MENU_ITEMS, MENU_NET_ITEMS, MENU_PARENT_NET_ITEMS } from '@constants/constants';
+import {
+  MENU_ITEMS,
+  MENU_PARENT_NET_ITEMS,
+  MENU_SIBLING_NET_ITEMS,
+  MENU_CHILD_NET_ITEMS,
+  MENU_NET_ITEMS,
+} from '@constants/constants';
 import { useUser } from '@hooks/useUser';
 import { ICONS } from '@components/icon/icon';
 import { IconButton } from '@components/buttons/icon.button/icon.button';
@@ -21,6 +27,7 @@ export const Header: FC = () => {
   const openNetMenu = useCallback(() => {
     const menuNetItems = {
       parentItems: MENU_PARENT_NET_ITEMS,
+      siblingItems: MENU_SIBLING_NET_ITEMS,
       childItems: MENU_CHILD_NET_ITEMS,
       items: MENU_NET_ITEMS,
     };

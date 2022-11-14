@@ -1,7 +1,7 @@
 import { createUseStyles } from 'react-jss';
 
 export const useStyles = createUseStyles(
-  ({ palette, vars, mixins }) => ({
+  ({ breakpoints, palette, vars, mixins }) => ({
     root: {
       ...mixins.size('100%'),
       position: 'absolute',
@@ -56,17 +56,20 @@ export const useStyles = createUseStyles(
     },
 
     modal: {
-      maxHeight: 'calc(100% - 60px)',
+      maxHeight: 'calc(100% - 144px)',
       transform: `translateY(calc(60px + ${vars.gap.main}))`,
       background: palette.bg.main,
       margin: `0 ${vars.gap.main}`,
       borderRadius: vars.radius.main,
-      overflow: 'hidden',
+      overflow: 'auto',
       animationName: 'modal',
       animationDuration: vars.transition.L,
       transitionProperty: 'transform',
       transitionDuration: vars.transition.normal,
       transitionTimingFunction: vars.cubicBezier.easeInCirc,
+      [breakpoints.minHeight]: {
+        maxHeight: 'calc(100% - 196px)',
+      },
     },
 
     /* custom modal elements */

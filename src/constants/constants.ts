@@ -49,16 +49,22 @@ export const MENU_ITEMS: IMenuItem[] = [
 
 export const MENU_NET_ITEMS: IMenuItem[] = [
   {
+    label: 'На головну',
+    pathname: RoutesMap.INDEX,
+    icon: ICONS.spinner,
+    menu: ['insideNet'],
+  },
+  {
     label: 'Створити',
     pathname: RoutesMap.INDEX,
     icon: ICONS.spinner,
-    menu: [],
+    menu: ['logedIn'],
   },
   {
-    label: 'Вийти',
+    label: 'Покинути назавжди',
     pathname: RoutesMap.INDEX,
     icon: ICONS.spinner,
-    menu: [],
+    menu: ['insideNet'],
   },
 ];
 
@@ -67,13 +73,28 @@ export const MENU_PARENT_NET_ITEMS: IMenuItem[] = [
     label: 'Parent Net 1',
     pathname: RoutesMap.INDEX,
     icon: ICONS.logout,
-    menu: [],
+    menu: ['insideNet'],
   },
   {
     label: 'Parent Net 2',
     pathname: RoutesMap.INDEX,
     icon: ICONS.logout,
-    menu: [],
+    menu: ['insideNet'],
+  },
+];
+
+export const MENU_SIBLING_NET_ITEMS: IMenuItem[] = [
+  {
+    label: 'Sibling Net 1',
+    pathname: RoutesMap.INDEX,
+    icon: ICONS.logout,
+    menu: ['insideNet'],
+  },
+  {
+    label: 'Sibling Net 2',
+    pathname: RoutesMap.INDEX,
+    icon: ICONS.logout,
+    menu: ['insideNet'],
   },
 ];
 
@@ -82,12 +103,12 @@ export const MENU_CHILD_NET_ITEMS: IMenuItem[] = [
     label: 'Child Net 1',
     pathname: RoutesMap.INDEX,
     icon: ICONS.login,
-    menu: [],
+    menu: ['insideNet'],
   },
   {
     label: 'Child Net 2',
     pathname: RoutesMap.INDEX,
     icon: ICONS.login,
-    menu: [],
+    menu: ['insideNet'],
   },
 ];

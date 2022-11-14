@@ -11,7 +11,7 @@ export const useStyles = createUseStyles(
     },
     section: {
       padding: `${vars.gap.S} 0`,
-      borderBottom: `2px solid ${palette.add.main}`,
+      borderBottom: `1px dashed ${palette.add.main}`,
       '&:last-child': {
         border: 'none',
       },

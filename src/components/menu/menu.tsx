@@ -7,13 +7,14 @@ import { useStyles } from './menu.styles';
 
 export interface MenuProps {
   parentItems?: IMenuItem[];
+  siblingItems?: IMenuItem[];
   childItems?: IMenuItem[];
   items: IMenuItem[];
 }
 
 export const Menu: FC<MenuProps> = (props) => {
   const { root, section } = useStyles();
-  const { parentItems, childItems, items } = props;
+  const { parentItems, siblingItems, childItems, items } = props;
   const location = useLocation();
 
   const handleClick = useCallback(() => modalService.closeModal(), []);
@@ -30,11 +31,13 @@ export const Menu: FC<MenuProps> = (props) => {
 
   const itemsJsx = getMenuItemsJsx(items);
   const parentItemsJsx = getMenuItemsJsx(parentItems);
+  const siblingItemsJsx = getMenuItemsJsx(siblingItems);
   const childItemsJsx = getMenuItemsJsx(childItems);
 
   return (
     <div className={root}>
       {parentItemsJsx && <ul className={section}>{parentItemsJsx}</ul>}
+      {siblingItemsJsx && <ul className={section}>{siblingItemsJsx}</ul>}
       {childItemsJsx && <ul className={section}>{childItemsJsx}</ul>}
       <ul className={section}>{itemsJsx}</ul>
     </div>
