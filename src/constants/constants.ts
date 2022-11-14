@@ -46,3 +46,48 @@ export const MENU_ITEMS: IMenuItem[] = [
     menu: ['dev'],
   },
 ];
+
+export const MENU_NET_ITEMS: IMenuItem[] = [
+  {
+    label: 'Створити',
+    pathname: RoutesMap.INDEX,
+    icon: ICONS.spinner,
+    menu: [],
+  },
+  {
+    label: 'Вийти',
+    pathname: RoutesMap.INDEX,
+    icon: ICONS.spinner,
+    menu: [],
+  },
+];
+
+export const MENU_PARENT_NET_ITEMS: IMenuItem[] = [
+  {
+    label: 'Parent Net 1',
+    pathname: RoutesMap.INDEX,
+    icon: ICONS.logout,
+    menu: [],
+  },
+  {
+    label: 'Parent Net 2',
+    pathname: RoutesMap.INDEX,
+    icon: ICONS.logout,
+    menu: [],
+  },
+];
+
+export const MENU_CHILD_NET_ITEMS: IMenuItem[] = [
+  {
+    label: 'Child Net 1',
+    pathname: RoutesMap.INDEX,
+    icon: ICONS.login,
+    menu: [],
+  },
+  {
+    label: 'Child Net 2',
+    pathname: RoutesMap.INDEX,
+    icon: ICONS.login,
+    menu: [],
+  },
+];

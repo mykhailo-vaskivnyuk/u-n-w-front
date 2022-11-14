@@ -11,7 +11,7 @@ const getElement = (content: TContent | null) => {
   const { type, data } = content;
   switch (type) {
     case EModalContent.menu:
-      return <Menu items={data} />;
+      return <Menu {...data} />;
     case EModalContent.error:
       return <Message error>{data}</Message>;
     case EModalContent.message:

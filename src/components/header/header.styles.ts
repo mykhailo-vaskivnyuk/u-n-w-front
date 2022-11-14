@@ -11,7 +11,7 @@ export const useStyles = createUseStyles(
     },
     title: {
       flex: '1 0 0',
-      padding: `0 ${vars.gap.XL} 0 ${vars.gap.main}`,
+      padding: `0 ${vars.gap.main} 0 ${vars.gap.main}`,
       fontWeight: vars.fontWeight.bold,
       fontSize: vars.fontSize.M,
       lineHeight: vars.lineHeight.dense,

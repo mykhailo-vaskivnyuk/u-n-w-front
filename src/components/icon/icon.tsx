@@ -47,6 +47,7 @@ export enum ICONS {
   login = 'login',
   logout = 'logout',
   menu = 'menu',
+  menu_nets = 'menu.nets',
   printer = 'printer',
   scale = 'scale',
   search = 'search',

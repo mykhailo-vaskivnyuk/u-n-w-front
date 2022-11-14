@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import { Classes } from 'jss';
-import { IMenuItem } from '@components/menu/types';
+import { MenuProps } from '@components/menu/menu';
 
 export interface ModalProps {
   onClose?: () => void;
@@ -19,7 +19,7 @@ export enum EModalContent {
 
 export interface ModalContentPropsMap {
   [EModalContent.general]: ReactElement;
-  [EModalContent.menu]: IMenuItem[];
+  [EModalContent.menu]: MenuProps;
   [EModalContent.message]: string;
   [EModalContent.error]: string;
 }
