@@ -15,4 +15,6 @@ export const MessagesMap = {
   LOGOUT_FAILED: 'Не вдалося вийти з акаунту',
   BAD_REQUEST: 'Сталася невідома помилка',
   SERVER_ERROR: 'Сервіс недоступний',
+  NET_CREATED: 'Спільноту успішно створено',
+  NET_CREATE_FAILED: 'Не вдалося створити спільноту',
 };

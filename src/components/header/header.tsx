@@ -7,29 +7,28 @@ import {
   MENU_SIBLING_NET_ITEMS,
   MENU_CHILD_NET_ITEMS,
   MENU_NET_ITEMS,
-} from '@constants/constants';
+} from '@constants/menu.constants';
 import { useUser } from '@hooks/useUser';
 import { ICONS } from '@components/icon/icon';
 import { IconButton } from '@components/buttons/icon.button/icon.button';
+import { RoutesMap } from '@components/router/constants';
 import { useStyles } from './header.styles';
 import { MenuTypes } from '../menu/types';
 
 const isDEV = process.env.NODE_ENV === 'development';
 
 export const Header: FC = () => {
-  const { root, title, button, hidden } = useStyles();
+  const { root, title, button, homeButton, hidden } = useStyles();
   const user = useUser();
   const menuType: typeof MenuTypes[number] = user ? 'logedIn' : 'notLogedIn';
-  // console.log('MENU TYPE', menuType);
+
   const menuItems = MENU_ITEMS.filter(
     ({ menu }) => menu.includes(menuType) || (isDEV && menu.includes('dev')),
   );
   const openMenu = useCallback(() => modalService.openMenu({ items: menuItems }), [menuItems]);
 
   const menuNetItems = useMemo(() => {
-    // console.log('MENU TYPE', menuType);
     const items = MENU_NET_ITEMS.filter(({ menu }) => menu.includes(menuType));
-    // console.log(user, MENU_NET_ITEMS, menuType, items);
     if (!items.length) return null;
     return {
       // parentItems: MENU_PARENT_NET_ITEMS,
@@ -48,6 +47,12 @@ export const Header: FC = () => {
     <div className={root}>
       <IconButton icon={ICONS.menu} onClick={openMenu} className={button} />
       <div className={title}>НЕ В СПІЛЬНОТІ</div>
+      <IconButton
+        icon={ICONS.home}
+        href={RoutesMap.INDEX}
+        onClick={openNetMenu}
+        className={clsx(button, homeButton)}
+      />
       <IconButton
         icon={ICONS.menu_nets}
         onClick={openNetMenu}

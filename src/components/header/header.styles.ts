@@ -21,10 +21,17 @@ export const useStyles = createUseStyles(
       height: 'auto',
       padding: 0,
       color: palette.font.light,
+      '& + &': {
+        marginLeft: vars.gap.main,
+      },
+    },
+    homeButton: {
+      '& .icon': {
+        ...mixins.size(27),
+      },
     },
     hidden: {
-      opacity: 0,
-      pointerEvents: 'none',
+      display: 'none',
     },
   }),
   { name: 'Header' },

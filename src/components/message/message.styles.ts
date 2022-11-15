@@ -7,7 +7,7 @@ export const useStyles = createUseStyles(
       padding: vars.gap.main,
       borderRadius: vars.radius.S,
       color: palette.font.light,
-      background: palette.bg.second,
+      background: palette.second.dark,
       fontSize: vars.fontSize.M,
       fontWeight: vars.fontWeight.semiBold,
       ...mixins.flexCenter,

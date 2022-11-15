@@ -7,7 +7,6 @@ import { app } from '@api/app/client.app';
 import { modalService } from '@services/modal.service';
 import { RoutesMap } from '@components/router/constants';
 import { MessagesMap } from '@constants/messages';
-import { format } from '@utils/utils';
 import { useStyles } from './create.styles';
 import { NetCreateField, NetCreateFormValues, NetCreateSchema } from './create.schema';
 
@@ -37,32 +36,21 @@ const FormikProvider = Formik<NetCreateFormValues>;
 export const NetCreateForm = () => {
   const navigate = useNavigate();
 
-  const navigateToAccount = useCallback(
-    () => navigate(RoutesMap.ACCOUNT.INDEX, { replace: true }),
-    [navigate],
-  );
-  const showSuccess = useCallback((values: NetCreateFormValues) => {
-    const message = format(MessagesMap.CONFIRM_LINK_SENT, values[NetCreateField.NAME]);
-    modalService.showMessage(message);
-  }, []);
-  const showFailed = useCallback(() => modalService.showError(MessagesMap.SIGNUP_FAILED), []);
+  const navigateToIndex = useCallback(() => navigate(RoutesMap.INDEX), [navigate]);
+  const showSuccess = useCallback(() => modalService.showMessage(MessagesMap.NET_CREATED), []);
+  const showFailed = useCallback(() => modalService.showError(MessagesMap.NET_CREATE_FAILED), []);
 
   return (
     <FormikProvider
       initialValues={{ name: '' }}
       validationSchema={NetCreateSchema}
-      onSubmit={async (values) => {
+      onSubmit={async () => {
         await app.net
-          .create({
-            ...values,
-            net_level: 0,
-            parent_net_id: null,
-            first_net_id: null,
-            count_of_nets: 0,
-          })
+          .create({})
           .then((net) => {
             if (!net) return showFailed();
-            showSuccess(values);
+            showSuccess();
+            navigateToIndex();
           })
           .catch(() => {});
       }}
