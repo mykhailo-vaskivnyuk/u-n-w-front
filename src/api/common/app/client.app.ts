@@ -1,5 +1,6 @@
+/* eslint-disable max-lines */
 /* eslint-disable import/no-cycle */
-import { INetCreateResponse } from '@api/api/types/net.types';
+import { INetCreateResponse } from '../api/types/net.types';
 import { IUserResponse } from '../api/types/types';
 import { AppState } from '../constants';
 import { HttpResponseError } from '../errors';

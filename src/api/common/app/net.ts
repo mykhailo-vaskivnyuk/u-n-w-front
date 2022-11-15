@@ -1,5 +1,5 @@
 /* eslint-disable import/no-cycle */
-import { INetCreateParams } from '@api/api/types/net.types';
+import { INetCreateParams } from '../api/types/net.types';
 import { IClientAppThis } from './types';
 import { AppState } from '../constants';
 
