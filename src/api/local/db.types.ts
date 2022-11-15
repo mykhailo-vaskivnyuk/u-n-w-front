@@ -1,13 +1,11 @@
 /* eslint-disable max-lines */
 export const TABLES_MAP = {
-  SESSIONS: 'sessions',
-  USERS: 'users',
   NETS: 'nets',
+  NODES: 'nodes',
+  USERS: 'users',
   NETS_DATA: 'nets_data',
   NETS_USERS_DATA: 'nets_users_data',
-  NODES: 'nodes',
-  NODES_USERS: 'nodes_users',
-  NODES_NETS: 'nodes_nets',
+  SESSIONS: 'sessions',
 };
 
 export type ITableUsers = {
@@ -16,9 +14,9 @@ export type ITableUsers = {
   name: string | null;
   mobile: string | null;
   password: string | null;
-  link: string | null;
-  invite: string | null;
-  restore: string | null;
+  confirm_token: string | null;
+  invite_token: string | null;
+  restore_token: string | null;
   net_name: string | null;
 }
 
@@ -39,7 +37,7 @@ export type ITableNets = {
 export interface ITableNetsData {
   net_id: number;
   name: string;
-  goal: string;
+  goal: string | null;
   resource_name_1: string | null;
   resource_link_1: string | null;
   resource_name_2: string | null;
@@ -61,22 +59,10 @@ export interface ITableNetsUsersData {
 export interface ITableNodes {
   node_id: number;
   node_level: number;
-  node_address: number;
   parent_node_id: number | null;
   first_node_id: number | null;
   count_of_members: number;
   node_date: string;
   blocked: boolean;
   changes: boolean;
-}
-
-export interface ITableNodesNets {
-  node_id: number;
-  net_id: number;
-}
-
-export interface ITableNodesUsers {
-  node_id: number;
-  user_id: number;
-  invite: string | null;
 }
