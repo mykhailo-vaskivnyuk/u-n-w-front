@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { FormContainer } from '@components/views/form.container/form.container';
-import { AccountForm } from '@components/forms/account/account';
+import { AccountForm } from '@components/forms/account/account/account';
 
 export const Account: FC = () => {
   return (

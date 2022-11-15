@@ -1,4 +1,5 @@
-import React, { FC, useCallback } from 'react';
+import React, { FC, useCallback, useMemo } from 'react';
+import clsx from 'clsx';
 import { modalService } from '@services/modal.service';
 import {
   MENU_ITEMS,
@@ -16,29 +17,42 @@ import { MenuTypes } from '../menu/types';
 const isDEV = process.env.NODE_ENV === 'development';
 
 export const Header: FC = () => {
-  const { root, title, button } = useStyles();
+  const { root, title, button, hidden } = useStyles();
   const user = useUser();
   const menuType: typeof MenuTypes[number] = user ? 'logedIn' : 'notLogedIn';
+  // console.log('MENU TYPE', menuType);
   const menuItems = MENU_ITEMS.filter(
     ({ menu }) => menu.includes(menuType) || (isDEV && menu.includes('dev')),
   );
   const openMenu = useCallback(() => modalService.openMenu({ items: menuItems }), [menuItems]);
 
-  const openNetMenu = useCallback(() => {
-    const menuNetItems = {
-      parentItems: MENU_PARENT_NET_ITEMS,
-      siblingItems: MENU_SIBLING_NET_ITEMS,
-      childItems: MENU_CHILD_NET_ITEMS,
-      items: MENU_NET_ITEMS,
+  const menuNetItems = useMemo(() => {
+    // console.log('MENU TYPE', menuType);
+    const items = MENU_NET_ITEMS.filter(({ menu }) => menu.includes(menuType));
+    // console.log(user, MENU_NET_ITEMS, menuType, items);
+    if (!items.length) return null;
+    return {
+      // parentItems: MENU_PARENT_NET_ITEMS,
+      // siblingItems: MENU_SIBLING_NET_ITEMS,
+      // childItems: MENU_CHILD_NET_ITEMS,
+      items,
     };
-    modalService.openMenu(menuNetItems);
-  }, []);
+  }, [menuType]);
+
+  const openNetMenu = useCallback(
+    () => menuNetItems && modalService.openMenu(menuNetItems),
+    [menuNetItems],
+  );
 
   return (
     <div className={root}>
       <IconButton icon={ICONS.menu} onClick={openMenu} className={button} />
       <div className={title}>НЕ В СПІЛЬНОТІ</div>
-      <IconButton icon={ICONS.menu_nets} onClick={openNetMenu} className={button} />
+      <IconButton
+        icon={ICONS.menu_nets}
+        onClick={openNetMenu}
+        className={clsx(button, { [hidden]: !menuNetItems })}
+      />
     </div>
   );
 };

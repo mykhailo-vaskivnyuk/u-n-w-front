@@ -13,7 +13,9 @@ import { Overmail } from '@components/views/account/overmail/overmail';
 import { Signup } from '@components/views/account/signup/signup';
 import { Mail } from '@components/views/mail/mail';
 import { NotFound } from '@components/views/not.found/not.found';
-import { RelativeRoutesMap, RoutesMap } from './constants';
+import { NetCreate } from '@components/views/net/create/create';
+import { Net } from '@components/views/net/net/net';
+import { RelativeRoutesMap } from './constants';
 
 export const Router: FC = () => {
   return (
@@ -21,7 +23,7 @@ export const Router: FC = () => {
       <Redirect />
       <Routes>
         <Route path={RelativeRoutesMap.INDEX} element={<Main />} />
-        <Route path={RoutesMap.ABOUT} element={<About />} />
+        <Route path={RelativeRoutesMap.ABOUT} element={<About />} />
         <Route path={RelativeRoutesMap.ACCOUNT.INDEX}>
           <Route path="" element={<Account />} />
           <Route path={RelativeRoutesMap.ACCOUNT.SIGNUP} element={<Signup />} />
@@ -30,6 +32,10 @@ export const Router: FC = () => {
           <Route path={RelativeRoutesMap.ACCOUNT.OVERMAIL} element={<Overmail />} />
           <Route path={RelativeRoutesMap.ACCOUNT.CONFIRM} element={<Confirm />} />
           <Route path={RelativeRoutesMap.ACCOUNT.RESTORE} element={<Restore />} />
+        </Route>
+        <Route path={RelativeRoutesMap.NET.INDEX}>
+          <Route path="" element={<Net />} />
+          <Route path={RelativeRoutesMap.NET.CREATE} element={<NetCreate />} />
         </Route>
         <Route path={RelativeRoutesMap.PALETTE} element={<Palette />} />
         <Route path={RelativeRoutesMap.MAIL} element={<Mail />} />

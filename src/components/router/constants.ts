@@ -12,6 +12,10 @@ export const RelativeRoutesMap = {
     CONFIRM: 'confirm/*',
     RESTORE: 'restore/*',
   },
+  NET: {
+    INDEX: 'net',
+    CREATE: 'create',
+  },
   PALETTE: 'palette',
   MAIL: 'mail',
 };

@@ -4,9 +4,8 @@ export const useStyles = createUseStyles(
   ({ breakpoints, palette, vars, mixins }) => ({
     root: {
       ...mixins.size('100%'),
-      position: 'absolute',
-      top: 0,
-      left: 0,
+      position: 'fixed',
+      margin: '0 auto',
       zIndex: vars.zIndex.modal,
       '&.closing': {
         '& $modal': {
@@ -15,6 +14,9 @@ export const useStyles = createUseStyles(
         '& $backdrop': {
           opacity: 0,
         },
+      },
+      [breakpoints.maxWidth]: {
+        width: vars.width.maxWidth,
       },
     },
 
@@ -56,7 +58,7 @@ export const useStyles = createUseStyles(
     },
 
     modal: {
-      maxHeight: 'calc(100% - 144px)',
+      maxHeight: 'calc(100% - 124px)',
       transform: `translateY(calc(60px + ${vars.gap.main}))`,
       background: palette.bg.main,
       margin: `0 ${vars.gap.main}`,
@@ -68,7 +70,7 @@ export const useStyles = createUseStyles(
       transitionDuration: vars.transition.normal,
       transitionTimingFunction: vars.cubicBezier.easeInCirc,
       [breakpoints.minHeight]: {
-        maxHeight: 'calc(100% - 196px)',
+        maxHeight: 'calc(100% - 84px)',
       },
     },
 

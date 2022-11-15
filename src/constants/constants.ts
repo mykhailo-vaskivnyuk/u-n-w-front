@@ -56,7 +56,7 @@ export const MENU_NET_ITEMS: IMenuItem[] = [
   },
   {
     label: 'Створити',
-    pathname: RoutesMap.INDEX,
+    pathname: RoutesMap.NET.CREATE,
     icon: ICONS.spinner,
     menu: ['logedIn'],
   },

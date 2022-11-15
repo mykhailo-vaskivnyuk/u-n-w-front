@@ -22,6 +22,10 @@ export const useStyles = createUseStyles(
       padding: 0,
       color: palette.font.light,
     },
+    hidden: {
+      opacity: 0,
+      pointerEvents: 'none',
+    },
   }),
   { name: 'Header' },
 );
