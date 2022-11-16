@@ -8,7 +8,7 @@ interface IconButtonProps {
   icon: ICONS;
   href?: string;
   className?: string;
-  onClick: (e: MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
 }
 
 export const IconButton: FC<IconButtonProps> = memo((props) => {

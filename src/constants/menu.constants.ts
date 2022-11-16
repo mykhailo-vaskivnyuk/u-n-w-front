@@ -58,7 +58,7 @@ export const MENU_NET_ITEMS: IMenuItem[] = [
     label: 'Створити',
     pathname: RoutesMap.NET.CREATE,
     icon: ICONS.spinner,
-    menu: ['notLogedIn', 'logedIn'],
+    menu: ['insideNet', 'logedIn'],
   },
   {
     label: 'Покинути назавжди',

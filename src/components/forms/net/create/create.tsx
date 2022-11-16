@@ -44,9 +44,9 @@ export const NetCreateForm = () => {
     <FormikProvider
       initialValues={{ name: '' }}
       validationSchema={NetCreateSchema}
-      onSubmit={async () => {
+      onSubmit={async (values) => {
         await app.net
-          .create({})
+          .create(values)
           .then((net) => {
             if (!net) return showFailed();
             showSuccess();

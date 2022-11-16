@@ -6,6 +6,8 @@ import { useAppError } from '../../hooks/useAppError';
 
 const STATUS_TO_MESSAGES_MAP: Record<HttpResponseErrorCode, string> = {
   400: MessagesMap.BAD_REQUEST,
+  401: MessagesMap.UNAUTHORIZED,
+  403: MessagesMap.FORBIDDEN,
   404: 'Not found',
   409: 'Conflict',
   500: MessagesMap.SERVER_ERROR,
