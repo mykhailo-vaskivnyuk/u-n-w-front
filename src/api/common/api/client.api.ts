@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import * as P from './types/types';
 import * as Q from './types/client.api.types';
 
@@ -34,6 +35,11 @@ export const getApi = (
   'net': {
     'create': (options: P.INetCreateParams) =>
       fetch<P.INetCreateResponse>('/net/create', options),
+
+    'enter': (options: Q.TNetEnter) =>
+      fetch<P.INetCreateResponse>('/net/enter', options),
+
+    'readUserNets': () => fetch<Q.TNetReadUserNetsResponse>('/net/readUserNets'),
 
   },
   'scripts': {

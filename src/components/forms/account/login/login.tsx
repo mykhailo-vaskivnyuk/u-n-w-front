@@ -70,7 +70,7 @@ export const LoginForm = () => {
               actions.setFieldTouched(LoginField.PASSWORD, false);
               return showFailed();
             }
-            !user.confirmed && showNotConfirmed(values);
+            user.user_state === 'NOT_CONFIRMED' && showNotConfirmed(values);
             navigateToIndex();
           })
           .catch(() => {});

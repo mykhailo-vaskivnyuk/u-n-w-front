@@ -4,7 +4,7 @@ import { IWsResponse, TFetch } from './types';
 import { HttpResponseError } from './errors';
 
 export const getConnection = async (baseUrl: string): Promise<TFetch> => {
-  const requests = new Map<any, number>();
+  let requests = new Map<any, number>();
   let id = 0;
   const getId = () => {
     id = (id + 1) % 100;
@@ -14,29 +14,25 @@ export const getConnection = async (baseUrl: string): Promise<TFetch> => {
   let socket = new WebSocket(baseUrl);
 
   const checkConnection = async () => {
-    const { readyState, OPEN, CLOSED } = socket;
+    const { readyState, OPEN, CLOSING, CLOSED } = socket;
     if (readyState === OPEN) return;
-    if (readyState === CLOSED) socket = new WebSocket(baseUrl);
+    if (readyState === CLOSED || readyState === CLOSING) {
+      requests = new Map<any, number>();
+      socket = new WebSocket(baseUrl);
+    }
     const executor: TPromiseExecutor<void> = (rv, rj) => {
       const timer = setTimeout(() => {
         rj(new HttpResponseError(503));
-      }, 5000);
-      const listeners = {} as any;
-      const removeListeners = () => {
-        socket.removeEventListener('open', listeners.handleOpen);
-        socket.removeEventListener('error', listeners.handleError);
-      };
-      listeners.handleOpen = () => {
+      }, 10000);
+      const handleOpen = () => {
         clearTimeout(timer);
-        removeListeners();
         rv();
       };
-      listeners.handleError = () => {
-        removeListeners();
+      const handleError = () => {
         rj(new HttpResponseError(503));
       };
-      socket.addEventListener('error', listeners.handleError);
-      socket.addEventListener('open', listeners.handleOpen);
+      socket.addEventListener('error', handleError);
+      socket.addEventListener('open', handleOpen);
     };
     return new Promise<void>(executor);
   };

@@ -15,6 +15,9 @@ export const RelativeRoutesMap = {
   NET: {
     INDEX: 'net',
     CREATE: 'create',
+    ENTER: 'enter/*',
+    COMEOUT: 'comeout',
+    LEAVE: 'leave',
   },
   PALETTE: 'palette',
   MAIL: 'mail',

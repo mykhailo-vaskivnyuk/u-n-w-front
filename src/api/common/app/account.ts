@@ -10,7 +10,7 @@ export const getAccountMethods = (parent: IClientAppThis) => ({
     parent.setState(AppState.LOADING);
     try {
       const user = await parent.clientApi.account[type](args as any);
-      user && parent.setUser(user);
+      user && await parent.setUser(user);
       parent.setState(AppState.READY);
       return user;
     } catch (e: any) {
@@ -23,7 +23,7 @@ export const getAccountMethods = (parent: IClientAppThis) => ({
     parent.setState(AppState.LOADING);
     try {
       const success = await parent.clientApi.account[type]();
-      success && parent.setUser(null);
+      success && await parent.setUser(null);
       parent.setState(AppState.READY);
       return success;
     } catch (e: any) {
@@ -50,7 +50,7 @@ export const getAccountMethods = (parent: IClientAppThis) => ({
     parent.setState(AppState.LOADING);
     try {
       const user = await parent.clientApi.account[type](args);
-      user && parent.setUser(user);
+      user && await parent.setUser(user);
       parent.setState(AppState.READY);
       return user;
     } catch (e: any) {

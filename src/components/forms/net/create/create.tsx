@@ -45,7 +45,7 @@ export const NetCreateForm = () => {
       initialValues={{ name: '' }}
       validationSchema={NetCreateSchema}
       onSubmit={async (values) => {
-        await app.net
+        await app.netMethods
           .create(values)
           .then((net) => {
             if (!net) return showFailed();

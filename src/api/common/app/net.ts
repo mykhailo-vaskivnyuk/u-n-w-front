@@ -16,4 +16,28 @@ export const getNetMethods = (parent: IClientAppThis) => ({
       throw e;
     }
   },
+
+  async enter(net_id: number) {
+    parent.setState(AppState.LOADING);
+    try {
+      const net = await parent.clientApi.net.enter({ net_id });
+      parent.setNet(net);
+      parent.setState(AppState.READY);
+    } catch (e: any) {
+      parent.setError(e);
+      throw e;
+    }
+  },
+
+  async getNets() {
+    parent.setState(AppState.LOADING);
+    try {
+      const userNets = await parent.clientApi.net.readUserNets();
+      parent.setNets(userNets);
+      parent.setState(AppState.READY);
+    } catch (e: any) {
+      parent.setError(e);
+      throw e;
+    }
+  },
 });

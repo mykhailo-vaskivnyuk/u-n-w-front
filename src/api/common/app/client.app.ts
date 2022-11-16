@@ -1,5 +1,6 @@
 /* eslint-disable max-lines */
 /* eslint-disable import/no-cycle */
+import { TNetReadUserNetsResponse } from '../api/types/client.api.types';
 import { INetCreateResponse } from '../api/types/net.types';
 import { IUserResponse } from '../api/types/types';
 import { AppState } from '../constants';
@@ -16,15 +17,16 @@ export class ClientApp extends EventEmitter {
   private baseUrl = '';
   protected state: AppState = AppState.INITING;
   private user: IUserResponse = null;
-  private user_net: INetCreateResponse | null = null;
+  private net: INetCreateResponse | null = null;
+  private nets: TNetReadUserNetsResponse[] = []; 
   private error: HttpResponseError | null = null;
   account: ReturnType<typeof getAccountMethods>;
-  net: ReturnType<typeof getNetMethods>;
+  netMethods: ReturnType<typeof getNetMethods>;
 
   constructor() {
     super();
     this.account = getAccountMethods(this as any);
-    this.net = getNetMethods(this as any);
+    this.netMethods = getNetMethods(this as any);
     this.baseUrl = process.env.API || `${window.location.origin}/api`;
   }
 
@@ -53,18 +55,32 @@ export class ClientApp extends EventEmitter {
     return {
       state: this.state,
       user: this.user,
+      net: this.net,
+      nets: this.nets,
       error: this.error,
     };
   }
 
-  protected setUser(user: IUserResponse) {
+  protected async setUser(user: IUserResponse) {
     this.user = user;
     this.emit('user', user);
+    if (user && user.user_state === 'LOGGEDIN') {
+      await this.netMethods.getNets();
+    } else {
+      this.setNet(null);
+      this.setNets([]);
+    }
   }
 
-  protected setNet(net: INetCreateResponse) {
-    this.user_net = net;
+  protected setNet(net: INetCreateResponse | null) {
+    this.net = net;
+    net && (this.user!.user_state = 'INSIDE_NET');
     this.emit('net', net);
+  }
+
+  protected setNets(nets: TNetReadUserNetsResponse[]) {
+    this.nets = nets;
+    this.emit('nets', nets);
   }
 
   protected setState(state: AppState) {
@@ -92,7 +108,7 @@ export class ClientApp extends EventEmitter {
     this.setState(AppState.LOADING);
     try {
       const user = await this.clientApi!.user.read();
-      this.setUser(user);
+      await this.setUser(user);
       this.setState(AppState.READY);
       return user;
     } catch (e: any) {
