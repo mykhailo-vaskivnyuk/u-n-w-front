@@ -11,10 +11,12 @@ export const format = (str: string, ...values: string[]) => {
 export const getMenuItemsForUser = (menuItems: IMenuItem[], user: IUserResponse) => {
   let { user_state: userState } = user || {};
   if (!userState) userState = 'NOT_LOGGEDIN';
-  const filteredMenuItems = menuItems.filter(
-    ({ allowForUser }) =>
+  const filteredMenuItems = menuItems.filter(({ allowForUser }) => {
+    if (Array.isArray(allowForUser)) return allowForUser.includes(userState!);
+    return (
       USER_STATE_MAP[allowForUser] <= USER_STATE_MAP[userState!] ||
-      (isDEV && allowForUser === 'DEV'),
-  );
+      (isDEV && allowForUser === 'DEV')
+    );
+  });
   return filteredMenuItems.length ? filteredMenuItems : undefined;
 };

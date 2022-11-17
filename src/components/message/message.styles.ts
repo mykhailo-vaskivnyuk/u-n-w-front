@@ -5,7 +5,6 @@ export const useStyles = createUseStyles(
     root: {
       margin: vars.gap.S,
       padding: vars.gap.main,
-      borderRadius: vars.radius.S,
       color: palette.font.light,
       background: palette.second.dark,
       fontSize: vars.fontSize.M,

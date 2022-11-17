@@ -62,7 +62,7 @@ export const useStyles = createUseStyles(
       transform: `translateY(calc(60px + ${vars.gap.main}))`,
       background: palette.bg.main,
       margin: `0 ${vars.gap.main}`,
-      borderRadius: vars.radius.main,
+      borderRadius: vars.radius.S,
       overflow: 'auto',
       animationName: 'modal',
       animationDuration: vars.transition.L,

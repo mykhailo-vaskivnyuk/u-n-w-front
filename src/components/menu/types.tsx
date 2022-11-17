@@ -5,7 +5,7 @@ export interface IMenuItem {
   label: string;
   pathname: string;
   icon: ICONS;
-  allowForUser: UserStateKeys;
+  allowForUser: UserStateKeys | UserStateKeys[];
 }
 
 export interface MenuItemProps extends IMenuItem {

@@ -19,7 +19,7 @@ export const MENU_ITEMS: IMenuItem[] = [
     label: 'Авторизуватись',
     pathname: RoutesMap.ACCOUNT.LOGIN,
     icon: ICONS.login,
-    allowForUser: 'NOT_LOGGEDIN',
+    allowForUser: ['NOT_LOGGEDIN'],
   },
   {
     label: 'Вийти',

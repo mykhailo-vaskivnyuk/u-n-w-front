@@ -20,8 +20,9 @@ export const getNetMethods = (parent: IClientAppThis) => ({
     parent.setState(AppState.LOADING);
     try {
       const net = await parent.api.net.enter({ net_id });
-      parent.setNet(net);
+      net && parent.setNet(net);
       parent.setState(AppState.READY);
+      return net;
     } catch (e: any) {
       parent.setError(e);
     }
