@@ -1,13 +1,13 @@
 import React, { FC, FormEvent, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Formik, useFormikContext } from 'formik';
-import { Button } from '@components/buttons/button/button';
-import { Input } from '@components/controls/input/input';
+import { RoutesMap } from '@constants/router.constants';
+import { MessagesMap } from '@constants/messages';
 import { app } from '@api/app/client.app';
 import { modalService } from '@services/modal.service';
-import { useNavigate } from 'react-router-dom';
 import { useUser } from '@hooks/useUser';
-import { RoutesMap } from '@components/router/constants';
-import { MessagesMap } from '@constants/messages';
+import { Input } from '@components/controls/input/input';
+import { Button } from '@components/buttons/button/button';
 import { AccountField, AccountFormValues } from './account.schema';
 import { useStyles } from './account.styles';
 
@@ -59,7 +59,7 @@ export const AccountForm = () => {
 
   if (!user) return null;
 
-  const { email = '', name = '', net_name: netName = '', mobile = '' } = user || {};
+  const { email, name, net_name: netName, mobile } = user || {};
   const initialValue = {
     email,
     name: name || undefined,

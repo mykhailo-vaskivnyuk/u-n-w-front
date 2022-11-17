@@ -1,4 +1,4 @@
-import { getRoutesMap } from './utils';
+import { getRoutesMap } from '../components/router/utils';
 
 export const RelativeRoutesMap = {
   INDEX: '',
@@ -15,6 +15,9 @@ export const RelativeRoutesMap = {
   NET: {
     INDEX: 'net',
     CREATE: 'create',
+    ENTER: 'enter/*',
+    COMEOUT: 'comeout',
+    LEAVE: 'leave',
   },
   PALETTE: 'palette',
   MAIL: 'mail',

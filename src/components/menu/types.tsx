@@ -1,12 +1,11 @@
+import { UserStateKeys } from '@api/constants';
 import { ICONS } from '@components/icon/icon';
-
-export const MenuTypes = ['notLogedIn', 'notConfirmed', 'logedIn', 'dev', 'insideNet'] as const;
 
 export interface IMenuItem {
   label: string;
   pathname: string;
   icon: ICONS;
-  menu: typeof MenuTypes[number][];
+  allowForUser: UserStateKeys;
 }
 
 export interface MenuItemProps extends IMenuItem {

@@ -9,7 +9,7 @@ export interface MenuProps {
   parentItems?: IMenuItem[];
   siblingItems?: IMenuItem[];
   childItems?: IMenuItem[];
-  items: IMenuItem[];
+  items?: IMenuItem[];
 }
 
 export const Menu: FC<MenuProps> = (props) => {

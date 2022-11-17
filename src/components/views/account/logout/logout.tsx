@@ -1,8 +1,8 @@
 import { FC, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { app } from '@api/app/client.app';
-import { RoutesMap } from '@components/router/constants';
+import { RoutesMap } from '@constants/router.constants';
 import { MessagesMap } from '@constants/messages';
+import { app } from '@api/app/client.app';
 import { modalService } from '@services/modal.service';
 
 export const Logout: FC = () => {

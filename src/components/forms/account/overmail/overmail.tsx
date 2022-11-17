@@ -1,13 +1,13 @@
 import React, { FC, FormEvent, useCallback } from 'react';
-import { Formik, useFormikContext } from 'formik';
-import { app } from '@api/app/client.app';
-import { Button } from '@components/buttons/button/button';
-import { Input } from '@components/controls/input/input';
 import { useNavigate } from 'react-router-dom';
-import { modalService } from '@services/modal.service';
-import { RoutesMap } from '@components/router/constants';
+import { Formik, useFormikContext } from 'formik';
+import { RoutesMap } from '@constants/router.constants';
 import { MessagesMap } from '@constants/messages';
+import { app } from '@api/app/client.app';
+import { modalService } from '@services/modal.service';
 import { format } from '@utils/utils';
+import { Input } from '@components/controls/input/input';
+import { Button } from '@components/buttons/button/button';
 import { OvermailField, OvermailFormValues, OvermailSchema } from './overmail.schema';
 import { useStyles } from './overmail.styles';
 
@@ -59,14 +59,11 @@ export const OvermailForm = () => {
       initialValues={{ email: '' }}
       validationSchema={OvermailSchema}
       onSubmit={(values) => {
-        app.account
-          .overmail(values)
-          .then((success) => {
-            if (!success) return showFailed(values);
-            showSuccess(values);
-            navigateToIndex();
-          })
-          .catch(() => {});
+        app.account.overmail(values).then((success) => {
+          if (!success) return showFailed(values);
+          showSuccess(values);
+          navigateToIndex();
+        });
       }}
     >
       <Overmail />

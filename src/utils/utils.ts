@@ -1,20 +1,20 @@
-export const getEnumFromMap = <
-  T extends Record<string | number, unknown>,
-  Q extends Record<keyof T, keyof T>,
->(
-  map: T,
-): Q =>
-  Object.keys(map).reduce((obj, key) => {
-    const value: string | number = Number.isNaN(+key) ? key : +key;
-    Object.assign(obj, { [key]: value });
-    return obj;
-  }, {} as Q);
+import { IUserResponse } from '@api/api/types/account.types';
+import { IMenuItem } from '@components/menu/types';
+import { USER_STATE_MAP } from '@api/constants';
 
-export const delay = (time: number) =>
-  new Promise((rv) => {
-    setTimeout(rv, time);
-  });
+const isDEV = process.env.NODE_ENV === 'development';
 
 export const format = (str: string, ...values: string[]) => {
   return values.reduce((result, value) => result.replace('%s', value), str);
+};
+
+export const getMenuItemsForUser = (menuItems: IMenuItem[], user: IUserResponse) => {
+  let { user_state: userState } = user || {};
+  if (!userState) userState = 'NOT_LOGGEDIN';
+  const filteredMenuItems = menuItems.filter(
+    ({ allowForUser }) =>
+      USER_STATE_MAP[allowForUser] >= USER_STATE_MAP[userState!] ||
+      (isDEV && allowForUser === 'DEV'),
+  );
+  return filteredMenuItems.length ? filteredMenuItems : undefined;
 };

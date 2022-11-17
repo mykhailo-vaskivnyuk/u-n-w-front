@@ -1,9 +1,9 @@
 import { FC, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AppState } from '@api/constants';
+import { RoutesMap } from '@constants/router.constants';
 import { useAppState } from '@hooks/useAppState';
 import { useUser } from '@hooks/useUser';
-import { RoutesMap } from '@components/router/constants';
 
 const endingOnSlash = /\/$/;
 const isDEV = process.env.NODE_ENV === 'development';

@@ -1,15 +1,15 @@
 import React, { FC, FormEvent, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, useFormikContext } from 'formik';
-import { Button } from '@components/buttons/button/button';
-import { Input } from '@components/controls/input/input';
+import { RoutesMap } from '@constants/router.constants';
+import { MessagesMap } from '@constants/messages';
 import { app } from '@api/app/client.app';
 import { modalService } from '@services/modal.service';
-import { RoutesMap } from '@components/router/constants';
-import { MessagesMap } from '@constants/messages';
 import { format } from '@utils/utils';
-import { useStyles } from './signup.styles';
+import { Input } from '@components/controls/input/input';
+import { Button } from '@components/buttons/button/button';
 import { SignupField, SignupFormValues, SignupSchema } from './signup.schema';
+import { useStyles } from './signup.styles';
 
 const Signup: FC = () => {
   const { buttons } = useStyles();
@@ -56,14 +56,11 @@ export const SignupForm = () => {
       initialValues={{ email: '' }}
       validationSchema={SignupSchema}
       onSubmit={async (values) => {
-        await app.account
-          .loginOrSignup('signup', values)
-          .then((user) => {
-            if (!user) return showFailed();
-            showSuccess(values);
-            navigateToAccount();
-          })
-          .catch(() => {});
+        await app.account.loginOrSignup('signup', values).then((user) => {
+          if (!user) return showFailed();
+          showSuccess(values);
+          navigateToAccount();
+        });
       }}
     >
       <Signup />

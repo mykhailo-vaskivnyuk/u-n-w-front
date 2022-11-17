@@ -1,13 +1,13 @@
 import React, { FC, FormEvent, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, useFormikContext } from 'formik';
+import { RoutesMap } from '@constants/router.constants';
+import { MessagesMap } from '@constants/messages';
+import { format } from '@utils/utils';
 import { app } from '@api/app/client.app';
 import { modalService } from '@services/modal.service';
 import { Button } from '@components/buttons/button/button';
 import { Input } from '@components/controls/input/input';
-import { RoutesMap } from '@components/router/constants';
-import { MessagesMap } from '@constants/messages';
-import { format } from '@utils/utils';
 import { LoginField, LoginFormValues, LoginSchema } from './login.schema';
 import { useStyles } from './login.styles';
 
@@ -62,18 +62,15 @@ export const LoginForm = () => {
       initialValues={{ email: '', password: '' }}
       validationSchema={LoginSchema}
       onSubmit={(values, actions) => {
-        app.account
-          .loginOrSignup('login', values)
-          .then((user) => {
-            if (!user) {
-              actions.setFieldValue(LoginField.PASSWORD, '');
-              actions.setFieldTouched(LoginField.PASSWORD, false);
-              return showFailed();
-            }
-            !user.confirmed && showNotConfirmed(values);
-            navigateToIndex();
-          })
-          .catch(() => {});
+        app.account.loginOrSignup('login', values).then((user) => {
+          if (!user) {
+            actions.setFieldValue(LoginField.PASSWORD, '');
+            actions.setFieldTouched(LoginField.PASSWORD, false);
+            return showFailed();
+          }
+          user.user_state === 'NOT_CONFIRMED' && showNotConfirmed(values);
+          navigateToIndex();
+        });
       }}
     >
       <Login />

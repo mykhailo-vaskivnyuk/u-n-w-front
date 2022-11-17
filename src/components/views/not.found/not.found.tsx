@@ -1,6 +1,6 @@
-import { Button } from '@components/buttons/button/button';
-import { RoutesMap } from '@components/router/constants';
 import React, { FC } from 'react';
+import { RoutesMap } from '@constants/router.constants';
+import { Button } from '@components/buttons/button/button';
 import { useStyles } from './not.found.styles';
 
 export const NotFound: FC = () => {
