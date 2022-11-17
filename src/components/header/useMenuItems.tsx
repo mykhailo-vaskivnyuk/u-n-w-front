@@ -20,7 +20,7 @@ export const useMenuItems = () => {
         label: name,
         pathname: RoutesMap.NET.ENTER.replace('*', `${net_id}`),
         icon: ICONS.home,
-        allowForUser: 'INSIDE_NET',
+        allowForUser: 'LOGGEDIN',
       }),
     );
 

@@ -66,7 +66,7 @@ export const getConnection = async (baseUrl: string): Promise<TFetch> => {
       const timer = setTimeout(handleTimeout, 3000);
       const newRv = (...args: Parameters<typeof rv>) => {
         clearTimeout(timer);
-        rv(args);
+        rv(...args);
       };
       send(newRv, rj);
     };
@@ -81,11 +81,13 @@ export const getConnection = async (baseUrl: string): Promise<TFetch> => {
     const requestMessage = JSON.stringify(request);
     const sendExecutor = createSendExecutor(requestMessage);
     const trySendExecutor = createTrySendExecutor(sendExecutor);
-    await new Promise(trySendExecutor).catch(() => {
+    try {
+      return await new Promise(trySendExecutor);
+    } catch (e) {
       socket.close();
-      return checkConnection();
-    });
-    return new Promise(sendExecutor);
+      await checkConnection();
+      return new Promise(sendExecutor);
+    }
   };
 
   return fetch;
