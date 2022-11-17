@@ -27,6 +27,7 @@ export const useMenuItems = () => {
   const menuNetItems = useMemo(() => {
     const items = getMenuItemsForUser(MENU_NET_ITEMS, user);
     const parentItems = getMenuItemsForUser(menuParentNetItems, user);
+    if (!items) return undefined;
     return { parentItems, items };
   }, [menuParentNetItems, user]);
 
@@ -37,5 +38,5 @@ export const useMenuItems = () => {
     [menuNetItems],
   );
 
-  return { name, openMenu, openNetMenu: menuNetItems ? openNetMenu : undefined };
+  return { name, openMenu, openNetMenu: menuNetItems && openNetMenu };
 };

@@ -17,8 +17,8 @@ export const Router: FC = () => {
       <Routes>
         <Route path={RelativeRoutesMap.INDEX} element={<Main />} />
         <Route path={RelativeRoutesMap.ABOUT} element={<About />} />
-        <AccountRouter />
-        <NetRouter />
+        {AccountRouter}
+        {NetRouter}
         <Route path={RelativeRoutesMap.PALETTE} element={<Palette />} />
         <Route path={RelativeRoutesMap.MAIL} element={<Mail />} />
         <Route path="*" element={<NotFound />} />

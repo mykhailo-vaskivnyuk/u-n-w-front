@@ -13,7 +13,7 @@ export const getMenuItemsForUser = (menuItems: IMenuItem[], user: IUserResponse)
   if (!userState) userState = 'NOT_LOGGEDIN';
   const filteredMenuItems = menuItems.filter(
     ({ allowForUser }) =>
-      USER_STATE_MAP[allowForUser] >= USER_STATE_MAP[userState!] ||
+      USER_STATE_MAP[allowForUser] <= USER_STATE_MAP[userState!] ||
       (isDEV && allowForUser === 'DEV'),
   );
   return filteredMenuItems.length ? filteredMenuItems : undefined;

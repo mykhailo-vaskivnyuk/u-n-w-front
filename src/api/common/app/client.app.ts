@@ -62,6 +62,7 @@ export class ClientApp extends EventEmitter {
   }
 
   protected async setUser(user: IUserResponse) {
+    if (this.user === user) return;
     this.user = user;
     if (user && user.user_state === 'LOGGEDIN') {
       await this.netMethods.getNets();
@@ -73,6 +74,7 @@ export class ClientApp extends EventEmitter {
   }
 
   protected async setNet(net: INetCreateResponse | null = null) {
+    if (this.net === net) return;
     this.net = net;
     if (net) this.user!.user_state = 'INSIDE_NET';
     else {
@@ -84,6 +86,7 @@ export class ClientApp extends EventEmitter {
   }
 
   protected setNets(nets: TUserGetNetsResponse[] = []) {
+    if (this.nets === nets) return;
     this.nets = nets;
     this.emit('nets', nets);
   }
