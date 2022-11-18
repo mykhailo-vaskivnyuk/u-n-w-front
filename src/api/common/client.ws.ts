@@ -84,6 +84,7 @@ export const getConnection = async (baseUrl: string): Promise<TFetch> => {
     try {
       return await new Promise(trySendExecutor);
     } catch (e) {
+      if (e instanceof HttpResponseError) throw e;
       socket.close();
       await checkConnection();
       return new Promise(sendExecutor);

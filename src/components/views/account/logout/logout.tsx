@@ -10,7 +10,7 @@ export const Logout: FC = () => {
 
   const navigateToIndex = () => navigate(RoutesMap.INDEX, { replace: true });
   const navigateBack = () => navigate(-1);
-  const showFailed = () => modalService.showMessage(MessagesMap.LOGOUT_FAILED);
+  const showFailed = () => modalService.showError(MessagesMap.LOGOUT_FAILED);
 
   useEffect(() => {
     app.account
