@@ -25,7 +25,7 @@ export const Modal: FC<PropsWithChildren<ModalProps>> = (props) => {
       onBackdropClick?.();
       return closeOnBackdropClick ? 'closing' : curState;
     });
-  }, []);
+  }, [closeOnBackdropClick, onBackdropClick]);
 
   const closeEndHandler = useCallback(() => {
     onClose?.();

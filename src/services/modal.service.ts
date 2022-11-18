@@ -1,8 +1,7 @@
-import { SetStateAction, Dispatch } from 'react';
 import { EModalContent, ModalContentPropsMap, TContent } from '@components/modal/modal.types';
 import { MenuProps } from '@components/menu/menu';
 
-type TCallback = Dispatch<SetStateAction<TContent | null>>;
+type TCallback = (content: TContent | null) => void;
 type TCloseCallback = () => void;
 
 class ModalService {
