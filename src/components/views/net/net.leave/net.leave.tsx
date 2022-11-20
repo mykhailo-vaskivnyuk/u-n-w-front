@@ -10,7 +10,7 @@ import { app } from '@api/app/client.app';
 export const NetLeave: FC = () => {
   const navigate = useNavigate();
   const [net] = useNet();
-  const navigateToIndex = () => navigate(RoutesMap.INDEX, { replace: true });
+  const navigateToIndex = () => navigate(RoutesMap.ROOT, { replace: true });
   const navigateBack = () => navigate(-1);
   const showSuccess = () =>
     modalService.showMessage(format(MessagesMap.NET_LEAVE, net?.name || ''));

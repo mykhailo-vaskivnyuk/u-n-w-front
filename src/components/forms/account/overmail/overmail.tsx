@@ -42,7 +42,7 @@ export const OvermailForm = () => {
   const navigate = useNavigate();
 
   const navigateToIndex = useCallback(
-    () => navigate(RoutesMap.INDEX, { replace: true }),
+    () => navigate(RoutesMap.ROOT, { replace: true }),
     [navigate],
   );
   const showSuccess = useCallback((values: OvermailFormValues) => {

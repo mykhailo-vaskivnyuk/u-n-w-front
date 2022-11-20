@@ -34,8 +34,8 @@ Icon.displayName = 'Icon';
 
 export enum ICONS {
   arrowDown = 'arrow-down',
-  arrowLeft = 'arrow-left',
-  arrowRight = 'arrow-right',
+  arrowLeft = 'arrow.left',
+  arrowRight = 'arrow.right',
   arrowUp = 'arrow-up',
   calendar = 'calendar',
   confirm = 'confirm',

@@ -11,11 +11,21 @@ export const useStyles = createUseStyles(
       borderRadius: vars.radius.SS,
       textTransform: 'uppercase',
       cursor: 'pointer',
+      '&:link, &:visited': {
+        color: palette.font.light,
+      },
       '&.secondary': {
         background: palette.bg.second,
       },
-      '&:link, &:visited': {
-        color: palette.font.light,
+      '&.text': {
+        ...mixins.size('auto'),
+        display: 'block',
+        background: 'none',
+        padding: 0,
+        margin: `0 ${vars.gap.main}`,
+        fontWeight: vars.fontWeight.bold,
+        fontSize: vars.fontSize.M,
+        lineHeight: vars.lineHeight.dense,
       },
     },
   }),

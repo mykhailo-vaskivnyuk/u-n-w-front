@@ -1,10 +1,10 @@
-import React, { FC, memo, PropsWithChildren } from 'react';
+import React, { FC, memo, PropsWithChildren, ButtonHTMLAttributes } from 'react';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import { useStyles } from './button.styles';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  btnType: 'primary' | 'secondary';
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  btnType: 'primary' | 'secondary' | 'text';
   href?: string;
 }
 

@@ -48,7 +48,7 @@ export const LoginForm = () => {
   const navigate = useNavigate();
 
   const navigateToIndex = useCallback(
-    () => navigate(RoutesMap.INDEX, { replace: true }),
+    () => navigate(RoutesMap.ROOT, { replace: true }),
     [navigate],
   );
   const showNotConfirmed = useCallback((values: LoginFormValues) => {

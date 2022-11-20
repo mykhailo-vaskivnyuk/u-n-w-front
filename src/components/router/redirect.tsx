@@ -16,22 +16,22 @@ export const Redirect: FC = () => {
 
   useEffect(() => {
     if (state === AppState.INITING) return;
-    if (pathname !== RoutesMap.INDEX && endingOnSlash.test(pathname)) {
+    if (pathname !== RoutesMap.ROOT && endingOnSlash.test(pathname)) {
       return navigate(pathname.replace(endingOnSlash, ''));
     }
     switch (pathname) {
-      case RoutesMap.INDEX:
+      case RoutesMap.ROOT:
       case RoutesMap.ACCOUNT.INDEX:
         !user && navigate(RoutesMap.ACCOUNT.LOGIN);
         break;
       case RoutesMap.ACCOUNT.SIGNUP:
       case RoutesMap.ACCOUNT.LOGIN:
       case RoutesMap.ACCOUNT.OVERMAIL:
-        user && navigate(RoutesMap.INDEX);
+        user && navigate(RoutesMap.ROOT);
         break;
       case RoutesMap.PALETTE:
       case RoutesMap.MAIL:
-        !isDEV && navigate(RoutesMap.INDEX);
+        !isDEV && navigate(RoutesMap.ROOT);
         break;
       default:
     }

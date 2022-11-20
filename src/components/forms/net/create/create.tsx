@@ -36,7 +36,7 @@ const FormikProvider = Formik<NetCreateFormValues>;
 export const NetCreateForm = () => {
   const navigate = useNavigate();
 
-  const navigateToIndex = useCallback(() => navigate(RoutesMap.INDEX), [navigate]);
+  const navigateToIndex = useCallback(() => navigate(RoutesMap.ROOT), [navigate]);
   const showSuccess = useCallback(() => modalService.showMessage(MessagesMap.NET_CREATED), []);
   const showFailed = useCallback(() => modalService.showError(MessagesMap.NET_CREATE_FAILED), []);
 

@@ -1,7 +1,7 @@
 import { EModalContent, ModalContentPropsMap, TContent } from '@components/modal/modal.types';
 import { MenuProps } from '@components/menu/menu';
 
-type TCallback = (content: TContent | null) => void;
+type TCallback = (content: TContent) => void;
 type TCloseCallback = () => void;
 
 class ModalService {

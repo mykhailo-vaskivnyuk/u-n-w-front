@@ -6,8 +6,16 @@ export const useStyles = createUseStyles(
       ...mixins.size(42),
       ...mixins.flexCenter,
       background: 'transparent',
-      padding: vars.gap.SS,
+      padding: 0,
       cursor: 'pointer',
+    },
+    withChildren: {
+      ...mixins.size('auto'),
+      fontWeight: vars.fontWeight.semiBold,
+      textTransform: 'uppercase',
+      '& .icon': {
+        margin: vars.gap.S,
+      },
     },
   }),
   {

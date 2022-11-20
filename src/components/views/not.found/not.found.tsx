@@ -9,7 +9,7 @@ export const NotFound: FC = () => {
   return (
     <div className={root}>
       <h1 className={title}>404</h1>
-      <Button type="submit" className={button} href={RoutesMap.INDEX} btnType="primary">
+      <Button type="submit" className={button} href={RoutesMap.ROOT} btnType="primary">
         на головну
       </Button>
     </div>

@@ -1,7 +1,7 @@
 import { getRoutesMap } from '../components/router/utils';
 
 export const RelativeRoutesMap = {
-  INDEX: '',
+  ROOT: '',
   ABOUT: 'about',
   ACCOUNT: {
     INDEX: 'account',
@@ -18,6 +18,10 @@ export const RelativeRoutesMap = {
     ENTER: 'enter/*',
     COMEOUT: 'comeout',
     LEAVE: 'leave',
+  },
+  USER: {
+    INDEX: 'user',
+    NET: 'net/*',
   },
   PALETTE: 'palette',
   MAIL: 'mail',

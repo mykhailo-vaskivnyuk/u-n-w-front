@@ -61,33 +61,3 @@ export const MENU_NET_ITEMS: IMenuItem[] = [
     allowForUser: 'INSIDE_NET',
   },
 ];
-
-export const MENU_SIBLING_NET_ITEMS: IMenuItem[] = [
-  {
-    label: 'Sibling Net 1',
-    pathname: RoutesMap.INDEX,
-    icon: ICONS.logout,
-    allowForUser: 'INSIDE_NET',
-  },
-  {
-    label: 'Sibling Net 2',
-    pathname: RoutesMap.INDEX,
-    icon: ICONS.logout,
-    allowForUser: 'INSIDE_NET',
-  },
-];
-
-export const MENU_CHILD_NET_ITEMS: IMenuItem[] = [
-  {
-    label: 'Child Net 1',
-    pathname: RoutesMap.INDEX,
-    icon: ICONS.login,
-    allowForUser: 'INSIDE_NET',
-  },
-  {
-    label: 'Child Net 2',
-    pathname: RoutesMap.INDEX,
-    icon: ICONS.login,
-    allowForUser: 'INSIDE_NET',
-  },
-];

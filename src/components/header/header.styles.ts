@@ -9,12 +9,8 @@ export const useStyles = createUseStyles(
       background: palette.bg.first,
       padding: vars.gap.main,
     },
-    title: {
+    titleButton: {
       flex: '1 0 0',
-      padding: `0 ${vars.gap.main} 0 ${vars.gap.main}`,
-      fontWeight: vars.fontWeight.bold,
-      fontSize: vars.fontSize.M,
-      lineHeight: vars.lineHeight.dense,
     },
     button: {
       width: 'auto',

@@ -4,6 +4,6 @@ import { RoutesMap } from '../../constants/router.constants';
 
 export const NotFoundRedirect: FC = () => {
   const navigate = useNavigate();
-  useEffect(() => navigate(RoutesMap.INDEX));
+  useEffect(() => navigate(RoutesMap.ROOT));
   return null;
 };

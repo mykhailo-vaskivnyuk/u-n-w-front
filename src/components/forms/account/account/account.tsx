@@ -49,7 +49,7 @@ export const AccountForm = () => {
   const navigate = useNavigate();
 
   const navigateToIndex = useCallback(
-    () => navigate(RoutesMap.INDEX, { replace: true }),
+    () => navigate(RoutesMap.ROOT, { replace: true }),
     [navigate],
   );
   const showSuccess = useCallback(() => modalService.showMessage(MessagesMap.ACCOUNT_DELETED), []);

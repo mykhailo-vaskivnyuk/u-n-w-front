@@ -2,15 +2,16 @@ import { FC, useEffect } from 'react';
 import { useMatch, useNavigate } from 'react-router-dom';
 import { RoutesMap } from '@constants/router.constants';
 import { MessagesMap } from '@constants/messages';
+import { makeDynamicPathname } from '@utils/utils';
 import { app } from '@api/app/client.app';
 import { modalService } from '@services/modal.service';
 
 export const Restore: FC = () => {
   const navigate = useNavigate();
-  const path = RoutesMap.ACCOUNT.RESTORE.replace('*', ':token');
+  const path = makeDynamicPathname(RoutesMap.ACCOUNT.RESTORE, ':token');
   const { params } = useMatch<'token', typeof path>({ path }) || {};
 
-  const navigateToIndex = () => navigate(RoutesMap.INDEX, { replace: true });
+  const navigateToIndex = () => navigate(RoutesMap.ROOT, { replace: true });
   const showFailed = () => modalService.showError(MessagesMap.BAD_LINK);
 
   useEffect(() => {

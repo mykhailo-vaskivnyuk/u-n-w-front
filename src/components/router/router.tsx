@@ -9,16 +9,18 @@ import { Mail } from '@components/views/mail/mail';
 import { NotFound } from '@components/views/not.found/not.found';
 import { AccountRouter } from './routes/account.router';
 import { NetRouter } from './routes/net.router';
+import { UserRouter } from './routes/user.router';
 
 export const Router: FC = () => {
   return (
     <>
       <Redirect />
       <Routes>
-        <Route path={RelativeRoutesMap.INDEX} element={<Main />} />
+        <Route path={RelativeRoutesMap.ROOT} element={<Main />} />
         <Route path={RelativeRoutesMap.ABOUT} element={<About />} />
         {AccountRouter}
         {NetRouter}
+        {UserRouter}
         <Route path={RelativeRoutesMap.PALETTE} element={<Palette />} />
         <Route path={RelativeRoutesMap.MAIL} element={<Mail />} />
         <Route path="*" element={<NotFound />} />

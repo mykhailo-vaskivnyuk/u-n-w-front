@@ -15,7 +15,7 @@ import { getNetMethods } from './net';
 export class ClientApp extends EventEmitter {
   protected api: IClientApi | null;
   private baseUrl = '';
-  protected state: AppState = AppState.INITING;
+  private state: AppState = AppState.INITING;
   private user: IUserResponse = null;
   private net: INetCreateResponse | null = null;
   private nets: TUserGetNetsResponse[] = [];
