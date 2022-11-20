@@ -4,15 +4,18 @@ import { AppState } from '@api/constants';
 import { RoutesMap } from '@constants/router.constants';
 import { useAppState } from '@hooks/useAppState';
 import { useUser } from '@hooks/useUser';
+import { useNet } from '@hooks/useNet';
+import { app } from '@api/app/client.app';
+import { IS_DEV } from '@utils/utils';
 
 const endingOnSlash = /\/$/;
-const isDEV = process.env.NODE_ENV === 'development';
 
 export const Redirect: FC = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const state = useAppState();
   const user = useUser();
+  const [net] = useNet();
 
   useEffect(() => {
     if (state === AppState.INITING) return;
@@ -22,20 +25,32 @@ export const Redirect: FC = () => {
     switch (pathname) {
       case RoutesMap.ROOT:
       case RoutesMap.ACCOUNT.INDEX:
+        if (net) {
+          app.netMethods.comeout().then(() => navigate(pathname));
+          return;
+        }
         !user && navigate(RoutesMap.ACCOUNT.LOGIN);
         break;
       case RoutesMap.ACCOUNT.SIGNUP:
       case RoutesMap.ACCOUNT.LOGIN:
       case RoutesMap.ACCOUNT.OVERMAIL:
+        if (net) {
+          app.netMethods.comeout().then(() => navigate(pathname));
+          return;
+        }
         user && navigate(RoutesMap.ROOT);
         break;
       case RoutesMap.PALETTE:
       case RoutesMap.MAIL:
-        !isDEV && navigate(RoutesMap.ROOT);
+        if (net) {
+          app.netMethods.comeout().then(() => navigate(pathname));
+          return;
+        }
+        !IS_DEV && navigate(RoutesMap.ROOT);
         break;
       default:
     }
-  }, [navigate, pathname, state, user]);
+  }, [navigate, net, pathname, state, user]);
 
   return null;
 };

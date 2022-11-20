@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Formik, useFormikContext } from 'formik';
 import { RoutesMap } from '@constants/router.constants';
 import { MessagesMap } from '@constants/messages';
+import { makeDynamicPathname } from '@utils/utils';
 import { app } from '@api/app/client.app';
 import { modalService } from '@services/modal.service';
 import { Input } from '@components/controls/input/input';
@@ -36,7 +37,10 @@ const FormikProvider = Formik<NetCreateFormValues>;
 export const NetCreateForm = () => {
   const navigate = useNavigate();
 
-  const navigateToIndex = useCallback(() => navigate(RoutesMap.ROOT), [navigate]);
+  const navigateToNet = useCallback(
+    (netId: number) => navigate(makeDynamicPathname(RoutesMap.USER.NET, netId)),
+    [navigate],
+  );
   const showSuccess = useCallback(() => modalService.showMessage(MessagesMap.NET_CREATED), []);
   const showFailed = useCallback(() => modalService.showError(MessagesMap.NET_CREATE_FAILED), []);
 
@@ -48,7 +52,7 @@ export const NetCreateForm = () => {
         await app.netMethods.create(values).then((net) => {
           if (!net) return showFailed();
           showSuccess();
-          navigateToIndex();
+          navigateToNet(net.net_id);
         });
       }}
     >
