@@ -14,9 +14,45 @@ export const useMenuItems = () => {
   const [net, nets] = useNet();
   const menuItems = getMenuItemsForUser(MENU_ITEMS, user);
 
+  const {
+    parent_nets: parentNets = [],
+    sibling_nets: siblingNets = [],
+    child_nets: childNets = [],
+  } = nets;
+
   const menuParentNetItems = useMemo(
     () =>
-      nets
+      parentNets
+        .filter(({ net_id }) => net_id !== net?.net_id)
+        .map(
+          ({ net_id, name }): IMenuItem => ({
+            label: name,
+            pathname: makeDynamicPathname(RoutesMap.NET.ENTER, net_id),
+            icon: ICONS.home,
+            allowForUser: 'LOGGEDIN',
+          }),
+        ),
+    [net, nets],
+  );
+
+  const menuSiblingNetItems = useMemo(
+    () =>
+      siblingNets
+        .filter(({ net_id }) => net_id !== net?.net_id)
+        .map(
+          ({ net_id, name }): IMenuItem => ({
+            label: name,
+            pathname: makeDynamicPathname(RoutesMap.NET.ENTER, net_id),
+            icon: ICONS.home,
+            allowForUser: 'LOGGEDIN',
+          }),
+        ),
+    [net, nets],
+  );
+
+  const menuChildNetItems = useMemo(
+    () =>
+      childNets
         .filter(({ net_id }) => net_id !== net?.net_id)
         .map(
           ({ net_id, name }): IMenuItem => ({

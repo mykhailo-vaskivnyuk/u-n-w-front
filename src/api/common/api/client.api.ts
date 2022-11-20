@@ -49,7 +49,8 @@ export const getApi = (
 
   },
   'user': {
-    'getNets': () => fetch<Q.TUserGetNetsResponse>('/user/getNets'),
+    'getNets': (options: Q.TUserGetNets) =>
+      fetch<Q.TUserGetNetsResponse>('/user/getNets', options),
 
     'update': () => fetch<string>('/user/update'),
 

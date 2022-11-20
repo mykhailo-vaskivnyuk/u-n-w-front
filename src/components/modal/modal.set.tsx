@@ -21,17 +21,20 @@ const getElement = (content: TContent | null) => {
   }
 };
 
+type TState = [TContent | null, TContent[]];
+
 export const ModalSet: FC = () => {
   const { content: clsContent } = useStyles();
-  const [contentQueue, setContentQueue] = useState<TContent[]>([]);
-  const [content, setContent] = useState<TContent | null>(null);
+  const [[content], setContent] = useState<TState>([null, []]);
   const element = getElement(content);
 
   const addContent = useCallback(
-    (newContent: TContent | null) =>
-      setContentQueue((curContentQueue) => {
-        newContent && curContentQueue.unshift(newContent);
-        return [...curContentQueue];
+    (newContent: TContent) =>
+      setContent((state: TState) => {
+        const [curContent, curContentQueue] = state;
+        if (!curContentQueue.length && !curContent) return [newContent, []];
+        curContentQueue.unshift(newContent);
+        return state;
       }),
     [],
   );
@@ -40,21 +43,16 @@ export const ModalSet: FC = () => {
     modalService.setCallback(addContent);
   }, [addContent]);
 
-  const handleClose = useCallback(() => {
-    setContent((curContent) => {
-      if (curContent) return null;
-      setContentQueue((curContentQueue) => {
-        const nextContent = curContentQueue.pop() || null;
-        setTimeout(setContent, 500, nextContent);
-        return curContentQueue;
-      });
-      return null;
-    });
-  }, []);
-
-  useEffect(() => {
-    if (!content) handleClose();
-  }, [handleClose, content, contentQueue]);
+  const handleClose = useCallback(
+    () =>
+      setContent((state) => {
+        const curContentQueue = state[1];
+        const nextContent = curContentQueue.pop();
+        nextContent && setTimeout(setContent, 500, [nextContent, curContentQueue]);
+        return [null, curContentQueue];
+      }),
+    [],
+  );
 
   return (
     <Modal onClose={handleClose}>{element && <div className={clsContent}>{element}</div>}</Modal>
