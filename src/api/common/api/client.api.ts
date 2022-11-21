@@ -36,10 +36,9 @@ export const getApi = (
     'comeout': () => fetch<boolean>('/net/comeout'),
 
     'create': (options: P.INetCreateParams) =>
-      fetch<P.INetCreateResponse>('/net/create', options),
+      fetch<P.INetResponse>('/net/create', options),
 
-    'enter': (options: Q.TNetEnter) =>
-      fetch<P.INetCreateResponse>('/net/enter', options),
+    'getParents': () => fetch<P.INetSimpleResponse>('/net/getParents'),
 
     'leave': () => fetch<boolean>('/net/leave'),
 
@@ -49,11 +48,16 @@ export const getApi = (
 
   },
   'user': {
-    'getNets': (options: Q.TUserGetNets) =>
-      fetch<Q.TUserGetNetsResponse>('/user/getNets', options),
-
     'update': () => fetch<string>('/user/update'),
 
+    'net': {
+      'getChildren': (options: Q.TUserNetGetChildren) =>
+        fetch<P.INetSimpleResponse>('/user/net/getChildren', options),
+
+      'read': (options: P.INetReadParams) =>
+        fetch<P.INetResponse>('/user/net/read', options),
+
+    },
     'read': () => fetch<P.IUserResponse>('/user/read'),
 
   },

@@ -10,7 +10,7 @@ export type IClientAppThis = ClientApp & {
   api: ReturnType<typeof getApi>;
   setState: (state: AppState) => void;
   setUser: (user: T.IUserResponse) => Promise<void>;
-  setNet: (net: T.INetCreateResponse) => void;
+  setNet: (net: T.INetResponse) => void;
   setNets: (nets: TUserGetNetsResponse) => void;
   setError: (e: HttpResponseError) => void;
 };

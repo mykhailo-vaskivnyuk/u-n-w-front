@@ -14,63 +14,63 @@ export const useMenuItems = () => {
   const [net, nets] = useNet();
   const menuItems = getMenuItemsForUser(MENU_ITEMS, user);
 
-  const {
-    parent_nets: parentNets = [],
-    sibling_nets: siblingNets = [],
-    child_nets: childNets = [],
-  } = nets;
+  // const {
+  //   parent_nets: parentNets = [],
+  //   sibling_nets: siblingNets = [],
+  //   child_nets: childNets = [],
+  // } = nets;
 
-  const menuParentNetItems = useMemo(
-    () =>
-      parentNets
-        .filter(({ net_id }) => net_id !== net?.net_id)
-        .map(
-          ({ net_id, name }): IMenuItem => ({
-            label: name,
-            pathname: makeDynamicPathname(RoutesMap.NET.ENTER, net_id),
-            icon: ICONS.home,
-            allowForUser: 'LOGGEDIN',
-          }),
-        ),
-    [net, nets],
-  );
+  // const menuParentNetItems = useMemo(
+  //   () =>
+  //     parentNets
+  //       .filter(({ net_id }) => net_id !== net?.net_id)
+  //       .map(
+  //         ({ net_id, name }): IMenuItem => ({
+  //           label: name,
+  //           pathname: makeDynamicPathname(RoutesMap.NET.ENTER, net_id),
+  //           icon: ICONS.home,
+  //           allowForUser: 'LOGGEDIN',
+  //         }),
+  //       ),
+  //   [net, nets],
+  // );
 
-  const menuSiblingNetItems = useMemo(
-    () =>
-      siblingNets
-        .filter(({ net_id }) => net_id !== net?.net_id)
-        .map(
-          ({ net_id, name }): IMenuItem => ({
-            label: name,
-            pathname: makeDynamicPathname(RoutesMap.NET.ENTER, net_id),
-            icon: ICONS.home,
-            allowForUser: 'LOGGEDIN',
-          }),
-        ),
-    [net, nets],
-  );
+  // const menuSiblingNetItems = useMemo(
+  //   () =>
+  //     siblingNets
+  //       .filter(({ net_id }) => net_id !== net?.net_id)
+  //       .map(
+  //         ({ net_id, name }): IMenuItem => ({
+  //           label: name,
+  //           pathname: makeDynamicPathname(RoutesMap.NET.ENTER, net_id),
+  //           icon: ICONS.home,
+  //           allowForUser: 'LOGGEDIN',
+  //         }),
+  //       ),
+  //   [net, nets],
+  // );
 
-  const menuChildNetItems = useMemo(
-    () =>
-      childNets
-        .filter(({ net_id }) => net_id !== net?.net_id)
-        .map(
-          ({ net_id, name }): IMenuItem => ({
-            label: name,
-            pathname: makeDynamicPathname(RoutesMap.NET.ENTER, net_id),
-            icon: ICONS.home,
-            allowForUser: 'LOGGEDIN',
-          }),
-        ),
-    [net, nets],
-  );
+  // const menuChildNetItems = useMemo(
+  //   () =>
+  //     childNets
+  //       .filter(({ net_id }) => net_id !== net?.net_id)
+  //       .map(
+  //         ({ net_id, name }): IMenuItem => ({
+  //           label: name,
+  //           pathname: makeDynamicPathname(RoutesMap.NET.ENTER, net_id),
+  //           icon: ICONS.home,
+  //           allowForUser: 'LOGGEDIN',
+  //         }),
+  //       ),
+  //   [net, nets],
+  // );
 
   const menuNetItems = useMemo(() => {
     const items = getMenuItemsForUser(MENU_NET_ITEMS, user);
-    const parentItems = getMenuItemsForUser(menuParentNetItems, user);
+    // const parentItems = getMenuItemsForUser(menuParentNetItems, user);
     if (!items) return undefined;
-    return { parentItems, items };
-  }, [menuParentNetItems, user]);
+    return { parentItems: [], items };
+  }, [user]);
 
   const { name = ROOT_TITLE, net_id: netId } = net || {};
   const href = net ? makeDynamicPathname(RoutesMap.USER.NET, netId!) : RoutesMap.ROOT;
