@@ -26,7 +26,7 @@ export const Redirect: FC = () => {
       case RoutesMap.ROOT:
       case RoutesMap.ACCOUNT.INDEX:
         if (net) {
-          app.netMethods.comeout().then(() => navigate(pathname));
+          app.netMethods.comeout().then((success) => !success && navigate(pathname));
           return;
         }
         !user && navigate(RoutesMap.ACCOUNT.LOGIN);
@@ -35,7 +35,7 @@ export const Redirect: FC = () => {
       case RoutesMap.ACCOUNT.LOGIN:
       case RoutesMap.ACCOUNT.OVERMAIL:
         if (net) {
-          app.netMethods.comeout().then(() => navigate(pathname));
+          app.netMethods.comeout().then((success) => !success && navigate(pathname));
           return;
         }
         user && navigate(RoutesMap.ROOT);
@@ -43,7 +43,7 @@ export const Redirect: FC = () => {
       case RoutesMap.PALETTE:
       case RoutesMap.MAIL:
         if (net) {
-          app.netMethods.comeout().then(() => navigate(pathname));
+          app.netMethods.comeout().then((success) => !success && navigate(pathname));
           return;
         }
         !IS_DEV && navigate(RoutesMap.ROOT);
