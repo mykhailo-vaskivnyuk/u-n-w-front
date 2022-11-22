@@ -3,12 +3,14 @@ import clsx from 'clsx';
 import { vars } from '@styles/vars';
 import { ICONS } from '@components/icon/icon';
 import { IconButton } from '@components/buttons/icon.button/icon.button';
+import { useUserNet } from './useUserNet';
 import { useStyles } from './net.main.styles';
 
 const USER_NET_POSITION = ['tree', 'circle'] as const;
 type UserNetPositionKeys = typeof USER_NET_POSITION[number];
 
 export const NetMain: FC = () => {
+  useUserNet();
   const {
     container,
     root,

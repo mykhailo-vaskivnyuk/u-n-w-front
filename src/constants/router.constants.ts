@@ -14,14 +14,20 @@ export const RelativeRoutesMap = {
   },
   NET: {
     INDEX: 'net',
-    CREATE: 'create',
-    ENTER: 'enter/*',
+    // CREATE: 'create',
     COMEOUT: 'comeout',
     LEAVE: 'leave',
   },
   USER: {
     INDEX: 'user',
-    NET: 'net/*',
+    NET: {
+      INDEX: 'net',
+      CREATE: 'create',
+      NET_NUMBER: {
+        INDEX: '*',
+        CREATE: 'create',
+      },
+    },
   },
   PALETTE: 'palette',
   MAIL: 'mail',

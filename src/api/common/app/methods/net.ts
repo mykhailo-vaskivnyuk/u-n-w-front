@@ -1,7 +1,7 @@
 /* eslint-disable import/no-cycle */
-import { INetCreateParams } from '../api/types/net.types';
-import { IClientAppThis } from './types';
-import { AppState } from '../constants';
+import { INetCreateParams } from '../../api/types/net.types';
+import { IClientAppThis, IUserNets } from '../types';
+import { AppState } from '../../constants';
 
 export const getNetMethods = (parent: IClientAppThis) => ({
   async create(args: INetCreateParams) {
@@ -59,12 +59,25 @@ export const getNetMethods = (parent: IClientAppThis) => ({
 
   async getNets() {
     parent.setState(AppState.LOADING);
+    const { net } = parent.getState()
+    const userNets = {} as IUserNets;
     try {
-      // const { net_id: netId = null } = parent.getState().net || {};
-      // const parentNets = await parent.api.net.getParents();
-      const siblingNets = await parent.api.user.net.getChildren();
-      // const childNets = await parent.api.user.net.getChildren();
-      const userNets = { siblingNets };
+      if (!net) {
+        userNets.siblingNets = await parent.api.user.net.getChildren(
+          { net_id: null },
+        );
+      } else {
+        const { net_id: netId } = net;
+        userNets.parentNets = await parent.api.net.getParents();
+        console.log(net.parent_net_id);
+        userNets.siblingNets = await parent.api.user.net.getChildren(
+          { net_id: net.parent_net_id },
+        );
+        userNets.childNets = await parent.api.user.net.getChildren(
+          { net_id: netId },
+        );
+      }
+      console.log(userNets);
       parent.setNets(userNets);
       parent.setState(AppState.READY);
     } catch (e: any) {

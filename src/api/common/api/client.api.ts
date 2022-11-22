@@ -52,7 +52,8 @@ export const getApi = (
       'enter': (options: P.INetReadParams) =>
         fetch<P.INetResponse>('/user/net/enter', options),
 
-      'getChildren': () => fetch<P.INetSimpleResponse>('/user/net/getChildren'),
+      'getChildren': (options: P.INetReadParams) =>
+        fetch<P.INetSimpleResponse>('/user/net/getChildren', options),
 
     },
     'read': () => fetch<P.IUserResponse>('/user/read'),

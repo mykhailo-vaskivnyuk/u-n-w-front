@@ -18,16 +18,14 @@ export const useMenuItems = () => {
 
   const parentNetItems = useMemo(
     () =>
-      parentNets
-        // .filter(({ net_id }) => net_id !== net?.net_id)
-        .map(
-          ({ net_id, name }): IMenuItem => ({
-            label: name,
-            pathname: makeDynamicPathname(RoutesMap.NET.ENTER, net_id),
-            icon: ICONS.home,
-            allowForUser: 'LOGGEDIN',
-          }),
-        ),
+      parentNets.map(
+        ({ net_id, name }): IMenuItem => ({
+          label: name,
+          pathname: makeDynamicPathname(RoutesMap.USER.NET.NET_NUMBER.INDEX, net_id),
+          icon: ICONS.home,
+          allowForUser: 'LOGGEDIN',
+        }),
+      ),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [nets],
   );
@@ -37,7 +35,7 @@ export const useMenuItems = () => {
       siblingNets.map(
         ({ net_id, name }): IMenuItem => ({
           label: name,
-          pathname: makeDynamicPathname(RoutesMap.NET.ENTER, net_id),
+          pathname: makeDynamicPathname(RoutesMap.USER.NET.NET_NUMBER.INDEX, net_id),
           icon: ICONS.home,
           allowForUser: 'LOGGEDIN',
         }),
@@ -51,7 +49,7 @@ export const useMenuItems = () => {
       childNets.map(
         ({ net_id, name }): IMenuItem => ({
           label: name,
-          pathname: makeDynamicPathname(RoutesMap.NET.ENTER, net_id),
+          pathname: makeDynamicPathname(RoutesMap.USER.NET.NET_NUMBER.INDEX, net_id),
           icon: ICONS.home,
           allowForUser: 'LOGGEDIN',
         }),
@@ -71,7 +69,9 @@ export const useMenuItems = () => {
   }, [nets, user]);
 
   const { name = ROOT_TITLE, net_id: netId } = net || {};
-  const href = net ? makeDynamicPathname(RoutesMap.USER.NET, netId!) : RoutesMap.ROOT;
+  const href = net
+    ? makeDynamicPathname(RoutesMap.USER.NET.NET_NUMBER.INDEX, netId!)
+    : RoutesMap.ROOT;
 
   const openMenu = useCallback(() => modalService.openMenu({ items: menuItems }), [menuItems]);
   const openNetMenu = useCallback(

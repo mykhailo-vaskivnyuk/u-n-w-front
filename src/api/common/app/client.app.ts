@@ -6,10 +6,10 @@ import { AppState } from '../constants';
 import { HttpResponseError } from '../errors';
 import EventEmitter from '../event.emitter';
 import { getApi, IClientApi } from '../api/client.api';
-import { getAccountMethods } from './account';
+import { getAccountMethods } from './methods/account';
 import { getConnection as getHttpConnection } from '../client.http';
 import { getConnection as getWsConnection } from '../client.ws';
-import { getNetMethods } from './net';
+import { getNetMethods } from './methods/net';
 
 export class ClientApp extends EventEmitter {
   protected api: IClientApi | null;

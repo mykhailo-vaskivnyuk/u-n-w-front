@@ -42,20 +42,26 @@ export const MENU_ITEMS: IMenuItem[] = [
 ];
 
 export const MENU_NET_ITEMS: IMenuItem[] = [
+  // {
+  //   label: 'Вийти',
+  //   pathname: RoutesMap.NET.COMEOUT,
+  //   icon: ICONS.spinner,
+  //   allowForUser: 'INSIDE_NET',
+  // },
   {
-    label: 'Вийти',
-    pathname: RoutesMap.NET.COMEOUT,
-    icon: ICONS.spinner,
-    allowForUser: 'INSIDE_NET',
-  },
-  {
-    label: 'Створити',
-    pathname: RoutesMap.NET.CREATE,
+    label: 'Створити спільноту',
+    pathname: RoutesMap.USER.NET.CREATE,
     icon: ICONS.spinner,
     allowForUser: 'LOGGEDIN',
   },
   {
-    label: 'Покинути назавжди',
+    label: 'Створити спільноту',
+    pathname: `${RoutesMap.USER.NET.INDEX}/$net_id/create`,
+    icon: ICONS.spinner,
+    allowForUser: 'INSIDE_NET',
+  },
+  {
+    label: 'Покинути спільноту назавжди',
     pathname: RoutesMap.NET.LEAVE,
     icon: ICONS.spinner,
     allowForUser: 'INSIDE_NET',
