@@ -8,13 +8,16 @@ export const useStyles = createUseStyles(
       padding: vars.gap.main,
       paddingLeft: vars.gap.L,
       paddingRight: vars.gap.L,
+      color: palette.font.first,
     },
     section: {
       padding: `${vars.gap.S} 0`,
-      borderBottom: `1px dashed ${palette.add.main}`,
       '&:last-child': {
         border: 'none',
       },
+    },
+    parentItems: {
+      color: palette.add.dark,
     },
   }),
   { name: 'Menu' },

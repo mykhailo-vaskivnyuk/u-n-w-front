@@ -6,7 +6,7 @@ export const MENU_ITEMS: IMenuItem[] = [
   {
     label: 'Про You & World',
     pathname: RoutesMap.ABOUT,
-    icon: ICONS.spinner,
+    icon: ICONS.about,
     allowForUser: 'NOT_LOGGEDIN',
   },
   {
@@ -18,7 +18,7 @@ export const MENU_ITEMS: IMenuItem[] = [
   {
     label: 'Акаунт',
     pathname: RoutesMap.ACCOUNT.INDEX,
-    icon: ICONS.spinner,
+    icon: ICONS.account,
     allowForUser: 'NOT_CONFIRMED',
   },
   {
@@ -30,13 +30,13 @@ export const MENU_ITEMS: IMenuItem[] = [
   {
     label: 'Палітра',
     pathname: RoutesMap.PALETTE,
-    icon: ICONS.logout,
+    icon: ICONS.dev,
     allowForUser: 'DEV',
   },
   {
     label: 'Шаблон email',
     pathname: RoutesMap.MAIL,
-    icon: ICONS.logout,
+    icon: ICONS.dev,
     allowForUser: 'DEV',
   },
 ];
@@ -45,19 +45,19 @@ export const MENU_NET_ITEMS: IMenuItem[] = [
   {
     label: 'Створити спільноту',
     pathname: `${RoutesMap.NET.INDEX}/:net_id/create`,
-    icon: ICONS.spinner,
+    icon: ICONS.create,
     allowForUser: ['LOGGEDIN'],
   },
   {
     label: 'Створити спільноту',
     pathname: `${RoutesMap.NET.INDEX}/:net_id/create`,
-    icon: ICONS.spinner,
+    icon: ICONS.create,
     allowForUser: 'INSIDE_NET',
   },
   {
     label: 'Покинути назавжди',
     pathname: RoutesMap.NET.LEAVE,
-    icon: ICONS.spinner,
+    icon: ICONS.remove,
     allowForUser: 'INSIDE_NET',
   },
 ];

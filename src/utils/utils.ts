@@ -40,12 +40,12 @@ export const getNetMenuItems = (
   return filteredMenuItems.length ? filteredMenuItems : undefined;
 };
 
-export const createNetMenuItems = (nets: INetsResponse, user: IUserResponse) => {
+export const createNetMenuItems = (nets: INetsResponse, user: IUserResponse, icon?: ICONS) => {
   const netMenuItems = nets.map(
     ({ net_id, name }): IMenuItem => ({
       label: name,
       pathname: makeDynamicPathname(NET_NUMBER.INDEX, net_id),
-      icon: ICONS.home,
+      icon: icon || ICONS.home,
       allowForUser: 'LOGGEDIN',
     }),
   );

@@ -1,5 +1,6 @@
 import React, { FC, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
+import clsx from 'clsx';
 import { modalService } from '@services/modal.service';
 import { IMenuItem } from './types';
 import { MenuItem } from './menu.item';
@@ -13,7 +14,7 @@ export interface MenuProps {
 }
 
 export const Menu: FC<MenuProps> = (props) => {
-  const { root, section } = useStyles();
+  const { root, section, parentItems: clsParentItems } = useStyles();
   const { parentItems, siblingItems, childItems, items } = props;
   const location = useLocation();
 
@@ -36,7 +37,7 @@ export const Menu: FC<MenuProps> = (props) => {
 
   return (
     <div className={root}>
-      {parentItemsJsx && <ul className={section}>{parentItemsJsx}</ul>}
+      {parentItemsJsx && <ul className={clsx(section, clsParentItems)}>{parentItemsJsx}</ul>}
       {siblingItemsJsx && <ul className={section}>{siblingItemsJsx}</ul>}
       {childItemsJsx && <ul className={section}>{childItemsJsx}</ul>}
       {itemsJsx && <ul className={section}>{itemsJsx}</ul>}

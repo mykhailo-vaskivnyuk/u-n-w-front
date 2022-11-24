@@ -15,6 +15,9 @@ export const useStyles = createUseStyles(
           opacity: 0,
         },
       },
+      '&.opened $modal:before': {
+        pointerEvents: 'none',
+      },
       [breakpoints.maxWidth]: {
         width: vars.width.maxWidth,
       },
@@ -69,6 +72,11 @@ export const useStyles = createUseStyles(
       transitionProperty: 'transform',
       transitionDuration: vars.transition.normal,
       transitionTimingFunction: vars.cubicBezier.easeInCirc,
+      '&:before': {
+        content: '""',
+        position: 'absolute',
+        ...mixins.size('100%'),
+      },
       [breakpoints.minHeight]: {
         maxHeight: 'calc(100% - 84px)',
       },

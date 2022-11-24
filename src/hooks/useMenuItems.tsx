@@ -7,6 +7,7 @@ import { modalService } from '@services/modal.service';
 import { useUser } from '@hooks/useUser';
 import { useNet } from '@hooks/useNet';
 import { USER_STATE_MAP } from '@api/constants';
+import { ICONS } from '@components/icon/icon';
 
 const { NET_NUMBER } = RoutesMap.NET;
 
@@ -21,9 +22,9 @@ export const useMenuItems = () => {
   const menuNetItems = useMemo(() => {
     const items = getNetMenuItems(MENU_NET_ITEMS, user, net);
     const { parentNets, siblingNets, childNets } = nets;
-    const parentItems = createNetMenuItems(parentNets, user);
-    const siblingItems = createNetMenuItems(siblingNets, user);
-    const childItems = createNetMenuItems(childNets, user);
+    const parentItems = createNetMenuItems(parentNets, user, ICONS.arrowSimpleUp);
+    const siblingItems = createNetMenuItems(siblingNets, user, ICONS.arrowSimpleRight);
+    const childItems = createNetMenuItems(childNets, user, ICONS.arrowSimpleDown);
     return { parentItems, siblingItems, childItems, items };
   }, [net, nets, user]);
 
