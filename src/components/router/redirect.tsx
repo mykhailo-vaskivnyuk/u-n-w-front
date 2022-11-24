@@ -1,14 +1,13 @@
-import { FC, useEffect } from 'react';
+import { FC, useCallback, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AppState } from '@api/constants';
+import { IS_DEV, REGEXP_END_ON_SLASH } from '@constants/constants';
 import { RoutesMap } from '@constants/router.constants';
 import { useAppState } from '@hooks/useAppState';
 import { useUser } from '@hooks/useUser';
 import { useNet } from '@hooks/useNet';
+import { makeDynamicPathname } from '@utils/utils';
 import { app } from '@api/app/client.app';
-import { IS_DEV } from '@utils/utils';
-
-const endingOnSlash = /\/$/;
 
 export const Redirect: FC = () => {
   const navigate = useNavigate();
@@ -17,40 +16,46 @@ export const Redirect: FC = () => {
   const user = useUser();
   const [net] = useNet();
 
+  const netPathname = net && makeDynamicPathname(RoutesMap.USER.NET.NET_NUMBER.INDEX, net.net_id);
+  const netComeout = useCallback(
+    () =>
+      app.netMethods.comeout().then((success) => success || !netPathname || navigate(netPathname)),
+    [navigate, netPathname],
+  );
+
   useEffect(() => {
     if (state === AppState.INITING) return;
-    if (pathname !== RoutesMap.ROOT && endingOnSlash.test(pathname)) {
-      return navigate(pathname.replace(endingOnSlash, ''));
+    if (pathname !== RoutesMap.ROOT && REGEXP_END_ON_SLASH.test(pathname)) {
+      return navigate(pathname.replace(REGEXP_END_ON_SLASH, ''));
     }
     switch (pathname) {
       case RoutesMap.ROOT:
       case RoutesMap.ACCOUNT.INDEX:
-        if (net) {
-          app.netMethods.comeout().then((success) => !success && navigate(pathname));
-          return;
-        }
-        !user && navigate(RoutesMap.ACCOUNT.LOGIN);
+        if (!user) return navigate(RoutesMap.ACCOUNT.LOGIN);
+        if (user.user_state === 'INSIDE_NET') netComeout();
         break;
       case RoutesMap.ACCOUNT.SIGNUP:
       case RoutesMap.ACCOUNT.LOGIN:
       case RoutesMap.ACCOUNT.OVERMAIL:
-        if (net) {
-          app.netMethods.comeout().then((success) => !success && navigate(pathname));
-          return;
-        }
-        user && navigate(RoutesMap.ROOT);
+        if (!user) return;
+        if (user.user_state === 'INSIDE_NET')
+          netComeout().then((next) => next && navigate(RoutesMap.ROOT));
+        break;
+      case RoutesMap.USER.INDEX:
+      case RoutesMap.USER.NET.INDEX:
+      case RoutesMap.USER.NET.COMEOUT:
+      case RoutesMap.USER.NET.LEAVE:
+      case RoutesMap.USER.NET.CREATE:
+        // if (!net) navigate(RoutesMap.ROOT);
         break;
       case RoutesMap.PALETTE:
       case RoutesMap.MAIL:
-        if (net) {
-          app.netMethods.comeout().then((success) => !success && navigate(pathname));
-          return;
-        }
+        if (net) netComeout();
         !IS_DEV && navigate(RoutesMap.ROOT);
         break;
       default:
     }
-  }, [navigate, net, pathname, state, user]);
+  }, [navigate, net, netComeout, pathname, state, user]);
 
   return null;
 };

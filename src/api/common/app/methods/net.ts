@@ -1,14 +1,17 @@
 /* eslint-disable import/no-cycle */
 import { INetCreateParams } from '../../api/types/net.types';
-import { IClientAppThis, IUserNets } from '../types';
+import { INITIAL_NETS, IClientAppThis } from '../types';
 import { AppState } from '../../constants';
 
 export const getNetMethods = (parent: IClientAppThis) => ({
   async create(args: INetCreateParams) {
     parent.setState(AppState.LOADING);
     try {
-      const net = await parent.api.net.create(args);
-      net && parent.setNet(net);
+      const net = await parent.api.user.net.create(args);
+      if (net) {
+        this.getAllNets();
+        parent.setNet(net);
+      }
       parent.setState(AppState.READY);
       return net;
     } catch (e: any) {
@@ -31,10 +34,12 @@ export const getNetMethods = (parent: IClientAppThis) => ({
   async comeout() {
     parent.setState(AppState.LOADING);
     try {
-      await parent.api.user.net.enter({ net_id: null });
-      parent.setNet(null);
-      parent.setState(AppState.READY);
-      return true;
+      const success = await parent.api.user.net.comeout();
+      if (success) {
+        parent.setNet(null);
+        parent.setState(AppState.READY);
+      }
+      return success;
     } catch (e: any) {
       parent.setError(e);
       throw e;
@@ -44,10 +49,10 @@ export const getNetMethods = (parent: IClientAppThis) => ({
   async leave() {
     parent.setState(AppState.LOADING);
     try {
-      const success = await parent.api.net.leave();
+      const success = await parent.api.user.net.leave();
       if (success) {
+        await this.getAllNets();
         parent.setNet(null);
-        await this.getNets();
       }
       parent.setState(AppState.READY);
       return success;
@@ -57,31 +62,36 @@ export const getNetMethods = (parent: IClientAppThis) => ({
     }
   },
 
-  async getNets() {
+  async getAllNets() {
     parent.setState(AppState.LOADING);
-    const { net } = parent.getState()
-    const userNets = {} as IUserNets;
     try {
-      if (!net) {
-        userNets.siblingNets = await parent.api.user.net.getChildren(
-          { net_id: null },
-        );
-      } else {
-        const { net_id: netId } = net;
-        userNets.parentNets = await parent.api.net.getParents();
-        console.log(net.parent_net_id);
-        userNets.siblingNets = await parent.api.user.net.getChildren(
-          { net_id: net.parent_net_id },
-        );
-        userNets.childNets = await parent.api.user.net.getChildren(
-          { net_id: netId },
-        );
-      }
-      console.log(userNets);
-      parent.setNets(userNets);
+      const nets = await parent.api.user.nets.get();
+      parent.setAllNets(nets);
       parent.setState(AppState.READY);
     } catch (e: any) {
       parent.setError(e);
     }
+  },
+
+  getNets() {
+    const { net, allNets } = parent.getState();
+    const nets = { ...INITIAL_NETS };
+    if (!net) {
+      nets.childNets = allNets.filter((item) => item.parent_net_id === null);
+      parent.setNets(nets);
+      return;
+    }
+    if (net.parent_net_id !== null) {
+      nets.parentNets = allNets.filter((item) =>
+        item.first_net_id === net.first_net_id &&
+        item.net_level < net.net_level,
+      );
+    }
+    nets.siblingNets = allNets
+      .filter((item) => item.parent_net_id === net.parent_net_id,
+    );
+    nets.childNets = allNets
+      .filter((item) => item.parent_net_id === net.net_id);
+    parent.setNets(nets);
   },
 });

@@ -9,22 +9,18 @@ export const RelativeRoutesMap = {
     LOGIN: 'login',
     OVERMAIL: 'overmail',
     LOGOUT: 'logout',
-    CONFIRM: 'confirm/*',
-    RESTORE: 'restore/*',
-  },
-  NET: {
-    INDEX: 'net',
-    // CREATE: 'create',
-    COMEOUT: 'comeout',
-    LEAVE: 'leave',
+    CONFIRM: 'confirm/:token',
+    RESTORE: 'restore/:token',
   },
   USER: {
     INDEX: 'user',
     NET: {
       INDEX: 'net',
       CREATE: 'create',
+      COMEOUT: 'comeout',
+      LEAVE: 'leave',
       NET_NUMBER: {
-        INDEX: '*',
+        INDEX: ':net_id',
         CREATE: 'create',
       },
     },

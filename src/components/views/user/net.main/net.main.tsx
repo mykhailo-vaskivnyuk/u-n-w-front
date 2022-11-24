@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import { vars } from '@styles/vars';
 import { ICONS } from '@components/icon/icon';
 import { IconButton } from '@components/buttons/icon.button/icon.button';
+import { NotFound } from '@components/views/not.found/not.found';
 import { useUserNet } from './useUserNet';
 import { useStyles } from './net.main.styles';
 
@@ -10,7 +11,6 @@ const USER_NET_POSITION = ['tree', 'circle'] as const;
 type UserNetPositionKeys = typeof USER_NET_POSITION[number];
 
 export const NetMain: FC = () => {
-  useUserNet();
   const {
     container,
     root,
@@ -22,6 +22,10 @@ export const NetMain: FC = () => {
     circle,
   } = useStyles();
   const [netView, setNetView] = useState<UserNetPositionKeys>('tree');
+
+  const notFound = useUserNet();
+  if (notFound) return <NotFound />;
+
   const membersTree = new Array(7).fill('tree').map((i, j) => (
     <div key={`${i + j}`} className={member}>
       {j === 0 ? 'current user' : `${i} member ${j}`}

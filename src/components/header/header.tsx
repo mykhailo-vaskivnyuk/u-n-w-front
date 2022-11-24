@@ -4,7 +4,7 @@ import { RoutesMap } from '@constants/router.constants';
 import { ICONS } from '@components/icon/icon';
 import { IconButton } from '@components/buttons/icon.button/icon.button';
 import { Button } from '@components/buttons/button/button';
-import { useMenuItems } from './useMenuItems';
+import { useMenuItems } from '../../hooks/useMenuItems';
 import { useStyles } from './header.styles';
 
 export const Header: FC = () => {

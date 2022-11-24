@@ -1,5 +1,5 @@
 import { FC, useCallback, useEffect } from 'react';
-import { HttpResponseErrorCode } from '@api/errors';
+import { HttpResponseErrorCode, HttpResponseErrorMap } from '@api/errors';
 import { modalService } from '@services/modal.service';
 import { MessagesMap } from '@constants/messages';
 import { useAppError } from '../../hooks/useAppError';
@@ -26,6 +26,7 @@ export const ErrorCatch: FC = () => {
   useEffect(() => {
     if (!error) return;
     const { statusCode } = error || {};
+    if (HttpResponseErrorMap[statusCode] === 'Not found') return;
     showError(statusCode);
   }, [showError, error]);
 

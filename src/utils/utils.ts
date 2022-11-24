@@ -1,51 +1,53 @@
 import { IUserResponse } from '@api/api/types/account.types';
+import { INetResponse, INetsResponse } from '@api/api/types/net.types';
 import { IMenuItem } from '@components/menu/types';
-import { USER_STATE_MAP } from '@api/constants';
-import { RelativeRoutesMap } from '@constants/router.constants';
-import { INetResponse } from '@api/api/types/net.types';
+import { UserStateKeys, USER_STATE_MAP } from '@api/constants';
+import { RoutesMap } from '@constants/router.constants';
+import { IS_DEV } from '@constants/constants';
+import { ICONS } from '@components/icon/icon';
 
-export const IS_DEV = process.env.NODE_ENV === 'development';
+const { NET_NUMBER } = RoutesMap.USER.NET;
 
 export const format = (str: string, ...values: string[]) => {
   return values.reduce((result, value) => result.replace('%s', value), str);
 };
 
-export const getMenuItemsForUser = (
+export const makeDynamicPathname = (pathname: string, id: number | string) =>
+  pathname.replace(/:[^/]+/, id.toString());
+
+const netMenuFilter = (netMeuItem: IMenuItem, userState: UserStateKeys) => {
+  const { allowForUser } = netMeuItem;
+  if (Array.isArray(allowForUser)) return allowForUser.includes(userState!);
+  if (USER_STATE_MAP[allowForUser] <= USER_STATE_MAP[userState!]) return true;
+  if (IS_DEV && allowForUser === 'DEV') return true;
+  return false;
+};
+
+export const getNetMenuItems = (
   menuItems: IMenuItem[],
   user: IUserResponse,
   net?: INetResponse,
 ) => {
-  let { user_state: userState } = user || {};
-  const { net_id: netId } = net || {};
-  if (!userState) userState = 'NOT_LOGGEDIN';
-  const filteredMenuItems = menuItems
-    .filter(({ allowForUser }) => {
-      if (Array.isArray(allowForUser)) return allowForUser.includes(userState!);
-      return (
-        USER_STATE_MAP[allowForUser] <= USER_STATE_MAP[userState!] ||
-        (IS_DEV && allowForUser === 'DEV')
-      );
-    })
-    .map((item) => {
-      if (netId) item.pathname.replace('$net_id', netId!.toString())
-      return item;
-    });
-
+  const { user_state: userState = 'NOT_LOGGEDIN' } = user || {};
+  const netId = net?.net_id.toString();
+  let filteredMenuItems = menuItems.filter((item) => netMenuFilter(item, userState));
+  filteredMenuItems = !netId
+    ? filteredMenuItems
+    : filteredMenuItems.map((item) => {
+        const pathname = item.pathname.replace(':net_id', netId);
+        return { ...item, pathname };
+      });
   return filteredMenuItems.length ? filteredMenuItems : undefined;
 };
 
-export const makeDynamicPathname = (pathname: string, id: number | string) =>
-  pathname.replace('*', id.toString());
-
-export const getAppStateFromHash = () => {
-  const names = window.location.hash
-    .replace('#', '')
-    .split('/')
-    .filter((path) => Boolean(path));
-  if (names.shift() !== RelativeRoutesMap.USER.INDEX) return {};
-  const netPathname = makeDynamicPathname(RelativeRoutesMap.USER.NET.INDEX, '').replace('/', '');
-  if (names.shift() !== netPathname) return {};
-  const netId = Number.parseInt(names.shift() || '', 10);
-  if (!netId) return {};
-  return { net_id: netId };
+export const createNetMenuItems = (nets: INetsResponse, user: IUserResponse) => {
+  const netMenuItems = nets.map(
+    ({ net_id, name }): IMenuItem => ({
+      label: name,
+      pathname: makeDynamicPathname(NET_NUMBER.INDEX, net_id),
+      icon: ICONS.home,
+      allowForUser: 'LOGGEDIN',
+    }),
+  );
+  return getNetMenuItems(netMenuItems, user);
 };
