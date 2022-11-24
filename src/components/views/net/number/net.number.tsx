@@ -4,8 +4,8 @@ import { vars } from '@styles/vars';
 import { ICONS } from '@components/icon/icon';
 import { IconButton } from '@components/buttons/icon.button/icon.button';
 import { NotFound } from '@components/views/not.found/not.found';
-import { useUserNet } from './useUserNet';
-import { useStyles } from './net.main.styles';
+import { useUserNet } from '../../../../hooks/useUserNet';
+import { useStyles } from './net.number.styles';
 
 const USER_NET_POSITION = ['tree', 'circle'] as const;
 type UserNetPositionKeys = typeof USER_NET_POSITION[number];

@@ -17,14 +17,6 @@ export const useStyles = createUseStyles(
       height: 'auto',
       padding: 0,
       color: palette.font.light,
-      '& + &': {
-        marginLeft: vars.gap.main,
-      },
-    },
-    homeButton: {
-      '& .icon': {
-        ...mixins.size(27),
-      },
     },
     hidden: {
       display: 'none',

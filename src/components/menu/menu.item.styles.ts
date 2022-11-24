@@ -4,7 +4,7 @@ export const useStyles = createUseStyles(
   ({ palette, mixins, vars }) => ({
     root: {
       color: palette.font.first,
-      fontSize: vars.fontSize.XL,
+      fontSize: vars.fontSize.L,
       fontWeight: vars.fontWeight.semiBold,
     },
     link: {

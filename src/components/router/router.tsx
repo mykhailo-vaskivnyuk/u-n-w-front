@@ -9,7 +9,6 @@ import { Mail } from '@components/views/mail/mail';
 import { NotFound } from '@components/views/not.found/not.found';
 import { AccountRouter } from './routes/account.router';
 import { NetRouter } from './routes/net.router';
-import { UserRouter } from './routes/user.router';
 
 export const Router: FC = () => {
   return (
@@ -20,7 +19,6 @@ export const Router: FC = () => {
         <Route path={RelativeRoutesMap.ABOUT} element={<About />} />
         {AccountRouter}
         {NetRouter}
-        {UserRouter}
         <Route path={RelativeRoutesMap.PALETTE} element={<Palette />} />
         <Route path={RelativeRoutesMap.MAIL} element={<Mail />} />
         <Route path="*" element={<NotFound />} />

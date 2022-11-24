@@ -38,7 +38,7 @@ export const NetCreateForm = () => {
   const navigate = useNavigate();
 
   const navigateToNet = useCallback(
-    (netId: number) => navigate(makeDynamicPathname(RoutesMap.USER.NET.NET_NUMBER.INDEX, netId)),
+    (netId: number) => navigate(makeDynamicPathname(RoutesMap.NET.NET_NUMBER.INDEX, netId)),
     [navigate],
   );
   const showSuccess = useCallback(() => modalService.showMessage(MessagesMap.NET_CREATED), []);

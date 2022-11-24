@@ -7,7 +7,7 @@ import { app } from '@api/app/client.app';
 export const useUserNet = () => {
   const navigate = useNavigate();
   const [notFound, setNotFound] = useState(false);
-  const path = makeDynamicPathname(RoutesMap.USER.NET.NET_NUMBER.INDEX, ':net_id');
+  const path = makeDynamicPathname(RoutesMap.NET.NET_NUMBER.INDEX, ':net_id');
   const { params } = useMatch<'net_id', typeof path>({ path }) || {};
   const { net_id: netId } = params || {};
   const navigateBack = useCallback(() => navigate(-1), [navigate]);

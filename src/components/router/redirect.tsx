@@ -16,7 +16,7 @@ export const Redirect: FC = () => {
   const user = useUser();
   const [net] = useNet();
 
-  const netPathname = net && makeDynamicPathname(RoutesMap.USER.NET.NET_NUMBER.INDEX, net.net_id);
+  const netPathname = net && makeDynamicPathname(RoutesMap.NET.NET_NUMBER.INDEX, net.net_id);
   const netComeout = useCallback(
     () =>
       app.netMethods.comeout().then((success) => success || !netPathname || navigate(netPathname)),
@@ -41,11 +41,10 @@ export const Redirect: FC = () => {
         if (user.user_state === 'INSIDE_NET')
           netComeout().then((next) => next && navigate(RoutesMap.ROOT));
         break;
-      case RoutesMap.USER.INDEX:
-      case RoutesMap.USER.NET.INDEX:
-      case RoutesMap.USER.NET.COMEOUT:
-      case RoutesMap.USER.NET.LEAVE:
-      case RoutesMap.USER.NET.CREATE:
+      case RoutesMap.NET.INDEX:
+      case RoutesMap.NET.COMEOUT:
+      case RoutesMap.NET.LEAVE:
+      case RoutesMap.NET.CREATE:
         // if (!net) navigate(RoutesMap.ROOT);
         break;
       case RoutesMap.PALETTE:

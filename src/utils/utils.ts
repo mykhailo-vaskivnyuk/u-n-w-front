@@ -6,7 +6,7 @@ import { RoutesMap } from '@constants/router.constants';
 import { IS_DEV } from '@constants/constants';
 import { ICONS } from '@components/icon/icon';
 
-const { NET_NUMBER } = RoutesMap.USER.NET;
+const { NET_NUMBER } = RoutesMap.NET;
 
 export const format = (str: string, ...values: string[]) => {
   return values.reduce((result, value) => result.replace('%s', value), str);

@@ -39,7 +39,7 @@ export const Menu: FC<MenuProps> = (props) => {
       {parentItemsJsx && <ul className={section}>{parentItemsJsx}</ul>}
       {siblingItemsJsx && <ul className={section}>{siblingItemsJsx}</ul>}
       {childItemsJsx && <ul className={section}>{childItemsJsx}</ul>}
-      <ul className={section}>{itemsJsx}</ul>
+      {itemsJsx && <ul className={section}>{itemsJsx}</ul>}
     </div>
   );
 };

@@ -58,5 +58,5 @@ export const useStyles = createUseStyles(
       border: '1px dotted #000000',
     },
   }),
-  { name: 'Members' },
+  { name: 'NetMain' },
 );

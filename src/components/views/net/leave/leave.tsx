@@ -7,7 +7,7 @@ import { modalService } from '@services/modal.service';
 import { useNet } from '@hooks/useNet';
 import { app } from '@api/app/client.app';
 
-const { COMEOUT, NET_NUMBER } = RoutesMap.USER.NET;
+const { COMEOUT, NET_NUMBER } = RoutesMap.NET;
 const { NET_LEAVE, NET_LEAVE_FAILED } = MessagesMap;
 
 export const NetLeave: FC = () => {

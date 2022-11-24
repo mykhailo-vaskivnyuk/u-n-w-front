@@ -12,17 +12,14 @@ export const RelativeRoutesMap = {
     CONFIRM: 'confirm/:token',
     RESTORE: 'restore/:token',
   },
-  USER: {
-    INDEX: 'user',
-    NET: {
-      INDEX: 'net',
+  NET: {
+    INDEX: 'net',
+    CREATE: 'create',
+    COMEOUT: 'comeout',
+    LEAVE: 'leave',
+    NET_NUMBER: {
+      INDEX: ':net_id',
       CREATE: 'create',
-      COMEOUT: 'comeout',
-      LEAVE: 'leave',
-      NET_NUMBER: {
-        INDEX: ':net_id',
-        CREATE: 'create',
-      },
     },
   },
   PALETTE: 'palette',

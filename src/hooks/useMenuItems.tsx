@@ -6,35 +6,45 @@ import { getNetMenuItems, createNetMenuItems, makeDynamicPathname } from '@utils
 import { modalService } from '@services/modal.service';
 import { useUser } from '@hooks/useUser';
 import { useNet } from '@hooks/useNet';
+import { USER_STATE_MAP } from '@api/constants';
+
+const { NET_NUMBER } = RoutesMap.NET;
 
 export const useMenuItems = () => {
   const user = useUser();
+  const { user_state: userState = 'NOT_LOGGEDIN' } = user || {};
   const [net, nets] = useNet();
   const { name = ROOT_TITLE, net_id: netId } = net || {};
 
-  const menuItems = useMemo(() => getNetMenuItems(MENU_ITEMS, user), [user]);
+  const mainMenuItems = useMemo(() => getNetMenuItems(MENU_ITEMS, user), [user]);
 
   const menuNetItems = useMemo(() => {
-    const { parentNets, siblingNets, childNets } = nets;
     const items = getNetMenuItems(MENU_NET_ITEMS, user, net);
+    const { parentNets, siblingNets, childNets } = nets;
     const parentItems = createNetMenuItems(parentNets, user);
     const siblingItems = createNetMenuItems(siblingNets, user);
     const childItems = createNetMenuItems(childNets, user);
-    if (!items) return undefined;
     return { parentItems, siblingItems, childItems, items };
   }, [net, nets, user]);
 
   const href = useMemo(
-    () =>
-      netId ? makeDynamicPathname(RoutesMap.USER.NET.NET_NUMBER.INDEX, netId!) : RoutesMap.ROOT,
+    () => (netId ? makeDynamicPathname(NET_NUMBER.INDEX, netId!) : RoutesMap.ROOT),
     [netId],
   );
 
-  const openMenu = useCallback(() => modalService.openMenu({ items: menuItems }), [menuItems]);
-  const openNetMenu = useCallback(
-    () => menuNetItems && modalService.openMenu(menuNetItems),
-    [menuNetItems],
+  const openMainMenu = useCallback(
+    () => modalService.openMenu({ items: mainMenuItems }),
+    [mainMenuItems],
   );
+  const openNetMenu = useCallback(() => modalService.openMenu(menuNetItems), [menuNetItems]);
 
-  return { name, href, openMenu, openNetMenu: menuNetItems && openNetMenu };
+  const showMainMenu = userState !== 'INSIDE_NET' || undefined;
+  const showNetMenu = USER_STATE_MAP[userState] >= USER_STATE_MAP.LOGGEDIN || undefined;
+
+  return {
+    name,
+    href,
+    openMainMenu: showMainMenu && openMainMenu,
+    openNetMenu: showNetMenu && openNetMenu,
+  };
 };

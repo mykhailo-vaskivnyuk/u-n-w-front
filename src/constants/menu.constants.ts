@@ -4,12 +4,6 @@ import { ICONS } from '@components/icon/icon';
 
 export const MENU_ITEMS: IMenuItem[] = [
   {
-    label: 'Акаунт',
-    pathname: RoutesMap.ACCOUNT.INDEX,
-    icon: ICONS.spinner,
-    allowForUser: 'NOT_CONFIRMED',
-  },
-  {
     label: 'Про You & World',
     pathname: RoutesMap.ABOUT,
     icon: ICONS.spinner,
@@ -20,6 +14,12 @@ export const MENU_ITEMS: IMenuItem[] = [
     pathname: RoutesMap.ACCOUNT.LOGIN,
     icon: ICONS.login,
     allowForUser: ['NOT_LOGGEDIN'],
+  },
+  {
+    label: 'Акаунт',
+    pathname: RoutesMap.ACCOUNT.INDEX,
+    icon: ICONS.spinner,
+    allowForUser: 'NOT_CONFIRMED',
   },
   {
     label: 'Вийти',
@@ -44,19 +44,19 @@ export const MENU_ITEMS: IMenuItem[] = [
 export const MENU_NET_ITEMS: IMenuItem[] = [
   {
     label: 'Створити спільноту',
-    pathname: RoutesMap.USER.NET.CREATE,
+    pathname: `${RoutesMap.NET.INDEX}/:net_id/create`,
     icon: ICONS.spinner,
     allowForUser: ['LOGGEDIN'],
   },
   {
     label: 'Створити спільноту',
-    pathname: `${RoutesMap.USER.NET.INDEX}/:net_id/create`,
+    pathname: `${RoutesMap.NET.INDEX}/:net_id/create`,
     icon: ICONS.spinner,
     allowForUser: 'INSIDE_NET',
   },
   {
-    label: 'Покинути спільноту назавжди',
-    pathname: RoutesMap.USER.NET.LEAVE,
+    label: 'Покинути назавжди',
+    pathname: RoutesMap.NET.LEAVE,
     icon: ICONS.spinner,
     allowForUser: 'INSIDE_NET',
   },
