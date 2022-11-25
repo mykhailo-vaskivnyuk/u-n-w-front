@@ -14,8 +14,8 @@ export const NetLeave: FC = () => {
   const navigate = useNavigate();
   const [net] = useNet();
   const { parent_net_id: parentNetId } = net || {};
-  const parntNetPathname = makeDynamicPathname(NET_NUMBER.INDEX, parentNetId || '');
-
+  const parntNetPathname = parentNetId && makeDynamicPathname(NET_NUMBER.INDEX, parentNetId);
+  console.log('PATHNAME', parntNetPathname)
   const navigateToComeout = () => navigate(COMEOUT, { replace: true });
   const navigateToNet = (pathname: string) => navigate(pathname, { replace: true });
   const navigateBack = () => navigate(-1);
