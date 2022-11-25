@@ -56,11 +56,14 @@ export const SignupForm = () => {
       initialValues={{ email: '' }}
       validationSchema={SignupSchema}
       onSubmit={async (values) => {
-        await app.account.loginOrSignup('signup', values).then((user) => {
-          if (!user) return showFailed();
-          showSuccess(values);
-          navigateToAccount();
-        });
+        await app.account
+          .loginOrSignup('signup', values)
+          .then((user) => {
+            if (!user) return showFailed();
+            showSuccess(values);
+            navigateToAccount();
+          })
+          .catch(() => {});
       }}
     >
       <Signup />

@@ -4,7 +4,7 @@ import { IWsResponse, TFetch } from './types';
 import { HttpResponseError } from './errors';
 import {
   CONECTION_ATTEMPT_COUNT, CONNECTION_ATTEMPT_DELAY, CONNECTION_TIMEOUT,
- } from './constants';
+} from './constants';
 
 export const getConnection = async (baseUrl: string): Promise<TFetch> => {
   let requests: Map<any, number>;

@@ -1,14 +1,12 @@
 import { createUseStyles } from 'react-jss';
 
 export const useStyles = createUseStyles(
-  ({ mixins, vars, palette }) => ({
+  ({ vars, palette }) => ({
     container: {
       width: '100%',
       height: '100%',
       overflow: 'hidden',
-      display: 'grid',
-      gridTemplateRows: '50px 1fr',
-      gap: vars.gap.S,
+      overflowY: 'auto',
     },
     root: {
       width: '100%',
@@ -23,7 +21,7 @@ export const useStyles = createUseStyles(
     netView: {
       height: '100%',
       display: 'grid',
-      gridTemplateRows: 'repeat(8, 1fr)',
+      gridTemplateRows: 'repeat(8, minmax(60px, auto))',
       alignItems: 'center',
       gap: vars.gap.SS,
     },
@@ -36,9 +34,6 @@ export const useStyles = createUseStyles(
       '& $viewButton': {
         justifyContent: 'start',
         transform: `translateX(calc(50% - ${vars.gap.main} - ${vars.gap.S}))`,
-        '& svg': {
-          transform: 'rotate(180deg)',
-        },
       },
     },
     circle: {
@@ -46,16 +41,6 @@ export const useStyles = createUseStyles(
         justifyContent: 'end',
         transform: `translateX(calc(-50% + ${vars.gap.main} + ${vars.gap.S}))`,
       },
-    },
-    menu: {
-      height: '100%',
-      ...mixins.flexCenter,
-      border: '1px dotted #000000',
-    },
-    member: {
-      height: '100%',
-      ...mixins.flexCenter,
-      border: '1px dotted #000000',
     },
   }),
   { name: 'NetMain' },
