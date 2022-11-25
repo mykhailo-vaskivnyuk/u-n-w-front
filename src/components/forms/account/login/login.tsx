@@ -62,15 +62,19 @@ export const LoginForm = () => {
       initialValues={{ email: '', password: '' }}
       validationSchema={LoginSchema}
       onSubmit={(values, actions) => {
-        app.account.loginOrSignup('login', values).then((user) => {
-          if (!user) {
-            actions.setFieldValue(LoginField.PASSWORD, '');
-            actions.setFieldTouched(LoginField.PASSWORD, false);
-            return showFailed();
-          }
-          user.user_state === 'NOT_CONFIRMED' && showNotConfirmed(values);
-          navigateToIndex();
-        });
+        app.account
+          .loginOrSignup('login', values)
+          .then((user) => {
+            console.log('here');
+            if (!user) {
+              actions.setFieldValue(LoginField.PASSWORD, '');
+              actions.setFieldTouched(LoginField.PASSWORD, false);
+              return showFailed();
+            }
+            user.user_state === 'NOT_CONFIRMED' && showNotConfirmed(values);
+            navigateToIndex();
+          })
+          .catch(() => {});
       }}
     >
       <Login />

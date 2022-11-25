@@ -22,9 +22,9 @@ export const useMenuItems = () => {
   const menuNetItems = useMemo(() => {
     const items = getNetMenuItems(MENU_NET_ITEMS, user, net);
     const { parentNets, siblingNets, childNets } = nets;
-    const parentItems = createNetMenuItems(parentNets, user, ICONS.arrowSimpleUp);
-    const siblingItems = createNetMenuItems(siblingNets, user, ICONS.arrowSimpleRight);
-    const childItems = createNetMenuItems(childNets, user, ICONS.arrowSimpleDown);
+    const parentItems = createNetMenuItems(parentNets, user, ICONS.arrowUp);
+    const siblingItems = createNetMenuItems(siblingNets, user, ICONS.arrowRight);
+    const childItems = createNetMenuItems(childNets, user, ICONS.arrowDown);
     return { parentItems, siblingItems, childItems, items };
   }, [net, nets, user]);
 

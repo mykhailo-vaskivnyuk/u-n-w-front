@@ -7,7 +7,7 @@ export const useStyles = createUseStyles(
       height: '100%',
       margin: '0 auto',
       display: 'grid',
-      gridTemplateRows: '60px 1fr 40px',
+      gridTemplateRows: '60px auto 1fr 40px',
       background: palette.bg.main,
       position: 'relative',
       borderRadius: vars.radius.main,
@@ -17,6 +17,19 @@ export const useStyles = createUseStyles(
       },
       [breakpoints.minHeight]: {
         height: 'calc(100% + 52px)',
+      },
+    },
+    netMenu: {
+      transform: 'translateY(-44px)',
+      transition: `all ${vars.transition.normal} ease-in`,
+      display: 'flex',
+      justifyContent: 'end',
+      alignItems: 'center',
+      border: `2px solid ${palette.first.main}`,
+      borderRadius: `0 0 ${vars.radius.main} ${vars.radius.main} `,
+      padding: `${vars.gap.S} calc(${vars.gap.main} - 2px)`,
+      '&.opened': {
+        transform: 'translateY(0)',
       },
     },
   }),
