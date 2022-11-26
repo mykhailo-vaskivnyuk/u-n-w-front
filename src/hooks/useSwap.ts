@@ -1,4 +1,4 @@
-import { MouseEvent, TouchEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { MouseEvent, TouchEvent, useCallback, useEffect, useRef, useState } from 'react';
 
 const DIFF = 100;
 const isTouchEvent = (e: MouseEvent | TouchEvent): e is TouchEvent => {
