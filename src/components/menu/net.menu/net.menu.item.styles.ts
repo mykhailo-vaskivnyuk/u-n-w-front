@@ -5,6 +5,7 @@ export const useStyles = createUseStyles(
     root: {
       fontSize: vars.fontSize.L,
       fontWeight: vars.fontWeight.semiBold,
+      marginLeft: vars.gap.main,
     },
     link: {
       display: 'flex',
@@ -14,9 +15,6 @@ export const useStyles = createUseStyles(
         color: palette.second.main,
       },
     },
-    icon: {
-      color: 'currentColor',
-    },
   }),
-  { name: 'MenuItem' },
+  { name: 'NetMenuItem' },
 );

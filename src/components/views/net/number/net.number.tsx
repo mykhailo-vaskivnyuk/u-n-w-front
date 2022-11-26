@@ -1,21 +1,18 @@
-import React, { FC, useState } from 'react';
-import clsx from 'clsx';
+import React, { FC } from 'react';
 import { vars } from '@styles/vars';
-import { ICONS } from '@components/icon/icon';
-import { IconButton } from '@components/buttons/icon.button/icon.button';
+import { useSwap } from '@hooks/useSwap';
+import { useUserNet } from '@hooks/useUserNet';
 import { NotFound } from '@components/views/not.found/not.found';
 import { Member } from '@components/member/member';
-// import { useSwap } from '@hooks/useSwap';
-import { useUserNet } from '../../../../hooks/useUserNet';
 import { useStyles } from './net.number.styles';
 
 const USER_NET_POSITION = ['tree', 'circle'] as const;
 type UserNetPositionKeys = typeof USER_NET_POSITION[number];
 
 export const NetMain: FC = () => {
-  const { container, root, netView: clsNetView, viewButton, tree, circle } = useStyles();
-  const [netView, setNetView] = useState<UserNetPositionKeys>('tree');
-  // const [netView, hendlers] = useSwap<UserNetPositionKeys>([...USER_NET_POSITION]);
+  const { container, root, netView: clsNetView, viewTitle } = useStyles();
+  // const [netView, setNetView] = useState<UserNetPositionKeys>('tree');
+  const [netView, handlers] = useSwap<UserNetPositionKeys>([...USER_NET_POSITION]);
   const notFound = useUserNet();
   if (notFound) return <NotFound />;
 
@@ -36,28 +33,31 @@ export const NetMain: FC = () => {
       <div
         className={root}
         style={{ left: netView === 'tree' ? 0 : `calc(-100% - ${vars.gap.main}` }}
+        {...handlers}
       >
-        <div className={clsx(clsNetView, tree)}>
-          <IconButton
+        <div className={clsNetView}>
+          {/* <IconButton
             icon={ICONS.arrowRight}
             iconPosition="left"
             className={viewButton}
             onClick={() => setNetView('circle')}
           >
             SWITCH to CIRCLE
-          </IconButton>
+          </IconButton> */}
+          <div className={viewTitle}>TREE MODE</div>
           {membersTree}
         </div>
-        <div className={clsx(clsNetView, circle)}>
+        <div className={clsNetView}>
           {membersCircle}
-          <IconButton
+          {/* <IconButton
             icon={ICONS.arrowLeft}
             iconPosition="right"
             className={viewButton}
             onClick={() => setNetView('tree')}
           >
             SWITCH to TREE
-          </IconButton>
+          </IconButton> */}
+          <div className={viewTitle}>CIRCLE MODE</div>
         </div>
       </div>
     </div>

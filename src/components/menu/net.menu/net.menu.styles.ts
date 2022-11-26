@@ -1,13 +1,16 @@
 import { createUseStyles } from 'react-jss';
 
 export const useStyles = createUseStyles(
-  ({ palette }) => ({
+  ({ palette, vars }) => ({
     root: {
-      color: palette.font.first,
-      background: palette.first.extraLight,
+      color: palette.first.main,
+      background: palette.light.main,
     },
     section: {
       display: 'flex',
+      '& > *': {
+        marginLeft: vars.gap.main,
+      },
     },
   }),
   { name: 'NetMenu' },

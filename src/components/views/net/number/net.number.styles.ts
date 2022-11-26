@@ -25,22 +25,10 @@ export const useStyles = createUseStyles(
       alignItems: 'center',
       gap: vars.gap.SS,
     },
-    viewButton: {
+    viewTitle: {
       color: palette.add.main,
       justifySelf: 'center',
-      width: '50%',
-    },
-    tree: {
-      '& $viewButton': {
-        justifyContent: 'start',
-        transform: `translateX(calc(50% - ${vars.gap.main} - ${vars.gap.S}))`,
-      },
-    },
-    circle: {
-      '& $viewButton': {
-        justifyContent: 'end',
-        transform: `translateX(calc(-50% + ${vars.gap.main} + ${vars.gap.S}))`,
-      },
+      fontWeight: vars.fontWeight.semiBold,
     },
   }),
   { name: 'NetMain' },
