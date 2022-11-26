@@ -29,7 +29,11 @@ export const NetMenu: FC<NetMenuProps> = (props) => {
     [handleClick, location.pathname],
   );
 
-  const itemsJsx = [<Icon key="key" icon={ICONS.account} />]; // getMenuItemsJsx(items);
+  const itemsJsx = [
+    <Icon key="key1" icon={ICONS.account} />,
+    <Icon key="key2" icon={ICONS.login} />,
+    <Icon key="key3" icon={ICONS.create} />,
+  ]; // getMenuItemsJsx(items);
 
   return (
     <div className={clsx(root, className)}>

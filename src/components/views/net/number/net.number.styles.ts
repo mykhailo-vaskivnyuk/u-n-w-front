@@ -28,17 +28,17 @@ export const useStyles = createUseStyles(
     viewButton: {
       color: palette.add.main,
       justifySelf: 'center',
-      width: '50%',
+      fontWeight: vars.fontWeight.semiBold,
     },
     tree: {
       '& $viewButton': {
-        justifyContent: 'start',
+        // justifyContent: 'start',
         transform: `translateX(calc(50% - ${vars.gap.main} - ${vars.gap.S}))`,
       },
     },
     circle: {
       '& $viewButton': {
-        justifyContent: 'end',
+        // justifyContent: 'end',
         transform: `translateX(calc(-50% + ${vars.gap.main} + ${vars.gap.S}))`,
       },
     },
