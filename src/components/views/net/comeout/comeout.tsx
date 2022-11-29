@@ -20,7 +20,10 @@ export const NetComeout: FC = () => {
         showFailed();
         navigateBack();
       })
-      .catch(navigateBack);
+      .catch(() => {
+        showFailed();
+        navigateBack();
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

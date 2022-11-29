@@ -16,6 +16,8 @@ export class ClientApp extends EventEmitter {
   private baseUrl = '';
   private state: AppState = AppState.INITING;
   private user: IUserResponse = null;
+  private circle: IUserResponse[] = [];
+  private tree: IUserResponse[] = [];
   private net: INetResponse = null;
   private allNets: INetsResponse = [];
   private nets: INets = INITIAL_NETS;
@@ -66,6 +68,7 @@ export class ClientApp extends EventEmitter {
     if (this.user === user) return;
     this.user = user;
     if (user && user.user_state !== 'NOT_CONFIRMED') {
+      
       await this.netMethods.getAllNets();
       this.netMethods.getNets();
     } else {

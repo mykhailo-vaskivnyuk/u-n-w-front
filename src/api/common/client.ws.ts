@@ -48,8 +48,8 @@ export const getConnection = async (baseUrl: string): Promise<TFetch> => {
       if (reqId && reqId !== requests.get(handler)) return;
       socket.removeEventListener('message', handler);
       requests.delete(handler);
-      status !== 200 && rj(new HttpResponseError(status));
-      rv(resData);
+      if (status === 200) return rv(resData);
+      rj(new HttpResponseError(status));
     };
 
   const createSendExecutor = (
@@ -64,7 +64,7 @@ export const getConnection = async (baseUrl: string): Promise<TFetch> => {
   const createSendWithTimeoutExecutor = (
     send: ReturnType<typeof createSendExecutor>,
   ): TPromiseExecutor<any> => (rv, rj) => {
-    const handleTimeout = () => rj(new Error('Connection timeout'));
+    const handleTimeout = () => rj(new HttpResponseError(503));
     const timer = setTimeout(handleTimeout, CONNECTION_TIMEOUT);
     const newRv = (...args: Parameters<typeof rv>) => {
       clearTimeout(timer);

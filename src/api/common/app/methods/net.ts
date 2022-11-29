@@ -8,10 +8,10 @@ export const getNetMethods = (parent: IClientAppThis) => ({
   async create(args: INetCreateParams) {
     parent.setState(AppState.LOADING);
     try {
-      const net = await parent.api.user.net.create(args);
+      const net = await parent.api.net.create(args);
       if (net) {
         this.getAllNets();
-        parent.setNet(net);
+        await parent.setNet(net);
       }
       parent.setState(AppState.READY);
       return net;
@@ -23,8 +23,8 @@ export const getNetMethods = (parent: IClientAppThis) => ({
   async enter(net_id: number) {
     parent.setState(AppState.LOADING);
     try {
-      const net = await parent.api.user.net.enter({ net_id });
-      net && parent.setNet(net);
+      const net = await parent.api.net.enter({ net_id });
+      net && await parent.setNet(net);
       parent.setState(AppState.READY);
       return net;
     } catch (e: any) {
@@ -35,9 +35,9 @@ export const getNetMethods = (parent: IClientAppThis) => ({
   async comeout() {
     parent.setState(AppState.LOADING);
     try {
-      const success = await parent.api.user.net.comeout();
+      const success = await parent.api.net.comeout();
       if (success) {
-        parent.setNet(null);
+        await parent.setNet(null);
         parent.setState(AppState.READY);
       }
       return success;
@@ -50,16 +50,27 @@ export const getNetMethods = (parent: IClientAppThis) => ({
   async leave() {
     parent.setState(AppState.LOADING);
     try {
-      const success = await parent.api.user.net.leave();
+      const success = await parent.api.net.leave();
       if (success) {
         await this.getAllNets();
-        parent.setNet(null);
+        await parent.setNet(null);
       }
       parent.setState(AppState.READY);
       return success;
     } catch (e: any) {
       parent.setError(e);
       throw e;
+    }
+  },
+
+  async getCircle() {
+    parent.setState(AppState.LOADING);
+    try {
+      const circle = await parent.api.net.circle();
+      // parent.setCircle(circle);
+      parent.setState(AppState.READY);
+    } catch (e: any) {
+      parent.setError(e);
     }
   },
 
