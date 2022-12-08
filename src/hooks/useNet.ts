@@ -6,6 +6,9 @@ import { app } from '@api/app/client.app';
 export const useNet = () => {
   const [net, setNet] = useState<INetResponse | null>(() => app.getState().net);
   const [nets, setNets] = useState<INets>(() => app.getState().nets);
+  console.log('NET', net);
+  const { circle, tree } = app.getState();
+
   useEffect(() => {
     const handlerNet = (data: INetResponse | null) => setNet(data);
     const handlerNets = (data: INets) => setNets(data);
@@ -17,5 +20,5 @@ export const useNet = () => {
     };
   }, []);
 
-  return [net, nets] as const;
+  return [net, nets, circle, tree] as const;
 };

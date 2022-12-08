@@ -1,11 +1,13 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { RelativeRoutesMap } from '@constants/router.constants';
-import { Net } from '@components/views/net/net/net';
+import { Net } from '@components/views/net/net';
 import { NetCreate } from '@components/views/net/create/create';
 import { NetComeout } from '@components/views/net/comeout/comeout';
 import { NetLeave } from '@components/views/net/leave/leave';
 import { NetMain } from '@components/views/net/number/net.number';
+import { CircleRouter } from './circle.router';
+import { TreeRouter } from './tree.router';
 
 export const NetRouter = (
   <Route path={RelativeRoutesMap.NET.INDEX}>
@@ -16,6 +18,8 @@ export const NetRouter = (
     <Route path={RelativeRoutesMap.NET.NET_NUMBER.INDEX}>
       <Route path="" element={<NetMain />} />
       <Route path="create" element={<NetCreate />} />
+      {CircleRouter}
+      {TreeRouter}
     </Route>
   </Route>
 );

@@ -39,7 +39,9 @@ export const getApi = (
     'enter': (options: P.INetReadParams) =>
       fetch<P.INetResponse>('/net/enter', options),
 
-    'circle': () => fetch<P.INetCircleResponse>('/net/circle'),
+    'getCircle': () => fetch<P.INetCircleResponse>('/net/getCircle'),
+
+    'getTree': () => fetch<P.INetCircleResponse>('/net/getTree'),
 
     'leave': () => fetch<boolean>('/net/leave'),
 

@@ -1,6 +1,9 @@
 /* eslint-disable max-lines */
 /* eslint-disable import/no-cycle */
-import { INetResponse, INetsResponse, IUserResponse } from '../api/types/types';
+import {
+  INetCircleResponse, INetResponse,
+  INetsResponse, IUserResponse,
+} from '../api/types/types';
 import { INITIAL_NETS, INets } from './types';
 import { AppState } from '../constants';
 import { HttpResponseError } from '../errors';
@@ -16,8 +19,8 @@ export class ClientApp extends EventEmitter {
   private baseUrl = '';
   private state: AppState = AppState.INITING;
   private user: IUserResponse = null;
-  private circle: IUserResponse[] = [];
-  private tree: IUserResponse[] = [];
+  private circle: INetCircleResponse = [];
+  private tree: INetCircleResponse = [];
   private net: INetResponse = null;
   private allNets: INetsResponse = [];
   private nets: INets = INITIAL_NETS;
@@ -58,6 +61,8 @@ export class ClientApp extends EventEmitter {
       state: this.state,
       user: this.user,
       net: this.net,
+      circle: this.circle,
+      tree: this.tree,
       allNets: this.allNets,
       nets: this.nets,
       error: this.error,
@@ -68,7 +73,6 @@ export class ClientApp extends EventEmitter {
     if (this.user === user) return;
     this.user = user;
     if (user && user.user_state !== 'NOT_CONFIRMED') {
-      
       await this.netMethods.getAllNets();
       this.netMethods.getNets();
     } else {
@@ -82,10 +86,16 @@ export class ClientApp extends EventEmitter {
     this.net = net;
     if (net) {
       this.user!.user_state = 'INSIDE_NET';
+      await this.netMethods.getCircle();
+      await this.netMethods.getTree();
       this.emit('user', { ...this.user });
     } else if (this.user) {
       this.user!.user_state = 'LOGGEDIN';
       this.emit('user', { ...this.user });
+    }
+    if (!net) {
+      this.setCircle([]);
+      this.setTree([]);
     }
     this.netMethods.getNets();
     this.emit('net', net);
@@ -100,6 +110,16 @@ export class ClientApp extends EventEmitter {
     if (this.nets === nets) return;
     this.nets = nets;
     this.emit('nets', this.nets);
+  }
+
+  protected setCircle(circle: INetCircleResponse) {
+    if (this.circle === circle) return;
+    this.circle = circle;
+  }
+
+  protected setTree(tree: INetCircleResponse) {
+    if (this.tree === tree) return;
+    this.tree = tree;
   }
 
   protected setState(state: AppState) {

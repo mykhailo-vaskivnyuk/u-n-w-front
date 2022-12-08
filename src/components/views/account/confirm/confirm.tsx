@@ -2,13 +2,13 @@ import { FC, useEffect } from 'react';
 import { useMatch, useNavigate } from 'react-router-dom';
 import { RoutesMap } from '@constants/router.constants';
 import { MessagesMap } from '@constants/messages';
-import { makeDynamicPathname } from '@utils/utils';
 import { app } from '@api/app/client.app';
 import { modalService } from '@services/modal.service';
 
+const path = RoutesMap.ACCOUNT.CONFIRM;
+
 export const Confirm: FC = () => {
   const navigate = useNavigate();
-  const path = makeDynamicPathname(RoutesMap.ACCOUNT.CONFIRM, ':token');
   const { params } = useMatch<'token', typeof path>({ path }) || {};
 
   const navigateToIndex = () => navigate(RoutesMap.ROOT, { replace: true });

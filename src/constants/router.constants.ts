@@ -20,6 +20,16 @@ export const RelativeRoutesMap = {
     NET_NUMBER: {
       INDEX: ':net_id',
       CREATE: 'create',
+      CIRCLE: {
+        INDEX: 'circle',
+        USER: 'user',
+        MEMBER: ':member',
+      },
+      TREE: {
+        INDEX: 'tree',
+        USER: 'user',
+        MEMBER: ':member',
+      },
     },
   },
   PALETTE: 'palette',

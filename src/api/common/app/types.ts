@@ -1,6 +1,6 @@
 /* eslint-disable import/no-cycle */
 import * as T from '../api/types/types';
-import { INetsResponse } from '../api/types/types';
+import { INetCircleResponse, INetsResponse } from '../api/types/types';
 import { AppState } from '../constants';
 import { HttpResponseError } from '../errors';
 import { getApi } from '../api/client.api';
@@ -13,6 +13,8 @@ export type IClientAppThis = ClientApp & {
   setNet: (net: T.INetResponse) => void;
   setAllNets: (nets: INetsResponse) => void;
   setNets: (nets: INets) => void;
+  setCircle: (circle: INetCircleResponse) => void;
+  setTree: (tree: INetCircleResponse) => void;
   setError: (e: HttpResponseError) => void;
 };
 

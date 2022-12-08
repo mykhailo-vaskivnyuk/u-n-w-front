@@ -12,8 +12,8 @@ export const format = (str: string, ...values: string[]) => {
   return values.reduce((result, value) => result.replace('%s', value), str);
 };
 
-export const makeDynamicPathname = (pathname: string, id: number | string) =>
-  pathname.replace(/:[^/]+/, id.toString());
+export const makeDynamicPathname = (pathname: string, ...ids: (number | string)[]) =>
+  ids.reduce((result: string, id) => result.replace(/:[^/]+/, id.toString()), pathname);
 
 const netMenuFilter = (netMeuItem: IMenuItem, userState: UserStateKeys) => {
   const { allowForUser } = netMeuItem;

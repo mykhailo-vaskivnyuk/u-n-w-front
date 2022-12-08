@@ -4,7 +4,7 @@ import { createUseStyles } from 'react-jss';
 export const useStyles = createUseStyles(
   ({ palette, vars }) => ({
     root: {
-      display: 'grid',
+      display: 'flex', // 'grid',
       gridTemplateColumns: '50px 1fr',
       alignItems: 'center',
       padding: vars.gap.S,

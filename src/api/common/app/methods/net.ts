@@ -66,8 +66,19 @@ export const getNetMethods = (parent: IClientAppThis) => ({
   async getCircle() {
     parent.setState(AppState.LOADING);
     try {
-      const circle = await parent.api.net.circle();
-      // parent.setCircle(circle);
+      const circle = await parent.api.net.getCircle();
+      parent.setCircle(circle);
+      parent.setState(AppState.READY);
+    } catch (e: any) {
+      parent.setError(e);
+    }
+  },
+
+  async getTree() {
+    parent.setState(AppState.LOADING);
+    try {
+      const circle = await parent.api.net.getTree();
+      parent.setTree(circle);
       parent.setState(AppState.READY);
     } catch (e: any) {
       parent.setError(e);
@@ -105,7 +116,6 @@ export const getNetMethods = (parent: IClientAppThis) => ({
         const { net_id: curNetId, parent_net_id: nextParentNetId } = item;
         if (curNetId !== curParentNetId) return acc;
         acc.push(item);
-
         curParentNetId = nextParentNetId;
         return acc;
       }, [...nets.parentNets])
