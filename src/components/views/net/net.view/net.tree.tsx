@@ -1,20 +1,20 @@
 import React, { FC } from 'react';
-import { MemberCard } from '@components/member/member.card';
+import { MemberCard } from '@components/member/card/member.card';
 import { app } from '@api/app/client.app';
-import { NetUserCard } from '@components/member/net.user.card';
-import { useStyles } from '../number/net.number.styles';
+import { NetUserCard } from '@components/member/card/net.user.card';
+import { useStyles } from '../net.id/net.id.styles';
 
-export const NetCircle: FC = () => {
-  const { circle } = app.getState();
+export const NetTree: FC = () => {
+  const { tree } = app.getState();
   const { netView: clsNetView, viewTitle } = useStyles();
 
-  const circleJsx = new Array(7)
+  const treeJsx = new Array(7)
     .fill('circle')
     .map((i, j) =>
-      j === 1 ? (
-        <NetUserCard key={`${i + j}`} netView="circle" />
+      j === 0 ? (
+        <NetUserCard key={`${i + j}`} netView="tree" />
       ) : (
-        <MemberCard key={`${i + j}`} netView="circle" member={circle[j] || null} />
+        <MemberCard key={`${i + j}`} netView="tree" member={tree[j - 1]} />
       ),
     );
 
@@ -28,8 +28,8 @@ export const NetCircle: FC = () => {
           >
             SWITCH to CIRCLE
           </IconButton> */}
-      <div className={viewTitle}>CIRCLE MODE</div>
-      {circleJsx}
+      <div className={viewTitle}>TREE MODE</div>
+      {treeJsx}
     </div>
   );
 };

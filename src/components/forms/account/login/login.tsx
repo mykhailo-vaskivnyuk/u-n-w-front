@@ -4,12 +4,14 @@ import { Formik, useFormikContext } from 'formik';
 import { RoutesMap } from '@constants/router.constants';
 import { MessagesMap } from '@constants/messages';
 import { format } from '@utils/utils';
-import { app } from '@api/app/client.app';
 import { modalService } from '@services/modal.service';
+import { app } from '@api/app/client.app';
 import { Button } from '@components/buttons/button/button';
 import { Input } from '@components/controls/input/input';
 import { LoginField, LoginFormValues, LoginSchema } from './login.schema';
 import { useStyles } from './login.styles';
+
+const FormikProvider = Formik<LoginFormValues>;
 
 const Login: FC = () => {
   const { buttons } = useStyles();
@@ -42,15 +44,13 @@ const Login: FC = () => {
   );
 };
 
-const FormikProvider = Formik<LoginFormValues>;
-
 export const LoginForm = () => {
   const navigate = useNavigate();
-
   const navigateToIndex = useCallback(
     () => navigate(RoutesMap.ROOT, { replace: true }),
     [navigate],
   );
+
   const showNotConfirmed = useCallback((values: LoginFormValues) => {
     const message = format(MessagesMap.NOT_CONFIRMED, values[LoginField.EMAIL]);
     modalService.showError(message);
@@ -61,11 +61,10 @@ export const LoginForm = () => {
     <FormikProvider
       initialValues={{ email: '', password: '' }}
       validationSchema={LoginSchema}
-      onSubmit={(values, actions) => {
+      onSubmit={(values, actions) =>
         app.account
           .loginOrSignup('login', values)
           .then((user) => {
-            console.log('here');
             if (!user) {
               actions.setFieldValue(LoginField.PASSWORD, '');
               actions.setFieldTouched(LoginField.PASSWORD, false);
@@ -74,8 +73,8 @@ export const LoginForm = () => {
             user.user_state === 'NOT_CONFIRMED' && showNotConfirmed(values);
             navigateToIndex();
           })
-          .catch(() => {});
-      }}
+          .catch(() => {})
+      }
     >
       <Login />
     </FormikProvider>

@@ -1,13 +1,13 @@
 import React, { FC, PropsWithChildren, useCallback, useRef } from 'react';
 import clsx from 'clsx';
 import { useLocation } from 'react-router-dom';
-import { useAppState } from '@hooks/useAppState';
-import { AppState } from '@api/constants';
+import { useAppStatus } from '@hooks/useAppStatus';
+import { AppStatus } from '@api/constants';
 import { useStyles } from './content.styles';
 
 export const Content: FC<PropsWithChildren> = ({ children }) => {
   const { root, animation } = useStyles();
-  const isInit = useAppState() === AppState.INITING;
+  const isInit = useAppStatus() === AppStatus.INITING;
   const ref = useRef<HTMLDivElement>(null);
   const { key } = useLocation();
 

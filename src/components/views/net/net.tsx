@@ -6,7 +6,7 @@ export const Net: FC = () => {
 
   return (
     <div className={root}>
-      <div className={content}>СПІЛЬНОТА</div>
+      <div className={content}>НЕ В СПІЛЬНОТI</div>
     </div>
   );
 };

@@ -7,14 +7,14 @@ import { modalService } from '@services/modal.service';
 import { useNet } from '@hooks/useNet';
 import { app } from '@api/app/client.app';
 
-const { COMEOUT, NET_NUMBER } = RoutesMap.NET;
+const { COMEOUT, NET_ID } = RoutesMap.NET;
 const { NET_LEAVE, NET_LEAVE_FAILED } = MessagesMap;
 
 export const NetLeave: FC = () => {
   const navigate = useNavigate();
   const [net] = useNet();
   const { parent_net_id: parentNetId } = net || {};
-  const parntNetPathname = parentNetId && makeDynamicPathname(NET_NUMBER.INDEX, parentNetId);
+  const parentNetPathname = parentNetId && makeDynamicPathname(NET_ID.INDEX, parentNetId);
   const navigateToComeout = () => navigate(COMEOUT, { replace: true });
   const navigateToNet = (pathname: string) => navigate(pathname, { replace: true });
   const navigateBack = () => navigate(-1);
@@ -30,7 +30,7 @@ export const NetLeave: FC = () => {
           return navigateBack();
         }
         showSuccess();
-        parntNetPathname ? navigateToNet(parntNetPathname) : navigateToComeout();
+        parentNetPathname ? navigateToNet(parentNetPathname) : navigateToComeout();
       })
       .catch(navigateBack);
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -1,10 +1,9 @@
-import { mixins } from '@styles/mixins';
 import { createUseStyles } from 'react-jss';
 
 export const useStyles = createUseStyles(
-  ({ palette, vars }) => ({
+  ({ palette, vars, mixins }) => ({
     root: {
-      display: 'flex', // 'grid',
+      display: 'flex',
       gridTemplateColumns: '50px 1fr',
       alignItems: 'center',
       padding: vars.gap.S,
@@ -22,5 +21,5 @@ export const useStyles = createUseStyles(
       background: palette.first.extraLight,
     },
   }),
-  { name: 'Member' },
+  { name: 'MemberCard' },
 );

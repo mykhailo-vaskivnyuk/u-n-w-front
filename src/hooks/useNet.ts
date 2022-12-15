@@ -6,7 +6,7 @@ import { app } from '@api/app/client.app';
 export const useNet = () => {
   const [net, setNet] = useState<INetResponse | null>(() => app.getState().net);
   const [nets, setNets] = useState<INets>(() => app.getState().nets);
-  console.log('NET', net);
+
   const { circle, tree } = app.getState();
 
   useEffect(() => {

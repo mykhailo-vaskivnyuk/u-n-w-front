@@ -6,11 +6,11 @@ export enum LoginField {
 }
 
 export interface LoginFormValues {
-  email: string;
-  password: string;
+  [LoginField.EMAIL]: string;
+  [LoginField.PASSWORD]: string;
 }
 
 export const LoginSchema = yup.object().shape({
-  email: yup.string().required().email(),
-  password: yup.string().required(),
+  [LoginField.EMAIL]: yup.string().required().email(),
+  [LoginField.PASSWORD]: yup.string().required(),
 });

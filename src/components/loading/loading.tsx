@@ -1,16 +1,16 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Icon, ICONS } from '@components/icon/icon';
-import { AppState } from '@api/constants';
-import { useAppState } from '@hooks/useAppState';
+import { AppStatus } from '@api/constants';
+import { useAppStatus } from '@hooks/useAppStatus';
 import { useStyles } from './loading.styles';
 
 export const Loading: FC = () => {
   const { root, icon } = useStyles();
   const [loading, setLoading] = useState<boolean>(true);
-  const state = useAppState();
+  const status = useAppStatus();
 
   useEffect(() => {
-    const isLoading = state === AppState.LOADING || state === AppState.INITING;
+    const isLoading = status === AppStatus.LOADING || status === AppStatus.INITING;
     let timer: ReturnType<typeof setTimeout> | null = null;
     if (isLoading) {
       if (loading) return;
@@ -22,7 +22,7 @@ export const Loading: FC = () => {
       timer && clearTimeout(timer);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state]);
+  }, [status]);
 
   if (!loading) return null;
 

@@ -6,7 +6,7 @@ import { RoutesMap } from '@constants/router.constants';
 import { IS_DEV } from '@constants/constants';
 import { ICONS } from '@components/icon/icon';
 
-const { NET_NUMBER } = RoutesMap.NET;
+const { NET_ID } = RoutesMap.NET;
 
 export const format = (str: string, ...values: string[]) => {
   return values.reduce((result, value) => result.replace('%s', value), str);
@@ -44,7 +44,7 @@ export const createNetMenuItems = (nets: INetsResponse, user: IUserResponse, ico
   const netMenuItems = nets.map(
     ({ net_id, name }): IMenuItem => ({
       label: name,
-      pathname: makeDynamicPathname(NET_NUMBER.INDEX, net_id),
+      pathname: makeDynamicPathname(NET_ID.INDEX, net_id),
       icon: icon || ICONS.home,
       allowForUser: 'LOGGEDIN',
     }),

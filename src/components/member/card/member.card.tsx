@@ -1,7 +1,6 @@
 import React, { FC, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { IMemberResponse } from '@api/api/types/net.types';
-import { NetViewKeys } from '@components/views/net/number/net.number';
+import { IMemberResponse, NetViewKeys } from '@api/api/types/net.types';
 import { makeDynamicPathname } from '@utils/utils';
 import { RoutesMap } from '@constants/router.constants';
 import { app } from '@api/app/client.app';
@@ -22,9 +21,11 @@ export const MemberCard: FC<MemberCardProps> = (props) => {
   const handleClick = useCallback(
     () =>
       netView === 'tree'
-        ? navigate(makeDynamicPathname(RoutesMap.NET.NET_NUMBER.TREE.MEMBER, net!.net_id, nodeId!))
+        ? navigate(
+            makeDynamicPathname(RoutesMap.NET.NET_ID.TREE.NODE_ID.INDEX, net!.net_id, nodeId!),
+          )
         : navigate(
-            makeDynamicPathname(RoutesMap.NET.NET_NUMBER.CIRCLE.MEMBER, net!.net_id, nodeId!),
+            makeDynamicPathname(RoutesMap.NET.NET_ID.CIRCLE.NODE_ID.INDEX, net!.net_id, nodeId!),
           ),
     [navigate, net, netView, nodeId],
   );

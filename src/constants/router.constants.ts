@@ -17,18 +17,23 @@ export const RelativeRoutesMap = {
     CREATE: 'create',
     COMEOUT: 'comeout',
     LEAVE: 'leave',
-    NET_NUMBER: {
+    NET_ID: {
       INDEX: ':net_id',
       CREATE: 'create',
       CIRCLE: {
         INDEX: 'circle',
         USER: 'user',
-        MEMBER: ':member',
+        NODE_ID: {
+          INDEX: ':node_id',
+        },
       },
       TREE: {
         INDEX: 'tree',
         USER: 'user',
-        MEMBER: ':member',
+        NODE_ID: {
+          INDEX: ':node_id',
+          INVITE: 'invite',
+        },
       },
     },
   },

@@ -9,7 +9,7 @@ import { useNet } from '@hooks/useNet';
 import { USER_STATE_MAP } from '@api/constants';
 import { ICONS } from '@components/icon/icon';
 
-const { NET_NUMBER } = RoutesMap.NET;
+const { NET_ID } = RoutesMap.NET;
 
 export const useMenuItems = () => {
   const user = useUser();
@@ -29,7 +29,7 @@ export const useMenuItems = () => {
   }, [net, nets, user]);
 
   const href = useMemo(
-    () => (netId ? makeDynamicPathname(NET_NUMBER.INDEX, netId!) : RoutesMap.ROOT),
+    () => (netId ? makeDynamicPathname(NET_ID.INDEX, netId!) : RoutesMap.ROOT),
     [netId],
   );
 

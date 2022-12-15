@@ -1,12 +1,14 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { RelativeRoutesMap } from '@constants/router.constants';
-import { MemberCircle } from '@components/member/member.circle';
-import { NetUser } from '@components/member/net.user';
+import { CircleMember } from '@components/member/circle/circle.member';
+import { NetUser } from '@components/member/user/net.user';
+
+const { CIRCLE } = RelativeRoutesMap.NET.NET_ID;
 
 export const CircleRouter = (
-  <Route path={RelativeRoutesMap.NET.NET_NUMBER.CIRCLE.INDEX}>
-    <Route path={RelativeRoutesMap.NET.NET_NUMBER.CIRCLE.USER} element={<NetUser />} />
-    <Route path={RelativeRoutesMap.NET.NET_NUMBER.CIRCLE.MEMBER} element={<MemberCircle />} />
+  <Route path={CIRCLE.INDEX}>
+    <Route path={CIRCLE.USER} element={<NetUser />} />
+    <Route path={CIRCLE.NODE_ID.INDEX} element={<CircleMember />} />
   </Route>
 );

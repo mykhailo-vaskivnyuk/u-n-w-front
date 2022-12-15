@@ -13,4 +13,6 @@ export type IMemberResponse =
   Omit<ITableNodesInvites, 'token'> & {
     token: string | null;
   };
-export type INetCircleResponse = IMemberResponse[];
+export type INetViewResponse = IMemberResponse[];
+export const NET_VIEW_MAP = ['tree', 'circle'] as const;
+export type NetViewKeys = typeof NET_VIEW_MAP[number];
