@@ -24,7 +24,7 @@ export const getConnection = async (baseUrl: string): Promise<TFetch> => {
     if (!handleResponse) return;
     requests.delete(reqId);
     handleResponse(response);
-  };
+  }
 
   const checkConnection = async (attempt = CONECTION_ATTEMPT_COUNT) => {
     !socket && createSocket();
@@ -57,7 +57,7 @@ export const getConnection = async (baseUrl: string): Promise<TFetch> => {
       if (status === 200) return rv(data);
       rj(new HttpResponseError(status));
     };
-  
+
   const createSendExecutor = (
     requestMessage: string,
   ): TPromiseExecutor<void> => (rv, rj) => {

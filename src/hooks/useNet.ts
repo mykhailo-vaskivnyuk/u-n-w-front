@@ -10,13 +10,11 @@ export const useNet = () => {
   const { circle, tree } = app.getState();
 
   useEffect(() => {
-    const handlerNet = (data: INetResponse | null) => setNet(data);
-    const handlerNets = (data: INets) => setNets(data);
-    app.on('net', handlerNet);
-    app.on('nets', handlerNets);
+    app.on('net', setNet);
+    app.on('nets', setNets);
     return () => {
-      app.remove('net', handlerNet);
-      app.remove('nets', handlerNets);
+      app.remove('net', setNet);
+      app.remove('nets', setNets);
     };
   }, []);
 
