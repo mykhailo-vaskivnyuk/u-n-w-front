@@ -1,20 +1,19 @@
+/* eslint-disable react/no-array-index-key */
 import React, { FC } from 'react';
 import { MemberCard } from '@components/member/card/member.card';
-import { app } from '@api/app/client.app';
 import { NetUserCard } from '@components/member/card/net.user.card';
 import { useStyles } from '../net.id/net.id.styles';
 
 export const NetTree: FC = () => {
-  const { tree } = app.getState();
   const { netView: clsNetView, viewTitle } = useStyles();
 
   const treeJsx = new Array(7)
-    .fill('circle')
+    .fill('tree')
     .map((i, j) =>
       j === 0 ? (
-        <NetUserCard key={`${i + j}`} netView="tree" />
+        <NetUserCard key={`tree-${j}`} netView="tree" />
       ) : (
-        <MemberCard key={`${i + j}`} netView="tree" member={tree[j - 1]} />
+        <MemberCard key={`tree-${j}`} netView="tree" memberUiPosition={j} />
       ),
     );
 

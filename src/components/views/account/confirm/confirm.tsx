@@ -1,7 +1,8 @@
 import { FC, useEffect } from 'react';
-import { useMatch, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { RoutesMap } from '@constants/router.constants';
 import { MessagesMap } from '@constants/messages';
+import { useMatchParam } from '@utils/utils';
 import { app } from '@api/app/client.app';
 import { modalService } from '@services/modal.service';
 
@@ -9,15 +10,13 @@ const path = RoutesMap.ACCOUNT.CONFIRM;
 
 export const Confirm: FC = () => {
   const navigate = useNavigate();
-  const { params } = useMatch<'token', typeof path>({ path }) || {};
-
+  const token = useMatchParam('token', path) as string;
   const navigateToIndex = () => navigate(RoutesMap.ROOT, { replace: true });
   const navigateToAccount = () => navigate(RoutesMap.ACCOUNT.INDEX, { replace: true });
   const showSuccess = () => modalService.showMessage(MessagesMap.CONFIRM_SUCCESS);
   const showFailed = () => modalService.showError(MessagesMap.BAD_LINK);
 
   useEffect(() => {
-    const { token } = params || {};
     if (!token) {
       showFailed();
       return navigateToIndex();

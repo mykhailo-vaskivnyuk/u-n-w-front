@@ -7,17 +7,19 @@ import { modalService } from '@services/modal.service';
 import { useNet } from '@hooks/useNet';
 import { app } from '@api/app/client.app';
 
-const { COMEOUT, NET_ID } = RoutesMap.NET;
+const { NET_ID } = RoutesMap.NET;
 const { NET_LEAVE, NET_LEAVE_FAILED } = MessagesMap;
 
 export const NetLeave: FC = () => {
-  const navigate = useNavigate();
   const [net] = useNet();
   const { parent_net_id: parentNetId } = net || {};
-  const parentNetPathname = parentNetId && makeDynamicPathname(NET_ID.INDEX, parentNetId);
-  const navigateToComeout = () => navigate(COMEOUT, { replace: true });
-  const navigateToNet = (pathname: string) => navigate(pathname, { replace: true });
+
+  const navigate = useNavigate();
+  const navigateToIndex = () => navigate(RoutesMap.ROOT, { replace: true });
+  const navigateToNet = (netId: number) =>
+    navigate(makeDynamicPathname(NET_ID.INDEX, netId), { replace: true });
   const navigateBack = () => navigate(-1);
+
   const showSuccess = () => modalService.showMessage(format(NET_LEAVE, net?.name || ''));
   const showFailed = () => modalService.showError(NET_LEAVE_FAILED);
 
@@ -30,7 +32,7 @@ export const NetLeave: FC = () => {
           return navigateBack();
         }
         showSuccess();
-        parentNetPathname ? navigateToNet(parentNetPathname) : navigateToComeout();
+        parentNetId ? navigateToNet(parentNetId) : navigateToIndex();
       })
       .catch(navigateBack);
     // eslint-disable-next-line react-hooks/exhaustive-deps

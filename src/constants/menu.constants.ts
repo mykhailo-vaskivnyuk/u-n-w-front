@@ -44,7 +44,7 @@ export const MENU_ITEMS: IMenuItem[] = [
 export const MENU_NET_ITEMS: IMenuItem[] = [
   {
     label: 'Створити спільноту',
-    pathname: `${RoutesMap.NET.INDEX}/:net_id/create`,
+    pathname: `${RoutesMap.NET.INDEX}/create`,
     icon: ICONS.create,
     allowForUser: ['LOGGEDIN'],
   },

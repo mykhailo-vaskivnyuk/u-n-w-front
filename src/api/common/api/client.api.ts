@@ -30,6 +30,16 @@ export const getApi = (
   },
   'health': () => fetch<string>('/health'),
 
+  'member': {
+    'invite': {
+      'create': (options: P.IMemberInviteParams) =>
+        fetch<Q.TMemberInviteCreateResponse>('/member/invite/create', options),
+
+      'cancel': (options: Q.TMemberInviteCancel) =>
+        fetch<boolean>('/member/invite/cancel', options),
+
+    },
+  },
   'net': {
     'comeout': () => fetch<boolean>('/net/comeout'),
 

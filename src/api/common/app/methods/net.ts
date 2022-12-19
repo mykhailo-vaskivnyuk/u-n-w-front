@@ -37,10 +37,8 @@ export const getNetMethods = (parent: IClientAppThis) => ({
     parent.setStatus(AppStatus.LOADING);
     try {
       const success = await parent.api.net.comeout();
-      if (success) {
-        await parent.setNet(null);
-        parent.setStatus(AppStatus.READY);
-      }
+      if (success) await parent.setNet(null);
+      parent.setStatus(AppStatus.READY);
       return success;
     } catch (e: any) {
       parent.setError(e);
@@ -78,8 +76,8 @@ export const getNetMethods = (parent: IClientAppThis) => ({
   async getTree() {
     parent.setStatus(AppStatus.LOADING);
     try {
-      const circle = await parent.api.net.getTree();
-      parent.setTree(circle);
+      const tree = await parent.api.net.getTree();
+      parent.setTree(tree);
       parent.setStatus(AppStatus.READY);
     } catch (e: any) {
       parent.setError(e);

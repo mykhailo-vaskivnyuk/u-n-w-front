@@ -1,7 +1,7 @@
 export const MessagesMap = {
   SIGNUP_FAILED: 'Користувач з таким email вже зареєстрований',
   CONFIRM_LINK_SENT: `Акаунт успішно створено.
-    Для продовження роботи необхідно підтвердити вказаний email.
+    Для продовження роботи підтвердіть вказаний email.
     На %s надіслано лінк для його підтвердження.`,
   LOGIN_FAILED: 'Невірний email або пароль',
   NOT_CONFIRMED: `Ваш email ще не підтверджено. Лінк для його підтвердження був надісланий на %s.
@@ -22,4 +22,8 @@ export const MessagesMap = {
   NET_COMEOUT_FAILED: 'Не вдалося вийти з мережі',
   NET_LEAVE: "Ви успішно від'єднались від мережі %s",
   NET_LEAVE_FAILED: "Не вдалося від'єднатись від мережі",
+  MEMBER_INVITE_CREATE: 'Лінк-запрошення скопійовано до буферу обміну',
+  MEMBER_INVITE_CREATE_FAILED: 'Не вдалося створити лінк-запрошення',
+  MEMBER_INVITE_CANCEL: 'Запрошення скасовано',
+  MEMBER_INVITE_CANCEL_FAILED: 'Не вдалося скасувати запрошення',
 };

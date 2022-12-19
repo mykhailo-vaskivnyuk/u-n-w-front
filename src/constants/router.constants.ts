@@ -1,4 +1,4 @@
-import { getRoutesMap } from '../components/router/utils';
+import { getRoutesMap } from '../router/utils';
 
 export const RelativeRoutesMap = {
   ROOT: '',
@@ -17,6 +17,7 @@ export const RelativeRoutesMap = {
     CREATE: 'create',
     COMEOUT: 'comeout',
     LEAVE: 'leave',
+    INVITE: 'invite/:token',
     NET_ID: {
       INDEX: ':net_id',
       CREATE: 'create',
