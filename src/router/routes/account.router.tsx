@@ -1,13 +1,13 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { RelativeRoutesMap } from '@constants/router.constants';
-import { Account } from '@components/views/account/account/account';
-import { Signup } from '@components/views/account/signup/signup';
-import { Login } from '@components/views/account/login/login';
-import { Logout } from '@components/views/account/logout/logout';
-import { Overmail } from '@components/views/account/overmail/overmail';
-import { Confirm } from '@components/views/account/confirm/confirm';
-import { Restore } from '@components/views/account/restore/restore';
+import { Account } from '@views/account/account/account';
+import { Signup } from '@views/account/signup/signup';
+import { Login } from '@views/account/login/login';
+import { Logout } from '@views/account/logout/logout';
+import { Overmail } from '@views/account/overmail/overmail';
+import { Confirm } from '@views/account/confirm/confirm';
+import { Restore } from '@views/account/restore/restore';
 
 export const AccountRouter = (
   <Route path={RelativeRoutesMap.ACCOUNT.INDEX}>

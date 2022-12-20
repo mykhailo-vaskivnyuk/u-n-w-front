@@ -73,3 +73,6 @@ export const getMemberName = (
   const { name, member_name: memberName } = member;
   return name || memberName || `member ${position}`;
 };
+
+export const getMemberPosition = (netView: NetViewKeys, memberUiPosition: number) =>
+  netView === 'tree' ? memberUiPosition - 1 : memberUiPosition && memberUiPosition - 1;

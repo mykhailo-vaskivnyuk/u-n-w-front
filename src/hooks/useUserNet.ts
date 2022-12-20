@@ -1,24 +1,19 @@
 import { useEffect, useState } from 'react';
-import { useMatch } from 'react-router-dom';
 import { RoutesMap } from '@constants/router.constants';
+import { useMatchParam } from '@utils/utils';
 import { app } from '@api/app/client.app';
-import { useNet } from './useNet';
 
 const path = RoutesMap.NET.NET_ID.INDEX;
 
 export const useUserNet = () => {
-  const [loading, setLoading] = useState(true);
-  const [net] = useNet();
-
-  const { params } = useMatch<'net_id', typeof path>({ path, end: false }) || {};
-  const { net_id: strNetId } = params || {};
+  const netId = useMatchParam('net_id', path, false) as number;
+  const { net } = app.getState();
+  const [loading, setLoading] = useState(() => !net || net.net_id !== netId);
 
   useEffect(() => {
-    const netId = Number(strNetId);
-    if (net && net.net_id === netId) return;
+    if (!loading) return;
     app.netMethods.enter(netId).then(() => setLoading(false));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [strNetId]);
+  }, [loading, netId]);
 
   return [loading, net];
 };

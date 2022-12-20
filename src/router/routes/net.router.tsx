@@ -1,13 +1,13 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { RelativeRoutesMap } from '@constants/router.constants';
-import { Net } from '@components/views/net/net';
-import { NetCreate } from '@components/views/net/create/create';
-import { NetComeout } from '@components/views/net/comeout/comeout';
-import { NetLeave } from '@components/views/net/leave/leave';
-import { NetInvite } from '@components/views/net/invite/invite';
-import { NetIdIndex } from '@components/views/net/net.id/net.id.index';
-import { NetId } from '@components/views/net/net.id/net.id';
+import { Net } from '@views/net/net';
+import { NetCreate } from '@views/net/create/create';
+import { NetComeout } from '@views/net/comeout/comeout';
+import { NetLeave } from '@views/net/leave/leave';
+import { NetInvite } from '@views/net/invite/invite';
+import { NetIdIndex } from '@views/net/net.id/net.id.index';
+import { NetId } from '@views/net/net.id/net.id';
 import { CircleRouter } from './circle.router';
 import { TreeRouter } from './tree.router';
 

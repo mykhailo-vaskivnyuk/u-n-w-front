@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { RelativeRoutesMap } from '@constants/router.constants';
-import { NetUser } from '@components/member/user/net.user';
-import { TreeMemberIndex } from '@components/member/tree/tree.member.index';
-import { TreeMember } from '@components/member/tree/tree.member';
-import { TreeMemberInvite } from '@components/member/tree/tree.member.invite';
+import { NetUser } from '@views/member/user/net.user';
+import { TreeMemberIndex } from '@views/member/tree/tree.member.index';
+import { TreeMember } from '@views/member/tree/tree.member';
+import { TreeMemberInvite } from '@views/member/tree/tree.member.invite';
 
 const { TREE } = RelativeRoutesMap.NET.NET_ID;
 

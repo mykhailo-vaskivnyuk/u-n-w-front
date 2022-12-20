@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { RelativeRoutesMap } from '@constants/router.constants';
-import { NetUser } from '@components/member/user/net.user';
-import { CircleMemberIndex } from '@components/member/circle/circle.member.index';
-import { CircleMember } from '@components/member/circle/circle.member';
+import { NetUser } from '@views/member/user/net.user';
+import { CircleMemberIndex } from '@views/member/circle/circle.member.index';
+import { CircleMember } from '@views/member/circle/circle.member';
 
 const { CIRCLE } = RelativeRoutesMap.NET.NET_ID;
 
