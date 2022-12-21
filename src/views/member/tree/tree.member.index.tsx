@@ -8,7 +8,7 @@ import { useStyles } from '../member.styles';
 
 export const TreeMemberIndex: FC = () => {
   useTree();
-  const { root } = useStyles();
+  const { root, content } = useStyles();
   const [loading, member] = useNetMember('tree');
   if (loading) return null;
   if (!member) return <NotFound />;
@@ -16,7 +16,9 @@ export const TreeMemberIndex: FC = () => {
   return (
     <div className={root} aria-hidden="true">
       <TreeMemberTitle />
-      <Outlet key={Math.random()} />
+      <div className={content}>
+        <Outlet key={Math.random()} />
+      </div>
     </div>
   );
 };

@@ -5,20 +5,20 @@ const isTouchEvent = (e: MouseEvent | TouchEvent): e is TouchEvent => {
   return 'changedTouches' in e;
 };
 
-export const useSwap = <T>(vertical: [T, T]) => {
-  const [swap, setSwap] = useState<T>(vertical[0]);
+export const useSwap = <T>(options: readonly [T, T], initialOption: any) => {
+  const [option, setOption] = useState<T>(initialOption || options[0]);
   const mousePosition = useRef<MouseEvent | TouchEvent | undefined>(undefined);
-  const changeRef = useRef(false);
-  const ref = useRef<HTMLDivElement>(null);
+  const swapped = useRef(false);
+  const element = useRef<HTMLDivElement>(null);
 
   const defineSwap = useCallback(
-    (xStart: number, xEnd: number) => {
+    (xStart: number, xEnd: number, isMouseEvent = false) => {
       if (Math.abs(xStart - xEnd) < DIFF) return;
-      if (xStart - xEnd > DIFF) setSwap(vertical[1]);
-      else if (xEnd - xStart > DIFF) setSwap(vertical[0]);
-      changeRef.current = true;
+      if (xStart - xEnd > DIFF) setOption(options[1]);
+      else if (xEnd - xStart > DIFF) setOption(options[0]);
+      isMouseEvent && (swapped.current = true);
     },
-    [vertical],
+    [options],
   );
 
   const onMouseDown = useCallback((e: MouseEvent | TouchEvent) => {
@@ -36,7 +36,7 @@ export const useSwap = <T>(vertical: [T, T]) => {
       if (isTouchEvent(begin)) return null;
       const { clientX: bX } = begin;
       const { clientX: eX } = end;
-      defineSwap(bX, eX);
+      defineSwap(bX, eX, true);
       return null;
     },
     [defineSwap],
@@ -56,16 +56,15 @@ export const useSwap = <T>(vertical: [T, T]) => {
   );
 
   const onClick = useCallback((e: MouseEvent['nativeEvent']) => {
-    const swaped = changeRef.current;
-    if (!swaped) return;
+    if (!swapped.current) return;
     e.stopPropagation();
-    changeRef.current = false;
+    swapped.current = false;
   }, []);
 
   useEffect(() => {
-    if (!ref.current) return;
-    ref.current.addEventListener('click', onClick, { capture: false });
+    if (!element.current) return;
+    element.current.addEventListener('click', onClick, { capture: false });
   }, [onClick]);
 
-  return [swap, { onMouseDown, onMouseUp, onTouchStart, onTouchEnd, ref }] as const;
+  return [option, { onMouseDown, onMouseUp, onTouchStart, onTouchEnd, ref: element }] as const;
 };

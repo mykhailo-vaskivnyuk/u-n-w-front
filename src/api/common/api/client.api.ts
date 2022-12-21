@@ -8,7 +8,7 @@ export const getApi = (
   fetch: <T>(pathname: string, options?: Record<string, any>) => Promise<T>
 ) => ({
   'account': {
-    'confirm': (options: P.IConfirmParams) =>
+    'confirm': (options: P.ITokenParams) =>
       fetch<P.IUserResponse>('/account/confirm', options),
 
     'login': (options: P.ILoginParams) =>
@@ -21,7 +21,7 @@ export const getApi = (
 
     'remove': () => fetch<boolean>('/account/remove'),
 
-    'restore': (options: P.IConfirmParams) =>
+    'restore': (options: P.ITokenParams) =>
       fetch<P.IUserResponse>('/account/restore', options),
 
     'signup': (options: P.ISignupParams) =>
@@ -42,6 +42,9 @@ export const getApi = (
   },
   'net': {
     'comeout': () => fetch<boolean>('/net/comeout'),
+
+    'connectByToken': (options: P.ITokenParams) =>
+      fetch<Q.TNetConnectByTokenResponse>('/net/connectByToken', options),
 
     'create': (options: P.INetCreateParams) =>
       fetch<P.INetResponse>('/net/create', options),

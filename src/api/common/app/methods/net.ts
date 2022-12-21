@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 /* eslint-disable import/no-cycle */
-import { INetCreateParams } from '../../api/types/net.types';
+import { INetCreateParams, ITokenParams } from '../../api/types/types';
 import { INITIAL_NETS, IClientAppThis } from '../types';
 import { AppStatus } from '../../constants';
 
@@ -121,4 +121,18 @@ export const getNetMethods = (parent: IClientAppThis) => ({
       .reverse();
     parent.setNets(nets);
   },
+
+  async connectByInvite(args: ITokenParams) {
+    parent.setStatus(AppStatus.LOADING);
+    try {
+      const result = await parent.api.net.connectByToken(args);
+      const { error } = result || {};
+      if (!error) await this.getAllNets();
+      parent.setStatus(AppStatus.READY);
+      return result;
+    } catch (e: any) {
+      parent.setError(e);
+      throw e;
+    }
+  }
 });

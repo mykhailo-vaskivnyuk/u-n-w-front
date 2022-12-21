@@ -135,7 +135,7 @@ export class ClientApp extends EventEmitter {
   protected setMemberPosition(memberPosition?: number) {
     this.memberPosition = memberPosition;
   }
-  
+
   protected setTree(tree: INetViewResponse) {
     if (this.tree === tree) return;
     this.tree = tree;
