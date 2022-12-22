@@ -27,8 +27,8 @@ export const NetCircle: FC = () => {
           >
             SWITCH to CIRCLE
           </IconButton> */}
-      <div className={viewTitle}>CIRCLE MODE</div>
       {circleJsx}
+      <div className={viewTitle}>CIRCLE MODE</div>
     </div>
   );
 };

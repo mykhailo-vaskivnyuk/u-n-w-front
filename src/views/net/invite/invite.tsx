@@ -17,8 +17,8 @@ export const NetInvite: FC = () => {
 
   const navigate = useNavigate();
   const navigateBack = () => navigate(-1);
-  const navigateToNet = (netId: number) =>
-    navigate(makeDynamicPathname(netPath, netId), { replace: true, state: 'circle' });
+  const navigateToNet = (netId: number, state = 'tree') =>
+    navigate(makeDynamicPathname(netPath, netId), { replace: true, state });
 
   useEffect(() => {
     if (!token) {
@@ -33,9 +33,12 @@ export const NetInvite: FC = () => {
           return navigateBack();
         }
         const { net_id: netId, error } = result;
-        if (error) showFailed();
-        else showSuccess();
-        navigateToNet(netId);
+        if (error) {
+          showFailed();
+          return navigateToNet(netId);
+        }
+        showSuccess();
+        navigateToNet(netId, 'circle');
       })
       .catch(navigateBack);
     // eslint-disable-next-line react-hooks/exhaustive-deps
