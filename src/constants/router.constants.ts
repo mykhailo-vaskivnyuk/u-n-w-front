@@ -34,6 +34,7 @@ export const RelativeRoutesMap = {
         NODE_ID: {
           INDEX: ':node_id',
           INVITE: 'invite',
+          CONNECTED: 'connected',
         },
       },
     },

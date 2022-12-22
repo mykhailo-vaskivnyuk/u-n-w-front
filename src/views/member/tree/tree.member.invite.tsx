@@ -12,7 +12,7 @@ const memberPath = RoutesMap.NET.NET_ID.TREE.NODE_ID.INDEX;
 
 export const TreeMemberInvite: FC = () => {
   const { net } = app.getState();
-  const { token, node_id: nodeId, name } = useMember();
+  const { node_id: nodeId, memberStatus } = useMember();
 
   const navigate = useNavigate();
   const navigateToMember = useCallback(
@@ -21,11 +21,13 @@ export const TreeMemberInvite: FC = () => {
   );
 
   useEffect(() => {
-    if (name) navigateToMember();
+    if (memberStatus === 'ACTIVE' || memberStatus === 'CONNECTED') {
+      navigateToMember();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nodeId]);
 
-  return token ? (
+  return memberStatus === 'INVITING' ? (
     <FormContainer title="Cancel Invite">
       <MemberCancelInviteForm />
     </FormContainer>

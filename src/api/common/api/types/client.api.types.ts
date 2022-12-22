@@ -1,5 +1,11 @@
-export type TMemberInviteCreateResponse = string | null;
 export type TMemberInviteCancel = {
+  node_id: number;
+};
+export type TMemberInviteConfirm = {
+  node_id: number;
+};
+export type TMemberInviteCreateResponse = string | null;
+export type TMemberInviteRefuse = {
   node_id: number;
 };
 export type TNetConnectByTokenResponse = null | {

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
+import { NetViewKeys } from '@api/api/types/types';
 import { RoutesMap } from '@constants/router.constants';
 import { useMatchParam } from '@utils/utils';
 import { app } from '@api/app/client.app';
-import { NetViewKeys } from '@api/api/types/net.types';
 
 const path = {
   circle: RoutesMap.NET.NET_ID.CIRCLE.NODE_ID.INDEX,

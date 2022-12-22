@@ -1,6 +1,6 @@
 import React, { FC, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { NetViewKeys } from '@api/api/types/net.types';
+import { NetViewKeys } from '@api/api/types/types';
 import { RoutesMap } from '@constants/router.constants';
 import { makeDynamicPathname } from '@utils/utils';
 import { app } from '@api/app/client.app';

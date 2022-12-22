@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { useLocation } from 'react-router-dom';
-import { NetViewKeys, NET_VIEW_MAP } from '@api/api/types/net.types';
+import { NetViewKeys, NET_VIEW_MAP } from '@api/api/types/types';
 import { vars } from '@styles/vars';
 import { useSwap } from '@hooks/useSwap';
 import { NetCircle } from '../net.view/net.circle';

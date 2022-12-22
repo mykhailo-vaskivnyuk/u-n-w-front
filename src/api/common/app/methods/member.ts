@@ -1,7 +1,6 @@
 /* eslint-disable max-lines */
 /* eslint-disable import/no-cycle */
-import { NetViewKeys } from '../../api/types/net.types';
-import { IMemberInviteParams } from '../../api/types/member.types';
+import { NetViewKeys, IMemberInviteParams } from '../../api/types/types';
 import { TMemberInviteCancel } from '../../api/types/client.api.types';
 import { IClientAppThis } from '../types';
 import { AppStatus } from '../../constants';

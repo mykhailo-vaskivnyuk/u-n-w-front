@@ -1,11 +1,11 @@
 import { useMatch } from 'react-router-dom';
-import { IUserResponse } from '@api/api/types/account.types';
 import {
+  IUserResponse,
   INetResponse,
   INetsResponse,
   NetViewKeys,
   IMemberResponse,
-} from '@api/api/types/net.types';
+} from '@api/api/types/types';
 import { IMenuItem } from '@components/menu/types';
 import { UserStateKeys, USER_STATE_MAP } from '@api/constants';
 import { RoutesMap } from '@constants/router.constants';

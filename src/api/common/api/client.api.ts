@@ -32,11 +32,17 @@ export const getApi = (
 
   'member': {
     'invite': {
+      'cancel': (options: Q.TMemberInviteCancel) =>
+        fetch<boolean>('/member/invite/cancel', options),
+
+      'confirm': (options: Q.TMemberInviteConfirm) =>
+        fetch<boolean>('/member/invite/confirm', options),
+
       'create': (options: P.IMemberInviteParams) =>
         fetch<Q.TMemberInviteCreateResponse>('/member/invite/create', options),
 
-      'cancel': (options: Q.TMemberInviteCancel) =>
-        fetch<boolean>('/member/invite/cancel', options),
+      'refuse': (options: Q.TMemberInviteRefuse) =>
+        fetch<boolean>('/member/invite/refuse', options),
 
     },
   },
