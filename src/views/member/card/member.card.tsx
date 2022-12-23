@@ -1,7 +1,7 @@
 import React, { FC, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { NetViewKeys } from '@api/api/types/types';
-import { getMemberName, getMemberPosition, makeDynamicPathname } from '@utils/utils';
+import { getMemberPosition, makeDynamicPathname } from '@utils/utils';
 import { RoutesMap } from '@constants/router.constants';
 import { app } from '@api/app/client.app';
 import { useStyles } from './member.card.styles';
@@ -32,7 +32,7 @@ export const MemberCard: FC<MemberCardProps> = (props) => {
 
   if (!member) return <div className={root} aria-hidden="true" />;
 
-  const memberName = getMemberName(netView, member, memberPosition);
+  const memberName = app.member.getName(netView, member, memberPosition);
   const status = token ? 'inviting' : (name && '') || 'empty';
 
   return (

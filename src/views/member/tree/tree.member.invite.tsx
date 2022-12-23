@@ -1,18 +1,17 @@
 import React, { FC, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { RoutesMap } from '@constants/router.constants';
-import { useMember } from '@hooks/useMember';
 import { makeDynamicPathname } from '@utils/utils';
 import { app } from '@api/app/client.app';
-import { MemberInviteForm } from '@components/forms/member/invite/invite';
-import { MemberCancelInviteForm } from '@components/forms/member/invite/cancel.invite';
+import { MemberInviteCreateForm } from '@components/forms/member/invite/invite.create';
+import { MemberInviteCancelForm } from '@components/forms/member/invite/invite.cancel';
 import { FormContainer } from '@components/forms/form.container/form.container';
 
 const memberPath = RoutesMap.NET.NET_ID.TREE.NODE_ID.INDEX;
 
 export const TreeMemberInvite: FC = () => {
   const { net } = app.getState();
-  const { node_id: nodeId, memberStatus } = useMember();
+  const { node_id: nodeId, memberStatus } = app.getState().memberData!;
 
   const navigate = useNavigate();
   const navigateToMember = useCallback(
@@ -29,11 +28,11 @@ export const TreeMemberInvite: FC = () => {
 
   return memberStatus === 'INVITING' ? (
     <FormContainer title="Cancel Invite">
-      <MemberCancelInviteForm />
+      <MemberInviteCancelForm />
     </FormContainer>
   ) : (
     <FormContainer title="Invite Member">
-      <MemberInviteForm />
+      <MemberInviteCreateForm />
     </FormContainer>
   );
 };

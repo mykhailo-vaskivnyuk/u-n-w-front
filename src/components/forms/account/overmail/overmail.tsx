@@ -11,6 +11,16 @@ import { Button } from '@components/buttons/button/button';
 import { OvermailField, OvermailFormValues, OvermailSchema } from './overmail.schema';
 import { useStyles } from './overmail.styles';
 
+const FormikProvider = Formik<OvermailFormValues>;
+const showSuccess = (values: OvermailFormValues) => {
+  const message = format(MessagesMap.RESTORE_LINK_SENT, values[OvermailField.EMAIL]);
+  modalService.showMessage(message);
+};
+const showFail = (values: OvermailFormValues) => {
+  const message = format(MessagesMap.RESTORE_LINK_NOT_SENT, values[OvermailField.EMAIL]);
+  modalService.showError(message);
+};
+
 const Overmail: FC = () => {
   const { buttons } = useStyles();
   const { submitForm } = useFormikContext<OvermailFormValues>();
@@ -36,23 +46,12 @@ const Overmail: FC = () => {
   );
 };
 
-const FormikProvider = Formik<OvermailFormValues>;
-
 export const OvermailForm = () => {
   const navigate = useNavigate();
-
   const navigateToIndex = useCallback(
     () => navigate(RoutesMap.ROOT, { replace: true }),
     [navigate],
   );
-  const showSuccess = useCallback((values: OvermailFormValues) => {
-    const message = format(MessagesMap.RESTORE_LINK_SENT, values[OvermailField.EMAIL]);
-    modalService.showMessage(message);
-  }, []);
-  const showFailed = useCallback((values: OvermailFormValues) => {
-    const message = format(MessagesMap.RESTORE_LINK_NOT_SENT, values[OvermailField.EMAIL]);
-    modalService.showError(message);
-  }, []);
 
   return (
     <FormikProvider
@@ -60,7 +59,7 @@ export const OvermailForm = () => {
       validationSchema={OvermailSchema}
       onSubmit={(values) => {
         app.account.overmail(values).then((success) => {
-          if (!success) return showFailed(values);
+          if (!success) return showFail(values);
           showSuccess(values);
           navigateToIndex();
         });

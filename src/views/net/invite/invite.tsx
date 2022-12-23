@@ -9,7 +9,7 @@ import { app } from '@api/app/client.app';
 const invitePath = RoutesMap.NET.INVITE;
 const netPath = RoutesMap.NET.NET_ID.INDEX;
 const showSuccess = () => modalService.showMessage(MessagesMap.NET_CONNECTED);
-const showFailed = () => modalService.showError(MessagesMap.NET_CONNECT_FAILED);
+const showFail = () => modalService.showError(MessagesMap.NET_CONNECT_FAILED);
 const showBadLink = () => modalService.showError(MessagesMap.BAD_LINK);
 
 export const NetInvite: FC = () => {
@@ -34,7 +34,7 @@ export const NetInvite: FC = () => {
         }
         const { net_id: netId, error } = result;
         if (error) {
-          showFailed();
+          showFail();
           return navigateToNet(netId);
         }
         showSuccess();

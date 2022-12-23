@@ -9,29 +9,28 @@ import { app } from '@api/app/client.app';
 
 const { NET_ID } = RoutesMap.NET;
 const { NET_LEAVE, NET_LEAVE_FAILED } = MessagesMap;
+const showSuccess = (netName: string) => modalService.showMessage(format(NET_LEAVE, netName));
+const showFail = () => modalService.showError(NET_LEAVE_FAILED);
 
 export const NetLeave: FC = () => {
   const [net] = useNet();
-  const { parent_net_id: parentNetId } = net || {};
+  const { parent_net_id: parentNetId, name } = net!;
 
   const navigate = useNavigate();
   const navigateToIndex = () => navigate(RoutesMap.ROOT, { replace: true });
+  const navigateBack = () => navigate(-1);
   const navigateToNet = (netId: number) =>
     navigate(makeDynamicPathname(NET_ID.INDEX, netId), { replace: true });
-  const navigateBack = () => navigate(-1);
-
-  const showSuccess = () => modalService.showMessage(format(NET_LEAVE, net?.name || ''));
-  const showFailed = () => modalService.showError(NET_LEAVE_FAILED);
 
   useEffect(() => {
     app.netMethods
       .leave()
       .then((success) => {
         if (!success) {
-          showFailed();
+          showFail();
           return navigateBack();
         }
-        showSuccess();
+        showSuccess(name);
         parentNetId ? navigateToNet(parentNetId) : navigateToIndex();
       })
       .catch(navigateBack);

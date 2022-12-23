@@ -11,6 +11,10 @@ import { Button } from '@components/buttons/button/button';
 import { NetCreateField, NetCreateFormValues, NetCreateSchema } from './create.schema';
 import { useStyles } from './create.styles';
 
+const FormikProvider = Formik<NetCreateFormValues>;
+const showSuccess = () => modalService.showMessage(MessagesMap.NET_CREATED);
+const showFail = () => modalService.showError(MessagesMap.NET_CREATE_FAILED);
+
 const NetCreate: FC = () => {
   const { buttons } = useStyles();
   const { submitForm } = useFormikContext<NetCreateFormValues>();
@@ -32,17 +36,12 @@ const NetCreate: FC = () => {
   );
 };
 
-const FormikProvider = Formik<NetCreateFormValues>;
-
 export const NetCreateForm = () => {
   const navigate = useNavigate();
-
   const navigateToNet = useCallback(
     (netId: number) => navigate(makeDynamicPathname(RoutesMap.NET.NET_ID.INDEX, netId)),
     [navigate],
   );
-  const showSuccess = useCallback(() => modalService.showMessage(MessagesMap.NET_CREATED), []);
-  const showFailed = useCallback(() => modalService.showError(MessagesMap.NET_CREATE_FAILED), []);
 
   return (
     <FormikProvider
@@ -50,7 +49,7 @@ export const NetCreateForm = () => {
       validationSchema={NetCreateSchema}
       onSubmit={async (values) => {
         await app.netMethods.create(values).then((net) => {
-          if (!net) return showFailed();
+          if (!net) return showFail();
           showSuccess();
           navigateToNet(net.net_id);
         });

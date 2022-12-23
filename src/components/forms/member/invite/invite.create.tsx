@@ -2,7 +2,6 @@ import React, { FC, FormEvent, useCallback } from 'react';
 import { Formik, useFormikContext } from 'formik';
 import { RoutesMap } from '@constants/router.constants';
 import { MessagesMap } from '@constants/messages';
-import { useMember } from '@hooks/useMember';
 import { modalService } from '@services/modal.service';
 import { makeDynamicPathname } from '@utils/utils';
 import { app } from '@api/app/client.app';
@@ -12,8 +11,11 @@ import { MemberInviteField, MemberInviteFormValues, MemberInviteSchema } from '.
 import { useStyles } from './invite.styles';
 
 const pathToInvite = RoutesMap.NET.INVITE;
+const FormikProvider = Formik<MemberInviteFormValues>;
+const showSuccess = () => modalService.showMessage(MessagesMap.MEMBER_INVITE_CREATE);
+const showFail = () => modalService.showError(MessagesMap.MEMBER_INVITE_CREATE_FAILED);
 
-const MemberInvite: FC = () => {
+const MemberInviteCreate: FC = () => {
   const { buttons } = useStyles();
   const { submitForm } = useFormikContext<MemberInviteFormValues>();
 
@@ -37,20 +39,16 @@ const MemberInvite: FC = () => {
   );
 };
 
-const FormikProvider = Formik<MemberInviteFormValues>;
-const showSuccess = () => modalService.showMessage(MessagesMap.MEMBER_INVITE_CREATE);
-const showFailed = () => modalService.showError(MessagesMap.MEMBER_INVITE_CREATE_FAILED);
-
-export const MemberInviteForm = () => {
-  const { node_id: nodeId, member_name: memberName } = useMember();
+export const MemberInviteCreateForm = () => {
+  const { member_name: memberName } = app.getState().memberData!;
 
   return (
     <FormikProvider
-      initialValues={{ member_name: memberName, node_id: nodeId }}
+      initialValues={{ member_name: memberName }}
       validationSchema={MemberInviteSchema}
       onSubmit={(values) =>
         app.member.inviteCreate(values).then((token) => {
-          if (!token) return showFailed();
+          if (!token) return showFail();
           const { origin } = window.location;
           const path = makeDynamicPathname(pathToInvite, token);
           const url = `${origin}/#${path}`;
@@ -59,7 +57,7 @@ export const MemberInviteForm = () => {
         })
       }
     >
-      <MemberInvite />
+      <MemberInviteCreate />
     </FormikProvider>
   );
 };

@@ -11,6 +11,10 @@ import { Button } from '@components/buttons/button/button';
 import { AccountField, AccountFormValues } from './account.schema';
 import { useStyles } from './account.styles';
 
+const FormikProvider = Formik<AccountFormValues>;
+const showSuccess = () => modalService.showMessage(MessagesMap.ACCOUNT_DELETED);
+const showFail = () => modalService.showError(MessagesMap.ACCOUNT_NOT_DELETED);
+
 const Account: FC = () => {
   const { buttons } = useStyles();
   const { submitForm } = useFormikContext<AccountFormValues>();
@@ -43,17 +47,12 @@ const Account: FC = () => {
   );
 };
 
-const FormikProvider = Formik<AccountFormValues>;
-
 export const AccountForm = () => {
   const navigate = useNavigate();
-
   const navigateToIndex = useCallback(
     () => navigate(RoutesMap.ROOT, { replace: true }),
     [navigate],
   );
-  const showSuccess = useCallback(() => modalService.showMessage(MessagesMap.ACCOUNT_DELETED), []);
-  const showFailed = useCallback(() => modalService.showError(MessagesMap.ACCOUNT_NOT_DELETED), []);
 
   const user = useUser();
 
@@ -74,7 +73,7 @@ export const AccountForm = () => {
         app.account
           .logoutOrRemove('remove')
           .then((success) => {
-            if (!success) return showFailed();
+            if (!success) return showFail();
             showSuccess();
             navigateToIndex();
           })

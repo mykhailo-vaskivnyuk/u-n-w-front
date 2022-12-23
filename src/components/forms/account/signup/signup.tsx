@@ -11,6 +11,13 @@ import { Button } from '@components/buttons/button/button';
 import { SignupField, SignupFormValues, SignupSchema } from './signup.schema';
 import { useStyles } from './signup.styles';
 
+const FormikProvider = Formik<SignupFormValues>;
+const showSuccess = (values: SignupFormValues) => {
+  const message = format(MessagesMap.CONFIRM_LINK_SENT, values[SignupField.EMAIL]);
+  modalService.showMessage(message);
+};
+const showFail = () => modalService.showError(MessagesMap.SIGNUP_FAILED);
+
 const Signup: FC = () => {
   const { buttons } = useStyles();
   const { submitForm } = useFormikContext<SignupFormValues>();
@@ -36,20 +43,12 @@ const Signup: FC = () => {
   );
 };
 
-const FormikProvider = Formik<SignupFormValues>;
-
 export const SignupForm = () => {
   const navigate = useNavigate();
-
   const navigateToAccount = useCallback(
     () => navigate(RoutesMap.ACCOUNT.INDEX, { replace: true }),
     [navigate],
   );
-  const showSuccess = useCallback((values: SignupFormValues) => {
-    const message = format(MessagesMap.CONFIRM_LINK_SENT, values[SignupField.EMAIL]);
-    modalService.showMessage(message);
-  }, []);
-  const showFailed = useCallback(() => modalService.showError(MessagesMap.SIGNUP_FAILED), []);
 
   return (
     <FormikProvider
@@ -59,7 +58,7 @@ export const SignupForm = () => {
         await app.account
           .loginOrSignup('signup', values)
           .then((user) => {
-            if (!user) return showFailed();
+            if (!user) return showFail();
             showSuccess(values);
             navigateToAccount();
           })

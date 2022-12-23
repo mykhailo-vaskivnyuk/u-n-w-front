@@ -26,6 +26,8 @@ export const MessagesMap = {
   MEMBER_INVITE_CREATE_FAILED: 'Не вдалося створити лінк-запрошення',
   MEMBER_INVITE_CANCEL: 'Запрошення скасовано',
   MEMBER_INVITE_CANCEL_FAILED: 'Не вдалося скасувати запрошення',
+  MEMBER_CONFIRMED: 'Запрошення підтверджено',
+  MEMBER_CONFIRM_FAILED: 'Не вдалося підтвердити запрошення',
   NET_CONNECTED: 'Ви успішно приєднались до мережі',
   NET_CONNECT_FAILED: 'Ви вже є учасником цієї мережі',
 };

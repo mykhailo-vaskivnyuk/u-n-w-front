@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
-import { useMember } from '@hooks/useMember';
+import { app } from '@api/app/client.app';
 import { useStyles } from './tree.member.title.styles';
 
 export const TreeMemberTitle: FC = () => {
   const { root, avatar } = useStyles();
-  const { member_name: memberName } = useMember();
+  const { member_name: memberName } = app.getState().memberData!;
 
   return (
     <div className={root}>

@@ -1,11 +1,5 @@
 import { useMatch } from 'react-router-dom';
-import {
-  IUserResponse,
-  INetResponse,
-  INetsResponse,
-  NetViewKeys,
-  IMemberResponse,
-} from '@api/api/types/types';
+import { IUserResponse, INetResponse, INetsResponse, NetViewKeys } from '@api/api/types/types';
 import { IMenuItem } from '@components/menu/types';
 import { UserStateKeys, USER_STATE_MAP } from '@api/constants';
 import { RoutesMap } from '@constants/router.constants';
@@ -62,16 +56,6 @@ export const useMatchParam = (paramName: string, path: string, end: boolean = tr
   const { params } = useMatch<typeof paramName, typeof path>({ path, end }) || {};
   const { [paramName]: strParamValue } = params || {};
   return Number(strParamValue) || strParamValue || '';
-};
-
-export const getMemberName = (
-  netView: NetViewKeys,
-  member: IMemberResponse,
-  memberPosition: number,
-) => {
-  const position = netView === 'tree' ? memberPosition + 1 : memberPosition && memberPosition + 1;
-  const { name, member_name: memberName } = member;
-  return name || memberName || `member ${position}`;
 };
 
 export const getMemberPosition = (netView: NetViewKeys, memberUiPosition: number) =>

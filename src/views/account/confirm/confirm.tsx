@@ -7,18 +7,19 @@ import { app } from '@api/app/client.app';
 import { modalService } from '@services/modal.service';
 
 const path = RoutesMap.ACCOUNT.CONFIRM;
+const showSuccess = () => modalService.showMessage(MessagesMap.CONFIRM_SUCCESS);
+const showFail = () => modalService.showError(MessagesMap.BAD_LINK);
 
 export const Confirm: FC = () => {
-  const navigate = useNavigate();
   const token = useMatchParam('token', path) as string;
+
+  const navigate = useNavigate();
   const navigateToIndex = () => navigate(RoutesMap.ROOT, { replace: true });
   const navigateToAccount = () => navigate(RoutesMap.ACCOUNT.INDEX, { replace: true });
-  const showSuccess = () => modalService.showMessage(MessagesMap.CONFIRM_SUCCESS);
-  const showFailed = () => modalService.showError(MessagesMap.BAD_LINK);
 
   useEffect(() => {
     if (!token) {
-      showFailed();
+      showFail();
       return navigateToIndex();
     }
     app.account
@@ -28,7 +29,7 @@ export const Confirm: FC = () => {
           showSuccess();
           return navigateToAccount();
         }
-        showFailed();
+        showFail();
         navigateToIndex();
       })
       .catch(navigateToIndex);

@@ -11,14 +11,14 @@ const path = {
 
 export const useNetMember = (netView: NetViewKeys) => {
   const nodeId = useMatchParam('node_id', path[netView], false) as number;
-  const { [netView]: netViewData, memberPosition } = app.getState();
-  const member = netViewData[memberPosition!];
-  const [loading, setLoading] = useState(!member || member.node_id !== nodeId);
+  const { memberData } = app.getState();
+  const { node_id: curNodeId } = memberData || {};
+  const [loading, setLoading] = useState(curNodeId !== nodeId);
 
   useEffect(() => {
     if (!loading) return;
     app.member.find(netView, nodeId).finally(() => setLoading(false));
   }, [loading, netView, nodeId]);
 
-  return [loading, member];
+  return [loading, memberData];
 };
