@@ -3,15 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { RoutesMap } from '@constants/router.constants';
 import { makeDynamicPathname } from '@utils/utils';
 import { app } from '@api/app/client.app';
-import { MemberInviteCreateForm } from '@components/forms/member/invite/invite.create';
-import { MemberInviteCancelForm } from '@components/forms/member/invite/invite.cancel';
 import { FormContainer } from '@components/forms/form.container/form.container';
+import { MemberConfirmForm } from '@components/forms/member/confirm/confirm';
 
 const memberPath = RoutesMap.NET.NET_ID.TREE.NODE_ID.INDEX;
 
-export const TreeMemberInvite: FC = () => {
-  const { net } = app.getState();
-  const { node_id: nodeId, memberStatus } = app.getState().memberData!;
+export const TreeMemberConnected: FC = () => {
+  const { net, memberData } = app.getState();
+  const { node_id: nodeId, memberStatus } = memberData!;
 
   const navigate = useNavigate();
   const navigateToMember = useCallback(
@@ -20,19 +19,13 @@ export const TreeMemberInvite: FC = () => {
   );
 
   useEffect(() => {
-    if (memberStatus === 'ACTIVE' || memberStatus === 'CONNECTED') {
-      navigateToMember();
-    }
+    if (memberStatus !== 'CONNECTED') navigateToMember();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nodeId]);
 
-  return memberStatus === 'INVITED' ? (
-    <FormContainer title="Cancel Invite">
-      <MemberInviteCancelForm />
-    </FormContainer>
-  ) : (
-    <FormContainer title="Invite Member">
-      <MemberInviteCreateForm />
+  return (
+    <FormContainer title="Confirm or Refuse Invite">
+      <MemberConfirmForm />
     </FormContainer>
   );
 };

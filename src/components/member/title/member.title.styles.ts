@@ -3,19 +3,21 @@ import { createUseStyles } from 'react-jss';
 export const useStyles = createUseStyles(
   ({ palette, vars, mixins }) => ({
     root: {
+      height: 60,
       margin: `0 -${vars.gap.main} 0`,
       display: 'flex',
-      gap: vars.gap.S,
       alignItems: 'center',
+      gap: vars.gap.S,
       padding: vars.gap.S,
-      background: palette.add.main,
+      border: `1px solid ${palette.add.main}`,
       borderRadius: vars.gap.main,
-      color: palette.font.light,
+      background: palette.light.main,
+      color: palette.font.add,
       fontWeight: vars.fontWeight.semiBold,
     },
     avatar: {
       ...mixins.size(42),
-      background: palette.light.main,
+      border: `1px solid ${palette.add.main}`,
       borderRadius: 100,
     },
   }),

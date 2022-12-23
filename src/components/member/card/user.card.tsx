@@ -10,8 +10,8 @@ interface NetUserCardProps {
   netView: NetViewKeys;
 }
 
-export const NetUserCard: FC<NetUserCardProps> = (props) => {
-  const { root, avatar } = useStyles();
+export const UserCard: FC<NetUserCardProps> = (props) => {
+  const { root, avatar, name } = useStyles();
   const { net } = app.getState();
   const { netView } = props;
 
@@ -24,12 +24,10 @@ export const NetUserCard: FC<NetUserCardProps> = (props) => {
     [navigate, net, netView],
   );
 
-  // const title = token ? 'inviting' : name || 'empty';
-
   return (
     <div className={root} onClick={handleClick} aria-hidden="true">
       <div className={avatar} />
-      <div>current user</div>
+      <div className={name}>current user</div>
     </div>
   );
 };

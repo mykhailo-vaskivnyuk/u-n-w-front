@@ -41,7 +41,7 @@ export const useStyles = createUseStyles(
       marginTop: vars.gap.SS,
       borderRadius: vars.radius.SS,
       color: palette.font.light,
-      background: palette.bg.extraDark,
+      background: palette.dark.dark,
       letterSpacing: vars.letterGap.L,
       fontSize: vars.fontSize.S,
     },

@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { useTree } from '@hooks/useTree';
 import { useNetMember } from '@hooks/useNetMember';
 import { NotFound } from '@views/not.found/not.found';
-import { TreeMemberTitle } from '@components/member/tree.member.title';
+import { MemberTitle } from '@components/member/title/member.title';
 import { useStyles } from '../member.styles';
 
 export const TreeMemberIndex: FC = () => {
@@ -15,7 +15,7 @@ export const TreeMemberIndex: FC = () => {
 
   return (
     <div className={root} aria-hidden="true">
-      <TreeMemberTitle />
+      <MemberTitle />
       <div className={content}>
         <Outlet key={Math.random()} />
       </div>

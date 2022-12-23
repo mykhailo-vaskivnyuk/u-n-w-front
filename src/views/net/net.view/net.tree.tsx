@@ -1,24 +1,24 @@
 /* eslint-disable react/no-array-index-key */
 import React, { FC } from 'react';
-import { MemberCard } from '@views/member/card/member.card';
-import { NetUserCard } from '@views/member/card/net.user.card';
-import { useStyles } from '../net.id/net.id.styles';
+import { MemberCard } from '@components/member/card/member.card';
+import { UserCard } from '@components/member/card/user.card';
+import { useStyles } from './net.view.styles';
 
 export const NetTree: FC = () => {
-  const { netView: clsNetView, viewTitle } = useStyles();
+  const { root, viewTitle } = useStyles();
 
   const treeJsx = new Array(7)
     .fill('tree')
     .map((i, j) =>
       j === 0 ? (
-        <NetUserCard key={`tree-${j}`} netView="tree" />
+        <UserCard key={`tree-${j}`} netView="tree" />
       ) : (
         <MemberCard key={`tree-${j}`} netView="tree" memberUiPosition={j} />
       ),
     );
 
   return (
-    <div className={clsNetView}>
+    <div className={root}>
       {/* <IconButton
             icon={ICONS.arrowRight}
             iconPosition="left"
@@ -27,7 +27,7 @@ export const NetTree: FC = () => {
           >
             SWITCH to CIRCLE
           </IconButton> */}
-      <div className={viewTitle}>TREE MODE</div>
+      <div className={viewTitle}>TREE VIEW</div>
       {treeJsx}
     </div>
   );

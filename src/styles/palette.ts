@@ -51,7 +51,6 @@ const palette: Palette = {
     light: light(),
     main: bg(),
     dark: dark(),
-    extraDark: dark(125),
     first: first(),
     second: second(),
     add: add(),
@@ -60,6 +59,7 @@ const palette: Palette = {
   font: {
     first: first(),
     second: second(),
+    add: add(),
     light: light(),
     dark: dark(),
   },
@@ -70,6 +70,7 @@ const palette: Palette = {
 
   dark: {
     main: dark(),
+    dark: dark(125),
   },
 };
 

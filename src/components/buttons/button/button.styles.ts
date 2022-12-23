@@ -17,6 +17,9 @@ export const useStyles = createUseStyles(
       '&.secondary': {
         background: palette.bg.second,
       },
+      '&.refuse': {
+        background: palette.bg.dark,
+      },
       '&.text': {
         ...mixins.size('auto'),
         display: 'block',

@@ -1,24 +1,24 @@
 /* eslint-disable react/no-array-index-key */
 import React, { FC } from 'react';
-import { MemberCard } from '@views/member/card/member.card';
-import { NetUserCard } from '@views/member/card/net.user.card';
-import { useStyles } from '../net.id/net.id.styles';
+import { MemberCard } from '@components/member/card/member.card';
+import { UserCard } from '@components/member/card/user.card';
+import { useStyles } from './net.view.styles';
 
 export const NetCircle: FC = () => {
-  const { netView: clsNetView, viewTitle } = useStyles();
+  const { root, viewTitle } = useStyles();
 
   const circleJsx = new Array(7)
     .fill('circle')
     .map((i, j) =>
       j === 1 ? (
-        <NetUserCard key={`circle-${j}`} netView="circle" />
+        <UserCard key={`circle-${j}`} netView="circle" />
       ) : (
         <MemberCard key={`circle-${j}`} netView="circle" memberUiPosition={j} />
       ),
     );
 
   return (
-    <div className={clsNetView}>
+    <div className={root}>
       {/* <IconButton
             icon={ICONS.arrowRight}
             iconPosition="left"
@@ -28,7 +28,7 @@ export const NetCircle: FC = () => {
             SWITCH to CIRCLE
           </IconButton> */}
       {circleJsx}
-      <div className={viewTitle}>CIRCLE MODE</div>
+      <div className={viewTitle}>CIRCLE VIEW</div>
     </div>
   );
 };

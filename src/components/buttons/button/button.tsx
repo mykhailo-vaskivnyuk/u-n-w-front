@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { useStyles } from './button.styles';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  btnType: 'primary' | 'secondary' | 'text';
+  btnType: 'primary' | 'secondary' | 'refuse' | 'text';
   href?: string;
 }
 

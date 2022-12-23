@@ -1,4 +1,6 @@
-import { ITableUsers, ITableUsersNodesInvites } from '../../../local/imports';
+import {
+  ITableUsers, ITableUsersNodesInvites, getEnumFromMap
+} from '../../../local/imports';
 import { DbRecordOrNull } from '../../types';
 
 export type IMemberInviteParams = {
@@ -15,8 +17,10 @@ export type IMemberResponse =
 export const MEMBER_STATUS_MAP = {
   ACTIVE: 'active',
   CONNECTED: 'connected',
-  INVITING: 'inviting',
+  INVITED: 'invited',
   EMPTY: 'empty',
+  UNAVAILABLE: 'unavailable',
 };
 
 export type MemberStatusKeys = keyof typeof MEMBER_STATUS_MAP;
+export const MEMBER_STATUS_ENUM = getEnumFromMap(MEMBER_STATUS_MAP);

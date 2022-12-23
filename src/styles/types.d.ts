@@ -117,6 +117,8 @@ export type OpacityAVarsType = {
 export type LetterGapType = {
   M: number;
   L: number;
+  XL: number;
+  XXL: number;
 };
 
 /* ===================== Breakpoints declare ========================== */
@@ -171,7 +173,6 @@ export interface BackgroundColor {
   light: string;
   main: string;
   dark: string;
-  extraDark: string;
   disabled?: string;
   first: string;
   second: string;
@@ -183,16 +184,17 @@ export interface FontColor {
   dark: string;
   first: string;
   second: string;
+  add: string;
 }
 
 export interface Palette {
   first: PaletteColor;
   second: PaletteColor;
   add: PaletteColor;
-  bg: BackgroundColor;
-  font: FontColor;
   light: PaletteColor;
   dark: PaletteColor;
+  bg: BackgroundColor;
+  font: FontColor;
 }
 
 /* ===================== Theme declare ========================== */

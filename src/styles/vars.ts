@@ -96,6 +96,8 @@ const vars: Vars = {
   letterGap: {
     M: 0.3,
     L: 0.5,
+    XL: 1,
+    XXL: 1.2,
   },
 };
 
