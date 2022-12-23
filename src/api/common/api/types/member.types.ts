@@ -8,6 +8,10 @@ export type IMemberInviteParams = {
   member_name: string;
 }
 
+export type IMemberConfirmParams = {
+  node_id: number;
+}
+
 export type IMemberResponse =
   Pick<ITableUsers, 'name'> &
   DbRecordOrNull<Omit<ITableUsersNodesInvites, 'node_id'>> & {
