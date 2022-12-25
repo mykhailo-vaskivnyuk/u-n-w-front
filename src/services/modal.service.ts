@@ -15,13 +15,16 @@ class ModalService {
 
   private closeCallback: TCloseCallback = () => {};
 
+  constructor() {
+    this.closeModal = this.closeModal.bind(this);
+  }
+
   setCallback(callback: TCallback) {
     this.callback = callback;
   }
 
   setCloseCallback(callback: TCloseCallback) {
     this.closeCallback = callback;
-    this.closeModal = this.closeModal.bind(this);
   }
 
   openModal(data: ModalContentPropsMap[EModalContent.general]) {

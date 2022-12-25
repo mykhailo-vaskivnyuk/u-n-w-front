@@ -11,8 +11,8 @@ export const NetMenu: FC = () => {
   const items = useNetMenuItems() || [];
 
   const itemsJsx = items.map((item) => (
-    <li>
-      <IconButton key={item.href} className={button} {...item} />
+    <li key={item.href}>
+      <IconButton className={button} {...item} />
     </li>
   ));
 
