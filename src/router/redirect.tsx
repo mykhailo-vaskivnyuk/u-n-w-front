@@ -1,41 +1,59 @@
 import { FC, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { AppStatus } from '@api/constants';
 import { IS_DEV, REGEXP_END_ON_SLASH } from '@constants/constants';
 import { RoutesMap } from '@constants/router.constants';
+import { MessagesMap } from '@constants/messages';
+import { useNavigateTo } from 'contexts/navigate/navigate';
+import { useMatchParam } from '@utils/utils';
 import { useAppStatus } from '@hooks/useAppStatus';
+import { modalService } from '@services/modal.service';
 import { app } from '@api/app/client.app';
 
+const { INDEX: netPath } = RoutesMap.NET.NET_ID;
+const showFailed = () => modalService.showError(MessagesMap.NET_COMEOUT_FAILED);
+
 export const Redirect: FC = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigateTo();
   const { pathname } = useLocation();
   const status = useAppStatus();
+  const isNet = useMatchParam('net_id', netPath, false);
 
   useEffect(() => {
-    const { user, net } = app.getState();
     if (status !== AppStatus.READY) return;
     if (pathname !== RoutesMap.ROOT && REGEXP_END_ON_SLASH.test(pathname)) {
-      return navigate(pathname.replace(REGEXP_END_ON_SLASH, ''));
+      return navigate.to(pathname.replace(REGEXP_END_ON_SLASH, ''));
     }
+    const { user, net } = app.getState();
+    if (!isNet && net)
+      app.netMethods
+        .comeout()
+        .then((success) => {
+          if (success) return;
+          showFailed();
+          navigate.back();
+        })
+        .catch(() => {
+          showFailed();
+          navigate.back();
+        });
     switch (pathname) {
       case RoutesMap.ROOT:
       case RoutesMap.ACCOUNT.INDEX:
-        if (!user) navigate(RoutesMap.ACCOUNT.LOGIN);
-        if (net) app.netMethods.comeout();
+        if (!user) navigate.toLogin();
         break;
       case RoutesMap.ACCOUNT.SIGNUP:
       case RoutesMap.ACCOUNT.LOGIN:
       case RoutesMap.ACCOUNT.OVERMAIL:
-        if (user) navigate(RoutesMap.ROOT);
+        if (user) navigate.toIndex();
         break;
       case RoutesMap.PALETTE:
       case RoutesMap.MAIL:
-        !IS_DEV && navigate(RoutesMap.ROOT);
-        if (net) app.netMethods.comeout();
+        !IS_DEV && navigate.toIndex();
         break;
       default:
     }
-  }, [navigate, pathname, status]);
+  }, [isNet, navigate, pathname, status]);
 
   return null;
 };

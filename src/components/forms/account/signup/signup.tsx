@@ -1,11 +1,11 @@
-import React, { FC, FormEvent, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { FC, FormEvent } from 'react';
 import { Formik, useFormikContext } from 'formik';
 import { RoutesMap } from '@constants/router.constants';
 import { MessagesMap } from '@constants/messages';
-import { app } from '@api/app/client.app';
+import { useNavigateTo } from 'contexts/navigate/navigate';
 import { modalService } from '@services/modal.service';
 import { format } from '@utils/utils';
+import { app } from '@api/app/client.app';
 import { Input } from '@components/controls/input/input';
 import { Button } from '@components/buttons/button/button';
 import { SignupField, SignupFormValues, SignupSchema } from './signup.schema';
@@ -44,11 +44,7 @@ const Signup: FC = () => {
 };
 
 export const SignupForm = () => {
-  const navigate = useNavigate();
-  const navigateToAccount = useCallback(
-    () => navigate(RoutesMap.ACCOUNT.INDEX, { replace: true }),
-    [navigate],
-  );
+  const navigate = useNavigateTo();
 
   return (
     <FormikProvider
@@ -60,7 +56,7 @@ export const SignupForm = () => {
           .then((user) => {
             if (!user) return showFail();
             showSuccess(values);
-            navigateToAccount();
+            navigate.toAccount(true);
           })
           .catch(() => {});
       }}

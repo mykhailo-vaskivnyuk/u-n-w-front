@@ -15,12 +15,12 @@ export const RelativeRoutesMap = {
   NET: {
     INDEX: 'net',
     CREATE: 'create',
-    COMEOUT: 'comeout',
-    LEAVE: 'leave',
+    // COMEOUT: 'comeout',
     INVITE: 'invite/:token',
     NET_ID: {
       INDEX: ':net_id',
       CREATE: 'create',
+      LEAVE: 'leave',
       CIRCLE: {
         INDEX: 'circle',
         USER: 'user',

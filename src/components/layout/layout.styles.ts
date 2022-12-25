@@ -19,19 +19,6 @@ export const useStyles = createUseStyles(
         height: 'calc(100% + 52px)',
       },
     },
-    netMenu: {
-      transform: 'translateY(-44px)',
-      transition: `all ${vars.transition.normal} ease-in`,
-      display: 'flex',
-      justifyContent: 'end',
-      alignItems: 'center',
-      border: `2px solid ${palette.first.main}`,
-      borderRadius: `0 0 ${vars.radius.main} ${vars.radius.main} `,
-      padding: `${vars.gap.S} calc(${vars.gap.main} - 2px)`,
-      '&.opened': {
-        transform: 'translateY(0)',
-      },
-    },
   }),
   { name: 'Layout' },
 );

@@ -34,8 +34,8 @@ export const getNetMenuItems = (
   filteredMenuItems = !netId
     ? filteredMenuItems
     : filteredMenuItems.map((item) => {
-        const pathname = item.pathname.replace(':net_id', netId);
-        return { ...item, pathname };
+        const href = item.href.replace(':net_id', netId);
+        return { ...item, href };
       });
   return filteredMenuItems.length ? filteredMenuItems : undefined;
 };
@@ -44,7 +44,7 @@ export const createNetMenuItems = (nets: INetsResponse, user: IUserResponse, ico
   const netMenuItems = nets.map(
     ({ net_id, name }): IMenuItem => ({
       label: name,
-      pathname: makeDynamicPathname(NET_ID.INDEX, net_id),
+      href: makeDynamicPathname(NET_ID.INDEX, net_id),
       icon: icon || ICONS.home,
       allowForUser: 'LOGGEDIN',
     }),
@@ -52,10 +52,15 @@ export const createNetMenuItems = (nets: INetsResponse, user: IUserResponse, ico
   return getNetMenuItems(netMenuItems, user);
 };
 
-export const useMatchParam = (paramName: string, path: string, end: boolean = true) => {
+export const useMatchParam = (
+  paramName: string,
+  path: string,
+  end: boolean = true,
+  isNumberParam: boolean = true,
+) => {
   const { params } = useMatch<typeof paramName, typeof path>({ path, end }) || {};
   const { [paramName]: strParamValue } = params || {};
-  return Number(strParamValue) || strParamValue || '';
+  return isNumberParam ? Number(strParamValue) : strParamValue || '';
 };
 
 export const getMemberPosition = (netView: NetViewKeys, memberUiPosition: number) =>

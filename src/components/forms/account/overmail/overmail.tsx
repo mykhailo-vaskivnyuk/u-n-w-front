@@ -1,11 +1,11 @@
-import React, { FC, FormEvent, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { FC, FormEvent } from 'react';
 import { Formik, useFormikContext } from 'formik';
 import { RoutesMap } from '@constants/router.constants';
 import { MessagesMap } from '@constants/messages';
-import { app } from '@api/app/client.app';
+import { useNavigateTo } from 'contexts/navigate/navigate';
 import { modalService } from '@services/modal.service';
 import { format } from '@utils/utils';
+import { app } from '@api/app/client.app';
 import { Input } from '@components/controls/input/input';
 import { Button } from '@components/buttons/button/button';
 import { OvermailField, OvermailFormValues, OvermailSchema } from './overmail.schema';
@@ -47,11 +47,7 @@ const Overmail: FC = () => {
 };
 
 export const OvermailForm = () => {
-  const navigate = useNavigate();
-  const navigateToIndex = useCallback(
-    () => navigate(RoutesMap.ROOT, { replace: true }),
-    [navigate],
-  );
+  const navigate = useNavigateTo();
 
   return (
     <FormikProvider
@@ -61,7 +57,7 @@ export const OvermailForm = () => {
         app.account.overmail(values).then((success) => {
           if (!success) return showFail(values);
           showSuccess(values);
-          navigateToIndex();
+          navigate.toIndex(true);
         });
       }}
     >

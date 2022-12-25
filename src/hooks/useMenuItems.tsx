@@ -24,7 +24,7 @@ export const useMenuItems = () => {
     const { parentNets, siblingNets, childNets } = nets;
     const parentItems = createNetMenuItems(parentNets, user, ICONS.arrowUp);
     const siblingItems = createNetMenuItems(siblingNets, user, ICONS.arrowRight);
-    const childItems = createNetMenuItems(childNets, user, ICONS.arrowDown);
+    const childItems = createNetMenuItems(childNets, user, ICONS.arrowRight);
     return { parentItems, siblingItems, childItems, items };
   }, [net, nets, user]);
 

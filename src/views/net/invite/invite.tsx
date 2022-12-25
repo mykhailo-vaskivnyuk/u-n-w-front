@@ -1,46 +1,42 @@
 import { FC, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { RoutesMap } from '@constants/router.constants';
 import { MessagesMap } from '@constants/messages';
-import { makeDynamicPathname, useMatchParam } from '@utils/utils';
+import { useNavigateTo } from 'contexts/navigate/navigate';
+import { useMatchParam } from '@utils/utils';
 import { modalService } from '@services/modal.service';
 import { app } from '@api/app/client.app';
 
 const invitePath = RoutesMap.NET.INVITE;
-const netPath = RoutesMap.NET.NET_ID.INDEX;
 const showSuccess = () => modalService.showMessage(MessagesMap.NET_CONNECTED);
 const showFail = () => modalService.showError(MessagesMap.NET_CONNECT_FAILED);
 const showBadLink = () => modalService.showError(MessagesMap.BAD_LINK);
 
 export const NetInvite: FC = () => {
-  const token = useMatchParam('token', invitePath) as string;
-
-  const navigate = useNavigate();
-  const navigateBack = () => navigate(-1);
-  const navigateToNet = (netId: number, state = 'tree') =>
-    navigate(makeDynamicPathname(netPath, netId), { replace: true, state });
+  const navigate = useNavigateTo();
+  const token = useMatchParam('token', invitePath, true, false) as string;
 
   useEffect(() => {
     if (!token) {
       showBadLink();
-      return navigateBack();
+      return navigate.back();
     }
     app.netMethods
       .connectByInvite({ token })
       .then((result) => {
         if (!result) {
           showBadLink();
-          return navigateBack();
+          return navigate.back();
         }
-        const { net_id: netId, error } = result;
+        const { error } = result;
         if (error) {
           showFail();
-          return navigateToNet(netId);
+          navigate.toNet(result).id(true);
+        } else {
+          showSuccess();
+          navigate.toNet(result).id(true, 'circle');
         }
-        showSuccess();
-        navigateToNet(netId, 'circle');
       })
-      .catch(navigateBack);
+      .catch(navigate.back);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

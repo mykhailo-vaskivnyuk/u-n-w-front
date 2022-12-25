@@ -2,7 +2,7 @@ import React, { FC, useCallback, useEffect, useState } from 'react';
 import { modalService } from '@services/modal.service';
 import { Message } from '@components/message/message';
 import { Menu } from '@components/menu/menu';
-import { EModalContent, TContent } from './modal.types';
+import { EModalContent, ModalContentPropsMap, TContent } from './modal.types';
 import { Modal } from './modal';
 import { useStyles } from './modal.styles';
 
@@ -13,15 +13,18 @@ const getElement = (content: TContent | null) => {
     case EModalContent.menu:
       return <Menu {...data} />;
     case EModalContent.error:
-      return <Message error>{data}</Message>;
+      return <Message {...data} error />;
     case EModalContent.message:
-      return <Message>{data}</Message>;
+      return <Message {...data} />;
     default:
-      return content.data;
+      return data;
   }
 };
 
 type TState = [TContent | null, TContent[]];
+
+const hasOnClose = (data?: TContent['data']): data is ModalContentPropsMap[EModalContent.message] =>
+  data ? 'onClose' in data : false;
 
 export const ModalSet: FC = () => {
   const { content: clsContent } = useStyles();
@@ -46,9 +49,11 @@ export const ModalSet: FC = () => {
   const handleClose = useCallback(
     () =>
       setContent((state) => {
-        const curContentQueue = state[1];
+        const [curContent, curContentQueue] = state;
+        const { data } = curContent || {};
         const nextContent = curContentQueue.pop();
         nextContent && setTimeout(setContent, 500, [nextContent, curContentQueue]);
+        if (hasOnClose(data)) data.onClose?.();
         return [null, curContentQueue];
       }),
     [],

@@ -35,10 +35,10 @@ Icon.displayName = 'Icon';
 export enum ICONS {
   about = 'about',
   account = 'account',
+  arrowDown = 'arrow.down',
   arrowLeft = 'arrow.left',
   arrowRight = 'arrow.right',
   arrowUp = 'arrow.up',
-  arrowDown = 'arrow.down',
   create = 'create',
   cross = 'cross',
   dev = 'dev',

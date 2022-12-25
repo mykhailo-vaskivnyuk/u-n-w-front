@@ -4,18 +4,17 @@ export const useStyles = createUseStyles(
   ({ palette, vars }) => ({
     root: {
       fontSize: vars.fontSize.L,
-      fontWeight: vars.fontWeight.semiBold,
     },
-    link: {
-      display: 'flex',
-      alignItems: 'center',
+    button: {
+      justifyContent: 'start',
       gap: vars.gap.S,
+      textTransform: 'none',
       '&.active': {
         color: palette.second.main,
       },
-    },
-    icon: {
-      color: 'currentColor',
+      '& .icon': {
+        margin: 0,
+      },
     },
   }),
   { name: 'MenuItem' },

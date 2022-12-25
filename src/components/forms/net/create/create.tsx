@@ -1,11 +1,9 @@
-import React, { FC, FormEvent, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { FC, FormEvent } from 'react';
 import { Formik, useFormikContext } from 'formik';
-import { RoutesMap } from '@constants/router.constants';
 import { MessagesMap } from '@constants/messages';
-import { makeDynamicPathname } from '@utils/utils';
-import { app } from '@api/app/client.app';
+import { useNavigateTo } from 'contexts/navigate/navigate';
 import { modalService } from '@services/modal.service';
+import { app } from '@api/app/client.app';
 import { Input } from '@components/controls/input/input';
 import { Button } from '@components/buttons/button/button';
 import { NetCreateField, NetCreateFormValues, NetCreateSchema } from './create.schema';
@@ -37,11 +35,7 @@ const NetCreate: FC = () => {
 };
 
 export const NetCreateForm = () => {
-  const navigate = useNavigate();
-  const navigateToNet = useCallback(
-    (netId: number) => navigate(makeDynamicPathname(RoutesMap.NET.NET_ID.INDEX, netId)),
-    [navigate],
-  );
+  const navigate = useNavigateTo();
 
   return (
     <FormikProvider
@@ -51,7 +45,7 @@ export const NetCreateForm = () => {
         await app.netMethods.create(values).then((net) => {
           if (!net) return showFail();
           showSuccess();
-          navigateToNet(net.net_id);
+          navigate.toNet(net).id();
         });
       }}
     >

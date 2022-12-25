@@ -107,7 +107,6 @@ export const useCssBaseline = createUseStyles(
       },
 
       body: {
-        backgroundColor: palette.bg.light,
         fontFamily: vars.font.main,
         fontSize: vars.fontSize.main,
         fontWeight: vars.fontWeight.regular,

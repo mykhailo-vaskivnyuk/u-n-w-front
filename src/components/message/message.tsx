@@ -1,13 +1,38 @@
+import React, { FC } from 'react';
 import clsx from 'clsx';
-import React, { FC, PropsWithChildren } from 'react';
+import { Button } from '@components/buttons/button/button';
 import { useStyles } from './message.styles';
 
-export const Message: FC<PropsWithChildren<{ error?: boolean }>> = ({ error, children }) => {
-  const { root } = useStyles();
+export interface MessageProps {
+  message: string;
+  onConfirm?: () => void;
+  onRefuse?: () => void;
+  error?: boolean;
+}
+
+export const Message: FC<MessageProps> = (props) => {
+  const { root, buttons, text } = useStyles();
+  const { message, onConfirm, onRefuse, error } = props;
+
+  const confirmButton = onConfirm && (
+    <Button btnType="secondary" onClick={onConfirm}>
+      yes
+    </Button>
+  );
+
+  const refuseButton = onRefuse && (
+    <Button btnType="refuse" onClick={onRefuse}>
+      no
+    </Button>
+  );
 
   return (
     <div className={clsx(root, { error })}>
-      <div>{children}</div>
+      <div className={text}>{message}</div>
+      <div className={clsx({ [buttons]: confirmButton || refuseButton })}>
+        {refuseButton}
+        {confirmButton}
+      </div>
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import { ReactElement } from 'react';
 import { Classes } from 'jss';
 import { MenuProps } from '@components/menu/menu';
+import { MessageProps } from '@components/message/message';
 
 export interface ModalProps {
   onClose?: () => void;
@@ -20,8 +21,8 @@ export enum EModalContent {
 export interface ModalContentPropsMap {
   [EModalContent.general]: ReactElement;
   [EModalContent.menu]: MenuProps;
-  [EModalContent.message]: string;
-  [EModalContent.error]: string;
+  [EModalContent.message]: MessageProps & Pick<ModalProps, 'onClose'>;
+  [EModalContent.error]: Omit<MessageProps, 'error'>;
 }
 type CreateMapFromMap<T extends EModalContent = EModalContent> = {
   [Q in T]: { type: Q; data: ModalContentPropsMap[Q] };

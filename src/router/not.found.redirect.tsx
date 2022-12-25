@@ -1,9 +1,8 @@
 import { FC, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { RoutesMap } from '../constants/router.constants';
+import { useNavigateTo } from 'contexts/navigate/navigate';
 
 export const NotFoundRedirect: FC = () => {
-  const navigate = useNavigate();
-  useEffect(() => navigate(RoutesMap.ROOT), [navigate]);
+  const navigate = useNavigateTo();
+  useEffect(() => navigate.toIndex(), [navigate]);
   return null;
 };

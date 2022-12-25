@@ -1,39 +1,40 @@
 import { FC, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { RoutesMap } from '@constants/router.constants';
 import { MessagesMap } from '@constants/messages';
-import { format, makeDynamicPathname } from '@utils/utils';
+import { useNavigateTo } from 'contexts/navigate/navigate';
+import { format } from '@utils/utils';
 import { modalService } from '@services/modal.service';
-import { useNet } from '@hooks/useNet';
 import { app } from '@api/app/client.app';
 
-const { NET_ID } = RoutesMap.NET;
 const { NET_LEAVE, NET_LEAVE_FAILED } = MessagesMap;
 const showSuccess = (netName: string) => modalService.showMessage(format(NET_LEAVE, netName));
 const showFail = () => modalService.showError(NET_LEAVE_FAILED);
 
 export const NetLeave: FC = () => {
-  const [net] = useNet();
-  const { parent_net_id: parentNetId, name } = net!;
-
-  const navigate = useNavigate();
-  const navigateToIndex = () => navigate(RoutesMap.ROOT, { replace: true });
-  const navigateBack = () => navigate(-1);
-  const navigateToNet = (netId: number) =>
-    navigate(makeDynamicPathname(NET_ID.INDEX, netId), { replace: true });
+  const navigate = useNavigateTo();
 
   useEffect(() => {
-    app.netMethods
-      .leave()
-      .then((success) => {
-        if (!success) {
-          showFail();
-          return navigateBack();
-        }
-        showSuccess(name);
-        parentNetId ? navigateToNet(parentNetId) : navigateToIndex();
-      })
-      .catch(navigateBack);
+    let isLeaving = false;
+    const { net } = app.getState();
+    const { parent_net_id: netId, name } = net!;
+
+    const handleConfirm = () => {
+      isLeaving = true;
+      app.netMethods
+        .leave()
+        .then((success) => {
+          if (!success) {
+            showFail();
+            return navigate.back();
+          }
+          showSuccess(name);
+          netId ? navigate.toNet({ net_id: netId }).id(true) : navigate.toIndex(true);
+        })
+        .catch(navigate.back);
+    };
+
+    const message = format(MessagesMap.NET_LEAVE_CONFIRM, name);
+    const handleClose = () => !isLeaving && navigate.back();
+    modalService.showMessage(message, handleConfirm, undefined, handleClose);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

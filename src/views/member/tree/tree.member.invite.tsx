@@ -1,27 +1,18 @@
-import React, { FC, useCallback, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { RoutesMap } from '@constants/router.constants';
-import { makeDynamicPathname } from '@utils/utils';
-import { app } from '@api/app/client.app';
+import React, { FC, useEffect } from 'react';
+import { useNavigateTo } from 'contexts/navigate/navigate';
 import { MemberInviteCreateForm } from '@components/forms/member/invite/invite.create';
 import { MemberInviteCancelForm } from '@components/forms/member/invite/invite.cancel';
+import { app } from '@api/app/client.app';
 import { FormContainer } from '@components/forms/form.container/form.container';
 
-const memberPath = RoutesMap.NET.NET_ID.TREE.NODE_ID.INDEX;
-
 export const TreeMemberInvite: FC = () => {
-  const { net } = app.getState();
-  const { node_id: nodeId, memberStatus } = app.getState().memberData!;
-
-  const navigate = useNavigate();
-  const navigateToMember = useCallback(
-    () => navigate(makeDynamicPathname(memberPath, net!.net_id, nodeId)),
-    [navigate, net, nodeId],
-  );
+  const navigate = useNavigateTo();
+  const { net, memberData } = app.getState();
+  const { node_id: nodeId, memberStatus } = memberData!;
 
   useEffect(() => {
     if (memberStatus === 'ACTIVE' || memberStatus === 'CONNECTED') {
-      navigateToMember();
+      navigate.toNet(net!).treeMember(nodeId);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nodeId]);

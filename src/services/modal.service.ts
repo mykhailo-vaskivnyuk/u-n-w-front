@@ -1,13 +1,19 @@
-import { EModalContent, ModalContentPropsMap, TContent } from '@components/modal/modal.types';
+import {
+  EModalContent,
+  ModalContentPropsMap,
+  ModalProps,
+  TContent,
+} from '@components/modal/modal.types';
 import { MenuProps } from '@components/menu/menu';
+import { MessageProps } from '@components/message/message';
 
 type TCallback = (content: TContent) => void;
 type TCloseCallback = () => void;
 
 class ModalService {
-  private callback: TCallback | null = null;
+  private callback: TCallback = () => {};
 
-  private closeCallback: TCloseCallback | null = null;
+  private closeCallback: TCloseCallback = () => {};
 
   setCallback(callback: TCallback) {
     this.callback = callback;
@@ -15,26 +21,47 @@ class ModalService {
 
   setCloseCallback(callback: TCloseCallback) {
     this.closeCallback = callback;
+    this.closeModal = this.closeModal.bind(this);
   }
 
   openModal(data: ModalContentPropsMap[EModalContent.general]) {
-    this.callback && this.callback({ type: EModalContent.general, data });
+    this.callback({ type: EModalContent.general, data });
   }
 
   closeModal() {
-    this.closeCallback && this.closeCallback();
+    this.closeCallback();
   }
 
   openMenu(data: MenuProps) {
-    this.callback && this.callback({ type: EModalContent.menu, data });
+    this.callback({ type: EModalContent.menu, data });
   }
 
-  showError(data: ModalContentPropsMap[EModalContent.error]) {
-    this.callback && this.callback({ type: EModalContent.error, data });
+  showError(message: MessageProps['message']) {
+    this.callback({ type: EModalContent.error, data: { message } });
   }
 
-  showMessage(data: ModalContentPropsMap[EModalContent.message]) {
-    this.callback && this.callback({ type: EModalContent.message, data });
+  showMessage(
+    message: MessageProps['message'],
+    handleConfirm?: MessageProps['onConfirm'],
+    handleRefuse?: MessageProps['onRefuse'],
+    onClose?: ModalProps['onClose'],
+  ) {
+    const onConfirm =
+      handleConfirm &&
+      (() => {
+        this.closeModal();
+        handleConfirm();
+      });
+    const onRefuse =
+      handleRefuse &&
+      (() => {
+        this.closeModal();
+        handleRefuse();
+      });
+    this.callback({
+      type: EModalContent.message,
+      data: { message, onConfirm, onRefuse, onClose },
+    });
   }
 }
 

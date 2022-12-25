@@ -1,8 +1,6 @@
 import React, { FC, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { NetViewKeys } from '@api/api/types/types';
-import { RoutesMap } from '@constants/router.constants';
-import { makeDynamicPathname } from '@utils/utils';
+import { useNavigateTo } from 'contexts/navigate/navigate';
 import { app } from '@api/app/client.app';
 import { useStyles } from './member.card.styles';
 
@@ -15,14 +13,11 @@ export const UserCard: FC<NetUserCardProps> = (props) => {
   const { net } = app.getState();
   const { netView } = props;
 
-  const navigate = useNavigate();
-  const handleClick = useCallback(
-    () =>
-      netView === 'tree'
-        ? navigate(makeDynamicPathname(RoutesMap.NET.NET_ID.TREE.USER, net!.net_id))
-        : navigate(makeDynamicPathname(RoutesMap.NET.NET_ID.CIRCLE.USER, net!.net_id)),
-    [navigate, net, netView],
-  );
+  const navigate = useNavigateTo();
+  const handleClick = useCallback(() => {
+    const navigateTo = navigate.toNet(net!);
+    netView === 'tree' ? navigateTo.treeUser() : navigateTo.circleUser();
+  }, [navigate, net, netView]);
 
   return (
     <div className={root} onClick={handleClick} aria-hidden="true">

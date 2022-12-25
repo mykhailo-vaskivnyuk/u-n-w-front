@@ -1,5 +1,4 @@
-import React, { FC, useCallback } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { FC } from 'react';
 import clsx from 'clsx';
 import { modalService } from '@services/modal.service';
 import { IMenuItem } from './types';
@@ -13,22 +12,17 @@ export interface MenuProps {
   items?: IMenuItem[];
 }
 
+const handleClick = modalService.closeModal;
+
+const getMenuItemsJsx = (menuItemsProps?: IMenuItem[]) =>
+  menuItemsProps &&
+  menuItemsProps.map((item) => {
+    return <MenuItem key={item.href} {...item} onClick={handleClick} />;
+  });
+
 export const Menu: FC<MenuProps> = (props) => {
   const { root, section, parentItems: clsParentItems } = useStyles();
   const { parentItems, siblingItems, childItems, items } = props;
-  const location = useLocation();
-
-  const handleClick = useCallback(() => modalService.closeModal(), []);
-
-  const getMenuItemsJsx = useCallback(
-    (menuItemsProps?: IMenuItem[]) =>
-      menuItemsProps &&
-      menuItemsProps.map((item) => {
-        const active = item.pathname === location.pathname;
-        return <MenuItem key={item.pathname} {...item} onClick={handleClick} active={active} />;
-      }),
-    [handleClick, location.pathname],
-  );
 
   const itemsJsx = getMenuItemsJsx(items);
   const parentItemsJsx = getMenuItemsJsx(parentItems);

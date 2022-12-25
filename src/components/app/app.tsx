@@ -3,6 +3,7 @@ import { HashRouter } from 'react-router-dom';
 import { useApp } from '@hooks/useApp';
 import { ErrorBoundary } from '@components/error/error.boundary';
 import { Theme } from '@styles/theme';
+import { NavigateProvider } from 'contexts/navigate/navigate';
 import { Layout } from '@components/layout/layout';
 import { ErrorCatch } from '@components/error/error.catch';
 import { ModalSet } from '@components/modal/modal.set';
@@ -17,14 +18,16 @@ export const App: FC = () => {
       <Theme>
         <ErrorBoundary level="app">
           <HashRouter>
-            <Layout>
-              <ErrorCatch />
-              <ModalSet />
-              <Loading />
-              <Content>
-                <Router />
-              </Content>
-            </Layout>
+            <NavigateProvider>
+              <Layout>
+                <ErrorCatch />
+                <ModalSet />
+                <Loading />
+                <Content>
+                  <Router />
+                </Content>
+              </Layout>
+            </NavigateProvider>
           </HashRouter>
         </ErrorBoundary>
       </Theme>
