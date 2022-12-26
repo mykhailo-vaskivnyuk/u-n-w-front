@@ -65,7 +65,7 @@ export const LoginForm = () => {
               actions.setFieldTouched(LoginField.PASSWORD, false);
               return showFailed();
             }
-            user.user_state === 'NOT_CONFIRMED' && showNotConfirmed(values);
+            user.user_status === 'NOT_CONFIRMED' && showNotConfirmed(values);
             navigate.toIndex(true);
           })
           .catch(() => {})

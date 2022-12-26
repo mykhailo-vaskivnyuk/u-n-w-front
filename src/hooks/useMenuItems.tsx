@@ -6,14 +6,14 @@ import { getNetMenuItems, createNetMenuItems, makeDynamicPathname } from '@utils
 import { modalService } from '@services/modal.service';
 import { useUser } from '@hooks/useUser';
 import { useNet } from '@hooks/useNet';
-import { USER_STATE_MAP } from '@api/constants';
+import { USER_STATUS_MAP } from '@api/constants';
 import { ICONS } from '@components/icon/icon';
 
 const { NET_ID } = RoutesMap.NET;
 
 export const useMenuItems = () => {
   const user = useUser();
-  const { user_state: userState = 'NOT_LOGGEDIN' } = user || {};
+  const { user_status: userStatus = 'NOT_LOGGEDIN' } = user || {};
   const [net, nets] = useNet();
   const { name = ROOT_TITLE, net_id: netId } = net || {};
 
@@ -39,8 +39,8 @@ export const useMenuItems = () => {
   );
   const openNetMenu = useCallback(() => modalService.openMenu(menuNetItems), [menuNetItems]);
 
-  const showMainMenu = userState !== 'INSIDE_NET' || undefined;
-  const showNetMenu = USER_STATE_MAP[userState] >= USER_STATE_MAP.LOGGEDIN || undefined;
+  const showMainMenu = userStatus !== 'INSIDE_NET' || undefined;
+  const showNetMenu = USER_STATUS_MAP[userStatus] >= USER_STATUS_MAP.LOGGEDIN || undefined;
 
   return {
     name,

@@ -1,7 +1,7 @@
 import { useMatch } from 'react-router-dom';
 import { IUserResponse, INetResponse, INetsResponse, NetViewKeys } from '@api/api/types/types';
 import { IMenuItem } from '@components/menu/types';
-import { UserStateKeys, USER_STATE_MAP } from '@api/constants';
+import { UserStatusKeys, USER_STATUS_MAP } from '@api/constants';
 import { RoutesMap } from '@constants/router.constants';
 import { IS_DEV } from '@constants/constants';
 import { ICONS } from '@components/icon/icon';
@@ -15,10 +15,10 @@ export const format = (str: string, ...values: string[]) => {
 export const makeDynamicPathname = (pathname: string, ...ids: (number | string)[]) =>
   ids.reduce((result: string, id) => result.replace(/:[^/]+/, id.toString()), pathname);
 
-const netMenuFilter = (netMeuItem: IMenuItem, userState: UserStateKeys) => {
+const netMenuFilter = (netMeuItem: IMenuItem, userStatus: UserStatusKeys) => {
   const { allowForUser } = netMeuItem;
-  if (Array.isArray(allowForUser)) return allowForUser.includes(userState!);
-  if (USER_STATE_MAP[allowForUser] <= USER_STATE_MAP[userState!]) return true;
+  if (Array.isArray(allowForUser)) return allowForUser.includes(userStatus!);
+  if (USER_STATUS_MAP[allowForUser] <= USER_STATUS_MAP[userStatus!]) return true;
   if (IS_DEV && allowForUser === 'DEV') return true;
   return false;
 };
@@ -28,9 +28,9 @@ export const getNetMenuItems = (
   user: IUserResponse,
   net?: INetResponse,
 ) => {
-  const { user_state: userState = 'NOT_LOGGEDIN' } = user || {};
+  const { user_status: userStatus = 'NOT_LOGGEDIN' } = user || {};
   const netId = net?.net_id.toString();
-  let filteredMenuItems = menuItems.filter((item) => netMenuFilter(item, userState));
+  let filteredMenuItems = menuItems.filter((item) => netMenuFilter(item, userStatus));
   filteredMenuItems = !netId
     ? filteredMenuItems
     : filteredMenuItems.map((item) => {
