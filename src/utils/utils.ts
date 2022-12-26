@@ -1,7 +1,13 @@
 import { useMatch } from 'react-router-dom';
-import { IUserResponse, INetResponse, INetsResponse, NetViewKeys } from '@api/api/types/types';
+import {
+  IUserResponse,
+  INetResponse,
+  INetsResponse,
+  NetViewKeys,
+  UserStatusKeys,
+  USER_STATUS_MAP,
+} from '@api/api/types/types';
 import { IMenuItem } from '@components/menu/types';
-import { UserStatusKeys, USER_STATUS_MAP } from '@api/constants';
 import { RoutesMap } from '@constants/router.constants';
 import { IS_DEV } from '@constants/constants';
 import { ICONS } from '@components/icon/icon';

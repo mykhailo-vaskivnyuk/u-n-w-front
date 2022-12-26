@@ -1,4 +1,5 @@
 import { useCallback, useMemo } from 'react';
+import { USER_STATUS_MAP } from '@api/api/types/types';
 import { MENU_ITEMS, MENU_NET_ITEMS } from '@constants/menu.constants';
 import { RoutesMap } from '@constants/router.constants';
 import { ROOT_TITLE } from '@constants/constants';
@@ -6,7 +7,6 @@ import { getNetMenuItems, createNetMenuItems, makeDynamicPathname } from '@utils
 import { modalService } from '@services/modal.service';
 import { useUser } from '@hooks/useUser';
 import { useNet } from '@hooks/useNet';
-import { USER_STATUS_MAP } from '@api/constants';
 import { ICONS } from '@components/icon/icon';
 
 const { NET_ID } = RoutesMap.NET;

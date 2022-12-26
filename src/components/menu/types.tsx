@@ -1,4 +1,4 @@
-import { UserStatusKeys } from '@api/constants';
+import { UserStatusKeys } from '@api/api/types/types';
 import { ICONS } from '@components/icon/icon';
 
 export interface IMenuItem {
