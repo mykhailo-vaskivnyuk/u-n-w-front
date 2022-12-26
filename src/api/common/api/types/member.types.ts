@@ -19,11 +19,11 @@ export type IMemberResponse =
   };
 
 export const MEMBER_STATUS_MAP = {
-  ACTIVE: 'active',
-  CONNECTED: 'connected',
-  INVITED: 'invited',
-  EMPTY: 'empty',
   UNAVAILABLE: 'unavailable',
+  EMPTY: 'empty',
+  INVITED: 'invited',
+  CONNECTED: 'connected',
+  ACTIVE: 'active',
 };
 
 export type MemberStatusKeys = keyof typeof MEMBER_STATUS_MAP;
