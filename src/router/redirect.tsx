@@ -26,17 +26,10 @@ export const Redirect: FC = () => {
     }
     const { user, net } = app.getState();
     if (!isNet && net)
-      app.netMethods
-        .comeout()
-        .then((success) => {
-          if (success) return;
-          showFailed();
-          navigate.back();
-        })
-        .catch(() => {
-          showFailed();
-          navigate.back();
-        });
+      app.netMethods.comeout().catch(() => {
+        showFailed();
+        navigate.back();
+      });
     switch (pathname) {
       case RoutesMap.ROOT:
       case RoutesMap.ACCOUNT.INDEX:
