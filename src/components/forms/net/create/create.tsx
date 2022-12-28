@@ -1,5 +1,6 @@
 import React, { FC, FormEvent } from 'react';
 import { Formik, useFormikContext } from 'formik';
+import { MAX_NET_LEVEL } from '@api/api/constants';
 import { MessagesMap } from '@constants/messages';
 import { useNavigateTo } from 'contexts/navigate/navigate';
 import { modalService } from '@services/modal.service';
@@ -36,16 +37,21 @@ const NetCreate: FC = () => {
 
 export const NetCreateForm = () => {
   const navigate = useNavigateTo();
+  const { net_level: netLevel = -1 } = app.getState().net || {};
+
+  if (netLevel >= MAX_NET_LEVEL) {
+    return <div>NET_LEVEL_LIMIT_EXCEEDED</div>;
+  }
 
   return (
     <FormikProvider
       initialValues={{ name: '' }}
       validationSchema={NetCreateSchema}
       onSubmit={async (values) => {
-        await app.netMethods.create(values).then((net) => {
-          if (!net) return showFail();
+        await app.netMethods.create(values).then((newNet) => {
+          if (!newNet) return showFail();
           showSuccess();
-          navigate.toNet(net).id();
+          navigate.toNet(newNet).id();
         });
       }}
     >

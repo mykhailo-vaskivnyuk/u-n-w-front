@@ -9,7 +9,7 @@ import { useStyles } from './member.card.styles';
 export const MemberCard: FC<MemberCardProps> = (props) => {
   const { netView } = props;
   const [net, member] = useMemberCard(props);
-  const { node_id: nodeId, member_name: memberName, memberStatus } = member || {};
+  const { node_id: nodeId, member_name: memberName, memberStatus = 'UNAVAILABLE' } = member || {};
   const { root, avatar, name, [memberStatus]: clsStatus } = useStyles();
 
   const navigate = useNavigateTo();

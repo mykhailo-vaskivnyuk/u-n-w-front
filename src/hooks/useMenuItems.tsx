@@ -20,13 +20,13 @@ export const useMenuItems = () => {
   const mainMenuItems = useMemo(() => getNetMenuItems(MENU_ITEMS, user), [user]);
 
   const menuNetItems = useMemo(() => {
-    const items = getNetMenuItems(MENU_NET_ITEMS, user, net);
+    const items = getNetMenuItems(MENU_NET_ITEMS, user);
     const { parentNets, siblingNets, childNets } = nets;
     const parentItems = createNetMenuItems(parentNets, user, ICONS.arrowUp);
     const siblingItems = createNetMenuItems(siblingNets, user, ICONS.arrowRight);
     const childItems = createNetMenuItems(childNets, user, ICONS.arrowRight);
     return { parentItems, siblingItems, childItems, items };
-  }, [net, nets, user]);
+  }, [nets, user]);
 
   const href = useMemo(
     () => (netId ? makeDynamicPathname(NET_ID.INDEX, netId!) : RoutesMap.ROOT),

@@ -31,7 +31,7 @@ const netMenuFilter = (netMeuItem: IMenuItem, userStatus: UserStatusKeys) => {
 
 export const getNetMenuItems = (
   menuItems: IMenuItem[],
-  user: IUserResponse,
+  user?: IUserResponse,
   net?: INetResponse,
 ) => {
   const { user_status: userStatus = 'NOT_LOGGEDIN' } = user || {};
