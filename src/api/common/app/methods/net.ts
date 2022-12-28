@@ -9,11 +9,12 @@ export const getNetMethods = (parent: IClientAppThis) => ({
     parent.setStatus(AppStatus.LOADING);
     try {
       const { net: parentNet } = parent.getState();
-      const net = await parent.api.net.create({ ...parentNet, ...args });
-      if (net) {
-        this.getAllNets();
-        await parent.setNet(net);
-      }
+      const net = await parent.api.net.create({
+        net_id: null,
+        ...parentNet,
+        ...args,
+      });
+      if (net) this.getAllNets();
       parent.setStatus(AppStatus.READY);
       return net;
     } catch (e: any) {

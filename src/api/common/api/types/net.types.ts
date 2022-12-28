@@ -5,7 +5,7 @@ import { OmitNull } from '../../types';
 import { IMemberResponse } from './member.types';
 
 export type INetCreateParams  =
-  Pick<ITableNetsData, 'name'> & { net_id?: number };
+  Pick<ITableNetsData, 'name'> & { net_id: number | null };
 export type INetResponse = (ITableNets & Pick<ITableNetsData, 'name'>) | null;
 export type INetsResponse = OmitNull<INetResponse>[];
 export type INetReadParams = { net_id: number };
