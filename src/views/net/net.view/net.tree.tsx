@@ -1,10 +1,12 @@
 /* eslint-disable react/no-array-index-key */
 import React, { FC } from 'react';
+import { useTree } from '@hooks/useTree';
 import { MemberCard } from '@components/member/card/member.card';
 import { UserCard } from '@components/member/card/user.card';
 import { useStyles } from './net.view.styles';
 
 export const NetTree: FC = () => {
+  useTree();
   const { root, viewTitle } = useStyles();
 
   const treeJsx = new Array(7)

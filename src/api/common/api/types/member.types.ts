@@ -1,5 +1,6 @@
 import {
-  ITableUsers, ITableUsersNodesInvites, getEnumFromMap
+  ITableUsers, ITableUsersNodesInvites,
+  getEnumFromMap, ITableUsersMembers,
 } from '../../../local/imports';
 import { DbRecordOrNull } from '../../types';
 
@@ -22,7 +23,9 @@ export type IMemberInviteParams = {
 
 export type IMemberConfirmParams = Omit<IMemberInviteParams, 'member_name'>;
 
-export type IMemberResponse =
+export type IMemberResponse = { node_id: number, vote_count: number } &
   Pick<ITableUsers, 'name'> &
   DbRecordOrNull<Omit<ITableUsersNodesInvites, 'node_id' | 'user_id'>> &
-  { node_id: number };
+  DbRecordOrNull<
+    Omit<ITableUsersMembers, 'parent_node_id' | 'user_id'| 'member_id'>
+  >;

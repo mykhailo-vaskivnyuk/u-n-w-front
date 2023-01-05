@@ -4,7 +4,7 @@ import { createUseStyles } from 'react-jss';
 export const useStyles = createUseStyles(
   ({ palette, vars, mixins }) => ({
     root: {
-      gridArea: 'status',
+      gridArea: 'vote',
       ...mixins.size('100%'),
       ...mixins.flexCenter,
       color: palette.font.light,
@@ -13,19 +13,23 @@ export const useStyles = createUseStyles(
       fontSize: vars.fontSize.S,
       fontWeight: vars.fontWeight.semiBold,
       letterSpacing: vars.letterGap.XL,
+      background: palette.bg.disabled,
+      display: 'none',
+      '&.voteCount': {
+        background: 'none',
+        color: palette.font.add,
+        border: `1px solid ${palette.add.main}`,
+      },
+      '&.vote': {
+        background: palette.add.main,
+        color: palette.font.light,
+      },
     },
     [MEMBER_STATUS_ENUM.ACTIVE]: {
-      display: 'none',
-    },
-    [MEMBER_STATUS_ENUM.CONNECTED]: {
-      background: palette.add.main,
-    },
-    [MEMBER_STATUS_ENUM.INVITED]: {
-      background: palette.second.medium,
-    },
-    [MEMBER_STATUS_ENUM.EMPTY]: {
-      background: palette.dark.main,
+      '&.memberPosition': {
+        display: 'flex',
+      },
     },
   }),
-  { name: 'MemberStatus' },
+  { name: 'MemberVote' },
 );

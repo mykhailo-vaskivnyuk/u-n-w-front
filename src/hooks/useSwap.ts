@@ -1,12 +1,12 @@
-import { MouseEvent, TouchEvent, useCallback, useEffect, useRef, useState } from 'react';
+ import { MouseEvent, TouchEvent, useCallback, useEffect, useRef, useState } from 'react';
 
 const DIFF = 100;
 const isTouchEvent = (e: MouseEvent | TouchEvent): e is TouchEvent => {
   return 'changedTouches' in e;
 };
 
-export const useSwap = <T>(options: readonly [T, T], initialOption: any) => {
-  const [option, setOption] = useState<T>(initialOption || options[0]);
+export const useSwap = <T>(options: readonly [T, T], initialOption: T) => {
+  const [option, setOption] = useState<T>(initialOption);
   const mousePosition = useRef<MouseEvent | TouchEvent | undefined>(undefined);
   const swapped = useRef(false);
   const element = useRef<HTMLDivElement>(null);

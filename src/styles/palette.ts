@@ -54,6 +54,7 @@ const palette: Palette = {
     first: first(),
     second: second(),
     add: add(),
+    disabled: light(110),
   },
 
   font: {

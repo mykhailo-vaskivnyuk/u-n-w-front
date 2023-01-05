@@ -7,7 +7,7 @@ export const useStyles = createUseStyles(
       display: 'grid',
       gridTemplate: `
         "avatar name status"
-        "avatar name rerserved"
+        "avatar name vote"
       `,
       gridTemplateColumns: '50px 1fr 80px',
       gridTemplateRows: 'auto',

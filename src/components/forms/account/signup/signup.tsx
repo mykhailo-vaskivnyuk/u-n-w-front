@@ -16,7 +16,7 @@ const showSuccess = (values: SignupFormValues) => {
   const message = format(MessagesMap.CONFIRM_LINK_SENT, values[SignupField.EMAIL]);
   modalService.showMessage(message);
 };
-const showFail = () => modalService.showError(MessagesMap.SIGNUP_FAILED);
+const showFail = () => modalService.showError(MessagesMap.SIGNUP_FAIL);
 
 const Signup: FC = () => {
   const { buttons } = useStyles();

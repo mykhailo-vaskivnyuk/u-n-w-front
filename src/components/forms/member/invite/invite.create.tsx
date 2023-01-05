@@ -13,7 +13,7 @@ import { useStyles } from './invite.styles';
 const pathToInvite = RoutesMap.NET.INVITE;
 const FormikProvider = Formik<MemberInviteFormValues>;
 const showSuccess = () => modalService.showMessage(MessagesMap.MEMBER_INVITE_CREATE);
-const showFail = () => modalService.showError(MessagesMap.MEMBER_INVITE_CREATE_FAILED);
+const showFail = () => modalService.showError(MessagesMap.MEMBER_INVITE_CREATE_FAIL);
 
 const MemberInviteCreate: FC = () => {
   const { buttons } = useStyles();

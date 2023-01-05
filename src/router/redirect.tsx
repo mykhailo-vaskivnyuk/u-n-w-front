@@ -11,7 +11,7 @@ import { modalService } from '@services/modal.service';
 import { app } from '@api/app/client.app';
 
 const { INDEX: netPath } = RoutesMap.NET.NET_ID;
-const showFailed = () => modalService.showError(MessagesMap.NET_COMEOUT_FAILED);
+const showFailed = () => modalService.showError(MessagesMap.NET_COMEOUT_FAIL);
 
 export const Redirect: FC = () => {
   const navigate = useNavigateTo();

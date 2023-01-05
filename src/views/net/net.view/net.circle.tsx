@@ -1,10 +1,12 @@
 /* eslint-disable react/no-array-index-key */
 import React, { FC } from 'react';
+import { useCircle } from '@hooks/useCircle';
 import { MemberCard } from '@components/member/card/member.card';
 import { UserCard } from '@components/member/card/user.card';
 import { useStyles } from './net.view.styles';
 
 export const NetCircle: FC = () => {
+  useCircle();
   const { root, viewTitle } = useStyles();
 
   const circleJsx = new Array(7)

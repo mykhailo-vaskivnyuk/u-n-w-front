@@ -6,7 +6,7 @@ import { Button } from '@components/buttons/button/button';
 import { useStyles } from './invite.styles';
 
 const showSuccess = () => modalService.showMessage(MessagesMap.MEMBER_INVITE_CANCEL);
-const showFail = () => modalService.showError(MessagesMap.MEMBER_INVITE_CANCEL_FAILED);
+const showFail = () => modalService.showError(MessagesMap.MEMBER_INVITE_CANCEL_FAIL);
 
 const handleCancel = () =>
   app.member.inviteCancel().then((success) => {

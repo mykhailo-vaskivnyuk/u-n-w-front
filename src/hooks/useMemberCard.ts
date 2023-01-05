@@ -7,5 +7,5 @@ export const useMemberCard = (props: MemberCardProps) => {
   const memberPosition = getMemberPosition(netView, memberUiPosition);
   const { net, [netView]: netViewData } = app.getState();
   const member = netViewData[memberPosition];
-  return [net, member] as const;
+  return [net, member, memberPosition] as const;
 };

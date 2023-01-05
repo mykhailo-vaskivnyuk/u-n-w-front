@@ -3,7 +3,12 @@ import clsx from 'clsx';
 import { MemberStatusKeys } from '@api/api/types/types';
 import { useStyles } from './member.status.styles';
 
-export const MemberStatus: FC<{ memberStatus: MemberStatusKeys }> = ({ memberStatus }) => {
+interface MemberStatusProps {
+  memberStatus: MemberStatusKeys;
+}
+
+export const MemberStatus: FC<MemberStatusProps> = (props) => {
+  const { memberStatus } = props;
   const { root, [memberStatus]: status } = useStyles();
 
   return (

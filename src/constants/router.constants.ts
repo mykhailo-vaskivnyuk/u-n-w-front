@@ -15,7 +15,6 @@ export const RelativeRoutesMap = {
   NET: {
     INDEX: 'net',
     CREATE: 'create',
-    // COMEOUT: 'comeout',
     INVITE: 'invite/:token',
     NET_ID: {
       INDEX: ':net_id',
@@ -31,6 +30,7 @@ export const RelativeRoutesMap = {
       TREE: {
         INDEX: 'tree',
         USER: 'user',
+        CHAT: 'chat',
         NODE_ID: {
           INDEX: ':node_id',
           INVITE: 'invite',

@@ -8,7 +8,8 @@ import { app } from '@api/app/client.app';
 
 const invitePath = RoutesMap.NET.INVITE;
 const showSuccess = () => modalService.showMessage(MessagesMap.NET_CONNECTED);
-const showFail = () => modalService.showError(MessagesMap.NET_CONNECT_FAILED);
+const showFail = () => modalService.showError(MessagesMap.NET_CONNECT_FAIL);
+const showExists = () => modalService.showError(MessagesMap.NET_CONNECT_EXISTS);
 const showBadLink = () => modalService.showError(MessagesMap.BAD_LINK);
 
 export const NetInvite: FC = () => {
@@ -29,7 +30,11 @@ export const NetInvite: FC = () => {
         }
         const { error } = result;
         if (error) {
-          showFail();
+          if (error === 'not parent net member') {
+            showFail();
+            return navigate.back();
+          }
+          showExists();
           navigate.toNet(result).id(true);
         } else {
           showSuccess();

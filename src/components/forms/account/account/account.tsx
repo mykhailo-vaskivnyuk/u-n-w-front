@@ -27,7 +27,6 @@ const Account: FC = () => {
     <form onSubmit={handleSubmit}>
       <Input type="text" label="Email" name={AccountField.EMAIL} />
       <Input type="text" label="Name" name={AccountField.NAME} />
-      <Input type="text" label="Net name" name={AccountField.NET_NAME} />
       <Input type="text" label="Mobile" name={AccountField.MOBILE} />
       <Input type="text" label="Password" name={AccountField.PASSWORD} />
       <div className={buttons}>
@@ -52,11 +51,10 @@ export const AccountForm = () => {
 
   if (!user) return null;
 
-  const { email, name, net_name: netName, mobile } = user || {};
+  const { email, name, mobile } = user || {};
   const initialValue = {
     email,
     name: name || undefined,
-    net_name: netName || undefined,
     mobile: mobile || undefined,
   };
 

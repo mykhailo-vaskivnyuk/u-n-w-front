@@ -5,9 +5,9 @@ import { format } from '@utils/utils';
 import { modalService } from '@services/modal.service';
 import { app } from '@api/app/client.app';
 
-const { NET_LEAVE, NET_LEAVE_FAILED } = MessagesMap;
+const { NET_LEAVE, NET_LEAVE_FAIL } = MessagesMap;
 const showSuccess = (netName: string) => modalService.showMessage(format(NET_LEAVE, netName));
-const showFail = () => modalService.showError(NET_LEAVE_FAILED);
+const showFail = () => modalService.showError(NET_LEAVE_FAIL);
 
 export const NetLeave: FC = () => {
   const navigate = useNavigateTo();

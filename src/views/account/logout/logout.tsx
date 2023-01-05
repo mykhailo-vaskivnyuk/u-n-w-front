@@ -4,7 +4,7 @@ import { useNavigateTo } from 'contexts/navigate/navigate';
 import { modalService } from '@services/modal.service';
 import { app } from '@api/app/client.app';
 
-const showFailed = () => modalService.showError(MessagesMap.LOGOUT_FAILED);
+const showFailed = () => modalService.showError(MessagesMap.LOGOUT_FAIL);
 
 export const Logout: FC = () => {
   const navigate = useNavigateTo();

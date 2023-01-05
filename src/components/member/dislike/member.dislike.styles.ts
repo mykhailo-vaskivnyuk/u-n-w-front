@@ -13,19 +13,15 @@ export const useStyles = createUseStyles(
       fontSize: vars.fontSize.S,
       fontWeight: vars.fontWeight.semiBold,
       letterSpacing: vars.letterGap.XL,
+      background: palette.bg.disabled,
+      display: 'none',
+      '&.dislike': {
+        background: palette.dark.main,
+      },
     },
     [MEMBER_STATUS_ENUM.ACTIVE]: {
-      display: 'none',
-    },
-    [MEMBER_STATUS_ENUM.CONNECTED]: {
-      background: palette.add.main,
-    },
-    [MEMBER_STATUS_ENUM.INVITED]: {
-      background: palette.second.medium,
-    },
-    [MEMBER_STATUS_ENUM.EMPTY]: {
-      background: palette.dark.main,
+      display: 'flex',
     },
   }),
-  { name: 'MemberStatus' },
+  { name: 'MemberDislike' },
 );

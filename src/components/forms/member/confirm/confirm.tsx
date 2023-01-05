@@ -11,8 +11,8 @@ const show = {
     refuse: () => modalService.showMessage(MessagesMap.MEMBER_INVITE_CANCEL),
   },
   fail: {
-    confirm: () => modalService.showError(MessagesMap.MEMBER_CONFIRM_FAILED),
-    refuse: () => modalService.showError(MessagesMap.MEMBER_INVITE_CANCEL_FAILED),
+    confirm: () => modalService.showError(MessagesMap.MEMBER_CONFIRM_FAIL),
+    refuse: () => modalService.showError(MessagesMap.MEMBER_INVITE_CANCEL_FAIL),
   },
 };
 

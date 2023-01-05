@@ -12,7 +12,7 @@ import { useStyles } from './create.styles';
 
 const FormikProvider = Formik<NetCreateFormValues>;
 const showSuccess = () => modalService.showMessage(MessagesMap.NET_CREATED);
-const showFail = () => modalService.showError(MessagesMap.NET_CREATE_FAILED);
+const showFail = () => modalService.showError(MessagesMap.NET_CREATE_FAIL);
 
 const NetCreate: FC = () => {
   const { buttons } = useStyles();

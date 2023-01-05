@@ -16,7 +16,7 @@ const showNotConfirmed = (values: LoginFormValues) => {
   const message = format(MessagesMap.NOT_CONFIRMED, values[LoginField.EMAIL]);
   modalService.showError(message);
 };
-const showFailed = () => modalService.showError(MessagesMap.LOGIN_FAILED);
+const showFailed = () => modalService.showError(MessagesMap.LOGIN_FAIL);
 
 const Login: FC = () => {
   const { buttons } = useStyles();

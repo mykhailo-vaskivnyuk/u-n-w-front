@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable max-len */
 import * as P from './types/types';
 import * as Q from './types/client.api.types';
@@ -31,6 +32,24 @@ export const getApi = (
   'health': () => fetch<string>('/health'),
 
   'member': {
+    'data': {
+      'dislike': {
+        'set': (options: P.IMemberConfirmParams) =>
+          fetch<boolean>('/member/data/dislike/set', options),
+
+        'unSet': (options: P.IMemberConfirmParams) =>
+          fetch<boolean>('/member/data/dislike/unSet', options),
+
+      },
+      'vote': {
+        'set': (options: P.IMemberConfirmParams) =>
+          fetch<boolean>('/member/data/vote/set', options),
+
+        'unSet': (options: P.IMemberConfirmParams) =>
+          fetch<boolean>('/member/data/vote/unSet', options),
+
+      },
+    },
     'invite': {
       'cancel': (options: P.IMemberConfirmParams) =>
         fetch<boolean>('/member/invite/cancel', options),
@@ -47,6 +66,11 @@ export const getApi = (
     },
   },
   'net': {
+    'chat': {
+      'send': (options: Q.TNetChatSend) =>
+        fetch<Q.TNetChatSendResponse>('/net/chat/send', options),
+
+    },
     'connectByToken': (options: P.ITokenParams) =>
       fetch<Q.TNetConnectByTokenResponse>('/net/connectByToken', options),
 
@@ -77,6 +101,11 @@ export const getApi = (
   'user': {
     'update': () => fetch<string>('/user/update'),
 
+    'net': {
+      'getData': (options: P.INetReadParams) =>
+        fetch<P.IUserNetDataResponse>('/user/net/getData', options),
+
+    },
     'nets': {
       'get': () => fetch<P.INetsResponse>('/user/nets/get'),
 
