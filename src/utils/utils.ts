@@ -35,7 +35,7 @@ export const getNetMenuItems = (
   net?: INetResponse,
 ) => {
   const { user_status: userStatus = 'NOT_LOGGEDIN' } = user || {};
-  const netId = net?.net_id.toString();
+  const netId = net?.net_node_id.toString();
   let filteredMenuItems = menuItems.filter((item) => netMenuFilter(item, userStatus));
   filteredMenuItems = !netId
     ? filteredMenuItems
@@ -48,9 +48,9 @@ export const getNetMenuItems = (
 
 export const createNetMenuItems = (nets: INetsResponse, user: IUserResponse, icon?: ICONS) => {
   const netMenuItems = nets.map(
-    ({ net_id, name }): IMenuItem => ({
+    ({ net_node_id, name }): IMenuItem => ({
       label: name,
-      href: makeDynamicPathname(NET_ID.INDEX, net_id),
+      href: makeDynamicPathname(NET_ID.INDEX, net_node_id),
       icon: icon || ICONS.home,
       allowForUser: 'LOGGEDIN',
     }),

@@ -27,7 +27,7 @@ export const NetLeave: FC = () => {
             return navigate.back();
           }
           showSuccess(name);
-          netId ? navigate.toNet({ net_id: netId }).id(true) : navigate.toIndex(true);
+          netId ? navigate.toNet({ net_node_id: netId }).id(true) : navigate.toIndex(true);
         })
         .catch(navigate.back);
     };

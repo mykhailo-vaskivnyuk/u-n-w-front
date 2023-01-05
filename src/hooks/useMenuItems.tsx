@@ -15,7 +15,7 @@ export const useMenuItems = () => {
   const user = useUser();
   const { user_status: userStatus = 'NOT_LOGGEDIN' } = user || {};
   const [net, nets] = useNet();
-  const { name = ROOT_TITLE, net_id: netId } = net || {};
+  const { name = ROOT_TITLE, net_node_id: netId } = net || {};
 
   const mainMenuItems = useMemo(() => getNetMenuItems(MENU_ITEMS, user), [user]);
 

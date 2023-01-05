@@ -10,7 +10,7 @@ export const useUserNet = () => {
   const netId = useMatchParam('net_id', path, false) as number;
   const { net } = app.getState();
   const { netView = 'tree' } = useLocation().state || {};
-  const [loading, setLoading] = useState(() => !net || net.net_id !== netId);
+  const [loading, setLoading] = useState(() => !net || net.net_node_id !== netId);
 
   useEffect(() => {
     if (!loading) return;
