@@ -12,8 +12,8 @@ interface NetUserCardProps {
 export const UserCard: FC<NetUserCardProps> = (props) => {
   const { root, avatar, name } = useStyles();
   const { net, userNetData } = app.getState();
-  const { node_id: nodeId, token, vote, vote_count: voteCount } = userNetData!;
-  const memberStatus = token ? 'CONNECTED' : 'ACTIVE';
+  const { node_id: nodeId, confirmed, vote, vote_count: voteCount } = userNetData!;
+  const memberStatus = confirmed ? 'ACTIVE' : 'CONNECTED';
   const { netView } = props;
 
   const navigate = useNavigateTo();

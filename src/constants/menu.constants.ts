@@ -61,6 +61,6 @@ export const MENU_INSIDE_NET_ITEMS: IMenuItem[] = [
     label: 'Покинути назавжди',
     href: RoutesMap.NET.NET_ID.LEAVE,
     icon: ICONS.remove,
-    allowForUser: 'INSIDE_NET',
+    allowForUser: 'INVITING',
   },
 ];
