@@ -11,7 +11,7 @@ interface NetUserCardProps {
 
 export const UserCard: FC<NetUserCardProps> = (props) => {
   const { root, avatar, name } = useStyles();
-  const { net, userNetData } = app.getState();
+  const { net, userNetData, circle } = app.getState();
   const { node_id: nodeId, confirmed, vote, vote_count: voteCount } = userNetData!;
   const memberStatus = confirmed ? 'ACTIVE' : 'CONNECTED';
   const { netView } = props;
@@ -32,7 +32,7 @@ export const UserCard: FC<NetUserCardProps> = (props) => {
       <div className={name}>current user</div>
       <MemberVote
         nodeId={nodeId}
-        memberPosition={Infinity}
+        canVote={Boolean(circle.length)}
         memberStatus={memberStatus}
         vote={vote}
         voteCount={voteCount}

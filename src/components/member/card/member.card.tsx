@@ -41,7 +41,7 @@ export const MemberCard: FC<MemberCardProps> = (props) => {
       <MemberDislike nodeId={nodeId} memberStatus={memberStatus} dislike={dislike} />
       <MemberVote
         nodeId={nodeId}
-        memberPosition={memberPosition}
+        canVote={Boolean(memberPosition)}
         memberStatus={memberStatus}
         vote={vote}
         voteCount={voteCount}

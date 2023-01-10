@@ -7,14 +7,14 @@ import { useStyles } from './member.vote.styles';
 interface MemberDislikeProps {
   nodeId: number;
   memberStatus: MemberStatusKeys;
-  memberPosition: number;
+  canVote: boolean;
   vote: boolean | null;
   voteCount: number;
   netView: NetViewKeys;
 }
 
 export const MemberVote: FC<MemberDislikeProps> = (props) => {
-  const { nodeId, memberStatus, memberPosition, vote, voteCount, netView } = props;
+  const { nodeId, memberStatus, canVote, vote, voteCount, netView } = props;
   const { root, [memberStatus]: status } = useStyles();
 
   const handleClick = useCallback(
@@ -26,11 +26,11 @@ export const MemberVote: FC<MemberDislikeProps> = (props) => {
     [vote, nodeId],
   );
 
-  if (netView === 'tree') return null;
+  if (netView === 'tree' || !canVote) return null;
 
   return (
     <div
-      className={clsx(root, status, { vote }, { voteCount }, { memberPosition })}
+      className={clsx(root, status, { vote }, { voteCount })}
       onClick={handleClick}
       aria-hidden="true"
     >

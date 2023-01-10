@@ -26,9 +26,7 @@ export const useStyles = createUseStyles(
       },
     },
     [MEMBER_STATUS_ENUM.ACTIVE]: {
-      '&.memberPosition': {
-        display: 'flex',
-      },
+      display: 'flex',
     },
   }),
   { name: 'MemberVote' },
