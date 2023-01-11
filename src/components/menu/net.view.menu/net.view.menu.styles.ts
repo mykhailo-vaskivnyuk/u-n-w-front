@@ -8,11 +8,14 @@ export const useStyles = createUseStyles(
       color: palette.font.light,
       background: palette.first.extraLight,
       borderRadius: vars.radius.S,
-      justifySelf: 'center',
-      ...mixins.flexCenter,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
     },
     viewTitle: {
       fontWeight: vars.fontWeight.semiBold,
+      marginLeft: '50%',
+      transform: `translateX(calc(-50% - ${vars.gap.S}))`,
     },
     section: {
       ...mixins.flexCenter,

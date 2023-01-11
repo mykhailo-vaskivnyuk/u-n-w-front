@@ -4,10 +4,10 @@ export const useStyles = createUseStyles(
   ({ palette, mixins, vars }) => ({
     root: {
       ...mixins.flexCenter,
-      fontWeight: vars.fontWeight.semiBold,
       fontSize: vars.fontSize.XL,
-      color: palette.font.second,
+      color: palette.font.first,
       margin: `${vars.gap.M} 0`,
+      textTransform: 'uppercase',
     },
   }),
   { name: 'Subtitle' },

@@ -7,8 +7,8 @@ export const useStyles = createUseStyles(
       gridArea: 'status',
       ...mixins.size('100%'),
       ...mixins.flexCenter,
-      color: palette.font.light,
-      border: '1px solid',
+      color: palette.dark.extraLight,
+      border: '1px solid transparent',
       borderRadius: vars.radius.S,
       fontSize: vars.fontSize.S,
       fontWeight: vars.fontWeight.semiBold,
@@ -16,6 +16,7 @@ export const useStyles = createUseStyles(
       background: palette.bg.disabled,
       display: 'none',
       '&.dislike': {
+        color: palette.font.light,
         background: palette.dark.main,
       },
     },

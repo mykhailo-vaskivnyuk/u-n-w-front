@@ -10,7 +10,7 @@ export const useStyles = createUseStyles(
         "avatar name vote"
       `,
       gridTemplateColumns: '50px 1fr 80px',
-      gridTemplateRows: 'auto',
+      gridTemplateRows: '1fr 1fr',
       alignItems: 'center',
       padding: vars.gap.S,
       color: palette.font.add,
@@ -34,16 +34,24 @@ export const useStyles = createUseStyles(
     [MEMBER_STATUS_ENUM.ACTIVE]: {},
     [MEMBER_STATUS_ENUM.CONNECTED]: {},
     [MEMBER_STATUS_ENUM.INVITED]: {},
-    [MEMBER_STATUS_ENUM.EMPTY]: {
+    [MEMBER_STATUS_ENUM.FREE]: {
       '& $avatar': {
-        opacity: 0,
+        display: 'none',
       },
       '& $name': {
-        opacity: 0,
+        display: 'none',
+      },
+    },
+    [MEMBER_STATUS_ENUM.EMPTY]: {
+      '& $avatar': {
+        display: 'none',
+      },
+      '& $name': {
+        display: 'none',
       },
     },
     [MEMBER_STATUS_ENUM.UNAVAILABLE]: {
-      opacity: 0,
+      display: 'none',
     },
   }),
   { name: 'MemberCard' },

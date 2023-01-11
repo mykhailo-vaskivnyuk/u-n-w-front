@@ -70,6 +70,9 @@ const palette: Palette = {
   },
 
   dark: {
+    extraLight: dark(25),
+    light: dark(50),
+    medium: dark(75),
     main: dark(),
     dark: dark(125),
   },

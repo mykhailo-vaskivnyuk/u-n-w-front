@@ -1,4 +1,3 @@
-import { mixins } from '@styles/mixins';
 import { createUseStyles } from 'react-jss';
 
 export const useStyles = createUseStyles(
@@ -10,7 +9,7 @@ export const useStyles = createUseStyles(
     },
     content: {
       flex: '1 0 0',
-      ...mixins.flexCenter,
+      marginTop: 60,
     },
   },
   { name: 'Member' },

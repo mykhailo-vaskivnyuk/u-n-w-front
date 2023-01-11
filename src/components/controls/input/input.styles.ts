@@ -16,7 +16,7 @@ export const useStyles = createUseStyles(
       paddingLeft: vars.gap.S,
       paddingRight: vars.gap.S,
       borderRadius: vars.radius.SS,
-      border: `1px solid ${palette.dark.main}`,
+      border: `1px solid ${palette.first.main}`,
       fontWeight: vars.fontWeight.semiBold,
       letterSpacing: vars.letterGap.M,
       '&:focus': {

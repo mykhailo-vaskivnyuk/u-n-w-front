@@ -5,7 +5,7 @@ import { makeDynamicPathname } from '@utils/utils';
 
 const { INDEX: netPath } = RoutesMap.NET.NET_ID;
 const { USER: treeUserPath, NODE_ID: TREE } = RoutesMap.NET.NET_ID.TREE;
-const { USER: circleUserPath, NODE_ID: CIRCLE } = RoutesMap.NET.NET_ID.TREE;
+const { USER: circleUserPath, NODE_ID: CIRCLE } = RoutesMap.NET.NET_ID.CIRCLE;
 const { INDEX: treeMemberPath, CONNECTED: connectedPath, INVITE: invitePath } = TREE;
 const { INDEX: circleMemberPath } = CIRCLE;
 

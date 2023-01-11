@@ -4,12 +4,11 @@ export const useStyles = createUseStyles(
   ({ palette, vars, mixins }) => ({
     root: {
       height: 60,
-      margin: `0 -${vars.gap.main} 0`,
       display: 'flex',
       alignItems: 'center',
       gap: vars.gap.S,
       padding: vars.gap.S,
-      border: `1px solid ${palette.add.main}`,
+      border: `2px solid ${palette.add.main}`,
       borderRadius: vars.gap.main,
       background: palette.light.main,
       color: palette.font.add,

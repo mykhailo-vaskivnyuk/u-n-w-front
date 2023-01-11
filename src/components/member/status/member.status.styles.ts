@@ -8,7 +8,7 @@ export const useStyles = createUseStyles(
       ...mixins.size('100%'),
       ...mixins.flexCenter,
       color: palette.font.light,
-      border: '1px solid',
+      border: '1px solid transparent',
       borderRadius: vars.radius.S,
       fontSize: vars.fontSize.S,
       fontWeight: vars.fontWeight.semiBold,
@@ -22,6 +22,10 @@ export const useStyles = createUseStyles(
     },
     [MEMBER_STATUS_ENUM.INVITED]: {
       background: palette.second.medium,
+    },
+    [MEMBER_STATUS_ENUM.FREE]: {
+      color: palette.dark.main,
+      border: `1px solid ${palette.dark.main}`,
     },
     [MEMBER_STATUS_ENUM.EMPTY]: {
       background: palette.dark.main,
