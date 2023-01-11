@@ -5,7 +5,7 @@ export const useStyles = createUseStyles(
     root: {
       height: '100%',
       display: 'grid',
-      gridTemplateRows: 'repeat(8, minmax(60px, auto))',
+      gridTemplateRows: 'repeat(8, minmax(60px, 1fr))',
       alignItems: 'center',
       gap: vars.gap.SS,
     },

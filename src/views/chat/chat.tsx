@@ -1,7 +1,7 @@
 import { app } from '@api/app/client.app';
 import clsx from 'clsx';
 import React, { FC, useCallback, useState, ChangeEvent, useRef, useEffect } from 'react';
-import { useStyles } from './tree.chat.styles';
+import { useStyles } from './chat.styles';
 
 interface IChatMessage {
   index: number;
@@ -10,16 +10,8 @@ interface IChatMessage {
 }
 
 const MESSAGES: IChatMessage[] = [];
-/*
-[
-  { index: 1, from: 'name', message: 'some message\nsome message\nsome message ' },
-  { index: 2, from: 'name', message: 'some message' },
-  { index: 3, from: '', message: 'some message' },
-  { index: 4, from: 'name', message: 'some message' },
-];
-*/
 
-export const TreeChat: FC = () => {
+export const Chat: FC = () => {
   const {
     container,
     readFieldContainer,
@@ -33,6 +25,8 @@ export const TreeChat: FC = () => {
   const lastValue = useRef<string>();
   lastValue.current = value;
 
+  useEffect(() => console.log('NEW CHAT'), []);
+
   const ref = useRef<HTMLDivElement>(null);
 
   const handleChange = useCallback(
@@ -41,8 +35,9 @@ export const TreeChat: FC = () => {
   );
 
   const handleSend = useCallback(() => {
+    const { netView } = app.getState();
     setValue(() => '');
-    lastValue.current && app.netMethods.sendTreeMessage(lastValue.current);
+    lastValue.current && app.netMethods.sendMessage(lastValue.current, netView!);
   }, []);
 
   const messagesJsx = messages.map(({ index, from, message }) => (
@@ -59,9 +54,7 @@ export const TreeChat: FC = () => {
   }, [MESSAGES.length]);
 
   useEffect(() => {
-    console.log('NEW COMPONENET');
     const onMessage = (data: any) => {
-      console.log('SET MESSAGE');
       setMessages((mess) => [
         ...mess,
         { index: mess.length + 1, from: 'name', message: data.message },

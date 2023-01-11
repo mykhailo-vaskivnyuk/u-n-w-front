@@ -3,11 +3,12 @@ import React, { FC } from 'react';
 import { useCircle } from '@hooks/useCircle';
 import { MemberCard } from '@components/member/card/member.card';
 import { UserCard } from '@components/member/card/user.card';
+import { NetViewMenu } from '@components/menu/net.view.menu/net.view.menu';
 import { useStyles } from './net.view.styles';
 
 export const NetCircle: FC = () => {
   useCircle();
-  const { root, viewTitle } = useStyles();
+  const { root } = useStyles();
 
   const circleJsx = new Array(7)
     .fill('circle')
@@ -21,16 +22,8 @@ export const NetCircle: FC = () => {
 
   return (
     <div className={root}>
-      {/* <IconButton
-            icon={ICONS.arrowRight}
-            iconPosition="left"
-            className={viewButton}
-            onClick={() => setNetView('circle')}
-          >
-            SWITCH to CIRCLE
-          </IconButton> */}
       {circleJsx}
-      <div className={viewTitle}>CIRCLE VIEW</div>
+      <NetViewMenu netView="circle" />
     </div>
   );
 };

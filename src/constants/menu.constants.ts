@@ -64,3 +64,33 @@ export const MENU_INSIDE_NET_ITEMS: IMenuItem[] = [
     allowForUser: 'INVITING',
   },
 ];
+
+export const MENU_TREE_ITEMS: IMenuItem[] = [
+  {
+    label: 'Інфо',
+    href: RoutesMap.NET.NET_ID.TREE.INDEX,
+    icon: ICONS.about,
+    allowForUser: ['INSIDE_NET'],
+  },
+  {
+    label: 'Чат',
+    href: RoutesMap.NET.NET_ID.TREE.CHAT,
+    icon: ICONS.login,
+    allowForUser: ['INSIDE_NET'],
+  },
+];
+
+export const MENU_CIRCLE_ITEMS: IMenuItem[] = [
+  {
+    label: 'Інфо',
+    href: RoutesMap.NET.NET_ID.TREE.INDEX,
+    icon: ICONS.about,
+    allowForUser: ['INSIDE_NET'],
+  },
+  {
+    label: 'Чат',
+    href: RoutesMap.NET.NET_ID.CIRCLE.CHAT,
+    icon: ICONS.login,
+    allowForUser: ['INSIDE_NET'],
+  },
+];

@@ -1,16 +1,10 @@
 import { useMatch } from 'react-router-dom';
-import {
-  IUserResponse,
-  INetResponse,
-  INetsResponse,
-  NetViewKeys,
-  UserStatusKeys,
-  USER_STATUS_MAP,
-} from '@api/api/types/types';
+import { INetsResponse, NetViewKeys, UserStatusKeys, USER_STATUS_MAP } from '@api/api/types/types';
 import { IMenuItem } from '@components/menu/types';
 import { RoutesMap } from '@constants/router.constants';
 import { IS_DEV } from '@constants/constants';
 import { ICONS } from '@components/icon/icon';
+import { app } from '@api/app/client.app';
 
 const { NET_ID } = RoutesMap.NET;
 
@@ -29,11 +23,8 @@ const netMenuFilter = (netMeuItem: IMenuItem, userStatus: UserStatusKeys) => {
   return false;
 };
 
-export const getNetMenuItems = (
-  menuItems: IMenuItem[],
-  user?: IUserResponse,
-  net?: INetResponse,
-) => {
+export const getNetMenuItems = (menuItems: IMenuItem[]) => {
+  const { user, net } = app.getState();
   const { user_status: userStatus = 'NOT_LOGGEDIN' } = user || {};
   const netId = net?.net_node_id.toString();
   let filteredMenuItems = menuItems.filter((item) => netMenuFilter(item, userStatus));
@@ -46,7 +37,7 @@ export const getNetMenuItems = (
   return filteredMenuItems.length ? filteredMenuItems : undefined;
 };
 
-export const createNetMenuItems = (nets: INetsResponse, user: IUserResponse, icon?: ICONS) => {
+export const createNetMenuItems = (nets: INetsResponse, icon?: ICONS) => {
   const netMenuItems = nets.map(
     ({ net_node_id, name }): IMenuItem => ({
       label: name,
@@ -55,7 +46,7 @@ export const createNetMenuItems = (nets: INetsResponse, user: IUserResponse, ico
       allowForUser: 'LOGGEDIN',
     }),
   );
-  return getNetMenuItems(netMenuItems, user);
+  return getNetMenuItems(netMenuItems);
 };
 
 export const useMatchParam = (

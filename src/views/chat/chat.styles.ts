@@ -61,5 +61,5 @@ export const useStyles = createUseStyles(
       paddingLeft: vars.gap.SS,
     },
   }),
-  { name: 'TreeChat' },
+  { name: 'Chat' },
 );

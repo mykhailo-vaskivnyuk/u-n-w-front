@@ -13,19 +13,22 @@ const { NET_ID } = RoutesMap.NET;
 
 export const useMenuItems = () => {
   const user = useUser();
-  const { user_status: userStatus = 'NOT_LOGGEDIN' } = user || {};
   const [net, nets] = useNet();
+
+  const { user_status: userStatus = 'NOT_LOGGEDIN' } = user || {};
   const { name = ROOT_TITLE, net_node_id: netId } = net || {};
 
-  const mainMenuItems = useMemo(() => getNetMenuItems(MENU_ITEMS, user), [user]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const mainMenuItems = useMemo(() => getNetMenuItems(MENU_ITEMS), [user]);
 
   const menuNetItems = useMemo(() => {
-    const items = getNetMenuItems(MENU_NET_ITEMS, user);
+    const items = getNetMenuItems(MENU_NET_ITEMS);
     const { parentNets, siblingNets, childNets } = nets;
-    const parentItems = createNetMenuItems(parentNets, user, ICONS.arrowUp);
-    const siblingItems = createNetMenuItems(siblingNets, user, ICONS.arrowRight);
-    const childItems = createNetMenuItems(childNets, user, ICONS.arrowRight);
+    const parentItems = createNetMenuItems(parentNets, ICONS.arrowUp);
+    const siblingItems = createNetMenuItems(siblingNets, ICONS.arrowRight);
+    const childItems = createNetMenuItems(childNets, ICONS.arrowRight);
     return { parentItems, siblingItems, childItems, items };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nets, user]);
 
   const href = useMemo(

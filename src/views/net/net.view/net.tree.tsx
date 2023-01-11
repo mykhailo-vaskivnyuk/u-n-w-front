@@ -3,11 +3,12 @@ import React, { FC } from 'react';
 import { useTree } from '@hooks/useTree';
 import { MemberCard } from '@components/member/card/member.card';
 import { UserCard } from '@components/member/card/user.card';
+import { NetViewMenu } from '@components/menu/net.view.menu/net.view.menu';
 import { useStyles } from './net.view.styles';
 
 export const NetTree: FC = () => {
   useTree();
-  const { root, viewTitle } = useStyles();
+  const { root } = useStyles();
 
   const treeJsx = new Array(7)
     .fill('tree')
@@ -21,15 +22,7 @@ export const NetTree: FC = () => {
 
   return (
     <div className={root}>
-      {/* <IconButton
-            icon={ICONS.arrowRight}
-            iconPosition="left"
-            className={viewButton}
-            onClick={() => setNetView('circle')}
-          >
-            SWITCH to CIRCLE
-          </IconButton> */}
-      <div className={viewTitle}>TREE VIEW</div>
+      <NetViewMenu netView="tree" />
       {treeJsx}
     </div>
   );
