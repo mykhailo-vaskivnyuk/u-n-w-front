@@ -19,7 +19,7 @@ export const MemberCard: FC<MemberCardProps> = (props) => {
     vote,
     vote_count: voteCount,
   } = member || {};
-  const { root, avatar, name, [memberStatus]: clsStatus } = useStyles();
+  const { root, avatar, name, [memberStatus]: status } = useStyles();
 
   const navigate = useNavigateTo();
   const handleClick = useCallback(
@@ -31,10 +31,10 @@ export const MemberCard: FC<MemberCardProps> = (props) => {
     [navigate, net, netView, nodeId],
   );
 
-  if (!member) return <div className={clsx(root, clsStatus)} aria-hidden="true" />;
+  if (!member) return <div className={clsx(root, status)} aria-hidden="true" />;
 
   return (
-    <div className={clsx(root, clsStatus)} onClick={handleClick} aria-hidden="true">
+    <div className={clsx(root, status)} onClick={handleClick} aria-hidden="true">
       <div className={avatar} />
       <div className={name}>{memberName}</div>
       <MemberStatus memberStatus={memberStatus} />

@@ -10,7 +10,8 @@ export const TreeMemberConnected: FC = () => {
   useEffect(() => {
     const { net, memberData } = app.getState();
     const { memberStatus, node_id: nodeId } = memberData!;
-    if (memberStatus !== 'CONNECTED') navigate.toNet(net!).treeMember(nodeId);
+    if (memberStatus === 'CONNECTED') return;
+    navigate.toNet(net!).treeMember(nodeId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
