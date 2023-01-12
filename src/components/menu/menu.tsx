@@ -14,9 +14,9 @@ export interface MenuProps {
 
 const handleClick = modalService.closeModal;
 
-const getMenuItemsJsx = (menuItemsProps?: IMenuItem[]) =>
-  menuItemsProps &&
-  menuItemsProps.map((item) => {
+const getMenuItemsJsx = (menuItems?: IMenuItem[]) =>
+  menuItems &&
+  menuItems.map((item) => {
     return <MenuItem key={item.href} {...item} onClick={handleClick} />;
   });
 

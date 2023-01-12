@@ -51,7 +51,7 @@ export const useStyles = createUseStyles(
       },
     },
     [MEMBER_STATUS_ENUM.UNAVAILABLE]: {
-      display: 'none',
+      opacity: 0,
     },
   }),
   { name: 'MemberCard' },

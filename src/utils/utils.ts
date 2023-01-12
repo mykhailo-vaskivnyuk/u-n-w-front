@@ -23,7 +23,7 @@ const netMenuFilter = (netMeuItem: IMenuItem, userStatus: UserStatusKeys) => {
   return false;
 };
 
-export const getNetMenuItems = (menuItems: IMenuItem[]) => {
+export const getMenuItems = (menuItems: IMenuItem[]) => {
   const { user, net } = app.getState();
   const { user_status: userStatus = 'NOT_LOGGEDIN' } = user || {};
   const netId = net?.net_node_id.toString();
@@ -42,11 +42,12 @@ export const createNetMenuItems = (nets: INetsResponse, icon?: ICONS) => {
     ({ net_node_id, name }): IMenuItem => ({
       label: name,
       href: makeDynamicPathname(NET_ID.INDEX, net_node_id),
+      end: false,
       icon: icon || ICONS.home,
       allowForUser: 'LOGGEDIN',
     }),
   );
-  return getNetMenuItems(netMenuItems);
+  return getMenuItems(netMenuItems);
 };
 
 export const useMatchParam = (

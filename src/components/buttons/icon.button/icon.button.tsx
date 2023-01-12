@@ -7,6 +7,7 @@ import { useStyles } from './icon.button.styles';
 interface IconButtonProps {
   icon: ICONS;
   href?: string;
+  end?: boolean;
   iconPosition?: 'left' | 'right';
   className?: string;
   onClick?: () => void;
@@ -14,12 +15,12 @@ interface IconButtonProps {
 
 export const IconButton: FC<PropsWithChildren<IconButtonProps>> = memo((props) => {
   const { root, withChildren } = useStyles();
-  const { icon, href, iconPosition = 'left', className, onClick, children } = props;
+  const { icon, href, end = true, iconPosition = 'left', className, onClick, children } = props;
   const cls = clsx(root, { [withChildren]: children }, className);
 
   if (href) {
     return (
-      <NavLink to={href} end className={cls} onClick={onClick}>
+      <NavLink to={href} end={end} className={cls} onClick={onClick}>
         {iconPosition === 'right' && children}
         <Icon icon={icon} />
         {iconPosition === 'left' && children}

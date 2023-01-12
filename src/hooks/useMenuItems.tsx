@@ -3,7 +3,7 @@ import { USER_STATUS_MAP } from '@api/api/types/types';
 import { MENU_ITEMS, MENU_NET_ITEMS } from '@constants/menu.constants';
 import { RoutesMap } from '@constants/router.constants';
 import { ROOT_TITLE } from '@constants/constants';
-import { getNetMenuItems, createNetMenuItems, makeDynamicPathname } from '@utils/utils';
+import { getMenuItems, createNetMenuItems, makeDynamicPathname } from '@utils/utils';
 import { modalService } from '@services/modal.service';
 import { useUser } from '@hooks/useUser';
 import { useNet } from '@hooks/useNet';
@@ -19,10 +19,10 @@ export const useMenuItems = () => {
   const { name = ROOT_TITLE, net_node_id: netId } = net || {};
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const mainMenuItems = useMemo(() => getNetMenuItems(MENU_ITEMS), [user]);
+  const mainMenuItems = useMemo(() => getMenuItems(MENU_ITEMS), [user]);
 
   const menuNetItems = useMemo(() => {
-    const items = getNetMenuItems(MENU_NET_ITEMS);
+    const items = getMenuItems(MENU_NET_ITEMS);
     const { parentNets, siblingNets, childNets } = nets;
     const parentItems = createNetMenuItems(parentNets, ICONS.arrowUp);
     const siblingItems = createNetMenuItems(siblingNets, ICONS.arrowRight);
