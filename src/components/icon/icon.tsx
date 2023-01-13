@@ -47,6 +47,7 @@ export enum ICONS {
   logout = 'logout',
   menu = 'menu',
   net = 'net',
+  post = 'post',
   remove = 'remove',
   spinner = 'spinner',
 }

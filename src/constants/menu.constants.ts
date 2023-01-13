@@ -75,7 +75,7 @@ export const MENU_TREE_ITEMS: IMenuItem[] = [
   {
     label: 'Чат',
     href: RoutesMap.NET.NET_ID.TREE.CHAT,
-    icon: ICONS.login,
+    icon: ICONS.post,
     allowForUser: ['INSIDE_NET'],
   },
 ];
@@ -90,7 +90,7 @@ export const MENU_CIRCLE_ITEMS: IMenuItem[] = [
   {
     label: 'Чат',
     href: RoutesMap.NET.NET_ID.CIRCLE.CHAT,
-    icon: ICONS.login,
+    icon: ICONS.post,
     allowForUser: ['INSIDE_NET'],
   },
 ];
