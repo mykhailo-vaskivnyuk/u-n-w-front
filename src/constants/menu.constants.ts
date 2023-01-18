@@ -52,6 +52,12 @@ export const MENU_NET_ITEMS: IMenuItem[] = [
 
 export const MENU_INSIDE_NET_ITEMS: IMenuItem[] = [
   {
+    label: 'Інфо',
+    href: RoutesMap.NET.NET_ID.INDEX,
+    icon: ICONS.about,
+    allowForUser: ['INSIDE_NET'],
+  },
+  {
     label: 'Створити спільноту',
     href: RoutesMap.NET.NET_ID.CREATE,
     icon: ICONS.create,
@@ -62,6 +68,12 @@ export const MENU_INSIDE_NET_ITEMS: IMenuItem[] = [
     href: RoutesMap.NET.NET_ID.LEAVE,
     icon: ICONS.remove,
     allowForUser: 'INVITING',
+  },
+  {
+    label: 'Чат',
+    href: RoutesMap.NET.NET_ID.CHAT,
+    icon: ICONS.post,
+    allowForUser: ['INSIDE_NET'],
   },
 ];
 

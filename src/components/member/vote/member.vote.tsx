@@ -1,6 +1,7 @@
 import React, { FC, useCallback, MouseEvent } from 'react';
 import clsx from 'clsx';
-import { MemberStatusKeys, NetViewKeys } from '@api/api/types/types';
+import { NetViewKeys } from '@api/api/types/types';
+import { MemberStatusKeys } from '@api/constants';
 import { app } from '@api/app/client.app';
 import { useStyles } from './member.vote.styles';
 
