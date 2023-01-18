@@ -57,8 +57,8 @@ export const useMatchParam = (
   isNumberParam: boolean = true,
 ) => {
   const { params } = useMatch<typeof paramName, typeof path>({ path, end }) || {};
-  const { [paramName]: strParamValue } = params || {};
-  return isNumberParam ? Number(strParamValue) : strParamValue || '';
+  const { [paramName]: strParamValue = '' } = params || {};
+  return isNumberParam ? Number(strParamValue) || 0 : strParamValue;
 };
 
 export const getMemberPosition = (netView: NetViewKeys, memberUiPosition: number) =>

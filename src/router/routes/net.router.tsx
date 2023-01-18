@@ -7,6 +7,7 @@ import { NetLeave } from '@views/net/leave/leave';
 import { NetInvite } from '@views/net/invite/invite';
 import { NetIdIndex } from '@views/net/net.id/net.id.index';
 import { NetId } from '@views/net/net.id/net.id';
+import { NetChat } from '@views/chat/net.chat';
 import { CircleRouter } from './circle.router';
 import { TreeRouter } from './tree.router';
 
@@ -21,6 +22,7 @@ export const NetRouter = (
       <Route path="" element={<NetId />} />
       <Route path={NET.NET_ID.CREATE} element={<NetCreate />} />
       <Route path={NET.NET_ID.LEAVE} element={<NetLeave />} />
+      <Route path={NET.NET_ID.CHAT} element={<NetChat />} />
       {CircleRouter}
       {TreeRouter}
     </Route>

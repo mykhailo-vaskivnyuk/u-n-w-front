@@ -14,14 +14,12 @@ const netViewStyle = {
 const options = [...NET_VIEW_MAP] as const;
 
 export const NetId: FC = () => {
-  const { netView: initialNetView = 'tree' } = app.getState();
+  const { netView: initialNetView } = app.getState();
   const { container, root } = useStyles();
-  const [netView, handlers] = useSwap<NetViewKeys>(options, initialNetView);
+  const [netView, handlers] = useSwap<NetViewKeys>(options, initialNetView!);
   const style = netViewStyle[netView];
 
-  useEffect(() => {
-    app.netMethods.setView(netView);
-  }, [netView]);
+  useEffect(() => app.netMethods.setView(netView), [netView]);
 
   return (
     <div className={container}>
