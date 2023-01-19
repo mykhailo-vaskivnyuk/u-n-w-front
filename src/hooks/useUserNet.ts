@@ -19,12 +19,12 @@ export const useUserNet = () => {
   useEffect(() => {
     if (loaded || loading) return;
     setLoading(true);
-    app.net.enter(netId).then(() => {
-      app.net.setView(netView);
+    app.net.enter(netId).then((success) => {
+      success && app.net.setView(netView);
       setLoading(false);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [netId, net, loading]);
+  }, [netId, net]);
 
   return [loading || !loaded, net];
 };
