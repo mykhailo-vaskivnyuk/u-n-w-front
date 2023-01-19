@@ -19,7 +19,7 @@ export const NetId: FC = () => {
   const [netView, handlers] = useSwap<NetViewKeys>(options, initialNetView!);
   const style = netViewStyle[netView];
 
-  useEffect(() => app.netMethods.setView(netView), [netView]);
+  useEffect(() => app.net.setView(netView), [netView]);
 
   return (
     <div className={container}>

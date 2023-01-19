@@ -1,5 +1,5 @@
 import { useMatch } from 'react-router-dom';
-import { INetsResponse, NetViewKeys, UserStatusKeys, USER_STATUS_MAP } from '@api/api/types/types';
+import * as T from '@api/api/types/types';
 import { IMenuItem } from '@components/menu/types';
 import { RoutesMap } from '@constants/router.constants';
 import { IS_DEV } from '@constants/constants';
@@ -15,10 +15,10 @@ export const format = (str: string, ...values: string[]) => {
 export const makeDynamicPathname = (pathname: string, ...ids: (number | string)[]) =>
   ids.reduce((result: string, id) => result.replace(/:[^/]+/, id.toString()), pathname);
 
-const netMenuFilter = (netMeuItem: IMenuItem, userStatus: UserStatusKeys) => {
+const netMenuFilter = (netMeuItem: IMenuItem, userStatus: T.UserStatusKeys) => {
   const { allowForUser } = netMeuItem;
   if (Array.isArray(allowForUser)) return allowForUser.includes(userStatus!);
-  if (USER_STATUS_MAP[allowForUser] <= USER_STATUS_MAP[userStatus!]) return true;
+  if (T.USER_STATUS_MAP[allowForUser] <= T.USER_STATUS_MAP[userStatus!]) return true;
   if (IS_DEV && allowForUser === 'DEV') return true;
   return false;
 };
@@ -37,7 +37,7 @@ export const getMenuItems = (menuItems: IMenuItem[]) => {
   return filteredMenuItems.length ? filteredMenuItems : undefined;
 };
 
-export const createNetMenuItems = (nets: INetsResponse, icon?: ICONS) => {
+export const createNetMenuItems = (nets: T.INetsResponse, icon?: ICONS) => {
   const netMenuItems = nets.map(
     ({ net_node_id, name }): IMenuItem => ({
       label: name,
@@ -61,5 +61,5 @@ export const useMatchParam = (
   return isNumberParam ? Number(strParamValue) || 0 : strParamValue;
 };
 
-export const getMemberPosition = (netView: NetViewKeys, memberUiPosition: number) =>
+export const getMemberPosition = (netView: T.NetViewKeys, memberUiPosition: number) =>
   netView === 'tree' ? memberUiPosition - 1 : memberUiPosition && memberUiPosition - 1;

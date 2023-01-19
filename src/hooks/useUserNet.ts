@@ -14,13 +14,13 @@ export const useUserNet = () => {
   const { net_node_id: netNodeId } = net || {};
   const [loading, setLoading] = useState(false);
 
-  const loaded = netNodeId !== netId;
+  const loaded = netNodeId === netId;
 
   useEffect(() => {
     if (loading) return;
     setLoading(!loaded);
-    app.netMethods.enter(netId).then(() => {
-      app.netMethods.setView(netView);
+    app.net.enter(netId).then(() => {
+      app.net.setView(netView);
       setLoading(false);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps

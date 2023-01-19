@@ -19,7 +19,7 @@ export const NetLeave: FC = () => {
 
     const handleConfirm = () => {
       isLeaving = true;
-      app.netMethods
+      app.net
         .leave()
         .then((success) => {
           if (!success) {

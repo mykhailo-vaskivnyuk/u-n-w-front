@@ -21,7 +21,7 @@ export const NetInvite: FC = () => {
       showBadLink();
       return navigate.back();
     }
-    app.netMethods
+    app.net
       .connectByInvite({ token })
       .then((result) => {
         if (!result) {

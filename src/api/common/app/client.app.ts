@@ -1,10 +1,8 @@
 /* eslint-disable max-lines */
 /* eslint-disable import/no-cycle */
-import {
-  INetResponse, INetsResponse, IUserNetDataResponse, IUserResponse, NetViewKeys,
-} from '../api/types/types';
+import * as T from '../api/types/types'
 import { INITIAL_NETS, INets, IMember } from './types';
-import { TOnChatMessage } from '../types';
+import { IChatMessage } from '../api/types/types';
 import { AppStatus } from '../constants';
 import { HttpResponseError } from '../errors';
 import { EventEmitter } from '../event.emitter';
@@ -12,37 +10,40 @@ import { getApi, IClientApi } from '../api/client.api';
 import { getAccountMethods } from './methods/account';
 import { getNetMethods } from './methods/net';
 import { getMemberMethods } from './methods/member';
+import { getChatMethods } from './methods/chat';
 import { getConnection as getHttpConnection } from '../client.http';
 import { getConnection as getWsConnection } from '../client.ws';
 
 export class ClientApp extends EventEmitter {
   private baseUrl = '';
   protected api: IClientApi | null;
-  setOnChatMessage?: (onChatMessage: TOnChatMessage) => void;
 
   private status: AppStatus = AppStatus.INITING;
   private error: HttpResponseError | null = null;
 
-  private user: IUserResponse = null;
-  private userNetData: IUserNetDataResponse | null = null;
-  private allNets: INetsResponse = [];
+  private user: T.IUserResponse = null;
+  private allNets: T.INetsResponse = [];
+  private messages = new Map<number, T.IChatMessage[]>();
+  private userNetData: T.IUserNetDataResponse | null = null;
   private nets: INets = INITIAL_NETS;
-  private net: INetResponse = null;
+  private userNet: T.INetResponse = null;
   private circle: IMember[] = [];
   private tree: IMember[] = [];
-  private netView?: NetViewKeys;
+  private netView?: T.NetViewKeys;
   private memberData?: IMember;
 
   account: ReturnType<typeof getAccountMethods>;
-  netMethods: ReturnType<typeof getNetMethods>;
+  net: ReturnType<typeof getNetMethods>;
   member: ReturnType<typeof getMemberMethods>;
+  chat: ReturnType<typeof getChatMethods>;
 
   constructor() {
     super();
-    this.account = getAccountMethods(this as any);
-    this.netMethods = getNetMethods(this as any);
-    this.member = getMemberMethods(this as any);
     this.baseUrl = process.env.API || `${window.location.origin}/api`;
+    this.account = getAccountMethods(this as any);
+    this.net = getNetMethods(this as any);
+    this.member = getMemberMethods(this as any);
+    this.chat = getChatMethods(this as any);
   }
 
   getState() {
@@ -51,19 +52,20 @@ export class ClientApp extends EventEmitter {
       error: this.error,
       user: this.user,
       userNetData: this.userNetData,
-      net: this.net,
+      net: this.userNet,
       circle: this.circle,
       tree: this.tree,
       allNets: this.allNets,
       nets: this.nets,
       netView: this.netView,
       memberData: this.memberData,
+      messages: this.messages,
     };
   }
 
   async init() {
     try {
-      const connection = await getHttpConnection(this.baseUrl);
+      const connection = getHttpConnection(this.baseUrl);
       this.api = getApi(connection);
       await this.api.health();
     } catch (e: any) {
@@ -71,10 +73,11 @@ export class ClientApp extends EventEmitter {
       if (e.statusCode !== 503) return this.setError(e);
       try {
         const baseUrl = this.baseUrl.replace('http', 'ws');
-        const { connection, setOnChatMessage } = await getWsConnection(baseUrl);
+        const connection = getWsConnection(
+          baseUrl, this.setMessage.bind(this),
+        );
         this.api = getApi(connection);
         await this.api.health();
-        this.setOnChatMessage = setOnChatMessage;
       } catch (err: any) {
         return this.setError(err);
       }
@@ -83,28 +86,30 @@ export class ClientApp extends EventEmitter {
     this.setStatus(AppStatus.INITED);
   }
 
-  protected async setUser(user: IUserResponse) {
+  protected async setUser(user: T.IUserResponse) {
     if (this.user === user) return;
     this.user = user;
     if (user && user.user_status !== 'NOT_CONFIRMED') {
-      await this.netMethods.getAllNets();
-      this.netMethods.getNets();
+      await this.net.getAllNets();
+      this.net.getNets();
     } else {
-      this.setNets({ ...INITIAL_NETS });
+      this.nets = INITIAL_NETS;
+      this.allNets = [];
+      this.messages = new Map();
     }
     this.emit('user', user);
   }
 
-  protected async setNet(net: INetResponse | null = null) {
-    if (this.net === net) return;
-    this.net = net;
-    if (net) {
-      await this.netMethods.getUserData(net.net_node_id);
+  protected async setNet(userNet: T.INetResponse = null) {
+    if (this.userNet === userNet) return;
+    this.userNet = userNet;
+    if (userNet) {
+      await this.net.getUserData(userNet.net_node_id);
       this.user!.user_status = this.userNetData!.confirmed ?
         'INSIDE_NET' :
         'INVITING';
-      await this.netMethods.getCircle();
-      await this.netMethods.getTree();
+      await this.net.getCircle();
+      await this.net.getTree();
       this.emit('user', { ...this.user });
     } else {
       this.setUserNetData();
@@ -117,18 +122,18 @@ export class ClientApp extends EventEmitter {
         this.emit('user', { ...this.user });
       }
     }
-    this.netMethods.getNets();
-    this.emit('net', net);
+    this.net.getNets();
+    this.emit('net', userNet);
   }
 
   protected setUserNetData(
-    userNetData: IUserNetDataResponse | null = null,
+    userNetData: T.IUserNetDataResponse | null = null,
   ) {
     if (this.userNetData === userNetData) return;
     this.userNetData = userNetData;
   }
 
-  protected setAllNets(nets: INetsResponse) {
+  protected setAllNets(nets: T.INetsResponse) {
     if (this.allNets === nets) return;
     this.allNets = nets;
   }
@@ -145,7 +150,7 @@ export class ClientApp extends EventEmitter {
     this.emit('circle', circle);
   }
 
-  protected setNetView(netView?: NetViewKeys) {
+  protected setNetView(netView?: T.NetViewKeys) {
     this.netView = netView;
   }
 
@@ -178,6 +183,33 @@ export class ClientApp extends EventEmitter {
   protected setError(e: HttpResponseError) {
     this.error = e;
     this.setStatus(AppStatus.ERROR);
+  }
+
+  protected async setMessage(messageData: T.IChatResponseMessage) {
+    if (!messageData) return;
+    const { chatId, ...message } = messageData;
+    if (!message.message) return;
+    const chatMessages = this.messages.get(chatId);
+    if (chatMessages) {
+      const lastMessage = chatMessages.at(-1);
+      const { index = 1 } = lastMessage || {};
+      if (message.index > index + 1) this.chat.getMessages(chatId, index + 1);
+      chatMessages.push(message as T.IChatMessage);
+    } else this.messages.set(chatId, [message as T.IChatMessage]);
+    this.emit('message', chatId);
+  }
+
+  protected setAllMessages(chatId: number, messages: T.IChatMessage[]) {
+    if (!messages.length) return;
+    const curChatMessages = this.messages.get(chatId);
+    let chatMessages: IChatMessage[] = []
+    if (curChatMessages) {
+      chatMessages = [...curChatMessages, ...messages]
+        .sort(({ index: a }, { index: b }) => a - b)
+        .filter(({ index }, i, arr) => index !== arr[i + 1]?.index);
+    }
+    this.messages.set(chatId, chatMessages);
+    this.emit('message', chatId);
   }
 
   private async readUser() {

@@ -26,7 +26,7 @@ export const Redirect: FC = () => {
     }
     const { user, net } = app.getState();
     if (!isNet && net)
-      app.netMethods.comeout().catch(() => {
+      app.net.comeout().catch(() => {
         showFailed();
         navigate.back();
       });

@@ -10,6 +10,7 @@ interface SendMessageProps {
 export const SendMessage: FC<SendMessageProps> = ({ netView }) => {
   const { root } = useStyles();
   const [value, setValue] = useState('');
+  const [chatId] = useState(() => app.chat.getChatId(netView));
   const lastValue = useRef<string>();
 
   const handleChange = useCallback(
@@ -20,8 +21,8 @@ export const SendMessage: FC<SendMessageProps> = ({ netView }) => {
   const handleSend = useCallback(() => {
     const message = lastValue.current;
     if (!message) return;
-    app.chat.sendMessage(message, netView).then(() => setValue(''));
-  }, [netView]);
+    app.chat.sendMessage(message, chatId!).then(() => setValue(''));
+  }, [chatId]);
 
   lastValue.current = value;
 
