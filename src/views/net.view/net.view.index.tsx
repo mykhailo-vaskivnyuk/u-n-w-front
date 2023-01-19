@@ -6,9 +6,8 @@ import { useTree } from '@hooks/useTree';
 import { useCircle } from '@hooks/useCircle';
 
 export const NetViewIndex: FC<{ netView: NetViewKeys }> = ({ netView }) => {
+  useNetView(netView);
   useTree();
   useCircle();
-  const curNetView = useNetView(netView);
-  if (!curNetView) return null;
   return <Outlet key={Math.random()} />;
 };

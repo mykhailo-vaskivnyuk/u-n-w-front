@@ -7,6 +7,11 @@ interface ChatTitleProps {
 }
 
 export const ChatTitle: FC<ChatTitleProps> = ({ netView }) => {
-  const { root } = useStyles();
-  return <div className={root}>{!netView ? 'net' : netView} chat</div>;
+  const { container, root } = useStyles();
+  const title = `${!netView ? 'net' : netView} chat`;
+  return (
+    <div className={container}>
+      <div className={root}>{title}</div>
+    </div>
+  );
 };

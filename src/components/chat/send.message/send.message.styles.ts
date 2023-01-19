@@ -3,7 +3,7 @@ import { createUseStyles } from 'react-jss';
 export const useStyles = createUseStyles(
   ({ palette, vars }) => ({
     root: {
-      height: 64,
+      height: 66,
       display: 'flex',
       border: `1px solid ${palette.font.second}`,
       borderRadius: vars.radius.SS,

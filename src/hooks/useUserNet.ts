@@ -17,8 +17,8 @@ export const useUserNet = () => {
   const loaded = netNodeId === netId;
 
   useEffect(() => {
-    if (loading) return;
-    setLoading(!loaded);
+    if (loaded || loading) return;
+    setLoading(true);
     app.net.enter(netId).then(() => {
       app.net.setView(netView);
       setLoading(false);

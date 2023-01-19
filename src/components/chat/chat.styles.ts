@@ -6,7 +6,6 @@ export const useStyles = createUseStyles(
       ...mixins.size('100%'),
       display: 'flex',
       flexDirection: 'column',
-      overflow: 'hidden',
     },
   }),
   { name: 'Chat' },
