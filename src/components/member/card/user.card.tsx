@@ -1,6 +1,6 @@
 import React, { FC, useCallback, MouseEvent } from 'react';
 import { NetViewKeys } from '@api/api/types/types';
-import { useNavigateTo } from 'contexts/navigate/navigate';
+import { useNavigateTo } from '@hooks/useNavigateTo';
 import { app } from '@api/app/client.app';
 import { MemberVote } from '../vote/member.vote';
 import { useStyles } from './member.card.styles';

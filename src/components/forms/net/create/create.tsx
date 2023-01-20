@@ -2,7 +2,7 @@ import React, { FC, FormEvent } from 'react';
 import { Formik, useFormikContext } from 'formik';
 import { MAX_NET_LEVEL } from '@api/api/constants';
 import { MessagesMap } from '@constants/messages';
-import { useNavigateTo } from 'contexts/navigate/navigate';
+import { useNavigateTo } from '@hooks/useNavigateTo';
 import { modalService } from '@services/modal.service';
 import { app } from '@api/app/client.app';
 import { Input } from '@components/controls/input/input';

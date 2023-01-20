@@ -1,8 +1,10 @@
-import { FC, useCallback, useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
+import { MessagesMap } from '@constants/messages';
 import { HttpResponseErrorCode, HttpResponseErrorMap } from '@api/errors';
 import { modalService } from '@services/modal.service';
-import { MessagesMap } from '@constants/messages';
-import { useAppError } from '../../hooks/useAppError';
+import { useNavigateTo } from '@hooks/useNavigateTo';
+import { useAppError } from '@hooks/useAppError';
+import { NotFound } from '@views/not.found/not.found';
 
 const STATUS_TO_MESSAGES_MAP: Record<HttpResponseErrorCode, string> = {
   400: MessagesMap.BAD_REQUEST,
@@ -14,21 +16,21 @@ const STATUS_TO_MESSAGES_MAP: Record<HttpResponseErrorCode, string> = {
   503: MessagesMap.SERVER_ERROR,
 };
 
-export const ErrorCatch: FC = () => {
-  const error = useAppError();
+const showError = (statusCode?: HttpResponseErrorCode) =>
+  modalService.showError(STATUS_TO_MESSAGES_MAP[statusCode || 500]);
 
-  const showError = useCallback(
-    (statusCode?: HttpResponseErrorCode) =>
-      modalService.showError(STATUS_TO_MESSAGES_MAP[statusCode || 500]),
-    [],
-  );
+export const ErrorCatch: FC = () => {
+  const { statusCode } = useAppError() || {};
+  const navigate = useNavigateTo();
 
   useEffect(() => {
-    if (!error) return;
-    const { statusCode } = error || {};
+    if (!statusCode) return;
     if (HttpResponseErrorMap[statusCode] === 'Not found') return;
+    if (HttpResponseErrorMap[statusCode] === 'Unauthorized') return navigate.toIndex();
     showError(statusCode);
-  }, [showError, error]);
+  }, [statusCode, navigate]);
+
+  if (statusCode === 404) return <NotFound />;
 
   return null;
 };

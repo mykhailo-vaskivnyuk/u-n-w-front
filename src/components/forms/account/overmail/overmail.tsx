@@ -2,7 +2,7 @@ import React, { FC, FormEvent } from 'react';
 import { Formik, useFormikContext } from 'formik';
 import { RoutesMap } from '@constants/router.constants';
 import { MessagesMap } from '@constants/messages';
-import { useNavigateTo } from 'contexts/navigate/navigate';
+import { useNavigateTo } from '@hooks/useNavigateTo';
 import { modalService } from '@services/modal.service';
 import { format } from '@utils/utils';
 import { app } from '@api/app/client.app';

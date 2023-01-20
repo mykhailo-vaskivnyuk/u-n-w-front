@@ -24,7 +24,7 @@ export const useUserNet = () => {
       setLoading(false);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [netId, net]);
+  }, [loaded]);
 
-  return [loading || !loaded, net];
+  return !loading && loaded && net;
 };

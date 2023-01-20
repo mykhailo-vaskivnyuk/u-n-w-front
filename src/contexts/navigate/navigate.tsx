@@ -1,4 +1,4 @@
-import React, { createContext, FC, PropsWithChildren, useContext, useMemo } from 'react';
+import React, { createContext, FC, PropsWithChildren, useMemo } from 'react';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { RoutesMap } from '@constants/router.constants';
 import { makeDynamicPathname } from '@utils/utils';
@@ -30,10 +30,10 @@ const getNavigateMap = (navigate: NavigateFunction) => {
   };
 };
 
-const Context = createContext<ReturnType<typeof getNavigateMap>>(getNavigateMap(() => {}));
-const Provider = Context.Provider;
-
-export const useNavigateTo = () => useContext(Context);
+export const NavigateContext = createContext<ReturnType<typeof getNavigateMap>>(
+  getNavigateMap(() => {}),
+);
+const Provider = NavigateContext.Provider;
 
 export const NavigateProvider: FC<PropsWithChildren> = ({ children }) => {
   const navigate = useNavigate();

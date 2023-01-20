@@ -12,6 +12,9 @@ export const useStyles = createUseStyles(
       height: '100%',
       overflow: 'auto',
       padding: vars.gap.main,
+      '.error + &': {
+        display: 'none',
+      },
     },
     animation: {
       animationName: 'showContent',

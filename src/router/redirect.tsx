@@ -4,7 +4,7 @@ import { AppStatus } from '@api/constants';
 import { IS_DEV, REGEXP_END_ON_SLASH } from '@constants/constants';
 import { RoutesMap } from '@constants/router.constants';
 import { MessagesMap } from '@constants/messages';
-import { useNavigateTo } from 'contexts/navigate/navigate';
+import { useNavigateTo } from '@hooks/useNavigateTo';
 import { useMatchParam } from '@utils/utils';
 import { useAppStatus } from '@hooks/useAppStatus';
 import { modalService } from '@services/modal.service';
@@ -20,16 +20,17 @@ export const Redirect: FC = () => {
   const isNet = useMatchParam('net_id', netPath, false);
 
   useEffect(() => {
-    if (status !== AppStatus.READY) return;
+    if (status !== AppStatus.READY && status !== AppStatus.ERROR) return;
     if (pathname !== RoutesMap.ROOT && REGEXP_END_ON_SLASH.test(pathname)) {
       return navigate.to(pathname.replace(REGEXP_END_ON_SLASH, ''));
     }
     const { user, net } = app.getState();
-    if (!isNet && net)
+    if (!isNet && net) {
       app.net.comeout().catch(() => {
         showFailed();
         navigate.back();
       });
+    }
     switch (pathname) {
       case RoutesMap.ROOT:
       case RoutesMap.ACCOUNT.INDEX:

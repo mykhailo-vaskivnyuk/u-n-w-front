@@ -1,6 +1,6 @@
 import React, { FC, useCallback, MouseEvent } from 'react';
 import clsx from 'clsx';
-import { useNavigateTo } from 'contexts/navigate/navigate';
+import { useNavigateTo } from '@hooks/useNavigateTo';
 import { useMemberCard } from '@hooks/useMemberCard';
 import { MemberStatus } from '@components/member/status/member.status';
 import { MemberCardProps } from './member.card.types';
