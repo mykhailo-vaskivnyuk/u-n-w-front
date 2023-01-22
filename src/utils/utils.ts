@@ -61,5 +61,5 @@ export const useMatchParam = (
   return isNumberParam ? Number(strParamValue) || 0 : strParamValue;
 };
 
-export const getMemberPosition = (netView: T.NetViewKeys, memberUiPosition: number) =>
+export const getMemberPosition = (netView: T.NetViewEnum, memberUiPosition: number) =>
   netView === 'tree' ? memberUiPosition - 1 : memberUiPosition && memberUiPosition - 1;

@@ -1,12 +1,12 @@
 import React, { FC, useCallback, MouseEvent } from 'react';
-import { NetViewKeys } from '@api/api/types/types';
+import { NetViewEnum } from '@api/api/types/types';
 import { useNavigateTo } from '@hooks/useNavigateTo';
 import { app } from '@api/app/client.app';
 import { MemberVote } from '../vote/member.vote';
 import { useStyles } from './member.card.styles';
 
 interface NetUserCardProps {
-  netView: NetViewKeys;
+  netView: NetViewEnum;
 }
 
 export const UserCard: FC<NetUserCardProps> = (props) => {

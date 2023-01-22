@@ -1,6 +1,6 @@
 import React, { FC, useCallback, MouseEvent } from 'react';
 import clsx from 'clsx';
-import { NetViewKeys } from '@api/api/types/types';
+import { NetViewEnum } from '@api/api/types/types';
 import { MemberStatusKeys } from '@api/constants';
 import { app } from '@api/app/client.app';
 import { useStyles } from './member.vote.styles';
@@ -11,7 +11,7 @@ interface MemberDislikeProps {
   canVote: boolean;
   vote: boolean | null;
   voteCount: number;
-  netView: NetViewKeys;
+  netView: NetViewEnum;
 }
 
 export const MemberVote: FC<MemberDislikeProps> = (props) => {

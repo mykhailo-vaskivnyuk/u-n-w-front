@@ -4,7 +4,7 @@ import { app } from '@api/app/client.app';
 import { useStyles } from './send.message.styles';
 
 interface SendMessageProps {
-  netView?: NetViewKeys;
+  netView: NetViewKeys;
 }
 
 export const SendMessage: FC<SendMessageProps> = ({ netView }) => {

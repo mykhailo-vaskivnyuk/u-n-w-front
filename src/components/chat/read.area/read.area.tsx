@@ -8,7 +8,7 @@ import { useStyles } from './read.area.styles';
 
 interface ReadAreaProps {
   membersMap: Map<number, IMember>;
-  netView?: NetViewKeys;
+  netView: NetViewKeys;
 }
 
 export const ReadArea: FC<ReadAreaProps> = (props) => {

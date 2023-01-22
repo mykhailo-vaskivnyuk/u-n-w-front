@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { NetViewKeys } from '@api/api/types/types';
 import { app } from '@api/app/client.app';
 
-export const useMessages = (netView?: NetViewKeys) => {
+export const useMessages = (netView: NetViewKeys) => {
   const setUpdate = useState([])[1];
   const [chatId, setChatId] = useState(() => app.chat.getChatId(netView));
   const { messages } = app.getState();

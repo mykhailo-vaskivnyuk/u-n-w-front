@@ -1,6 +1,6 @@
 import React, { FC, useMemo } from 'react';
 import clsx from 'clsx';
-import { NetViewKeys } from '@api/api/types/net.types';
+import { NetViewEnum } from '@api/api/types/net.types';
 import { MENU_CIRCLE_ITEMS, MENU_TREE_ITEMS } from '@constants/menu.constants';
 import { useTree } from '@hooks/useTree';
 import { useCircle } from '@hooks/useCircle';
@@ -13,7 +13,7 @@ const NET_VIEW_MENU = {
   circle: MENU_CIRCLE_ITEMS,
 };
 
-export const NetViewMenu: FC<{ netView: NetViewKeys }> = ({ netView }) => {
+export const NetViewMenu: FC<{ netView: NetViewEnum }> = ({ netView }) => {
   const { root, viewTitle, section, button } = useStyles();
   const tree = useTree();
   const circle = useCircle();

@@ -7,5 +7,5 @@ export const NetChat: FC = () => {
   const netMembersMap = new Map();
   circle.forEach((member) => netMembersMap.set(member.user_id, member));
   tree.forEach((member) => netMembersMap.set(member.user_id, member));
-  return <Chat membersMap={netMembersMap} />;
+  return <Chat membersMap={netMembersMap} netView="net" />;
 };

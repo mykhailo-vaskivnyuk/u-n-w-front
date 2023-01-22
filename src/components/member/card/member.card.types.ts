@@ -1,6 +1,6 @@
-import { NetViewKeys } from '@api/api/types/types';
+import { NetViewEnum } from '@api/api/types/types';
 
 export interface MemberCardProps {
-  netView: NetViewKeys;
+  netView: NetViewEnum;
   memberUiPosition: number;
 }

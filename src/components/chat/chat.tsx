@@ -8,7 +8,7 @@ import { useStyles } from './chat.styles';
 
 interface ChatProps {
   membersMap: Map<number, IMember>;
-  netView?: NetViewKeys;
+  netView: NetViewKeys;
 }
 
 export const Chat: FC<ChatProps> = (props) => {
