@@ -111,6 +111,13 @@ export const getApi = (
 
   },
   'user': {
+    'changes': {
+      'read': () => fetch<P.IUserChanges>('/user/changes/read'),
+
+      'confirm': (options: Q.TUserChangesConfirm) =>
+        fetch<boolean>('/user/changes/confirm', options),
+
+    },
     'update': () => fetch<string>('/user/update'),
 
     'net': {
