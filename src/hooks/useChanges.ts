@@ -1,24 +1,24 @@
 import { useCallback, useEffect, useState } from 'react';
-import { IUserChange, IUserChanges } from '@api/api/types/types';
-import { app } from '@api/app/client.app';
+import { IUserChange, IUserChanges, NetViewKeys } from '@api/api/types/types';
 import { AppStatus } from '@api/constants';
+import { app } from '@api/app/client.app';
 import { modalService } from '@services/modal.service';
 
-export const useChanges = () => {
+export const useChanges = (netView?: NetViewKeys) => {
   const [changes, setChanges] = useState<IUserChanges>([]);
-  const { net, netView, status } = app.getState();
-  const { node_id: nodeId } = net || {};
+  const { net: currentNet, status } = app.getState();
+  const { net_node_id: netNodeId } = currentNet || {};
 
   const selectChanges = useCallback(
     (change: IUserChange) => {
-      const { user_node_id: userNodeId, net_view: userNetView } = change;
-      if (!nodeId && !userNodeId) return true;
-      if (userNodeId !== nodeId) return false;
-      if (userNetView === 'net') return true;
-      if (userNetView === netView) return true;
+      const { net } = app.getState();
+      const { node_id: nodeId } = net || {};
+      const { user_node_id: userNodeId } = change;
+      if (!netView && !userNodeId) return true;
+      if (netView && nodeId === userNodeId) return true;
       return false;
     },
-    [nodeId, netView],
+    [netView],
   );
 
   const handleChanges = useCallback(
@@ -29,19 +29,19 @@ export const useChanges = () => {
     [selectChanges],
   );
 
+  const handleClose = useCallback((messageId: number) => {
+    app.changes.confirm(messageId);
+  }, []);
+
+  useEffect(() => {
+    if (netView && !netNodeId) return;
+    handleChanges(app.getState().changes);
+  }, [handleChanges, netNodeId, netView]);
+
   useEffect(() => {
     app.on('changes', handleChanges);
     return () => app.remove('changes', handleChanges);
   }, [handleChanges]);
-
-  useEffect(() => {
-    handleChanges(app.getState().changes);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [netView, nodeId]);
-
-  const handleClose = useCallback((messageId: number) => {
-    app.changes.confirm(messageId);
-  }, []);
 
   useEffect(() => {
     if (status !== AppStatus.READY) return;

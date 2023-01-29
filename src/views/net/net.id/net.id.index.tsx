@@ -5,7 +5,7 @@ import { useChanges } from '@hooks/useChanges';
 
 export const NetIdIndex: FC = () => {
   const net = useUserNet();
-  useChanges();
+  useChanges('net');
   if (!net) return null;
-  return <Outlet />;
+  return <Outlet key={Math.random()} />;
 };
