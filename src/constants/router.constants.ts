@@ -21,6 +21,7 @@ export const RelativeRoutesMap = {
       CREATE: 'create',
       LEAVE: 'leave',
       CHAT: 'chat',
+      BOARD: 'board',
       CIRCLE: {
         INDEX: 'circle',
         USER: 'user',

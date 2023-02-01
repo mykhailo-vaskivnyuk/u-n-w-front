@@ -3,7 +3,7 @@ import { Formik, useFormikContext } from 'formik';
 import { RoutesMap } from '@constants/router.constants';
 import { MessagesMap } from '@constants/messages';
 import { modalService } from '@services/modal.service';
-import { makeDynamicPathname } from '@utils/utils';
+import { makeDynamicPathname } from '@utils/format.utils';
 import { app } from '@api/app/client.app';
 import { Input } from '@components/controls/input/input';
 import { Button } from '@components/buttons/button/button';

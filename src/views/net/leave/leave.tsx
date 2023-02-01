@@ -1,7 +1,7 @@
 import { FC, useEffect } from 'react';
 import { MessagesMap } from '@constants/messages';
 import { useNavigateTo } from '@hooks/useNavigateTo';
-import { format } from '@utils/utils';
+import { format } from '@utils/format.utils';
 import { modalService } from '@services/modal.service';
 import { app } from '@api/app/client.app';
 

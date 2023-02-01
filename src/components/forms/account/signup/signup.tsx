@@ -4,7 +4,7 @@ import { RoutesMap } from '@constants/router.constants';
 import { MessagesMap } from '@constants/messages';
 import { useNavigateTo } from '@hooks/useNavigateTo';
 import { modalService } from '@services/modal.service';
-import { format } from '@utils/utils';
+import { format } from '@utils/format.utils';
 import { app } from '@api/app/client.app';
 import { Input } from '@components/controls/input/input';
 import { Button } from '@components/buttons/button/button';

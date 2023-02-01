@@ -3,7 +3,7 @@ import { Formik, useFormikContext } from 'formik';
 import { RoutesMap } from '@constants/router.constants';
 import { MessagesMap } from '@constants/messages';
 import { useNavigateTo } from '@hooks/useNavigateTo';
-import { format } from '@utils/utils';
+import { format } from '@utils/format.utils';
 import { modalService } from '@services/modal.service';
 import { app } from '@api/app/client.app';
 import { Button } from '@components/buttons/button/button';

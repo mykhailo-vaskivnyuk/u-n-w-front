@@ -88,6 +88,20 @@ export const getApi = (
     },
   },
   'net': {
+    'board': {
+      'save': (options: Q.TNetBoardSave) =>
+        fetch<boolean>('/net/board/save', options),
+
+      'remove': (options: Q.TNetBoardRemove) =>
+        fetch<boolean>('/net/board/remove', options),
+
+      'read': (options: P.INetReadParams) =>
+        fetch<P.INetBoardReadResponse>('/net/board/read', options),
+
+      'clear': (options: Q.TNetBoardClear) =>
+        fetch<boolean>('/net/board/clear', options),
+
+    },
     'connectByToken': (options: P.ITokenParams) =>
       fetch<Q.TNetConnectByTokenResponse>('/net/connectByToken', options),
 

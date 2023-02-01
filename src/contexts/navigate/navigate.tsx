@@ -1,7 +1,7 @@
 import React, { createContext, FC, PropsWithChildren, useMemo } from 'react';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { RoutesMap } from '@constants/router.constants';
-import { makeDynamicPathname } from '@utils/utils';
+import { makeDynamicPathname } from '@utils/format.utils';
 
 const { INDEX: netPath } = RoutesMap.NET.NET_ID;
 const { USER: treeUserPath, NODE_ID: TREE } = RoutesMap.NET.NET_ID.TREE;

@@ -31,7 +31,7 @@ export const useStyles = createUseStyles(
     message: {
       padding: vars.gap.SS,
       wordBreak: 'break-word',
-      whiteSpace: 'pre',
+      whiteSpace: 'pre-line',
     },
   }),
   { name: 'ChatMessage' },

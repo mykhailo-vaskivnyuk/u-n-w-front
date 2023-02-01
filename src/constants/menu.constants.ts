@@ -58,6 +58,12 @@ export const MENU_INSIDE_NET_ITEMS: IMenuItem[] = [
     allowForUser: ['INSIDE_NET'],
   },
   {
+    label: 'Board',
+    href: RoutesMap.NET.NET_ID.BOARD,
+    icon: ICONS.board,
+    allowForUser: ['INSIDE_NET'],
+  },
+  {
     label: 'Створити спільноту',
     href: RoutesMap.NET.NET_ID.CREATE,
     icon: ICONS.create,
@@ -95,7 +101,7 @@ export const MENU_TREE_ITEMS: IMenuItem[] = [
 export const MENU_CIRCLE_ITEMS: IMenuItem[] = [
   {
     label: 'Інфо',
-    href: RoutesMap.NET.NET_ID.TREE.INDEX,
+    href: RoutesMap.NET.NET_ID.CIRCLE.INDEX,
     icon: ICONS.about,
     allowForUser: ['INSIDE_NET'],
   },

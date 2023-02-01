@@ -1,3 +1,4 @@
+import { ITableUsersBoardMessages } from '../../../local/imports';
 import { NetViewKeys } from './net.types';
 
 export type IChatConnect = {
@@ -36,3 +37,5 @@ export type IChatGetMessagesResponse = IChatMessage[];
 
 export type INetChatIds = Partial<Record<NetViewKeys, number>>;
 export type IChatConnectAll = ({ net_node_id: number } & INetChatIds)[];
+
+export type INetBoardReadResponse = ITableUsersBoardMessages[]
