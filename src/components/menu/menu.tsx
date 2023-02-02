@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import clsx from 'clsx';
 import { modalService } from '@services/modal.service';
 import { IMenuItem } from './types';
-import { MenuItem } from './menu.item';
+import { MenuItem } from './menu.item/menu.item';
 import { useStyles } from './menu.styles';
 
 export interface MenuProps {

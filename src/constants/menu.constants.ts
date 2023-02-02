@@ -112,3 +112,12 @@ export const MENU_CIRCLE_ITEMS: IMenuItem[] = [
     allowForUser: ['INSIDE_NET'],
   },
 ];
+
+export const MENU_BOARD_ITEMS: IMenuItem[] = [
+  {
+    label: '',
+    href: '',
+    icon: ICONS.message,
+    allowForUser: 'INSIDE_NET',
+  },
+];

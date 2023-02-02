@@ -21,6 +21,21 @@ export const useStyles = createUseStyles(
           background: palette.bg.second,
         },
       },
+      '& a': {
+        color: palette.font.second,
+        fontWeight: vars.fontWeight.semiBold,
+      },
+    },
+    board: {
+      borderRadius: `0 0 ${vars.radius.main} ${vars.radius.main}`,
+      width: '100%',
+      maxWidth: '100%',
+      marginBottom: 0,
+      '&.myOwn': {
+        alignSelf: 'unset',
+        borderRadius: `0 0 ${vars.radius.main} ${vars.radius.main}`,
+        boxShadow: `2px 4px #00000022`,
+      },
     },
     name: {
       background: palette.bg.add,

@@ -19,7 +19,7 @@ export const useStyles = createUseStyles(
       border: `1px solid ${palette.first.main}`,
       fontWeight: vars.fontWeight.semiBold,
       letterSpacing: vars.letterGap.M,
-      '&:focus': {
+      '&:focus:not($textarea)': {
         borderColor: palette.first.main,
         borderWidth: 2,
         paddingTop: `calc(${vars.gap.SS} - 1px)`,
@@ -29,6 +29,11 @@ export const useStyles = createUseStyles(
         '-webkit-text-fill-color': `${palette.second.main} !important`,
         '-webkit-box-shadow': '0 0 0 30px #ffffff inset !important',
       },
+    },
+    textarea: {
+      height: '200px',
+      color: palette.font.add,
+      border: `1px solid ${palette.second.main}`,
     },
     label: {
       lineHeight: vars.lineHeight.dense,

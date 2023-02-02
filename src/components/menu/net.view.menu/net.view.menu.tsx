@@ -6,7 +6,7 @@ import { useTree } from '@hooks/useTree';
 import { useCircle } from '@hooks/useCircle';
 import { getMenuItems } from '@utils/menu.utils';
 import { IconButton } from '@components/buttons/icon.button/icon.button';
-import { useStyles } from './net.view.menu.styles';
+import { useStyles } from '../net.submenu.styles';
 
 const NET_VIEW_MENU = {
   tree: MENU_TREE_ITEMS,
@@ -14,7 +14,7 @@ const NET_VIEW_MENU = {
 };
 
 export const NetViewMenu: FC<{ netView: NetViewEnum }> = ({ netView }) => {
-  const { root, viewTitle, section, button } = useStyles();
+  const { root, title, section, button } = useStyles();
   const tree = useTree();
   const circle = useCircle();
 
@@ -30,8 +30,8 @@ export const NetViewMenu: FC<{ netView: NetViewEnum }> = ({ netView }) => {
     ));
 
   return (
-    <div className={clsx(root, { opened: items })}>
-      <div className={viewTitle}>{netView.toUpperCase()} VIEW</div>
+    <div className={root}>
+      <div className={title}>{netView.toUpperCase()} VIEW</div>
       <ul className={clsx(section)}>{itemsJsx}</ul>
     </div>
   );

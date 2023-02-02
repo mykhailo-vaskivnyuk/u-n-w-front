@@ -12,7 +12,7 @@ export const useStyles = createUseStyles(
       alignItems: 'center',
       justifyContent: 'space-between',
     },
-    viewTitle: {
+    title: {
       fontWeight: vars.fontWeight.semiBold,
       marginLeft: '50%',
       transform: `translateX(calc(-50% - ${vars.gap.S}))`,
@@ -22,6 +22,7 @@ export const useStyles = createUseStyles(
     },
     button: {
       ...mixins.size(28),
+      color: 'currentColor',
       marginLeft: `calc(${vars.gap.main} - ${vars.gap.SS} / 2)`,
       borderRadius: 100,
       '&.active': {
@@ -30,5 +31,5 @@ export const useStyles = createUseStyles(
       },
     },
   }),
-  { name: 'NetViewMenu' },
+  { name: 'NetSubmenu' },
 );
