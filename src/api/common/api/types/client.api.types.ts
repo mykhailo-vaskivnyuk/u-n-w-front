@@ -7,21 +7,12 @@ export type TMemberDisconnectUnactive = {
   monthAgo: number;
 };
 export type TMemberInviteCreateResponse = string | null;
-export type TNetBoardSave = {
-  message_id?: number;
-  node_id: number;
-  message: string;
-};
-export type TNetBoardRemove = {
-  message_id: number;
-  node_id: number;
-};
-export type TNetBoardClear = {
-  weekAgo: number;
-};
 export type TNetConnectByTokenResponse = null | {
   net_node_id: number;
   error?: string;
+};
+export type TNetBoardClear = {
+  weekAgo: number;
 };
 export type TScriptsScriptjsResponse = Record<string, any>;
 export type TTestDataResponse = {
