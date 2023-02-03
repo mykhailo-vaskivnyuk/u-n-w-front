@@ -5,7 +5,7 @@ import { modalService } from '@services/modal.service';
 import { useNet } from '@hooks/useNet';
 import { app } from '@api/app/client.app';
 import { FormContainer } from '@components/forms/form.container/form.container';
-import { NetBoardeForm } from '@components/forms/net/board/board';
+import { NetBoardForm } from '@components/forms/net/board/board';
 
 export const useNetBoard = () => {
   useNet();
@@ -21,7 +21,7 @@ export const useNetBoard = () => {
       modalService.closeModal();
       modalService.openModal(
         <FormContainer modal>
-          <NetBoardeForm
+          <NetBoardForm
             boardMessage={boardMessage}
             onSuccess={modalService.closeModal}
             onFail={handleFail}
@@ -36,7 +36,7 @@ export const useNetBoard = () => {
   const handleFormOpen = useCallback(() => {
     modalService.openModal(
       <FormContainer modal>
-        <NetBoardeForm
+        <NetBoardForm
           boardMessage={boardMessage}
           onSuccess={modalService.closeModal}
           onFail={handleFail}

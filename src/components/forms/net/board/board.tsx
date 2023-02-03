@@ -50,19 +50,23 @@ const NetBoard: FC = () => {
   );
 };
 
-export const NetBoardeForm: FC<NetBoardFormProps> = (props) => {
+export const NetBoardForm: FC<NetBoardFormProps> = (props) => {
   const { boardMessage, onSuccess, onFail, initialValues } = props;
-  const { message_id: messageId, message = '' } = boardMessage || {};
 
   return (
     <FormikProvider
-      initialValues={initialValues || { message, message_id: messageId }}
+      initialValues={initialValues || boardMessage || { message: '' }}
       validationSchema={NetBoardSchema}
-      onSubmit={(values) =>
-        app.net.board
-          .persist(values)
-          .then((success) => (success ? onSuccess() : (showFail(), onFail(values))))
-      }
+      onSubmit={(values) => {
+        const { message: curMessage } = boardMessage || {};
+        const { message: newMessage } = values;
+        if (newMessage === curMessage) return onSuccess();
+        app.net.board.persist(values).then((success) => {
+          if (success) return onSuccess();
+          showFail();
+          onFail(values);
+        });
+      }}
     >
       <NetBoard />
     </FormikProvider>
