@@ -6,8 +6,7 @@ import { modalService } from '@services/modal.service';
 
 export const useChanges = (netView?: NetViewKeys) => {
   const [changes, setChanges] = useState<IUserChanges>([]);
-  const { net: currentNet, status } = app.getState();
-  const { net_node_id: netNodeId } = currentNet || {};
+  const { status } = app.getState();
 
   const selectChanges = useCallback(
     (change: IUserChange) => {
@@ -34,9 +33,10 @@ export const useChanges = (netView?: NetViewKeys) => {
   }, []);
 
   useEffect(() => {
-    if (netView && !netNodeId) return;
+    if (status !== AppStatus.READY) return;
     handleChanges(app.getState().changes);
-  }, [handleChanges, netNodeId, netView]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [handleChanges]);
 
   useEffect(() => {
     app.on('changes', handleChanges);
@@ -49,6 +49,7 @@ export const useChanges = (netView?: NetViewKeys) => {
     if (!change) return;
     const { message_id: messageId, message } = change;
     modalService.showMessage(message, undefined, undefined, () => handleClose(messageId));
+    app.changes.remove(messageId);
   }, [changes, handleClose, status]);
 
   return null;
