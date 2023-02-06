@@ -10,6 +10,16 @@ import { ModalSet } from '@components/modal/modal.set';
 import { Loading } from '@components/loading/loading';
 import { Content } from '@components/content/content';
 import { Router } from '@router/router';
+import { Test } from './decorator';
+
+const test1 = new Test();
+const test2 = new Test();
+
+test1.setCounter(1);
+test2.setCounter(2);
+
+console.log(test1);
+console.log(test2);
 
 export const App: FC = () => {
   useApp();
