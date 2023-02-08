@@ -17,7 +17,7 @@ export const useMenuItems = () => {
   const [net, nets] = useNet();
 
   const { user_status: userStatus = 'NOT_LOGGEDIN' } = user || {};
-  const { name = ROOT_TITLE, net_node_id: netId } = net || {};
+  const { name = ROOT_TITLE, net_id: netId } = net || {};
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const mainMenuItems = useMemo(() => getMenuItems(MENU_ITEMS), [user]);
