@@ -3,24 +3,20 @@
 import * as T from '../../server/types/types';
 import { IClientAppThis, IMember } from '../types';
 import { AppStatus } from '../constants';
-import { getNetBoardMethods } from './net.board';
 import { getMemberStatus } from '../../server/utils';
+import { NetBoard } from './net.board.class';
 
 type IApp = Pick<IClientAppThis,
   | 'api'
   | 'getState'
   | 'setStatus'
-  | 'setUserStatus'
   | 'setError'
-  | 'setAllNets'
-  | 'setNets'
-  | 'setBoardMessages'
-  | 'setNetView'
+  | 'setUserStatus'
+  | 'userNets'
   | 'setMember'
   | 'member'
   | 'chat'
   | 'emit'
-  | 'userNets'
 >;
 
 export class Net{
@@ -30,10 +26,10 @@ export class Net{
   private tree: IMember[] = [];
   private netView?: T.NetViewEnum;
   
-  public board: ReturnType<typeof getNetBoardMethods>;
+  public board: NetBoard;
 
   constructor(private app: IApp) {
-    this.board = getNetBoardMethods(app as any);
+    this.board = new NetBoard(app);
   }
 
   getNetState() {
@@ -43,6 +39,7 @@ export class Net{
       circle: this.circle,
       tree: this.tree,
       netView: this.netView,
+      boardMessages: this.board.getState(),
     };
   }
 
@@ -60,7 +57,7 @@ export class Net{
       this.app.setUserStatus(userStatus);
     } else {
       this.setUserNetData();
-      this.app.setBoardMessages();
+      this.board = new NetBoard(this as any);
       this.setCircle();
       this.setTree();
       this.setView();
@@ -93,10 +90,6 @@ export class Net{
     this.tree = tree;
     this.app.emit('tree', tree);
   }
-
-  // private setMember(memberData?: IMember) {
-  //   this.memberData = memberData;
-  // }
 
   async create(args: Omit<T.INetCreateParams, 'node_id'>) {
     this.app.setStatus(AppStatus.LOADING);
@@ -197,10 +190,6 @@ export class Net{
       });
       this.setTree(tree);
   }
-
-  // setView(netView: T.NetViewEnum) {
-  //   this.app.setNetView(netView);
-  // }
 
   async connectByInvite(args: T.ITokenParams) {
     this.app.setStatus(AppStatus.LOADING);

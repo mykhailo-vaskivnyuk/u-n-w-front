@@ -1,7 +1,7 @@
 /* eslint-disable import/no-cycle */
 import * as T from '../../server/types/types';
-import { AppStatus } from '../constants';
 import { IClientAppThis, TLoginOrSignup } from '../types';
+import { AppStatus } from '../constants';
 
 type IApp = Pick<IClientAppThis,
   | 'api'

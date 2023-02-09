@@ -5,39 +5,64 @@ import {
 import { IClientAppThis } from '../types';
 import { AppStatus } from '../constants';
 
-export const getChangesMethods = (parent: IClientAppThis) => ({
-  lastDate: undefined as string | undefined,
+
+type IApp = Pick<IClientAppThis,
+  | 'api'
+  | 'getState'
+  | 'setStatus'
+  | 'setError'
+  | 'setUser'
+  | 'net'
+  | 'emit'
+>;
+
+export class Changes {
+  private lastDate?: string;
+  private netChanges: IUserChanges = [];
+
+  constructor(private app: IApp) {}
+
+  private setChanges(changes: IUserChanges) {
+    this.netChanges = changes;
+    this.app.emit('changes', changes);
+  }
+
+  getChangesState() {
+    return {
+      changes: this.netChanges,
+    };
+  }
 
   setLastDate(changes: IUserChanges) {
     this.lastDate = changes.at(-1)?.date;
-  },
+  }
 
   isInstantChange(
     messageData: OmitNull<IChatResponseMessage> | IInstantChange,
   ): messageData is IInstantChange {
     return 'message_id' in messageData;
-  },
+  }
 
   async read(inChain = false) {
-    !inChain && parent.setStatus(AppStatus.LOADING);
+    !inChain && this.app.setStatus(AppStatus.LOADING);
     try {
-      const newChanges = await parent.api
+      const newChanges = await this.app.api
         .user.changes.read({ date: this.lastDate });
       this.setLastDate(newChanges);
       !inChain && await this.update(newChanges);
       if (newChanges.length) {
-        const { changes: curChanges } = parent.getState();
-        parent.setChanges([...curChanges, ...newChanges]);
+        const { changes: curChanges } = this.app.getState();
+        this.setChanges([...curChanges, ...newChanges]);
       }
-      !inChain && parent.setStatus(AppStatus.READY);
+      !inChain && this.app.setStatus(AppStatus.READY);
     } catch (e: any) {
       if (inChain) throw e;
-      parent.setError(e);
+      this.app.setError(e);
     }
-  },
+  }
 
   async update(changes: IUserChanges | IInstantChange[]) {
-    const { user, net } = parent.getState();
+    const { user, net } = this.app.getState();
     const { node_id: nodeId, net_id: netId } = net || {};
     let updateAll = false;
     let updateNet = false;
@@ -50,27 +75,26 @@ export const getChangesMethods = (parent: IClientAppThis) => ({
       }
       if (userNodeId === nodeId) updateNet = true;
     }
-    if (updateAll) await parent.setUser({ ...user! }, false)
+    if (updateAll) await this.app.setUser({ ...user! }, false)
       .catch(console.log);
-    if (updateNet) await parent.net.enter(netId!, true)
+    if (updateNet) await this.app.net.enter(netId!, true)
       .catch(console.log);
-  },
+  }
 
   async confirm(messageId: number) {
-    parent.setStatus(AppStatus.LOADING);
+    this.app.setStatus(AppStatus.LOADING);
     try {
-      await parent.api.user.changes
+      await this.app.api.user.changes
         .confirm({ message_id: messageId });
-      parent.setStatus(AppStatus.READY);
+      this.app.setStatus(AppStatus.READY);
     } catch (e: any) {
-      parent.setError(e);
+      this.app.setError(e);
     }
-  },
+  }
 
   remove(messageId: number) {
-    let { changes } = parent.getState();
-    changes = changes.filter(({ message_id: v }) => messageId !== v);
-    parent.setChanges(changes);
-  },
-
-});
+    const changes = this.netChanges
+      .filter(({ message_id: v }) => messageId !== v);
+    this.setChanges(changes);
+  }
+}
