@@ -1,5 +1,5 @@
-import { IMemberResponse } from '@api/api/types/types';
-import { MemberStatusKeys } from '@api/constants';
+import { IMemberResponse } from '@server/types/types';
+import { MemberStatusKeys } from '@server/constants';
 
 export type IMember = Omit<IMemberResponse, 'member_name'> & {
   member_name: string;

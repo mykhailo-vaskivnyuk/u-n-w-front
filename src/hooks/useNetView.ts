@@ -1,5 +1,5 @@
-import { NetViewEnum } from '@api/api/types/types';
-import { app } from '@api/app/client.app';
+import { NetViewEnum } from '@server/types/types';
+import { app } from '@client/app';
 
 export const useNetView = (netView: NetViewEnum) => {
   const { netView: curNetView } = app.getState();

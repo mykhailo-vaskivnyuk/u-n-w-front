@@ -2,7 +2,7 @@ import React, { FC, PropsWithChildren, useCallback, useRef } from 'react';
 import clsx from 'clsx';
 import { useLocation } from 'react-router-dom';
 import { useAppStatus } from '@hooks/useAppStatus';
-import { AppStatus } from '@api/constants';
+import { AppStatus } from '@client/constants';
 import { useStyles } from './content.styles';
 
 export const Content: FC<PropsWithChildren> = ({ children }) => {

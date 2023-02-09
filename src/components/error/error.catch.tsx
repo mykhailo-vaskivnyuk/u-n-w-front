@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import { MessagesMap } from '@constants/messages';
-import { HttpResponseErrorCode, HttpResponseErrorMap } from '@api/errors';
+import { HttpResponseErrorCode, HTTP_RESPONSE_ERROR_MAP } from '@client/connection/errors';
 import { modalService } from '@services/modal.service';
 import { useNavigateTo } from '@hooks/useNavigateTo';
 import { useAppError } from '@hooks/useAppError';
@@ -25,8 +25,8 @@ export const ErrorCatch: FC = () => {
 
   useEffect(() => {
     if (!statusCode) return;
-    if (HttpResponseErrorMap[statusCode] === 'Not found') return;
-    if (HttpResponseErrorMap[statusCode] === 'Unauthorized') return navigate.toIndex();
+    if (HTTP_RESPONSE_ERROR_MAP[statusCode] === 'Not found') return;
+    if (HTTP_RESPONSE_ERROR_MAP[statusCode] === 'Unauthorized') return navigate.toIndex();
     showError(statusCode);
   }, [statusCode, navigate]);
 

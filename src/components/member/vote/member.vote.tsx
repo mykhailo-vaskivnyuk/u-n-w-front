@@ -1,8 +1,8 @@
 import React, { FC, useCallback, MouseEvent } from 'react';
 import clsx from 'clsx';
-import { NetViewEnum } from '@api/api/types/types';
-import { MemberStatusKeys } from '@api/constants';
-import { app } from '@api/app/client.app';
+import { NetViewEnum } from '@server/types/types';
+import { MemberStatusKeys } from '@server/constants';
+import { app } from '@client/app';
 import { useStyles } from './member.vote.styles';
 
 interface MemberDislikeProps {

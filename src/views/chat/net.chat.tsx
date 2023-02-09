@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { app } from '@api/app/client.app';
+import { app } from '@client/app';
 import { Chat } from '../../components/chat/chat';
 
 export const NetChat: FC = () => {

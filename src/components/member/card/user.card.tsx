@@ -1,7 +1,7 @@
 import React, { FC, useCallback, MouseEvent } from 'react';
-import { NetViewEnum } from '@api/api/types/types';
+import { NetViewEnum } from '@server/types/types';
 import { useNavigateTo } from '@hooks/useNavigateTo';
-import { app } from '@api/app/client.app';
+import { app } from '@client/app';
 import { MemberVote } from '../vote/member.vote';
 import { useStyles } from './member.card.styles';
 

@@ -1,6 +1,6 @@
 import React, { FC, useMemo } from 'react';
 import clsx from 'clsx';
-import { NetViewEnum } from '@api/api/types/net.types';
+import { NetViewEnum } from '@server/types/net.types';
 import { MENU_CIRCLE_ITEMS, MENU_TREE_ITEMS } from '@constants/menu.constants';
 import { useTree } from '@hooks/useTree';
 import { useCircle } from '@hooks/useCircle';

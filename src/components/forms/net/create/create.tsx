@@ -1,10 +1,10 @@
 import React, { FC, FormEvent } from 'react';
 import { Formik, useFormikContext } from 'formik';
-import { MAX_NET_LEVEL } from '@api/api/constants';
+import { MAX_NET_LEVEL } from '@server/constants';
 import { MessagesMap } from '@constants/messages';
 import { useNavigateTo } from '@hooks/useNavigateTo';
 import { modalService } from '@services/modal.service';
-import { app } from '@api/app/client.app';
+import { app } from '@client/app';
 import { Input } from '@components/controls/input/input';
 import { Button } from '@components/buttons/button/button';
 import { NetCreateField, NetCreateFormValues, NetCreateSchema } from './create.schema';

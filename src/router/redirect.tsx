@@ -1,6 +1,6 @@
 import { FC, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { AppStatus } from '@api/constants';
+import { AppStatus } from '@client/constants';
 import { IS_DEV, REGEXP_END_ON_SLASH } from '@constants/constants';
 import { RoutesMap } from '@constants/router.constants';
 import { MessagesMap } from '@constants/messages';
@@ -8,7 +8,7 @@ import { useNavigateTo } from '@hooks/useNavigateTo';
 import { useMatchParam } from '@utils/utils';
 import { useAppStatus } from '@hooks/useAppStatus';
 import { modalService } from '@services/modal.service';
-import { app } from '@api/app/client.app';
+import { app } from '@client/app';
 
 const { INDEX: netPath } = RoutesMap.NET.NET_ID;
 const showFailed = () => modalService.showError(MessagesMap.NET_COMEOUT_FAIL);

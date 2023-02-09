@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { INetResponse } from '@api/api/types/types';
-import { INets } from '@api/app/types';
-import { app } from '@api/app/client.app';
+import { INetResponse } from '@server/types/types';
+import { INets } from '@client/types';
+import { app } from '@client/app';
 
 export const useNet = () => {
   const [net, setNet] = useState<INetResponse | null>(() => app.getState().net);

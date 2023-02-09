@@ -1,9 +1,9 @@
-import * as T from '@api/api/types/types';
+import * as T from '@server/types/types';
 import { IMenuItem } from '@components/menu/types';
 import { RoutesMap } from '@constants/router.constants';
 import { IS_DEV } from '@constants/constants';
 import { ICONS } from '@components/icon/icon';
-import { app } from '@api/app/client.app';
+import { app } from '@client/app';
 import { makeDynamicPathname } from './format.utils';
 
 const { NET_ID } = RoutesMap.NET;

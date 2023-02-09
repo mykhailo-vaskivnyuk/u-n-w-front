@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { RoutesMap } from '@constants/router.constants';
 import { useMatchParam } from '@utils/utils';
-import { app } from '@api/app/client.app';
+import { app } from '@client/app';
 
 const path = {
   circle: RoutesMap.NET.NET_ID.CIRCLE.NODE_ID.INDEX,

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { HttpResponseError } from '@api/errors';
-import { app } from '@api/app/client.app';
+import { HttpResponseError } from '@client/connection/errors';
+import { app } from '@client/app';
 
 export const useAppError = () => {
   const [error, setError] = useState<HttpResponseError | null>(() => app.getState().error);

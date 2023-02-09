@@ -4,7 +4,7 @@ import { MessagesMap } from '@constants/messages';
 import { useNavigateTo } from '@hooks/useNavigateTo';
 import { modalService } from '@services/modal.service';
 import { useUser } from '@hooks/useUser';
-import { app } from '@api/app/client.app';
+import { app } from '@client/app';
 import { Input } from '@components/controls/input/input';
 import { Button } from '@components/buttons/button/button';
 import { AccountField, AccountFormValues } from './account.schema';

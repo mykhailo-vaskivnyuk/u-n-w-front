@@ -4,7 +4,7 @@ import { MessagesMap } from '@constants/messages';
 import { useNavigateTo } from '@hooks/useNavigateTo';
 import { useMatchParam } from '@utils/utils';
 import { modalService } from '@services/modal.service';
-import { app } from '@api/app/client.app';
+import { app } from '@client/app';
 
 const path = RoutesMap.ACCOUNT.RESTORE;
 const showFailed = () => modalService.showError(MessagesMap.BAD_LINK);

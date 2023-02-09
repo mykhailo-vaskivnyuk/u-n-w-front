@@ -1,10 +1,10 @@
 import React, { FC, useEffect } from 'react';
-import { NetViewEnum } from '@api/api/types/types';
+import { NetViewEnum } from '@server/types/types';
 import { vars } from '@styles/vars';
 import { useSwap } from '@hooks/useSwap';
 import { NetCircle } from '@views/net/net.view/net.circle';
 import { NetTree } from 'views/net/net.view/net.tree';
-import { app } from '@api/app/client.app';
+import { app } from '@client/app';
 import { useStyles } from './net.id.styles';
 
 const netViewStyle = {

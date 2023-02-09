@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import { useNavigateTo } from '@hooks/useNavigateTo';
-import { app } from '@api/app/client.app';
+import { app } from '@client/app';
 import { MemberInviteCreateForm } from '@components/forms/member/invite/invite.create';
 import { MemberInviteCancelForm } from '@components/forms/member/invite/invite.cancel';
 import { FormContainer } from '@components/forms/form.container/form.container';

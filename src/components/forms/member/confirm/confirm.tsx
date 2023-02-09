@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { MessagesMap } from '@constants/messages';
 import { modalService } from '@services/modal.service';
-import { app } from '@api/app/client.app';
+import { app } from '@client/app';
 import { Button } from '@components/buttons/button/button';
 import { useStyles } from './confirm.styles';
 

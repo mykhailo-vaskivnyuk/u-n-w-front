@@ -6,5 +6,9 @@ module.exports = {
       'code': 80,
       'ignoreUrls': true
     }],
+    '@typescript-eslint/naming-convention': ['error', {
+      selector: ['variable', 'function'],
+      format: ['camelCase', 'snake_case', 'UPPER_CASE'],
+    }],
   },
 };

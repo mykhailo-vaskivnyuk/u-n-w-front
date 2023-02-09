@@ -2,7 +2,7 @@ import { FC, useEffect } from 'react';
 import { MessagesMap } from '@constants/messages';
 import { useNavigateTo } from '@hooks/useNavigateTo';
 import { modalService } from '@services/modal.service';
-import { app } from '@api/app/client.app';
+import { app } from '@client/app';
 
 const showFailed = () => modalService.showError(MessagesMap.LOGOUT_FAIL);
 

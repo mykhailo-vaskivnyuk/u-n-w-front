@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { IMember } from '@api/app/types';
-import { NetViewKeys } from '@api/api/types/types';
+import { IMember } from '@client/types';
+import { NetViewKeys } from '@server/types/types';
 import { ChatTitle } from './title/chat.title';
 import { ReadArea } from './read.area/read.area';
 import { SendMessage } from './send.message/send.message';

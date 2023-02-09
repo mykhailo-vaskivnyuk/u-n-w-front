@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
-import { IUserChange, IUserChanges, NetViewKeys } from '@api/api/types/types';
-import { AppStatus } from '@api/constants';
-import { app } from '@api/app/client.app';
+import { IUserChange, IUserChanges, NetViewKeys } from '@server/types/types';
+import { AppStatus } from '@client/constants';
+import { app } from '@client/app';
 import { modalService } from '@services/modal.service';
 
 export const useChanges = (netView?: NetViewKeys) => {

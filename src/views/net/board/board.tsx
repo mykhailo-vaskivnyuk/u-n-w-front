@@ -1,6 +1,6 @@
 /* eslint-disable react/no-danger */
 import React, { FC } from 'react';
-import { app } from '@api/app/client.app';
+import { app } from '@client/app';
 import { NetBoardMenu } from '@components/menu/net.board.menu/net.board.menu';
 import { BoardMessage } from './board.message';
 import { useNetBoard } from '../../../hooks/useNetBoard';

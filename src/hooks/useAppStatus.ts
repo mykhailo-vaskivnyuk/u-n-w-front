@@ -1,5 +1,5 @@
-import { app } from '@api/app/client.app';
-import { AppStatus } from '@api/constants';
+import { app } from '@client/app';
+import { AppStatus } from '@client/constants';
 import { useEffect, useState } from 'react';
 
 export const useAppStatus = () => {

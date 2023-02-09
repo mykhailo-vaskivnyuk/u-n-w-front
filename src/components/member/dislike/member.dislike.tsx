@@ -1,7 +1,7 @@
 import React, { FC, useCallback, MouseEvent } from 'react';
 import clsx from 'clsx';
-import { MemberStatusKeys } from '@api/constants';
-import { app } from '@api/app/client.app';
+import { MemberStatusKeys } from '@server/constants';
+import { app } from '@client/app';
 import { useStyles } from './member.dislike.styles';
 
 interface MemberDislikeProps {

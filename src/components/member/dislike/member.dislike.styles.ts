@@ -1,5 +1,5 @@
 import { createUseStyles } from 'react-jss';
-import { MEMBER_STATUS_ENUM } from '@api/constants';
+import { MEMBER_STATUS_ENUM } from '@client/constants';
 
 export const useStyles = createUseStyles(
   ({ palette, vars, mixins }) => ({

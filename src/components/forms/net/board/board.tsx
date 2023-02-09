@@ -1,11 +1,11 @@
 import React, { FC, FormEvent, useCallback } from 'react';
 import { Formik, useFormikContext } from 'formik';
-import { ITableUsersBoardMessages } from '@api/../local/db.types';
+import { ITableUsersBoardMessages } from '@app/local/db.types';
 import { MessagesMap } from '@constants/messages';
 import { modalService } from '@services/modal.service';
 import { Button } from '@components/buttons/button/button';
 import { TextArea } from '@components/controls/textarea/textarea';
-import { app } from '@api/app/client.app';
+import { app } from '@client/app';
 import { NetBoardField, NetBoardFormValues, NetBoardSchema } from './board.schema';
 import { useStyles } from './board.styles';
 

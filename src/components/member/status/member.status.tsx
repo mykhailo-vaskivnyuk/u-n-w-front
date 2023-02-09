@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import clsx from 'clsx';
-import { MemberStatusKeys } from '@api/constants';
+import { MemberStatusKeys } from '@server/constants';
 import { useStyles } from './member.status.styles';
 
 interface MemberStatusProps {

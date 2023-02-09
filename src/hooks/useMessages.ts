@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { NetViewKeys } from '@api/api/types/types';
-import { app } from '@api/app/client.app';
+import { NetViewKeys } from '@server/types/types';
+import { app } from '@client/app';
 
 export const useMessages = (netView: NetViewKeys) => {
   const setUpdate = useState([])[1];

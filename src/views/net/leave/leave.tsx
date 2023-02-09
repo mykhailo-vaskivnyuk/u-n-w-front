@@ -3,7 +3,7 @@ import { MessagesMap } from '@constants/messages';
 import { useNavigateTo } from '@hooks/useNavigateTo';
 import { format } from '@utils/format.utils';
 import { modalService } from '@services/modal.service';
-import { app } from '@api/app/client.app';
+import { app } from '@client/app';
 
 const { NET_LEAVE, NET_LEAVE_FAIL } = MessagesMap;
 const showSuccess = (netName: string) => modalService.showMessage(format(NET_LEAVE, netName));

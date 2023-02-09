@@ -1,8 +1,8 @@
 import React, { FC, useRef, useEffect } from 'react';
-import { IMember } from '@api/app/types';
-import { NetViewKeys } from '@api/api/types/types';
+import { IMember } from '@client/types';
+import { NetViewKeys } from '@server/types/types';
 import { useMessages } from '@hooks/useMessages';
-import { app } from '@api/app/client.app';
+import { app } from '@client/app';
 import { ChatMessage } from '../message/chat.message';
 import { useStyles } from './read.area.styles';
 

@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useState, ChangeEvent, useRef } from 'react';
-import { NetViewKeys } from '@api/api/types/types';
-import { app } from '@api/app/client.app';
+import { NetViewKeys } from '@server/types/types';
+import { app } from '@client/app';
 import { useStyles } from './send.message.styles';
 
 interface SendMessageProps {

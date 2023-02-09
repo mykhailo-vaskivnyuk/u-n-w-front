@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import { useNavigateTo } from '@hooks/useNavigateTo';
-import { app } from '@api/app/client.app';
+import { app } from '@client/app';
 
 export const TreeMember: FC = () => {
   const navigate = useNavigateTo();

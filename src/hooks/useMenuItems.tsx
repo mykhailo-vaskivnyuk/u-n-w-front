@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from 'react';
-import { USER_STATUS_MAP } from '@api/api/types/types';
+import { USER_STATUS_MAP } from '@server/types/types';
 import { MENU_ITEMS, MENU_NET_ITEMS } from '@constants/menu.constants';
 import { RoutesMap } from '@constants/router.constants';
 import { ROOT_TITLE } from '@constants/constants';

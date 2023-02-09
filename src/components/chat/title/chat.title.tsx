@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { NetViewKeys } from '@api/api/types/types';
+import { NetViewKeys } from '@server/types/types';
 import { useStyles } from './chat.title.styles';
 
 interface ChatTitleProps {
