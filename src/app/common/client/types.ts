@@ -4,28 +4,30 @@ import { ITableUsersBoardMessages } from '../../local/imports';
 import { AppStatus } from './constants';
 import { MemberStatusKeys } from '../server/constants';
 import { HttpResponseError } from './connection/errors';
-import { getApi } from '../server/client.api';
 import { ClientApp } from './app';
 
-export type IClientAppThis = ClientApp & {
-  api: ReturnType<typeof getApi>;
+export type IClientAppThis = {
+  getState: ClientApp['getState'];
+  net: ClientApp['net'];
+  member: ClientApp['member'];
+  chat: ClientApp['chat'];
+  userNets: ClientApp['userNets'];
+  api: T.OmitNull<ClientApp['api']>;
+  emit: ClientApp['emit'];
   setStatus: (status: AppStatus) => void;
   setError: (e: HttpResponseError) => void;
-  setUser: (user: T.IUserResponse) => Promise<void>;
-  setUserNetData: (userNetData: T.IUserNetDataResponse) => void;
-  setNet: (net: T.INetResponse) => Promise<void>;
+  setUser: (user: T.IUserResponse, readChanges?: boolean) => Promise<void>;
+  setUserStatus: (status: T.UserStatusKeys) => void;
   setAllNets: (nets: T.INetsResponse) => void;
   setNets: (nets: INets) => void;
-  setCircle: (circle: T.INetViewResponse) => void;
-  setTree: (tree: T.INetViewResponse) => void;
   setNetView: (netView?: T.NetViewEnum) => void;
   setMemberPosition: (memberPosition?: number) => void;
   setMember: (memberData?: IMember) => void;
-  setUserChatId: (chatId:  number) => void;
+  setUserChatId: (message: T.IChatConnectResponse) => void;
   setNetChatIds: (netChatIds: TNetChatIdsMap) => void;
   setMessage: (message: T.OmitNull<T.IChatResponseMessage>) => void;
   setAllMessages: (chatId: number, messages: T.IChatMessage[]) => void;
-  setBoardMessages: (messages: ITableUsersBoardMessages[]) => void;
+  setBoardMessages: (messages?: ITableUsersBoardMessages[]) => void;
   setChanges: (changes: T.IUserChanges) => void;
 };
 
