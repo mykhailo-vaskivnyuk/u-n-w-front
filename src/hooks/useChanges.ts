@@ -47,9 +47,9 @@ export const useChanges = (netView?: NetViewKeys) => {
     if (status !== AppStatus.READY) return;
     const [change] = changes;
     if (!change) return;
-    const { message_id: messageId, message } = change;
-    modalService.showMessage(message, undefined, undefined, () => handleClose(messageId));
-    app.changes.remove(messageId);
+    const { event_id: eventId, message } = change;
+    modalService.showMessage(message, undefined, undefined, () => handleClose(eventId));
+    app.changes.remove(eventId);
   }, [changes, handleClose, status]);
 
   return null;
