@@ -6,6 +6,7 @@ import { HttpResponseError } from './connection/errors';
 import { ClientApp } from './app';
 
 export type IClientAppThis = Pick<ClientApp,
+  | 'account'
   | 'userNets'
   | 'net'
   | 'member'
@@ -18,7 +19,6 @@ export type IClientAppThis = Pick<ClientApp,
   setStatus: (status: AppStatus) => void;
   setError: (e: HttpResponseError) => void;
   setUser: (user: T.IUserResponse, readChanges?: boolean) => Promise<void>;
-  setUserStatus: (status: T.UserStatusKeys) => void;
   setMemberPosition: (memberPosition?: number) => void;
   setMember: (memberData?: IMember) => void;
 };

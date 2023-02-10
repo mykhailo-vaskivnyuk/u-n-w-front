@@ -20,7 +20,6 @@ export class ClientApp extends EventEmitter {
   private api: IClientApi | null;
   private status: AppStatus = AppStatus.INITING;
   private error: HttpResponseError | null = null;
-  private user: T.IUserResponse = null;
   private memberData?: IMember;
 
   account: Account;
@@ -45,12 +44,12 @@ export class ClientApp extends EventEmitter {
     return {
       status: this.status,
       error: this.error,
-      user: this.user,
+      user: this.account.getUser(),
       memberData: this.memberData,
       ...this.userNets.getUserNetsState(),
       ...this.net.getNetState(),
       ...this.chat.getChatState(),
-      ...this.changes.getChangesState(),
+      changes: this.changes.getChanges(),
     };
   }
 
@@ -75,7 +74,7 @@ export class ClientApp extends EventEmitter {
         return this.setError(err);
       }
     }
-    await this.readUser();
+    await this.account.readUser();
     this.setStatus(AppStatus.INITED);
   }
 
@@ -106,21 +105,14 @@ export class ClientApp extends EventEmitter {
     this.setStatus(AppStatus.ERROR);
   }
 
-  private async readUser() {
-    this.setStatus(AppStatus.LOADING);
-    try {
-      const user = await this.api!.user.read();
-      await this.setUser(user);
-      this.setStatus(AppStatus.READY);
-      return user;
-    } catch (e: any) {
-      this.setError(e);
-    }
+  private handleConnect() {
+    if (this.status === AppStatus.INITING) return;
+    this.chat.reset();
+    this.chat.connectAll().catch((e) => this.setError(e));
+    this.changes.read(true).catch((e) => this.setError(e));
   }
-
+  
   private async setUser(user: T.IUserResponse, readChanges = true) {
-    if (this.user === user) return;
-    this.user = user;
     if (user && user.user_status !== 'NOT_CONFIRMED') {
       await this.userNets.getAllNets();
       this.userNets.getNets();
@@ -129,21 +121,8 @@ export class ClientApp extends EventEmitter {
     this.emit('user', user);
   }
 
-  private setUserStatus(status: T.UserStatusKeys) {
-    if (!this.user) return;
-    this.user!.user_status = status;
-    this.emit('user', { ...this.user });
-  }
-
   private setMember(memberData?: IMember) {
     this.memberData = memberData;
-  }
-
-  private handleConnect() {
-    if (this.status === AppStatus.INITING) return;
-    this.chat.reset();
-    this.chat.connectAll().catch((e) => this.setError(e));
-    this.changes.read(true).catch((e) => this.setError(e));
   }
 }
 

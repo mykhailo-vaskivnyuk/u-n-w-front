@@ -11,7 +11,7 @@ type IApp = Pick<IClientAppThis,
   | 'getState'
   | 'setStatus'
   | 'setError'
-  | 'setUserStatus'
+  | 'account'
   | 'userNets'
   | 'setMember'
   | 'member'
@@ -54,7 +54,7 @@ export class Net{
       userStatus === 'INSIDE_NET' && await this.board.read();
       await this.getCircle();
       await this.getTree();
-      this.app.setUserStatus(userStatus);
+      this.app.account.setUserStatus(userStatus);
     } else {
       this.setUserNetData();
       this.board = new NetBoard(this as any);
@@ -62,7 +62,7 @@ export class Net{
       this.setTree();
       this.setView();
       this.app.setMember();
-      this.app.setUserStatus('LOGGEDIN');
+      this.app.account.setUserStatus('LOGGEDIN');
     }
     this.app.userNets.getNets();
     this.app.emit('net', userNet);

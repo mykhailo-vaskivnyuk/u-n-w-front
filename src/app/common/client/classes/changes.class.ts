@@ -27,10 +27,8 @@ export class Changes {
     this.app.emit('changes', changes);
   }
 
-  getChangesState() {
-    return {
-      changes: this.netChanges,
-    };
+  getChanges() {
+    return this.netChanges;
   }
 
   setLastDate(changes: IUserChanges) {
