@@ -5,10 +5,10 @@ import { modalService } from '@services/modal.service';
 import { makeInnerHtmlWithLinks } from '@utils/format.utils';
 import { useStyles as useStylesChat } from '@components/chat/message/chat.message.styles';
 import { app } from '@client/app';
-import { ITableUsersBoardMessages } from '../../../app/local/imports';
+import { ITableBoardMessages } from '../../../app/local/imports';
 
 interface BoardMessageProps {
-  boardMessage: ITableUsersBoardMessages;
+  boardMessage: ITableBoardMessages;
 }
 
 export const BoardMessage: FC<BoardMessageProps> = (props) => {

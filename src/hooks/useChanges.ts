@@ -1,15 +1,15 @@
 import { useCallback, useEffect, useState } from 'react';
-import { IUserChange, IUserChanges, NetViewKeys } from '@server/types/types';
+import { IEvent, IEvents, NetViewKeys } from '@server/types/types';
 import { AppStatus } from '@client/constants';
 import { app } from '@client/app';
 import { modalService } from '@services/modal.service';
 
 export const useChanges = (netView?: NetViewKeys) => {
-  const [changes, setChanges] = useState<IUserChanges>([]);
+  const [changes, setChanges] = useState<IEvents>([]);
   const { status } = app.getState();
 
   const selectChanges = useCallback(
-    (change: IUserChange) => {
+    (change: IEvent) => {
       const { net } = app.getState();
       const { node_id: nodeId } = net || {};
       const { user_node_id: userNodeId } = change;
@@ -21,7 +21,7 @@ export const useChanges = (netView?: NetViewKeys) => {
   );
 
   const handleChanges = useCallback(
-    (netChanges: IUserChanges) => {
+    (netChanges: IEvents) => {
       const showChanges = netChanges.filter(selectChanges);
       if (showChanges.length) setChanges(showChanges);
     },
