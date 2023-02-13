@@ -11,10 +11,10 @@ export const useChanges = (netView?: NetViewKeys) => {
   const selectChanges = useCallback(
     (change: IEvent) => {
       const { net } = app.getState();
-      const { node_id: nodeId } = net || {};
-      const { user_node_id: userNodeId } = change;
-      if (!netView && !userNodeId) return true;
-      if (netView && nodeId === userNodeId) return true;
+      const { net_id: netId } = net || {};
+      const { net_id: changeNetId } = change;
+      if (!netView && !changeNetId) return true;
+      if (netView && netId === changeNetId) return true;
       return false;
     },
     [netView],
