@@ -36,18 +36,12 @@ export class Chat {
     };
   }
 
-  private setUserChatId(message: T.IChatConnectResponse) {
-    if (!message) return;
-    this.userChatId = message.chatId;
-  }
-
   private setNetChatIds(netChatIds: TNetChatIdsMap) {
     this.netChatIds = netChatIds;
   }
 
   async connectAll() {
-    const userChatId = await this.app.api.chat.connect.user();
-    this.setUserChatId(userChatId);
+    await this.app.api.chat.connect.user();
     const allChatIds = await this.app.api.chat.connect.nets();
     const netChatIdsMap = new Map<number, T.INetChatIds>();
     allChatIds.forEach(({ net_id: netId, ...netChatIds }) => {
@@ -101,21 +95,18 @@ export class Chat {
     this.app.emit('message', chatId);
   }
 
-  setMessage(messageData: T.IChatResponseMessage | T.IInstantChange) {
+  setMessage<T extends T.MessageTypeKeys>(
+    messageData: T.IMessage<T>,
+  ) {
     if (!messageData) return;
 
-    if (this.app.changes.isInstantChange(messageData)) {
-      this.app.changes.update([messageData]);
-      return;
-    }
+    if (this.app.changes.isNewEvents(messageData))
+      return this.app.changes.read();
+    if (this.app.changes.isEvent(messageData))
+      return this.app.changes.update([messageData]);
 
     const { chatId } = messageData;
-    if (chatId === this.userChatId) {
-      this.app.changes.read();
-      return;
-    }
 
-    if (!messageData.message) return;
     const chatMessages = this.messages.get(chatId);
     if (chatMessages) {
       const lastMessage = chatMessages.at(-1);

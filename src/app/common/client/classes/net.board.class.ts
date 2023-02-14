@@ -2,7 +2,7 @@
 import { IBoardSaveParams } from '../../server/types/types';
 import { IClientAppThis } from '../types';
 import { AppStatus } from '../constants';
-import { ITableUsersBoardMessages } from '../../../local/imports';
+import { ITableBoardMessages } from '../../../local/imports';
 
 type IApp = Pick<IClientAppThis,
   | 'api'
@@ -12,7 +12,7 @@ type IApp = Pick<IClientAppThis,
 >;
 
 export class NetBoard {
-  private boardMessages: ITableUsersBoardMessages[];
+  private boardMessages: ITableBoardMessages[];
   
   constructor(private app: IApp) {}
 
@@ -20,7 +20,7 @@ export class NetBoard {
     return this.boardMessages;
   }
 
-  private setBoardMessages(messages: ITableUsersBoardMessages[] = []) {
+  private setBoardMessages(messages: ITableBoardMessages[] = []) {
     this.boardMessages = messages;
   }
 

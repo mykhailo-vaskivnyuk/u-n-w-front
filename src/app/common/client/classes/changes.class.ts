@@ -19,11 +19,11 @@ type IApp = Pick<IClientAppThis,
 
 export class Changes {
   private lastDate?: string;
-  private netChanges: IUserChanges = [];
+  private netChanges: IEvents = [];
 
   constructor(private app: IApp) {}
 
-  private setChanges(changes: IUserChanges) {
+  private setChanges(changes: IEvents) {
     this.netChanges = changes;
     this.app.emit('changes', changes);
   }
@@ -36,21 +36,16 @@ export class Changes {
     this.lastDate = changes.at(-1)?.date;
   }
 
-  // isEvent(
-  //   messageData: IMessage<MessageTypeKeys>,
-  // ): messageData is IMessage<'EVENT'> {
-  //   return messageData?.type === 'EVENT';
-  // },
+  isEvent(
+    messageData: IMessage<MessageTypeKeys>,
+  ): messageData is IMessage<'EVENT'> {
+    return messageData?.type === 'EVENT';
+  }
 
-  // isNewEvents(
-  //   messageData: IMessage<MessageTypeKeys>,
-  // ): messageData is IMessage<'NEW_EVENTS'> {
-  //   return messageData?.type === 'NEW_EVENTS';
-  // },
-  isInstantChange(
-    messageData: OmitNull<IChatResponseMessage> | IInstantChange,
-  ): messageData is IInstantChange {
-    return 'message_id' in messageData;
+  isNewEvents(
+    messageData: IMessage<MessageTypeKeys>,
+  ): messageData is IMessage<'NEW_EVENTS'> {
+    return messageData?.type === 'NEW_EVENTS';
   }
 
   async read(inChain = false) {
@@ -71,12 +66,9 @@ export class Changes {
     }
   }
 
-  // async update(changes: IEvents) {
-  //   const { user, net } = parent.getState();
-  //   const { net_id: netId } = net || {};
-  async update(changes: IUserChanges | IInstantChange[]) {
+  async update(changes: IEvents) {
     const { user, net } = this.app.getState();
-    const { node_id: nodeId, net_id: netId } = net || {};
+    const { net_id: netId } = net || {};
     let updateAll = false;
     let updateNet = false;
     for (const change of changes) {
@@ -94,32 +86,20 @@ export class Changes {
       .catch(console.log);
   }
 
-  // async confirm(eventId: number) {
-  //   parent.setStatus(AppStatus.LOADING);
-  //   try {
-  //     await parent.api.user.changes
-  //       .confirm({ event_id: eventId });
-  //     parent.setStatus(AppStatus.READY);
-  async confirm(messageId: number) {
+  async confirm(eventId: number) {
     this.app.setStatus(AppStatus.LOADING);
     try {
       await this.app.api.user.changes
-        .confirm({ message_id: messageId });
+        .confirm({ event_id: eventId });
       this.app.setStatus(AppStatus.READY);
     } catch (e: any) {
       this.app.setError(e);
     }
   }
 
-  remove(messageId: number) {
-//     let { changes } = parent.getState();
-//     changes = changes.filter(({ event_id: v }) => messageId !== v);
-//     parent.setChanges(changes);
-//   },
-
-// });
+  remove(eventId: number) {
     const changes = this.netChanges
-      .filter(({ message_id: v }) => messageId !== v);
+      .filter(({ event_id: v }) => eventId !== v);
     this.setChanges(changes);
   }
 }
