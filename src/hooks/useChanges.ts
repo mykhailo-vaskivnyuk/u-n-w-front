@@ -1,23 +1,21 @@
 import { useCallback, useEffect, useState } from 'react';
 import { IEvent, IEvents, NetViewKeys } from '@server/types/types';
-import { AppStatus } from '@client/constants';
 import { app } from '@client/app';
 import { modalService } from '@services/modal.service';
 
 export const useChanges = (netView?: NetViewKeys) => {
   const [changes, setChanges] = useState<IEvents>([]);
-  const { status } = app.getState();
+  const { net, status } = app.getState();
 
   const selectChanges = useCallback(
     (change: IEvent) => {
-      const { net } = app.getState();
       const { net_id: netId } = net || {};
       const { net_id: changeNetId } = change;
       if (!netView && !changeNetId) return true;
-      if (netView && netId === changeNetId) return true;
+      if (netView && netId && netId === changeNetId) return true;
       return false;
     },
-    [netView],
+    [netView, net],
   );
 
   const handleChanges = useCallback(
@@ -32,11 +30,7 @@ export const useChanges = (netView?: NetViewKeys) => {
     app.changes.confirm(messageId);
   }, []);
 
-  useEffect(() => {
-    if (status !== AppStatus.READY) return;
-    handleChanges(app.getState().changes);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [handleChanges]);
+  useEffect(() => handleChanges(app.getState().changes), [handleChanges]);
 
   useEffect(() => {
     app.on('changes', handleChanges);
@@ -44,7 +38,6 @@ export const useChanges = (netView?: NetViewKeys) => {
   }, [handleChanges]);
 
   useEffect(() => {
-    if (status !== AppStatus.READY) return;
     const [change] = changes;
     if (!change) return;
     const { event_id: eventId, message } = change;

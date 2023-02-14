@@ -1,6 +1,6 @@
 import React, { FC, FormEvent, useCallback } from 'react';
 import { Formik, useFormikContext } from 'formik';
-import { ITableUsersBoardMessages } from '@app/local/db.types';
+import { ITableBoardMessages } from '@app/local/db.types';
 import { MessagesMap } from '@constants/messages';
 import { modalService } from '@services/modal.service';
 import { Button } from '@components/buttons/button/button';
@@ -15,7 +15,7 @@ const showFail = () => modalService.showError(MessagesMap.BOARD_MESSAGE_SAVE_FAI
 interface NetBoardFormProps {
   onSuccess: () => void;
   onFail: (values: NetBoardFormValues) => void;
-  boardMessage?: ITableUsersBoardMessages;
+  boardMessage?: ITableBoardMessages;
   initialValues?: NetBoardFormValues;
 }
 

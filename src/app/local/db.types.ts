@@ -4,10 +4,10 @@ export const TABLES_MAP = {
   NETS: 'nets',
   USERS: 'users',
   NETS_DATA: 'nets_data',
-  NETS_USERS_DATA: 'nets_users_data',
-  NODES_INVITES: 'nodes_invites',
-  USERS_MESSAGES: 'users_messages',
-  USERS_BOARD_MESSAGES: 'users_board_messages',
+  MEMBERS: 'members',
+  MEMBERS_INVITES: 'members_invites',
+  EVENTS: 'events',
+  BOARD_MESSAGES: 'board_messages',
   USERS_CHANGES: 'users_changes',
   USERS_TOKENS: 'users_tokens',
   USERS_MEMBERS: 'users_members',
@@ -32,7 +32,7 @@ export type ITableNets = {
   net_id: number;
   net_level: number;
   parent_net_id: number | null;
-  first_net_id: number;
+  first_net_id: number | null;
   count_of_nets: number;
 }
 
@@ -53,7 +53,8 @@ export type ITableNetsData = {
   resource_link: string | null;
 }
 
-export type ITableNetsUsersData = {
+export type ITableMembers = {
+  member_id: number;
   node_id: number;
   net_id: number;
   user_id: number;
@@ -63,29 +64,27 @@ export type ITableNetsUsersData = {
   confirmed: boolean;
 }
 
-export type ITableUsersNodesInvites = {
-  parent_node_id: number;
+export type ITableMembersInvites = {
   user_id: number;
+  member_node_id: number;
   member_name: string;
   token: string;
 }
 
-export type ITableUsersMessages = {
-  message_id: number;
+export type ITableEvents = {
+  event_id: number;
   user_id: number;
-  user_node_id: number | null;
-  net_view: 'net' | 'tree' | 'circle'; // NetViewKeys
-  member_node_id: number | null;
+  net_id: number | null;
+  net_view: 'net' | 'tree' | 'circle' | null; /* NetViewKeys */
+  from_node_id: number | null;
   message: string;
   date: string;
 }
 
-export type ITableUsersBoardMessages = {
+export type ITableBoardMessages = {
   message_id: number;
   net_id: number;
   user_id: number;
-  node_id: number;
-  net_view: 'net' | 'tree' | 'circle'; // NetViewKeys
   message: string;
   date: string;
 }
