@@ -24,6 +24,7 @@ export class Account{
     if (this.user === user) return;
     this.user = user;
     await this.app.setUser(user);
+    this.app.emit('user', user);
   }
 
   setUserStatus(user_status: T.UserStatusKeys) {

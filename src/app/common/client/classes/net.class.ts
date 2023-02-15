@@ -13,6 +13,7 @@ type IApp = Pick<IClientAppThis,
   | 'setError'
   | 'account'
   | 'userNets'
+  | 'setNet'
   | 'setMember'
   | 'member'
   | 'chat'
@@ -64,7 +65,8 @@ export class Net{
       this.app.setMember();
       this.app.account.setUserStatus('LOGGEDIN');
     }
-    this.app.userNets.getNets();
+    // this.app.userNets.getNets();
+    await this.app.setNet();
     this.app.emit('net', userNet);
   }
 
@@ -100,7 +102,7 @@ export class Net{
         ...parentNet,
         ...args,
       });
-      if (net) this.app.userNets.getAllNets();
+      if (net) await this.app.setNet('create');
       this.app.setStatus(AppStatus.READY);
       return net;
     } catch (e: any) {
@@ -154,7 +156,7 @@ export class Net{
       const net = this.userNet;
       const success = await this.app.api.net.leave(net!);
       if (success) {
-        await this.app.userNets.getAllNets();
+        await this.app.setNet('leave');
         await this.setNet();
       }
       this.app.setStatus(AppStatus.READY);
@@ -196,7 +198,7 @@ export class Net{
     try {
       const result = await this.app.api.net.connectByToken(args);
       const { error } = result || {};
-      if (!error) await this.app.userNets.getAllNets();
+      if (!error) await this.app.setNet();
       this.app.setStatus(AppStatus.READY);
       return result;
     } catch (e: any) {

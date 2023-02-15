@@ -5,6 +5,7 @@ import { AppStatus } from './constants';
 import { MemberStatusKeys } from '../server/constants';
 import { HttpResponseError } from './connection/errors';
 import { ClientApp } from './app';
+import { Net } from './classes/net.class';
 
 export type IClientAppThis = Pick<ClientApp,
   | 'account'
@@ -20,6 +21,7 @@ export type IClientAppThis = Pick<ClientApp,
   setStatus: (status: AppStatus) => void;
   setError: (e: HttpResponseError) => void;
   setUser: (user: T.IUserResponse, readChanges?: boolean) => Promise<void>;
+  setNet: (methodName?: keyof Net) => void;
   setMemberPosition: (memberPosition?: number) => void;
   setMember: (memberData?: IMember) => void;
   // setUserChatId: (chatId:  number) => void;

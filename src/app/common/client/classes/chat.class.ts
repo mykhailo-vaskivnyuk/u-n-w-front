@@ -15,18 +15,11 @@ type IApp = Pick<IClientAppThis,
 
 export class Chat {
   private userChatId?: number;
-  private netChatIds: TNetChatIdsMap;
-  private messages: Map<number, T.IChatMessage[]>;
+  private netChatIds: TNetChatIdsMap = new Map();
+  private messages: Map<number, T.IChatMessage[]> = new Map();
 
   constructor(private app: IApp) {
     this.setMessage = this.setMessage.bind(this);
-    this.reset();
-  }
-
-  reset() {
-    this.userChatId = undefined;
-    this.netChatIds = new Map();
-    this.messages = new Map();
   }
 
   getChatState() {
@@ -41,6 +34,7 @@ export class Chat {
   }
 
   async connectAll() {
+    this.netChatIds = new Map();
     await this.app.api.chat.connect.user();
     const allChatIds = await this.app.api.chat.connect.nets();
     const netChatIdsMap = new Map<number, T.INetChatIds>();
