@@ -1,7 +1,6 @@
 /* eslint-disable max-lines */
 /* eslint-disable import/no-cycle */
 import * as T from '../server/types/types';
-import { IMember } from './types';
 import { AppStatus } from './constants';
 import { HttpResponseError } from './connection/errors';
 import { EventEmitter } from './event.emitter';
@@ -10,24 +9,22 @@ import { Account } from './classes/account.class';
 import { UserNets } from './classes/user.nets.class';
 import { Net } from './classes/net.class';
 import { Chat } from './classes/chat.class';
-import { Changes } from './classes/changes.class';
-import { getMemberMethods } from './methods/member';
+import { Events } from './classes/events.class';
 import { getConnection as getHttpConnection } from './connection/http';
 import { getConnection as getWsConnection } from './connection/ws';
+import { IEvents } from '../server/types/types';
 
 export class ClientApp extends EventEmitter {
   private baseUrl = '';
   private api: IClientApi | null;
   private status: AppStatus = AppStatus.INITING;
   private error: HttpResponseError | null = null;
-  private memberData?: IMember;
 
   account: Account;
   net: Net;
   userNets: UserNets;
   chat: Chat;
-  changes: Changes;
-  member: ReturnType<typeof getMemberMethods>;
+  userEvents: Events;
 
   constructor() {
     super();
@@ -35,8 +32,7 @@ export class ClientApp extends EventEmitter {
     this.account = new Account(this as any);
     this.net = new Net(this as any);
     this.chat = new Chat(this as any);
-    this.changes = new Changes(this as any);
-    this.member = getMemberMethods(this as any);
+    this.userEvents = new Events(this as any);
     this.setInitialValues();
   }
 
@@ -54,12 +50,11 @@ export class ClientApp extends EventEmitter {
    *  - tree: this.tree,
    *  - netView: this.netView,
    *  - boardMessages: this.board.getState(),
-   *  memberData: this.memberData,
+   *  - memberData: this.memberData,
    *  ...this.chat.getChatState(),
    *  - messages: this.messages,
    *  - chatIds: this.netChatIds,
-   *  changes: this.changes.getChanges(),
-   *
+   *  events: this.events.getEvents(),
    */
   getState() {
     return {
@@ -68,9 +63,8 @@ export class ClientApp extends EventEmitter {
       user: this.account.getUser(),
       ...this.userNets.getUserNetsState(),
       ...this.net.getNetState(),
-      memberData: this.memberData,
       ...this.chat.getChatState(),
-      changes: this.changes.getChanges(),
+      events: this.userEvents.getEvents(),
     };
   }
 
@@ -87,7 +81,7 @@ export class ClientApp extends EventEmitter {
         const connection = getWsConnection(
           baseUrl,
           this.handleConnect.bind(this),
-          this.chat.setMessage,
+          this.setMessage.bind(this),
         );
         this.api = getApi(connection);
         await this.api.health();
@@ -102,7 +96,7 @@ export class ClientApp extends EventEmitter {
   private setInitialValues() {
     this.userNets = new UserNets(this as any);
     this.chat = new Chat(this as any);
-    this.changes = new Changes(this as any);
+    this.userEvents = new Events(this as any);
   }
 
   private setStatus(status: AppStatus) {
@@ -129,19 +123,15 @@ export class ClientApp extends EventEmitter {
   private handleConnect() {
     if (this.status === AppStatus.INITING) return;
     this.chat.connectAll().catch((e) => this.setError(e));
-    this.changes.read(true).catch((e) => this.setError(e));
+    this.userEvents.read(true).catch((e) => this.setError(e));
   }
   
   private async setUser(user: T.IUserResponse, readChanges = true) {
     if (user && user.user_status !== 'NOT_CONFIRMED') {
       await this.userNets.getAllNets();
       this.userNets.getNets();
-      readChanges && await this.changes.read(true);
+      readChanges && await this.userEvents.read(true);
     } else this.setInitialValues();
-  }
-
-  private setMember(memberData?: IMember) {
-    this.memberData = memberData;
   }
 
   private async setNet(methodName: keyof Net) {
@@ -149,6 +139,39 @@ export class ClientApp extends EventEmitter {
       return this.userNets.getAllNets();
     }
     this.userNets.getNets();
+  }
+
+  async setEvents(events: IEvents) {
+    const { user, net } = this.getState();
+    const { net_id } = net || {};
+    let updateUser = false;
+    let updateNet = false;
+    for (const event of events) {
+      const { net_id: eventNetId } = event;
+      if (!eventNetId) {
+        updateUser = true;
+        net_id && (updateNet = true);
+        break;
+      }
+      if (eventNetId === net_id) updateNet = true;
+    }
+    if (updateUser) await this.setUser({ ...user! }, false)
+      .catch(console.log);
+    if (updateNet) await this.net.enter(net_id!, true)
+      .catch(console.log);
+  }
+
+  setMessage<T extends T.MessageTypeKeys>(
+    messageData: T.IMessage<T>,
+  ) {
+    if (!messageData) return;
+
+    if (this.userEvents.isNewEvents(messageData))
+      return this.userEvents.read();
+    if (this.userEvents.isEvent(messageData))
+      return this.setEvents([messageData]);
+
+    this.chat.setMessage(messageData);
   }
 }
 

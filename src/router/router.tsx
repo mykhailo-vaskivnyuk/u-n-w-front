@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { RelativeRoutesMap } from '@constants/router.constants';
-import { useChanges } from '@hooks/useChanges';
+import { useEvents } from '@hooks/useEvents';
 import { Main } from '@views/main/main';
 import { About } from '@views/about/about';
 import { Palette } from '@components/palette/palette';
@@ -12,7 +12,7 @@ import { AccountRouter } from './routes/account.router';
 import { NetRouter } from './routes/net.router';
 
 export const Router: FC = () => {
-  useChanges();
+  useEvents();
   return (
     <>
       <Redirect />

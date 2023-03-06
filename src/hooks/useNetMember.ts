@@ -17,7 +17,7 @@ export const useNetMember = () => {
 
   useEffect(() => {
     if (loaded) return;
-    app.member.find(nodeId);
+    app.net.findMember(nodeId);
     setRerender([]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loaded]);

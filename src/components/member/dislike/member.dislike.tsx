@@ -17,8 +17,8 @@ export const MemberDislike: FC<MemberDislikeProps> = (props) => {
   const handleClick = useCallback(
     (e: MouseEvent) => {
       e.preventDefault();
-      !dislike && app.member.data.setDislike(nodeId);
-      dislike && app.member.data.unsetDislike(nodeId);
+      !dislike && app.net.memberActions.setDislike(nodeId);
+      dislike && app.net.memberActions.unsetDislike(nodeId);
     },
     [dislike, nodeId],
   );

@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import { Outlet } from 'react-router-dom';
 import { useUserNet } from '@hooks/useUserNet';
-import { useChanges } from '@hooks/useChanges';
+import { useEvents } from '@hooks/useEvents';
 
 export const NetIdIndex: FC = () => {
   const net = useUserNet();
-  useChanges('net');
+  useEvents('net');
   if (!net) return null;
   return <Outlet key={Math.random()} />;
 };

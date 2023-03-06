@@ -21,8 +21,8 @@ export const MemberVote: FC<MemberDislikeProps> = (props) => {
   const handleClick = useCallback(
     (e: MouseEvent) => {
       e.preventDefault();
-      !vote && app.member.data.setVote(nodeId);
-      vote && app.member.data.unsetVote(nodeId);
+      !vote && app.net.memberActions.setVote(nodeId);
+      vote && app.net.memberActions.unsetVote(nodeId);
     },
     [vote, nodeId],
   );

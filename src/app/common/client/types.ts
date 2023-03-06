@@ -6,14 +6,14 @@ import { MemberStatusKeys } from '../server/constants';
 import { HttpResponseError } from './connection/errors';
 import { ClientApp } from './app';
 import { Net } from './classes/net.class';
+import { IEvents } from '../server/types/types';
 
 export type IClientAppThis = Pick<ClientApp,
   | 'account'
   | 'userNets'
   | 'net'
-  | 'member'
   | 'chat'
-  | 'changes'
+  | 'userEvents'
   | 'getState'
   | 'emit'
 > & {
@@ -22,14 +22,7 @@ export type IClientAppThis = Pick<ClientApp,
   setError: (e: HttpResponseError) => void;
   setUser: (user: T.IUserResponse, readChanges?: boolean) => Promise<void>;
   setNet: (methodName?: keyof Net) => void;
-  setMemberPosition: (memberPosition?: number) => void;
-  setMember: (memberData?: IMember) => void;
-  // setUserChatId: (chatId:  number) => void;
-  // setNetChatIds: (netChatIds: TNetChatIdsMap) => void;
-  // setMessage: (message: T.OmitNull<T.IChatResponseMessage>) => void;
-  // setAllMessages: (chatId: number, messages: T.IChatMessage[]) => void;
-  // setBoardMessages: (messages: ITableBoardMessages[]) => void;
-  // setChanges: (changes: T.IEvents) => void;
+  setEvents: (events: IEvents) => void;
 };
 
 export interface INets {
@@ -54,3 +47,8 @@ export type IMember = Omit<T.IMemberResponse, 'member_name'> & {
 };
 
 export type TNetChatIdsMap = Map<number, T.INetChatIds>;
+
+export type INetThis = {
+  netChanged: (nodeId: number) => Promise<void>;
+  memberChanged: (nodeId: number) => Promise<void>;
+};

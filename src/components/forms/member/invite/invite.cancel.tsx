@@ -9,7 +9,7 @@ const showSuccess = () => modalService.showMessage(MessagesMap.MEMBER_INVITE_CAN
 const showFail = () => modalService.showError(MessagesMap.MEMBER_INVITE_CANCEL_FAIL);
 
 const handleCancel = () =>
-  app.member.inviteCancel().then((success) => {
+  app.net.member!.inviteCancel().then((success) => {
     return success ? showSuccess() : showFail();
   });
 

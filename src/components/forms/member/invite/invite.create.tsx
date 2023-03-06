@@ -47,7 +47,7 @@ export const MemberInviteCreateForm = () => {
       initialValues={{ member_name: memberName }}
       validationSchema={MemberInviteSchema}
       onSubmit={(values) =>
-        app.member.inviteCreate(values).then((token) => {
+        app.net.member!.inviteCreate(values).then((token) => {
           if (!token) return showFail();
           const { origin } = window.location;
           const path = makeDynamicPathname(pathToInvite, token);

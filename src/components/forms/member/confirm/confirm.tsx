@@ -17,14 +17,14 @@ const show = {
 };
 
 const handleConfirm = () =>
-  app.member
-    .inviteConfirm()
+  app.net
+    .member!.inviteConfirm()
     .then((success) => (success ? show.success.confirm() : show.fail.confirm()))
     .catch(() => {});
 
 const handleRefuse = () =>
-  app.member
-    .inviteRefuse()
+  app.net
+    .member!.inviteRefuse()
     .then((success) => (success ? show.success.refuse() : show.fail.refuse()))
     .catch(() => {});
 

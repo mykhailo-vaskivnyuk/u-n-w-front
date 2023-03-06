@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import { ITableEvents } from '../../../local/imports';
 import { MessageTypeKeys } from './messages.types';
 
