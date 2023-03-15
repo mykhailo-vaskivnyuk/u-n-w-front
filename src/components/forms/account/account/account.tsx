@@ -47,7 +47,7 @@ const Account: FC = () => {
 
 export const AccountForm = () => {
   const navigate = useNavigateTo();
-  const user = useUser();
+  const [user] = useUser();
 
   if (!user) return null;
 

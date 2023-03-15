@@ -4,11 +4,12 @@ import { app } from '@client/app';
 
 export const useUser = () => {
   const [user, setUser] = useState<IUserResponse>(() => app.getState().user);
+  const { userStatus } = app.getState();
+
   useEffect(() => {
-    const handler = (data: IUserResponse) => setUser(data);
-    app.on('user', handler);
-    return () => app.remove('user', handler);
+    app.on('user', setUser);
+    return () => app.remove('user', setUser);
   }, []);
 
-  return user;
+  return [user, userStatus] as const;
 };

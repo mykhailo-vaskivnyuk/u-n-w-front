@@ -1,21 +1,16 @@
 /* eslint-disable max-lines */
 /* eslint-disable import/no-cycle */
 import * as T from '../../server/types/types';
-import { IClientAppThis, INetThis } from '../types';
+import { IClientAppThis } from '../types';
 import { AppStatus } from '../constants';
 
-type IApp = Pick<IClientAppThis,
-  | 'api'
-  | 'getState'
-  | 'setStatus'
-  | 'setError'
->;
+type IApp = IClientAppThis;
 
-type INet = Pick<INetThis, 'netChanged'>;
+type INet = { onMemberChanged: (member_node_id: number) => void };
 
 export class MemberActions{
 
-  constructor(private app: IApp, private member: INet) {}
+  constructor(private app: IApp, private net: INet) {}
 
   getName(
     netView: T.NetViewEnum,
@@ -29,13 +24,13 @@ export class MemberActions{
     return name || memberName || `member ${position}`;
   }
 
-  async setDislike(nodeId: number) {
+  async setDislike(member_node_id: number) {
     this.app.setStatus(AppStatus.LOADING);
     try {
       const { net } = this.app.getState();
       const success = await this.app.api.member.data.dislike
-        .set({ ...net!, member_node_id: nodeId });
-      if (success) await this.member.netChanged(nodeId);
+        .set({ ...net!, member_node_id });
+      success && await this.net.onMemberChanged(member_node_id);
       this.app.setStatus(AppStatus.READY);
       return success;
     } catch (e: any) {
@@ -43,13 +38,13 @@ export class MemberActions{
     }
   }
 
-  async unsetDislike(nodeId: number) {
+  async unsetDislike(member_node_id: number) {
     this.app.setStatus(AppStatus.LOADING);
     try {
       const { net } = this.app.getState();
       const success = await this.app.api.member.data.dislike
-        .unSet({ ...net!, member_node_id: nodeId });
-      if (success) await this.member.netChanged(nodeId);
+        .unSet({ ...net!, member_node_id });
+      success && await this.net.onMemberChanged(member_node_id);
       this.app.setStatus(AppStatus.READY);
       return success;
     } catch (e: any) {
@@ -57,17 +52,13 @@ export class MemberActions{
     }
   }
 
-  async setVote(nodeId: number) {
+  async setVote(member_node_id: number) {
     this.app.setStatus(AppStatus.LOADING);
     try {
       const { net } = this.app.getState();
       const success = await this.app.api.member.data.vote
-        .set({ ...net!, member_node_id: nodeId });
-      // const { net: newNet } = this.app.getState();
-      // if (success && net === newNet)
-      //   await this.app.net.enter(net!.net_id, true)
-      //     .catch((e) => console.log(e));
-      await this.member.netChanged(nodeId);
+        .set({ ...net!, member_node_id });
+      success && await this.net.onMemberChanged(member_node_id);
       this.app.setStatus(AppStatus.READY);
       return success;
     } catch (e: any) {
@@ -75,13 +66,13 @@ export class MemberActions{
     }
   }
 
-  async unsetVote(nodeId: number) {
+  async unsetVote(member_node_id: number) {
     this.app.setStatus(AppStatus.LOADING);
     try {
       const { net } = this.app.getState();
       const success = await this.app.api.member.data.vote
-        .unSet({ ...net!, member_node_id: nodeId });
-      if (success) await this.member.netChanged(nodeId);
+        .unSet({ ...net!, member_node_id });
+      success && await this.net.onMemberChanged(member_node_id);
       this.app.setStatus(AppStatus.READY);
       return success;
     } catch (e: any) {

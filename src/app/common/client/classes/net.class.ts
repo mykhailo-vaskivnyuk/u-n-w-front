@@ -9,17 +9,10 @@ import { Member } from './member.class';
 import { MemberActions } from './memberActions.class';
 import { NetBoard } from './net.board.class';
 
-type IApp = Pick<IClientAppThis,
-  | 'api'
-  | 'getState'
-  | 'setStatus'
-  | 'setError'
-  | 'account'
-  | 'userNets'
-  | 'setNet'
-  | 'chat'
-  | 'emit'
->;
+type IApp = IClientAppThis & {
+  onNewNet: () => void;
+  onNewNets: () => Promise<void>;
+};
 
 export class Net{
   private userNet: T.INetResponse = null;
@@ -36,22 +29,23 @@ export class Net{
     this.board = new NetBoard(app);
   }
 
-  async netChanged(nodeId: number) {
-    if (this.userNet?.node_id === nodeId) {
-      await this.getUserData();
-      await this.getCircle();
-      return;
-    }
-    const { netView } = this.app.getState();
-    if (netView === 'tree') await this.getTree();
-    else await this.getCircle();
-  }
+  // async netChanged(nodeId: number) {
+  //   if (this.userNet?.node_id === nodeId) {
+  //     await this.getUserData();
+  //     await this.getCircle();
+  //     return;
+  //   }
+  //   const { netView } = this.app.getState();
+  //   if (netView === 'tree') await this.getTree();
+  //   else await this.getCircle();
+  // }
 
-  async memberChanged(nodeId: number) {
-    const { netView } = this.app.getState();
-    if (netView === 'tree') await this.getTree();
+  async onMemberChanged(member_node_id: number) {
+    const { node_id } = this.userNetData || {};
+    if (this.netView === 'tree') await this.getTree();
     else await this.getCircle();
-    this.findMember(nodeId);
+    if (member_node_id === node_id) await this.getUserData();
+    else this.findMember(member_node_id);
   }
 
   getNetState() {
@@ -81,13 +75,10 @@ export class Net{
     this.userNet = userNet;
     if (userNet) {
       await this.getUserData();
-      const userStatus = this.userNetData!.confirmed ?
-        'INSIDE_NET' :
-        'INVITING';
-      userStatus === 'INSIDE_NET' && await this.board.read();
+      const { confirmed } = this.userNetData!;
+      confirmed && await this.board.read();
       await this.getCircle();
       await this.getTree();
-      this.app.account.setUserStatus(userStatus);
     } else {
       this.setUserNetData();
       this.board = new NetBoard(this as any);
@@ -95,10 +86,9 @@ export class Net{
       this.setTree();
       this.setView();
       this.member = null;
-      this.app.account.setUserStatus('LOGGEDIN');
     }
-    // this.app.userNets.getNets();
-    await this.app.setNet();
+    console.log('USER DATA', this.userNetData)
+    await this.app.onNewNet();
     this.app.emit('net', userNet);
   }
 
@@ -134,7 +124,7 @@ export class Net{
         ...parentNet,
         ...args,
       });
-      if (net) await this.app.setNet('create');
+      if (net) await this.app.onNewNets();
       this.app.setStatus(AppStatus.READY);
       return net;
     } catch (e: any) {
@@ -189,7 +179,7 @@ export class Net{
       const net = this.userNet;
       const success = await this.app.api.net.leave(net!);
       if (success) {
-        await this.app.setNet('leave');
+        await this.app.onNewNets();
         await this.setNet();
       }
       this.app.setStatus(AppStatus.READY);
@@ -229,7 +219,7 @@ export class Net{
     try {
       const result = await this.app.api.net.connectByToken(args);
       const { error } = result || {};
-      if (!error) await this.app.setNet();
+      if (!error) await this.app.onNewNets();
       this.app.setStatus(AppStatus.READY);
       return result;
     } catch (e: any) {

@@ -10,9 +10,8 @@ export const useAppError = () => {
   useEffect(() => setError(null), [location]);
 
   useEffect(() => {
-    const handler = (e: HttpResponseError | null) => setError(e);
-    app.on('error', handler);
-    return () => app.remove('error', handler);
+    app.on('error', setError);
+    return () => app.remove('error', setError);
   }, []);
 
   return error;

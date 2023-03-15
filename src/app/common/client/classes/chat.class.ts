@@ -5,13 +5,7 @@ import { IClientAppThis, TNetChatIdsMap } from '../types';
 import { AppStatus } from '../constants';
 import { OmitNull } from '../../server/types/types';
 
-type IApp = Pick<IClientAppThis,
-  | 'api'
-  | 'getState'
-  | 'setStatus'
-  | 'setError'
-  | 'emit'
->;
+type IApp = IClientAppThis;
 
 export class Chat {
   private netChatIds: TNetChatIdsMap = new Map();

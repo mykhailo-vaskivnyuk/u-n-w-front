@@ -12,13 +12,14 @@ import { Chat } from './classes/chat.class';
 import { Events } from './classes/events.class';
 import { getConnection as getHttpConnection } from './connection/http';
 import { getConnection as getWsConnection } from './connection/ws';
-import { IEvents } from '../server/types/types';
+import { IEvents, UserStatusKeys } from '../server/types/types';
 
 export class ClientApp extends EventEmitter {
   private baseUrl = '';
   private api: IClientApi | null;
   private status: AppStatus = AppStatus.INITING;
   private error: HttpResponseError | null = null;
+  private userStatus: UserStatusKeys = 'NOT_LOGGEDIN';
 
   account: Account;
   net: Net;
@@ -36,31 +37,12 @@ export class ClientApp extends EventEmitter {
     this.setInitialValues();
   }
 
-  /**
-   *  status: this.status,
-   *  error: this.error,
-   *  user: this.account.getUser(),
-   *  ...this.userNets.getUserNetsState(),
-   *  - allNets: this.allNets,
-   *  - nets: this.nets,
-   *  ...this.net.getNetState(),
-   *  - userNetData: this.userNetData,
-   *  - net: this.userNet,
-   *  - circle: this.circle,
-   *  - tree: this.tree,
-   *  - netView: this.netView,
-   *  - boardMessages: this.board.getState(),
-   *  - memberData: this.memberData,
-   *  ...this.chat.getChatState(),
-   *  - messages: this.messages,
-   *  - chatIds: this.netChatIds,
-   *  events: this.events.getEvents(),
-   */
   getState() {
     return {
       status: this.status,
       error: this.error,
       user: this.account.getUser(),
+      userStatus: this.userStatus,
       ...this.userNets.getUserNetsState(),
       ...this.net.getNetState(),
       ...this.chat.getChatState(),
@@ -74,9 +56,8 @@ export class ClientApp extends EventEmitter {
       this.api = getApi(connection);
       await this.api.health();
     } catch (e: any) {
-      if (!(e instanceof HttpResponseError)) return this.setError(e);
-      if (e.statusCode !== 503) return this.setError(e);
       try {
+        if (e.statusCode !== 503) throw new HttpResponseError(503);
         const baseUrl = this.baseUrl.replace('http', 'ws');
         const connection = getWsConnection(
           baseUrl,
@@ -89,8 +70,14 @@ export class ClientApp extends EventEmitter {
         return this.setError(error);
       }
     }
-    await this.account.readUser();
-    this.setStatus(AppStatus.INITED);
+
+    
+    try {
+      await this.account.init();
+      this.setStatus(AppStatus.INITED);
+    } catch (e: any) {
+      this.setError(e);
+    }
   }
 
   private setInitialValues() {
@@ -126,23 +113,42 @@ export class ClientApp extends EventEmitter {
     this.userEvents.read(true).catch((e) => this.setError(e));
   }
   
-  private async setUser(user: T.IUserResponse, readChanges = true) {
-    if (user && user.user_status !== 'NOT_CONFIRMED') {
-      await this.userNets.getAllNets();
-      this.userNets.getNets();
+  private async onNewUser(readChanges = true) {
+    const { user } = this.getState();
+    if (!user) this.setInitialValues();
+    else if (user.user_status === 'LOGGEDIN') {
+      await this.onNewNets();
       readChanges && await this.userEvents.read(true);
-    } else this.setInitialValues();
+    } 
+    this.setUserStatus();
   }
 
-  private async setNet(methodName: keyof Net) {
-    if (['comeout', 'leave', 'connectByInvite'].includes(methodName)) {
-      return this.userNets.getAllNets();
+  private setUserStatus() {
+    const user = this.account.getUser();
+    this.userStatus = 'NOT_LOGGEDIN';
+    if (!user) return;
+    const { net, userNetData } = this.net.getNetState();
+    if (!net) {
+      this.userStatus = user.user_status;
+      return;
     }
+    const { confirmed } = userNetData || {}
+    if (confirmed) this.userStatus = 'INSIDE_NET';
+    else this.userStatus = 'INVITING';
+  }
+
+  private async onNewNets() {
+    await this.userNets.getAllNets();
+    await this.chat.connectAll();
+  }
+
+  private onNewNet() {
     this.userNets.getNets();
+    this.setUserStatus();
   }
 
   async setEvents(events: IEvents) {
-    const { user, net } = this.getState();
+    const { net } = this.getState();
     const { net_id } = net || {};
     let updateUser = false;
     let updateNet = false;
@@ -155,7 +161,7 @@ export class ClientApp extends EventEmitter {
       }
       if (eventNetId === net_id) updateNet = true;
     }
-    if (updateUser) await this.setUser({ ...user! }, false)
+    if (updateUser) await this.onNewUser(false) // ?
       .catch(console.log);
     if (updateNet) await this.net.enter(net_id!, true)
       .catch(console.log);
@@ -176,3 +182,24 @@ export class ClientApp extends EventEmitter {
 }
 
 export const app = new ClientApp();
+
+/**
+ *  status: this.status,
+ *  error: this.error,
+ *  user: this.account.getUser(),
+ *  ...this.userNets.getUserNetsState(),
+ *  - allNets: this.allNets,
+ *  - nets: this.nets,
+ *  ...this.net.getNetState(),
+ *  - userNetData: this.userNetData,
+ *  - net: this.userNet,
+ *  - circle: this.circle,
+ *  - tree: this.tree,
+ *  - netView: this.netView,
+ *  - boardMessages: this.board.getState(),
+ *  - memberData: this.memberData,
+ *  ...this.chat.getChatState(),
+ *  - messages: this.messages,
+ *  - chatIds: this.netChatIds,
+ *  events: this.events.getEvents(),
+ */

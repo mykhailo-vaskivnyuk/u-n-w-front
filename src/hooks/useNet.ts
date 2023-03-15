@@ -4,6 +4,7 @@ import { INets } from '@client/types';
 import { app } from '@client/app';
 
 export const useNet = () => {
+  console.log(app.getState());
   const [net, setNet] = useState<INetResponse | null>(() => app.getState().net);
   const [nets, setNets] = useState<INets>(() => app.getState().nets);
 

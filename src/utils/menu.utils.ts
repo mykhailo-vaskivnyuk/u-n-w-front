@@ -17,8 +17,8 @@ const netMenuFilter = (netMeuItem: IMenuItem, userStatus: T.UserStatusKeys) => {
 };
 
 export const getMenuItems = (menuItems: IMenuItem[]) => {
-  const { user, net } = app.getState();
-  const { user_status: userStatus = 'NOT_LOGGEDIN' } = user || {};
+  console.log(app.getState().userStatus)
+  const { userStatus, net } = app.getState();
   const netId = net?.net_id.toString();
   let filteredMenuItems = menuItems.filter((item) => netMenuFilter(item, userStatus));
   filteredMenuItems = !netId

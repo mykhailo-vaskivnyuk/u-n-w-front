@@ -13,10 +13,9 @@ import { ICONS } from '@components/icon/icon';
 const { NET_ID } = RoutesMap.NET;
 
 export const useMenuItems = () => {
-  const user = useUser();
+  const [user, userStatus] = useUser();
   const [net, nets] = useNet();
 
-  const { user_status: userStatus = 'NOT_LOGGEDIN' } = user || {};
   const { name = ROOT_TITLE, net_id: netId } = net || {};
 
   // eslint-disable-next-line react-hooks/exhaustive-deps

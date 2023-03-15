@@ -30,7 +30,7 @@ export const ErrorCatch: FC = () => {
     showError(statusCode);
   }, [statusCode, navigate]);
 
-  if (statusCode === 404) return <NotFound />;
+  if (statusCode && HTTP_RESPONSE_ERROR_MAP[statusCode] === 'Not found') return <NotFound />;
 
   return null;
 };

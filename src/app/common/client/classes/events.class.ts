@@ -7,16 +7,7 @@ import { IClientAppThis } from '../types';
 import { AppStatus } from '../constants';
 
 
-type IApp = Pick<IClientAppThis,
-  | 'api'
-  | 'getState'
-  | 'setStatus'
-  | 'setError'
-  | 'setEvents'
-  // | 'setUser'
-  // | 'net'
-  | 'emit'
->;
+type IApp = IClientAppThis;
 
 export class Events {
   private lastDate?: string;

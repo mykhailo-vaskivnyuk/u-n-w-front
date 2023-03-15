@@ -1,17 +1,12 @@
 /* eslint-disable max-lines */
 /* eslint-disable import/no-cycle */
 import * as T from '../../server/types/types';
-import { IClientAppThis, IMember, INetThis } from '../types';
+import { IClientAppThis, IMember } from '../types';
 import { AppStatus } from '../constants';
 
-type IApp = Pick<IClientAppThis,
-  | 'api'
-  | 'getState'
-  | 'setStatus'
-  | 'setError'
->;
+type IApp = IClientAppThis;
 
-type INet =  Pick<INetThis, 'memberChanged'>;
+type INet = { onMemberChanged: (member_node_id: number) => void };
 
 export class Member {
 
@@ -34,7 +29,7 @@ export class Member {
         member_node_id: this.member.node_id,
         ...net!,
       });
-      if (token) await this.net.memberChanged(this.member.node_id);
+      if (token) await this.net.onMemberChanged(this.member.node_id);
       this.app.setStatus(AppStatus.READY);
       return token;
     } catch (e: any) {
@@ -48,7 +43,7 @@ export class Member {
       const { net } = this.app.getState();
       const success = await this.app.api.member.invite
         .cancel({ member_node_id: this.member.node_id, ...net! });
-      if (success) await this.net.memberChanged(this.member.node_id);
+      if (success) await this.net.onMemberChanged(this.member.node_id);
       this.app.setStatus(AppStatus.READY);
       return success;
     } catch (e: any) {
@@ -62,7 +57,7 @@ export class Member {
       const { net } = this.app.getState();
       const success = await this.app.api.member.invite
         .confirm({ member_node_id: this.member.node_id, ...net! });
-      if (success) await this.net.memberChanged(this.member.node_id);
+      if (success) await this.net.onMemberChanged(this.member.node_id);
       this.app.setStatus(AppStatus.READY);
       return success;
     } catch (e: any) {
@@ -77,7 +72,7 @@ export class Member {
       const { net } = this.app.getState();
       const success = await this.app.api.member.invite
         .refuse({ member_node_id: this.member.node_id, ...net! });
-      if (success) await this.net.memberChanged(this.member.node_id);
+      if (success) await this.net.onMemberChanged(this.member.node_id);
       this.app.setStatus(AppStatus.READY);
       return success;
     } catch (e: any) {
