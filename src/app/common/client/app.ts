@@ -18,7 +18,7 @@ export class ClientApp extends EventEmitter {
   private baseUrl = '';
   private api: IClientApi | null;
   private status: AppStatus = AppStatus.INITING;
-  private error: HttpResponseError | null = null;
+  private error: Error | null = null;
   private userStatus: UserStatusKeys = 'NOT_LOGGEDIN';
 
   account: Account;
@@ -71,7 +71,6 @@ export class ClientApp extends EventEmitter {
       }
     }
 
-    
     try {
       await this.account.init();
       this.setStatus(AppStatus.INITED);
@@ -86,7 +85,8 @@ export class ClientApp extends EventEmitter {
     this.userEvents = new Events(this as any);
   }
 
-  private setStatus(status: AppStatus) {
+  private async setStatus(status: AppStatus) {
+    if (this.status === status) return 
     if (status === AppStatus.ERROR) {
       this.status = status;
       this.emit('error', this.error);
@@ -97,12 +97,21 @@ export class ClientApp extends EventEmitter {
       this.status = AppStatus.READY;
       return this.emit('statuschanged', this.status);
     }
-    if (this.status === AppStatus.INITING) return;
-    this.status = status;
+    if (this.status === AppStatus.INITING) return;    
+    if (status === AppStatus.READY) {
+      this.status = status;
+      return this.emit('statuschanged', this.status);
+    }
+    if (this.status === AppStatus.LOADING)
+    await new Promise<void>((rv) => {
+      this.once('statuschanged', rv);
+    });
+    this.status = AppStatus.LOADING
     return this.emit('statuschanged', this.status);
   }
 
   private setError(e: HttpResponseError) {
+    if (this.error) return;
     this.error = e;
     this.setStatus(AppStatus.ERROR);
   }

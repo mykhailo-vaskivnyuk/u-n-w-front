@@ -1,6 +1,10 @@
 import React, { FC, useEffect } from 'react';
 import { MessagesMap } from '@constants/messages';
-import { HttpResponseErrorCode, HTTP_RESPONSE_ERROR_MAP } from '@client/connection/errors';
+import {
+  HttpResponseErrorCode,
+  httpResponseErrorEnum,
+  isHttpResponseError,
+} from '@client/connection/errors';
 import { modalService } from '@services/modal.service';
 import { useNavigateTo } from '@hooks/useNavigateTo';
 import { useAppError } from '@hooks/useAppError';
@@ -16,21 +20,26 @@ const STATUS_TO_MESSAGES_MAP: Record<HttpResponseErrorCode, string> = {
   503: MessagesMap.SERVER_ERROR,
 };
 
-const showError = (statusCode?: HttpResponseErrorCode) =>
-  modalService.showError(STATUS_TO_MESSAGES_MAP[statusCode || 500]);
+const showError = (statusCode: HttpResponseErrorCode) =>
+  modalService.showError(STATUS_TO_MESSAGES_MAP[statusCode]);
 
 export const ErrorCatch: FC = () => {
-  const { statusCode } = useAppError() || {};
+  const error = useAppError();
   const navigate = useNavigateTo();
 
   useEffect(() => {
-    if (!statusCode) return;
-    if (HTTP_RESPONSE_ERROR_MAP[statusCode] === 'Not found') return;
-    if (HTTP_RESPONSE_ERROR_MAP[statusCode] === 'Unauthorized') return navigate.toIndex();
+    if (!error) return;
+    let statusCode: HttpResponseErrorCode;
+    if (isHttpResponseError(error)) statusCode = error.statusCode;
+    else statusCode = httpResponseErrorEnum.InternalServerError;
+    if (statusCode === httpResponseErrorEnum.NotFound) return;
+    if (statusCode === httpResponseErrorEnum.Unauthorized) return navigate.toIndex();
     showError(statusCode);
-  }, [statusCode, navigate]);
+  }, [error, navigate]);
 
-  if (statusCode && HTTP_RESPONSE_ERROR_MAP[statusCode] === 'Not found') return <NotFound />;
+  if (!error) return null;
+  if (!isHttpResponseError(error)) return null;
+  if (error.statusCode !== httpResponseErrorEnum.NotFound) return null;
 
-  return null;
+  return <NotFound />;
 };

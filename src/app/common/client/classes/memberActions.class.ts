@@ -25,7 +25,7 @@ export class MemberActions{
   }
 
   async setDislike(member_node_id: number) {
-    this.app.setStatus(AppStatus.LOADING);
+    await this.app.setStatus(AppStatus.LOADING);
     try {
       const { net } = this.app.getState();
       const success = await this.app.api.member.data.dislike
@@ -39,7 +39,7 @@ export class MemberActions{
   }
 
   async unsetDislike(member_node_id: number) {
-    this.app.setStatus(AppStatus.LOADING);
+    await this.app.setStatus(AppStatus.LOADING);
     try {
       const { net } = this.app.getState();
       const success = await this.app.api.member.data.dislike
@@ -53,7 +53,7 @@ export class MemberActions{
   }
 
   async setVote(member_node_id: number) {
-    this.app.setStatus(AppStatus.LOADING);
+    await this.app.setStatus(AppStatus.LOADING);
     try {
       const { net } = this.app.getState();
       const success = await this.app.api.member.data.vote
@@ -67,7 +67,7 @@ export class MemberActions{
   }
 
   async unsetVote(member_node_id: number) {
-    this.app.setStatus(AppStatus.LOADING);
+    await this.app.setStatus(AppStatus.LOADING);
     try {
       const { net } = this.app.getState();
       const success = await this.app.api.member.data.vote

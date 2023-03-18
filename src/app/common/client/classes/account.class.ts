@@ -18,7 +18,6 @@ export class Account{
   
   async init() {
     const user = await this.app.api.user.read();
-    console.log('INIT', user)
     await this.setUser(user);
   }
 
@@ -32,7 +31,7 @@ export class Account{
   async loginOrSignup(
     type: 'login' | 'signup', args: T.ILoginParams | T.ISignupParams,
   ) {
-    this.app.setStatus(AppStatus.LOADING);
+    await await this.app.setStatus(AppStatus.LOADING);
     try {
       const user = await this.app.api.account[type](args as any);
       user && await this.setUser(user);
@@ -45,7 +44,7 @@ export class Account{
   }
 
   async logoutOrRemove(type: 'logout' | 'remove') {
-    this.app.setStatus(AppStatus.LOADING);
+    await await this.app.setStatus(AppStatus.LOADING);
     try {
       const success = await this.app.api.account[type]();
       success && await this.setUser(null);
@@ -58,7 +57,7 @@ export class Account{
   }
 
   async overmail(args: T.ISignupParams) {
-    this.app.setStatus(AppStatus.LOADING);
+    await this.app.setStatus(AppStatus.LOADING);
     try {
       const success = await this.app.api.account.overmail(args);
       this.app.setStatus(AppStatus.READY);
@@ -71,7 +70,7 @@ export class Account{
   async loginOverLink(
     type: 'confirm' | 'restore', args: T.ITokenParams,
   ): Promise<T.IUserResponse> {
-    this.app.setStatus(AppStatus.LOADING);
+    await this.app.setStatus(AppStatus.LOADING);
     try {
       const user = await this.app.api.account[type](args);
       user && await this.setUser(user);
