@@ -217,4 +217,17 @@ export class Net{
       throw e;
     }
   }
+
+  async update(args: Omit<T.INetUpdateParams, 'node_id'>) {
+    await this.app.setStatus(AppStatus.LOADING);
+    try {
+      const net = await this.app.api.net.update({ ...this.userNet!, ...args });
+      net && this.setNet(net);
+      this.app.setStatus(AppStatus.READY);
+      return net;
+    } catch (e: any) {
+      this.app.setError(e);
+      throw e;
+    }
+  }
 }

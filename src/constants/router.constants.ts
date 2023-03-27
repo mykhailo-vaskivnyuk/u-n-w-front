@@ -18,6 +18,7 @@ export const RelativeRoutesMap = {
     INVITE: 'invite/:token',
     NET_ID: {
       INDEX: ':net_id',
+      GOAL: 'goal',
       CREATE: 'create',
       LEAVE: 'leave',
       CHAT: 'chat',

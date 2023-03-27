@@ -52,6 +52,12 @@ export const MENU_NET_ITEMS: IMenuItem[] = [
 
 export const MENU_INSIDE_NET_ITEMS: IMenuItem[] = [
   {
+    label: 'Goal',
+    href: RoutesMap.NET.NET_ID.GOAL,
+    icon: ICONS.account,
+    allowForUser: 'INVITING',
+  },
+  {
     label: 'Інфо',
     href: RoutesMap.NET.NET_ID.INDEX,
     icon: ICONS.about,
@@ -88,13 +94,13 @@ export const MENU_TREE_ITEMS: IMenuItem[] = [
     label: 'Інфо',
     href: RoutesMap.NET.NET_ID.TREE.INDEX,
     icon: ICONS.about,
-    allowForUser: ['INSIDE_NET'],
+    allowForUser: 'INSIDE_NET',
   },
   {
     label: 'Чат',
     href: RoutesMap.NET.NET_ID.TREE.CHAT,
     icon: ICONS.post,
-    allowForUser: ['INSIDE_NET'],
+    allowForUser: 'INSIDE_NET',
   },
 ];
 
@@ -103,13 +109,13 @@ export const MENU_CIRCLE_ITEMS: IMenuItem[] = [
     label: 'Інфо',
     href: RoutesMap.NET.NET_ID.CIRCLE.INDEX,
     icon: ICONS.about,
-    allowForUser: ['INSIDE_NET'],
+    allowForUser: 'INSIDE_NET',
   },
   {
     label: 'Чат',
     href: RoutesMap.NET.NET_ID.CIRCLE.CHAT,
     icon: ICONS.post,
-    allowForUser: ['INSIDE_NET'],
+    allowForUser: 'INSIDE_NET',
   },
 ];
 
