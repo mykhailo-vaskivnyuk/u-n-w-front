@@ -1,5 +1,5 @@
 import { FC, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useMatch } from 'react-router-dom';
 import { AppStatus } from '@client/constants';
 import { IS_DEV, REGEXP_END_ON_SLASH } from '@constants/constants';
 import { RoutesMap } from '@constants/router.constants';
@@ -18,6 +18,7 @@ export const Redirect: FC = () => {
   const { pathname } = useLocation();
   const status = useAppStatus();
   const isNet = useMatchParam('net_id', netPath, false);
+  const isNetRoute = useMatch({ path: '/net', end: false });
 
   useEffect(() => {
     if (status !== AppStatus.READY && status !== AppStatus.ERROR) return;
@@ -31,6 +32,7 @@ export const Redirect: FC = () => {
         navigate.back();
       });
     }
+    if (isNetRoute && !user) return navigate.toIndex();
     switch (pathname) {
       case RoutesMap.ROOT:
       case RoutesMap.ACCOUNT.INDEX:
@@ -47,7 +49,7 @@ export const Redirect: FC = () => {
         break;
       default:
     }
-  }, [isNet, navigate, pathname, status]);
+  }, [isNet, isNetRoute, navigate, pathname, status]);
 
   return null;
 };

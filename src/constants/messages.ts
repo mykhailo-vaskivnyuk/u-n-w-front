@@ -23,6 +23,7 @@ export const MessagesMap = {
   NET_LEAVE_CONFIRM: 'Покинути спільноту %s назавжди?',
   NET_LEAVE: "Ви успішно від'єднались від мережі %s",
   NET_LEAVE_FAIL: "Не вдалося від'єднатись від мережі",
+  NET_NOT_GOAL: 'Спершу сформулюйте мету спільноти',
   MEMBER_INVITE_CREATE: 'Лінк-запрошення скопійовано до буферу обміну',
   MEMBER_INVITE_CREATE_FAIL: 'Не вдалося створити лінк-запрошення',
   MEMBER_INVITE_CANCEL: 'Запрошення скасовано',
