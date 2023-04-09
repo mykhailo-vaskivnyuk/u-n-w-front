@@ -13,6 +13,18 @@ export const Button: FC<PropsWithChildren<ButtonProps>> = memo((props) => {
   const { type = 'button', btnType, href, className, ...rest } = props;
 
   if (href) {
+    if (/^http/.test(href)) {
+      return (
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={clsx(root, btnType, className)}
+        >
+          {rest.children}
+        </a>
+      );
+    }
     return (
       <Link to={href} className={clsx(root, btnType, className)}>
         {rest.children}

@@ -1,16 +1,37 @@
 import { createUseStyles } from 'react-jss';
 
 export const useStyles = createUseStyles(
-  ({ mixins, vars, palette }) => ({
+  ({ vars, palette }) => ({
     root: {
-      height: '100%',
-      ...mixins.flexCenter,
+      display: 'flex',
       flexDirection: 'column',
+      alignItems: 'center',
+      paddingBottom: vars.gap.XL,
+      '& p': {
+        color: palette.first.main,
+        marginTop: vars.gap.L,
+        width: '100%',
+        fontSize: vars.fontSize.M,
+      },
+      '& ul': {
+        listStyleType: 'disc',
+        paddingLeft: vars.gap.L,
+      },
+      '& li': {
+        listStyleType: 'disc',
+      },
     },
-    content: {
+    title: {
       fontSize: vars.fontSize.XXL,
       fontWeight: vars.fontWeight.bold,
       color: palette.font.second,
+      '& + p': {
+        marginTop: vars.gap.XL,
+      },
+    },
+    button: {
+      width: '50%',
+      marginTop: vars.gap.XL,
     },
   }),
   { name: 'About' },
