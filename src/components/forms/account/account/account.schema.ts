@@ -16,7 +16,7 @@ export const AccountSchema = yup.object().shape({
 
 export interface AccountFormValues {
   [AccountField.EMAIL]: string;
-  [AccountField.NAME]?: string;
-  [AccountField.MOBILE]?: string;
-  [AccountField.PASSWORD]?: string;
+  [AccountField.NAME]: string;
+  [AccountField.MOBILE]: string;
+  [AccountField.PASSWORD]: string;
 }
