@@ -9,11 +9,11 @@ import { NetBoardForm } from '@components/forms/net/board/board';
 
 export const useNetBoard = () => {
   useNet();
-  const { user, boardMessages } = app.getState();
+  const { boardMessages, userNetData } = app.getState();
 
   const boardMessage = useMemo(
-    () => boardMessages.find(({ user_id: v }) => v === user!.user_id),
-    [boardMessages, user],
+    () => boardMessages.find(({ member_id: v }) => v === userNetData!.node_id),
+    [boardMessages, userNetData],
   );
 
   const handleFail = useCallback(

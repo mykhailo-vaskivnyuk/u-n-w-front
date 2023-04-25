@@ -14,11 +14,11 @@ interface BoardMessageProps {
 export const BoardMessage: FC<BoardMessageProps> = (props) => {
   const { root, board, name, message: clsMessage } = useStylesChat();
   const { boardMessage } = props;
-  const { user } = app.getState();
+  const { userNetData } = app.getState();
 
-  const { user_id: userId, message_id: messageId, message } = boardMessage;
+  const { member_id: memberId, message_id: messageId, message } = boardMessage;
   const handleOpen = () => modalService.showMessage(message);
-  const myOwn = userId === user!.user_id;
+  const myOwn = memberId === userNetData!.node_id;
   const innerHtml = { __html: makeInnerHtmlWithLinks(message) };
 
   return (
