@@ -14,10 +14,11 @@ const showFail = () => modalService.showError('FAIL');
 const NetGoal: FC = () => {
   const { buttons } = useStyles();
   const { submitForm, values } = useFormikContext<NetGoalFormValues>();
-  const { net } = app.getState();
-  const { goal, count_of_members: countOfMembers } = net!;
+  const { net, userNetData } = app.getState();
+  const { parent_node_id: parentNodeId, count_of_members: countOfMembers } = userNetData!;
+  const { goal } = net!;
   const changed = goal !== values[NetGoalField.GOAL];
-  const editable = countOfMembers === 1;
+  const editable = parentNodeId === null && countOfMembers === 1;
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();

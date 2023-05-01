@@ -5,17 +5,17 @@ import { modalService } from '@services/modal.service';
 
 export const useEvents = (netView?: NetViewKeys) => {
   const [events, setEvents] = useState<IEvents>([]);
-  const { status, userNetData } = app.getState();
+  const { status, net } = app.getState();
 
   const selectEvents = useCallback(
     (event: IEvent) => {
-      const { node_id: nodeId } = userNetData || {};
-      const { member_id: eventMemberId } = event;
-      if (!netView && !eventMemberId) return true;
-      if (netView && nodeId && nodeId === eventMemberId) return true;
+      const { net_id: netId } = net || {};
+      const { net_id: eventNetId } = event;
+      if (!netView && !eventNetId) return true;
+      if (netView && netId && netId === eventNetId) return true;
       return false;
     },
-    [userNetData, netView],
+    [net, netView],
   );
 
   const handleEvents = useCallback(

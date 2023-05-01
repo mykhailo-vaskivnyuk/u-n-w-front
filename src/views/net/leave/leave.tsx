@@ -15,7 +15,7 @@ export const NetLeave: FC = () => {
   useEffect(() => {
     let isLeaving = false;
     const { net } = app.getState();
-    const { parent_net_id: netId, name } = net!;
+    const { parent_net_id: parentNetId, name } = net!;
 
     const handleConfirm = () => {
       isLeaving = true;
@@ -27,7 +27,7 @@ export const NetLeave: FC = () => {
             return navigate.back();
           }
           showSuccess(name);
-          netId ? navigate.toNet({ net_id: netId }).id(true) : navigate.toIndex(true);
+          parentNetId ? navigate.toNet({ net_id: parentNetId }).id(true) : navigate.toIndex(true);
         })
         .catch(navigate.back);
     };
