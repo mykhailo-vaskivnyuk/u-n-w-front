@@ -15,6 +15,7 @@ const NetGoal: FC = () => {
   const { buttons } = useStyles();
   const { submitForm, values } = useFormikContext<NetGoalFormValues>();
   const { net, userNetData } = app.getState();
+
   const { parent_node_id: parentNodeId, count_of_members: countOfMembers } = userNetData!;
   const { goal } = net!;
   const changed = goal !== values[NetGoalField.GOAL];
