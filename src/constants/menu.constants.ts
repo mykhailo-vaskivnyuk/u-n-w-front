@@ -28,6 +28,12 @@ export const MENU_ITEMS: IMenuItem[] = [
     allowForUser: 'NOT_CONFIRMED',
   },
   {
+    label: 'Месенджер',
+    href: RoutesMap.ACCOUNT.MESSENGER,
+    icon: ICONS.telegram,
+    allowForUser: 'LOGGEDIN',
+  },
+  {
     label: 'Палітра',
     href: RoutesMap.PALETTE,
     icon: ICONS.dev,

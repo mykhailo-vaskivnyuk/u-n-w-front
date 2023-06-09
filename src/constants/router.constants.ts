@@ -11,6 +11,7 @@ export const RelativeRoutesMap = {
     LOGOUT: 'logout',
     CONFIRM: 'confirm/:token',
     RESTORE: 'restore/:token',
+    MESSENGER: 'messenger',
   },
   NET: {
     INDEX: 'net',

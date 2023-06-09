@@ -8,6 +8,7 @@ import { Logout } from '@views/account/logout/logout';
 import { Overmail } from '@views/account/overmail/overmail';
 import { Confirm } from '@views/account/confirm/confirm';
 import { Restore } from '@views/account/restore/restore';
+import { Messenger } from '@views/account/messenger/messenger';
 
 export const AccountRouter = (
   <Route path={RelativeRoutesMap.ACCOUNT.INDEX}>
@@ -18,5 +19,6 @@ export const AccountRouter = (
     <Route path={RelativeRoutesMap.ACCOUNT.OVERMAIL} element={<Overmail />} />
     <Route path={RelativeRoutesMap.ACCOUNT.CONFIRM} element={<Confirm />} />
     <Route path={RelativeRoutesMap.ACCOUNT.RESTORE} element={<Restore />} />
+    <Route path={RelativeRoutesMap.ACCOUNT.MESSENGER} element={<Messenger />} />
   </Route>
 );

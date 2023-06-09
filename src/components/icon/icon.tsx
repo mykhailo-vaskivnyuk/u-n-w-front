@@ -52,4 +52,5 @@ export enum ICONS {
   post = 'post',
   remove = 'remove',
   spinner = 'spinner',
+  telegram = 'telegram',
 }
