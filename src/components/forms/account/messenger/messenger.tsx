@@ -15,6 +15,7 @@ export const MessengerForm: FC = () => {
   const handleClick = async () => {
     const link = await app.account.messenger.getLink().catch(() => {});
     if (!link) return showFail();
+    // modalService.showMessage(link);
     navigate.toIndex();
     window.open(link);
   };
