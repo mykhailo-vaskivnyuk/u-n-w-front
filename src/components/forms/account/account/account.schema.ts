@@ -8,7 +8,7 @@ export enum AccountField {
 }
 
 export const AccountSchema = yup.object().shape({
-  [AccountField.EMAIL]: yup.string().required().email(),
+  [AccountField.EMAIL]: yup.string().email(),
   [AccountField.NAME]: yup.string(),
   [AccountField.MOBILE]: yup.string(),
   [AccountField.PASSWORD]: yup.string(),

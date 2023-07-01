@@ -50,8 +50,8 @@ export const SignupForm = () => {
     <FormikProvider
       initialValues={{ email: '' }}
       validationSchema={SignupSchema}
-      onSubmit={async (values) => {
-        await app.account
+      onSubmit={(values) => {
+        app.account
           .loginOrSignup('signup', values)
           .then((user) => {
             if (!user) return showFail();

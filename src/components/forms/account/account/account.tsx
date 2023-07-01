@@ -18,7 +18,7 @@ const showFail = () => modalService.showError(MessagesMap.ACCOUNT_NOT_DELETED);
 const getInitialValue = (user: OmitNull<IUserResponse>) => {
   const { email, name, mobile } = user;
   return {
-    email,
+    email: email || '',
     name: name || '',
     mobile: mobile || '',
     password: '',
