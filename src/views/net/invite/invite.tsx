@@ -29,19 +29,18 @@ export const NetInvite: FC = () => {
           return navigate.back();
         }
         const { error } = result;
-        if (error) {
-          if (error === 'not parent net member') {
-            showFail();
-            return navigate.back();
-          }
-          showExists();
-          navigate.toNet(result).id(true);
-        } else {
+        if (!error) {
           showSuccess();
-          navigate.toNet(result).id(true, 'circle');
+          return navigate.toNet(result).id(true, 'circle');
         }
+        if (error === 'not parent net member') {
+          showFail();
+          return navigate.back();
+        }
+        showExists();
+        navigate.toNet(result).id(true);
       })
-      .catch(navigate.back);
+      .catch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

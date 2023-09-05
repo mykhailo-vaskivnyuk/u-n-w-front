@@ -13,6 +13,7 @@ import { Router } from '@router/router';
 
 export const App: FC = () => {
   useApp();
+  console.log('LOCATION', window.location.href);
   return (
     <ErrorBoundary level="top">
       <Theme>

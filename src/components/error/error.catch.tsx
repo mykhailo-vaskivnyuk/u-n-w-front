@@ -33,7 +33,7 @@ export const ErrorCatch: FC = () => {
     if (isHttpResponseError(error)) statusCode = error.statusCode;
     else statusCode = httpResponseErrorEnum.InternalServerError;
     if (statusCode === httpResponseErrorEnum.NotFound) return;
-    if (statusCode === httpResponseErrorEnum.Unauthorized) return navigate.toIndex();
+    if (statusCode === httpResponseErrorEnum.Unauthorized) navigate.toIndex();
     showError(statusCode);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error]);
