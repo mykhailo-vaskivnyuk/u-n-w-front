@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { useStyles } from './button.styles';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  btnType: 'primary' | 'secondary' | 'refuse' | 'text';
+  btnType: 'primary' | 'secondary' | 'refuse' | 'text' | 'telegram';
   href?: string;
 }
 
@@ -13,7 +13,7 @@ export const Button: FC<PropsWithChildren<ButtonProps>> = memo((props) => {
   const { type = 'button', btnType, href, className, ...rest } = props;
 
   if (href) {
-    if (/^http/.test(href)) {
+    if (/^(http|tg):\/\//.test(href)) {
       return (
         <a
           href={href}

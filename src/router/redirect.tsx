@@ -14,15 +14,18 @@ const { INDEX: netPath } = RoutesMap.NET.NET_ID;
 const showFailed = () => modalService.showError(MessagesMap.NET_COMEOUT_FAIL);
 
 export const Redirect: FC = () => {
-  const navigate = useNavigateTo();
-  const { pathname } = useLocation();
   const status = useAppStatus();
+  const navigate = useNavigateTo();
+  const location = useLocation();
   const isNet = useMatchParam('net_id', netPath, false);
   const isNetRoute = useMatch({ path: '/net', end: false });
 
   useEffect(() => {
     if (status !== AppStatus.READY && status !== AppStatus.ERROR) return;
-    if (pathname !== RoutesMap.ROOT && REGEXP_END_ON_SLASH.test(pathname)) {
+    const { pathname, hash } = location;
+    if (pathname === RoutesMap.ROOT) {
+      if (/^#tgWebAppData/.test(hash)) return navigate.to(pathname);
+    } else if (REGEXP_END_ON_SLASH.test(pathname)) {
       return navigate.to(pathname.replace(REGEXP_END_ON_SLASH, ''));
     }
     const { user, net } = app.getState();
@@ -32,7 +35,7 @@ export const Redirect: FC = () => {
         navigate.back();
       });
     }
-    if (isNetRoute && !user) return navigate.toIndex();
+    // if (isNetRoute && !user) return navigate.toIndex();
     switch (pathname) {
       case RoutesMap.ROOT:
       case RoutesMap.ACCOUNT.INDEX:
@@ -49,7 +52,7 @@ export const Redirect: FC = () => {
         break;
       default:
     }
-  }, [isNet, isNetRoute, navigate, pathname, status]);
+  }, [isNet, isNetRoute, location, navigate, status]);
 
   return null;
 };

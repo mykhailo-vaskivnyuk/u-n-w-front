@@ -11,5 +11,12 @@ export const useUser = () => {
     return () => app.remove('user', setUser);
   }, []);
 
+  useEffect(() => {
+    if (!user) return;
+    const location = localStorage.getItem('location');
+    localStorage.removeItem('location');
+    if (location) window.location.href = location;
+  }, [user]);
+
   return [user, userStatus] as const;
 };

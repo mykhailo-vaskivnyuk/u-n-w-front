@@ -13,11 +13,15 @@ export const MessengerForm: FC = () => {
   const navigate = useNavigateTo();
 
   const handleClick = async () => {
-    const link = await app.account.messenger.getLink().catch(() => {});
-    if (!link) return showFail();
-    // modalService.showMessage(link);
-    navigate.toIndex();
-    window.open(link);
+    await app.account.messenger
+      .getLink()
+      .then((link) => {
+        if (!link) return showFail();
+        // modalService.showMessage(link);
+        navigate.toIndex();
+        window.open(link);
+      })
+      .catch(() => {});
   };
 
   return (

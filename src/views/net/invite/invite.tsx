@@ -40,7 +40,7 @@ export const NetInvite: FC = () => {
         showExists();
         navigate.toNet(result).id(true);
       })
-      .catch();
+      .catch(() => {});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

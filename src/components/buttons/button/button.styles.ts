@@ -17,6 +17,9 @@ export const useStyles = createUseStyles(
       '&.secondary': {
         background: palette.bg.second,
       },
+      '&.telegram': {
+        background: palette.bg.first,
+      },
       '&.refuse': {
         background: palette.bg.dark,
       },

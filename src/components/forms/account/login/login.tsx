@@ -1,6 +1,7 @@
 import React, { FC, FormEvent, useRef } from 'react';
 import { Formik, useFormikContext } from 'formik';
 import { RoutesMap } from '@constants/router.constants';
+import { TELEGRAM_URL } from '@constants/constants';
 import { MessagesMap } from '@constants/messages';
 import { useNavigateTo } from '@hooks/useNavigateTo';
 import { format } from '@utils/format.utils';
@@ -29,6 +30,9 @@ const Login: FC = () => {
     submitForm();
   };
 
+  const location = localStorage.getItem('location');
+  const { tg } = app.getState();
+
   return (
     <form onSubmit={handleSubmit}>
       <Input type="text" label="Email" name={LoginField.EMAIL} />
@@ -41,6 +45,11 @@ const Login: FC = () => {
         <Button href={RoutesMap.ACCOUNT.OVERMAIL} btnType="primary">
           увійти через email
         </Button>
+        {!tg.initData && (
+          <Button href={`${TELEGRAM_URL}&start=${location}`} btnType="telegram">
+            увійти через telegram
+          </Button>
+        )}
         <Button href={RoutesMap.ACCOUNT.SIGNUP} btnType="primary">
           створити акаунт
         </Button>

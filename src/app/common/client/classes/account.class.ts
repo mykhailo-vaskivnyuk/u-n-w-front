@@ -4,9 +4,7 @@ import * as T from '../../server/types/types';
 import { IClientAppThis } from '../types';
 import { AppStatus } from '../constants';
 import { Messenger } from './messenger.class';
-import { tgObj } from './tg';
-
-const IS_DEV = process.env.NODE_ENV === 'development';
+// import { tgObj } from './tg';
 
 type IApp = IClientAppThis & {
   onNewUser: (readChanges?: boolean) => Promise<void>;
