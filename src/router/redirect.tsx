@@ -1,7 +1,7 @@
 import { FC, useEffect } from 'react';
 import { useLocation, useMatch } from 'react-router-dom';
 import { AppStatus } from '@client/constants';
-import { IS_DEV, REGEXP_END_ON_SLASH } from '@constants/constants';
+import { IS_DEV, REGEXP_BAD_HASH, REGEXP_END_ON_SLASH } from '@constants/constants';
 import { RoutesMap } from '@constants/router.constants';
 import { MessagesMap } from '@constants/messages';
 import { useNavigateTo } from '@hooks/useNavigateTo';
@@ -22,24 +22,25 @@ export const Redirect: FC = () => {
 
   useEffect(() => {
     if (status !== AppStatus.READY && status !== AppStatus.ERROR) return;
-    const { pathname, hash } = location;
-    if (pathname === RoutesMap.ROOT) {
-      if (/^#tgWebAppData/.test(hash)) return navigate.to(pathname);
+    const { pathname: wPathname, hash: wHash } = window.location;
+    const { pathname } = location;
+    if (wPathname === RoutesMap.ROOT) {
+      if (REGEXP_BAD_HASH.test(wHash)) return navigate.toIndex();
     } else if (REGEXP_END_ON_SLASH.test(pathname)) {
       return navigate.to(pathname.replace(REGEXP_END_ON_SLASH, ''));
     }
-    const { user, net } = app.getState();
-    if (!isNet && net) {
+    const { user, net, tg } = app.getState();
+    if (!isNet && net)
       app.net.comeout().catch(() => {
         showFailed();
         navigate.back();
       });
-    }
-    // if (isNetRoute && !user) return navigate.toIndex();
     switch (pathname) {
       case RoutesMap.ROOT:
       case RoutesMap.ACCOUNT.INDEX:
-        if (!user) navigate.toLogin();
+        if (user) break;
+        if (tg.initData) navigate.toSignup(true);
+        else navigate.toLogin();
         break;
       case RoutesMap.ACCOUNT.SIGNUP:
       case RoutesMap.ACCOUNT.LOGIN:
@@ -48,7 +49,8 @@ export const Redirect: FC = () => {
         break;
       case RoutesMap.PALETTE:
       case RoutesMap.MAIL:
-        !IS_DEV && navigate.toIndex();
+        if (IS_DEV) break;
+        navigate.toIndex();
         break;
       default:
     }

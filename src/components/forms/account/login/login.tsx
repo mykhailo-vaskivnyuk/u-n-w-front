@@ -1,7 +1,6 @@
 import React, { FC, FormEvent, useRef } from 'react';
 import { Formik, useFormikContext } from 'formik';
 import { RoutesMap } from '@constants/router.constants';
-import { TELEGRAM_URL } from '@constants/constants';
 import { MessagesMap } from '@constants/messages';
 import { useNavigateTo } from '@hooks/useNavigateTo';
 import { format } from '@utils/format.utils';
@@ -10,6 +9,7 @@ import { app } from '@client/app';
 import { Button } from '@components/buttons/button/button';
 import { Input } from '@components/controls/input/input';
 import { LoginField, LoginFormValues, LoginSchema } from './login.schema';
+import { useTgHref } from './useTgHref';
 import { useStyles } from './login.styles';
 
 const FormikProvider = Formik<LoginFormValues>;
@@ -23,15 +23,13 @@ const Login: FC = () => {
   const { buttons } = useStyles();
   const { submitForm } = useFormikContext<LoginFormValues>();
   const ref = useRef<HTMLInputElement>(null);
+  const tgHref = useTgHref();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     ref.current?.blur();
     submitForm();
   };
-
-  const location = localStorage.getItem('location');
-  const { tg } = app.getState();
 
   return (
     <form onSubmit={handleSubmit}>
@@ -45,8 +43,8 @@ const Login: FC = () => {
         <Button href={RoutesMap.ACCOUNT.OVERMAIL} btnType="primary">
           увійти через email
         </Button>
-        {!tg.initData && (
-          <Button href={`${TELEGRAM_URL}&start=${location}`} btnType="telegram">
+        {tgHref && (
+          <Button href={tgHref} btnType="telegram">
             увійти через telegram
           </Button>
         )}

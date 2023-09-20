@@ -1,4 +1,5 @@
 import React, { FC, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { MessagesMap } from '@constants/messages';
 import {
   HttpResponseErrorCode,
@@ -26,6 +27,7 @@ const showError = (statusCode: HttpResponseErrorCode) =>
 export const ErrorCatch: FC = () => {
   const error = useAppError();
   const navigate = useNavigateTo();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     if (!error) return;
@@ -34,7 +36,7 @@ export const ErrorCatch: FC = () => {
     else statusCode = httpResponseErrorEnum.InternalServerError;
     if (statusCode === httpResponseErrorEnum.NotFound) return;
     if (statusCode === httpResponseErrorEnum.Unauthorized) {
-      localStorage.setItem('location', window.location.href);
+      localStorage.setItem('pathname', pathname);
       navigate.toIndex();
     }
     showError(statusCode);
