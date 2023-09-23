@@ -6,7 +6,7 @@ import { SignupTgForm } from '@components/forms/account/signup/signup.tg';
 
 export const Signup: FC = () => {
   const { tg } = app.getState();
-  const SignupComponent = tg.initData ? SignupTgForm : SignupForm;
+  const SignupComponent = tg ? SignupTgForm : SignupForm;
   return (
     <FormContainer title="Створити акаунт">
       <SignupComponent />

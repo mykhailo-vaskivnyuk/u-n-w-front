@@ -39,7 +39,7 @@ export const Redirect: FC = () => {
       case RoutesMap.ROOT:
       case RoutesMap.ACCOUNT.INDEX:
         if (user) break;
-        if (tg.initData) navigate.toSignup(true);
+        if (tg) navigate.toSignup(true);
         else navigate.toLogin();
         break;
       case RoutesMap.ACCOUNT.SIGNUP:
