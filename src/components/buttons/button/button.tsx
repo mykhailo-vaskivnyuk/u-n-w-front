@@ -13,7 +13,7 @@ export const Button: FC<PropsWithChildren<ButtonProps>> = memo((props) => {
   const { type = 'button', btnType, href, className, ...rest } = props;
 
   if (href) {
-    if (/^(http|tg):\/\//.test(href)) {
+    if (/^(https?|tg):\/\//.test(href)) {
       return (
         <a
           href={href}

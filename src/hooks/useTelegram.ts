@@ -5,6 +5,6 @@ export const useTelegram = () => {
   useEffect(() => {
     const { tg } = app.getState();
     if (!tg) return;
-    tg.expand();
+    tg.expand?.();
   }, []);
 };
