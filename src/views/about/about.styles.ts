@@ -16,6 +16,8 @@ export const useStyles = createUseStyles(
       '& ul': {
         listStyleType: 'disc',
         paddingLeft: vars.gap.L,
+        color: palette.first.main,
+        fontSize: vars.fontSize.M,
       },
       '& li': {
         listStyleType: 'disc',

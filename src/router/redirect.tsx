@@ -42,8 +42,11 @@ export const Redirect: FC = () => {
         if (tg) navigate.toSignup(true);
         else navigate.toLogin();
         break;
-      case RoutesMap.ACCOUNT.SIGNUP:
       case RoutesMap.ACCOUNT.LOGIN:
+        if (user) navigate.toIndex();
+        else if (tg) navigate.toSignup(true);
+        break;
+      case RoutesMap.ACCOUNT.SIGNUP:
       case RoutesMap.ACCOUNT.OVERMAIL:
         if (user) navigate.toIndex();
         break;

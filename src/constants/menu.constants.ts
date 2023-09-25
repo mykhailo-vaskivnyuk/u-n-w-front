@@ -26,12 +26,14 @@ export const MENU_ITEMS: IMenuItem[] = [
     href: RoutesMap.ACCOUNT.LOGOUT,
     icon: ICONS.logout,
     allowForUser: 'NOT_CONFIRMED',
+    forTg: false,
   },
   {
     label: 'Месенджер',
     href: RoutesMap.ACCOUNT.MESSENGER,
     icon: ICONS.telegram,
     allowForUser: 'LOGGEDIN',
+    forTg: false,
   },
   {
     label: 'Палітра',

@@ -8,24 +8,33 @@ import { makeDynamicPathname } from './format.utils';
 
 const { NET_ID } = RoutesMap.NET;
 
-const netMenuFilter = (netMeuItem: IMenuItem, userStatus: T.UserStatusKeys) => {
-  const { allowForUser } = netMeuItem;
-  if (Array.isArray(allowForUser)) return allowForUser.includes(userStatus!);
-  if (T.USER_STATUS_MAP[allowForUser] <= T.USER_STATUS_MAP[userStatus!]) return true;
-  if (IS_DEV && allowForUser === 'DEV') return true;
-  return false;
+const createNetMenuFilter = () => {
+  const { userStatus, tg } = app.getState();
+  return (netMeuItem: IMenuItem) => {
+    const { allowForUser, forTg } = netMeuItem;
+    if (!tg || forTg !== false) {
+      if (Array.isArray(allowForUser)) return allowForUser.includes(userStatus);
+      if (T.USER_STATUS_MAP[allowForUser] <= T.USER_STATUS_MAP[userStatus]) return true;
+    }
+    if (IS_DEV && allowForUser === 'DEV') return true;
+    return false;
+  };
+};
+
+const createInsertNetId = (netId: string) => (item: IMenuItem) => {
+  const href = item.href.replace(':net_id', netId); // makeDynamicPathname ?
+  return { ...item, href };
 };
 
 export const getMenuItems = (menuItems: IMenuItem[]) => {
-  const { userStatus, net } = app.getState();
-  const netId = net?.net_id.toString();
-  let filteredMenuItems = menuItems.filter((item) => netMenuFilter(item, userStatus));
-  filteredMenuItems = !netId
-    ? filteredMenuItems
-    : filteredMenuItems.map((item) => {
-        const href = item.href.replace(':net_id', netId);
-        return { ...item, href };
-      });
+  const netMenuFilter = createNetMenuFilter();
+  let filteredMenuItems = menuItems.filter(netMenuFilter);
+  const { net } = app.getState();
+  if (net) {
+    const netId = net?.net_id.toString();
+    const insertNetId = createInsertNetId(netId);
+    filteredMenuItems = filteredMenuItems.map(insertNetId);
+  }
   return filteredMenuItems.length ? filteredMenuItems : undefined;
 };
 
