@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { FormContainer } from '@components/forms/form.container/form.container';
+import { FormContainer } from '@components/containers/form.container';
 import { OvermailForm } from '@components/forms/account/overmail/overmail';
 
 export const Overmail: FC = () => {

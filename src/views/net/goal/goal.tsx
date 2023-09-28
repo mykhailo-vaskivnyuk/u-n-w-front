@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { FormContainer } from '@components/forms/form.container/form.container';
+import { FormContainer } from '@components/containers/form.container';
 import { NetGoalForm } from '@components/forms/net/goal/goal';
 
 export const NetGoal: FC = () => {

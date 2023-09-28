@@ -4,7 +4,7 @@ import { NetBoardFormValues } from '@components/forms/net/board/board.schema';
 import { modalService } from '@services/modal.service';
 import { useNet } from '@hooks/useNet';
 import { app } from '@client/app';
-import { FormContainer } from '@components/forms/form.container/form.container';
+import { FormContainer } from '@components/containers/form.container';
 import { NetBoardForm } from '@components/forms/net/board/board';
 
 export const useNetBoard = () => {

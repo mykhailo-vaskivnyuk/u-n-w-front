@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { FormContainer } from '@components/forms/form.container/form.container';
+import { FormContainer } from '@components/containers/form.container';
 import { MessengerForm } from '@components/forms/account/messenger/messenger';
 
 export const Messenger: FC = () => {

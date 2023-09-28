@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { useNavigateTo } from '@hooks/useNavigateTo';
 import { app } from '@client/app';
-import { FormContainer } from '@components/forms/form.container/form.container';
+import { FormContainer } from '@components/containers/form.container';
 import { MemberConfirmForm } from '@components/forms/member/confirm/confirm';
 
 export const TreeMemberConnected: FC = () => {

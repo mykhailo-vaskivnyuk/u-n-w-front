@@ -3,7 +3,7 @@ import { useNavigateTo } from '@hooks/useNavigateTo';
 import { app } from '@client/app';
 import { MemberInviteCreateForm } from '@components/forms/member/invite/invite.create';
 import { MemberInviteCancelForm } from '@components/forms/member/invite/invite.cancel';
-import { FormContainer } from '@components/forms/form.container/form.container';
+import { FormContainer } from '@components/containers/form.container';
 
 export const TreeMemberInvite: FC = () => {
   const navigate = useNavigateTo();
