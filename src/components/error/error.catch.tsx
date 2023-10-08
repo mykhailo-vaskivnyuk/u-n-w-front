@@ -43,9 +43,8 @@ export const ErrorCatch: FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error]);
 
-  if (!error) return null;
   if (!isHttpResponseError(error)) return null;
-  if (error.statusCode !== httpResponseErrorEnum.NotFound) return null;
+  if (error.statusCode === httpResponseErrorEnum.NotFound) return <NotFound />;
 
-  return <NotFound />;
+  return null;
 };
