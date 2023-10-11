@@ -20,6 +20,7 @@ export const RelativeRoutesMap = {
     NET_ID: {
       INDEX: ':net_id',
       GOAL: 'goal',
+      INFO: 'info',
       CREATE: 'create',
       LEAVE: 'leave',
       CHAT: 'chat',

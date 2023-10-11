@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import clsx from 'clsx';
 import { modalService } from '@services/modal.service';
+import { useCombineStyles } from '@styles/hooks/useCombineStyles';
 import { IMenuItem } from './types';
 import { MenuItem } from './menu.item/menu.item';
 import { useStyles } from './menu.styles';
@@ -10,6 +11,7 @@ export interface MenuProps {
   siblingItems?: IMenuItem[];
   childItems?: IMenuItem[];
   items?: IMenuItem[];
+  classes?: Partial<ReturnType<typeof useStyles>>;
 }
 
 const handleClick = modalService.closeModal;
@@ -21,8 +23,8 @@ const getMenuItemsJsx = (menuItems?: IMenuItem[]) =>
   });
 
 export const Menu: FC<MenuProps> = (props) => {
-  const { root, section, parentItems: clsParentItems } = useStyles();
-  const { parentItems, siblingItems, childItems, items } = props;
+  const { parentItems, siblingItems, childItems, items, classes } = props;
+  const { root, section, parentItems: clsParentItems } = useCombineStyles(useStyles(), classes);
 
   const itemsJsx = getMenuItemsJsx(items);
   const parentItemsJsx = getMenuItemsJsx(parentItems);

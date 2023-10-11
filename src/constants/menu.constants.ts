@@ -67,7 +67,7 @@ export const MENU_INSIDE_NET_ITEMS: IMenuItem[] = [
   },
   {
     label: 'Інфо',
-    href: RoutesMap.NET.NET_ID.INDEX,
+    href: RoutesMap.NET.NET_ID.INFO,
     icon: ICONS.about,
     allowForUser: ['INSIDE_NET'],
   },

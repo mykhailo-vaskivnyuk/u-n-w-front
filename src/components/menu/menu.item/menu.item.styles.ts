@@ -3,7 +3,7 @@ import { createUseStyles } from 'react-jss';
 export const useStyles = createUseStyles(
   ({ palette, vars }) => ({
     root: {
-      fontSize: vars.fontSize.L,
+      //
     },
     button: {
       justifyContent: 'start',

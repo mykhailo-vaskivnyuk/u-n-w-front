@@ -16,8 +16,8 @@ const NetGoal: FC = () => {
   const { submitForm, values } = useFormikContext<NetGoalFormValues>();
   const { net, userNetData } = app.getState();
 
-  const { parent_node_id: parentNodeId, count_of_members: countOfMembers } = userNetData!;
-  const { goal } = net!;
+  const { parent_node_id: parentNodeId } = userNetData!;
+  const { goal, total_count_of_members: countOfMembers } = net!;
   const changed = goal !== values[NetGoalField.GOAL];
   const editable = parentNodeId === null && countOfMembers === 1;
 

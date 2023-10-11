@@ -21,7 +21,7 @@ export const useMenuItems = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const mainMenuItems = useMemo(() => getMenuItems(MENU_ITEMS), [user]);
 
-  const menuNetItems = useMemo(() => {
+  const netMenuItems = useMemo(() => {
     const items = getMenuItems(MENU_NET_ITEMS);
     const { parentNets, siblingNets, childNets } = nets;
     const parentItems = createNetMenuItems(parentNets, ICONS.arrowUp);
@@ -40,7 +40,7 @@ export const useMenuItems = () => {
     () => modalService.openMenu({ items: mainMenuItems }),
     [mainMenuItems],
   );
-  const openNetMenu = useCallback(() => modalService.openMenu(menuNetItems), [menuNetItems]);
+  const openNetMenu = useCallback(() => modalService.openMenu(netMenuItems), [netMenuItems]);
 
   const showMainMenu = userStatus !== 'INSIDE_NET' || undefined;
   const showNetMenu = USER_STATUS_MAP[userStatus] >= USER_STATUS_MAP.LOGGEDIN || undefined;
@@ -48,6 +48,7 @@ export const useMenuItems = () => {
   return {
     name,
     href,
+    netMenuItems,
     openMainMenu: showMainMenu && openMainMenu,
     openNetMenu: showNetMenu && openNetMenu,
   };

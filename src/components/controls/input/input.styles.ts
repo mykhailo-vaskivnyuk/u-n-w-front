@@ -32,8 +32,8 @@ export const useStyles = createUseStyles(
     },
     textarea: {
       height: '200px',
-      color: palette.font.add,
-      border: `1px solid ${palette.second.main}`,
+      color: palette.font.second,
+      border: `1px solid ${palette.first.main}`,
     },
     label: {
       lineHeight: vars.lineHeight.dense,

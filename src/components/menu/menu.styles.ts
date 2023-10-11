@@ -9,6 +9,7 @@ export const useStyles = createUseStyles(
       paddingLeft: vars.gap.L,
       paddingRight: vars.gap.L,
       color: palette.font.first,
+      fontSize: vars.fontSize.L,
     },
     section: {
       padding: `${vars.gap.S} 0`,
