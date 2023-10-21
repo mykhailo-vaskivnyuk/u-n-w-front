@@ -6,7 +6,6 @@ export const useCssBaseline = createUseStyles(
   {
     // @ts-ignore
     '@global': {
-
       /* =========================== reset section ======================= */
       // Default
       [`html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, 
@@ -111,6 +110,7 @@ export const useCssBaseline = createUseStyles(
         fontSize: vars.fontSize.main,
         fontWeight: vars.fontWeight.regular,
         color: palette.font.dark,
+        background: palette.dark.main,
         '-webkit-font-smoothing': 'antialiased',
         '-moz-osx-font-smoothing': 'grayscale',
       },
