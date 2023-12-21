@@ -1,6 +1,6 @@
 import React, { FC, FormEvent, useCallback } from 'react';
 import { Formik, useFormikContext } from 'formik';
-import { ITableBoardMessages } from '@app/local/db.tables.types';
+import { ITableBoardMessages } from '@app/local/db.types';
 import { MessagesMap } from '@constants/messages';
 import { modalService } from '@services/modal.service';
 import { Button } from '@components/buttons/button/button';
