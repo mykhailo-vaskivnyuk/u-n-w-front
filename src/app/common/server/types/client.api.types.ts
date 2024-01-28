@@ -11,6 +11,8 @@ export type TAccountMessengerLinkConnect = {
   chatId: string;
   token: string;
 };
+export type TAdminNetGetResponse = {
+};
 export type TEventsRead = {
   date?: string;
 };

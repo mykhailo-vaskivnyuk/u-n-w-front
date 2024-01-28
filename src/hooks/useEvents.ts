@@ -26,13 +26,8 @@ export const useEvents = (netView?: NetViewKeys) => {
     [selectEvents],
   );
 
-  const handleClose = useCallback((messageId: number) => {
-    app.userEvents.confirm(messageId);
-  }, []);
-
-  useEffect(() => handleEvents(app.getState().events), [handleEvents]);
-
   useEffect(() => {
+    handleEvents(app.getState().events);
     app.on('events', handleEvents);
     return () => app.remove('events', handleEvents);
   }, [handleEvents]);
@@ -41,9 +36,9 @@ export const useEvents = (netView?: NetViewKeys) => {
     const [event] = events;
     if (!event) return;
     const { event_id: eventId, message } = event;
-    modalService.showMessage(message, undefined, undefined, () => handleClose(eventId));
-    app.userEvents.remove(eventId);
-  }, [events, handleClose]);
+    const handleClose = () => app.userEvents.confirm(eventId);
+    modalService.showMessage(message, undefined, undefined, handleClose);
+  }, [events]);
 
   return null;
 };

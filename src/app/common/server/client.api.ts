@@ -49,6 +49,13 @@ export const getApi = (
       },
     },
   },
+  'admin': {
+    'net': {
+      'get': (options: P.INetEnterParams) =>
+        fetch<Q.TAdminNetGetResponse>('/admin/net/get', options),
+
+    },
+  },
   'chat': {
     'connect': {
       'nets': () => fetch<P.IChatConnectAll>('/chat/connect/nets'),

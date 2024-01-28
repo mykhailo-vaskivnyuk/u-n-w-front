@@ -16,3 +16,12 @@ export type IBranchVotes =
   Pick<T.ITableNodes, 'node_id'> & {
   vote_count: number;
 };
+
+/* net structure */
+export type INetMember =
+  T.ITableNodes &
+  T.OuterJoin<T.ITableMembers> & {
+  invite: boolean;
+  dislikes: number;
+  votes: number;
+};
