@@ -6,6 +6,6 @@ export const useTgHref = () => {
   if (tg) return;
   const pathname = localStorage.getItem('pathname') || RoutesMap.ROOT;
   const hash = `#${pathname}`;
-  const tgHref = `${bot}&start=path${btoa(hash)}`;
+  const tgHref = `tg://resolve?domain=${bot}&start=path${btoa(hash)}`;
   return tgHref;
 };
