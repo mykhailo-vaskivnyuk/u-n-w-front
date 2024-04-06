@@ -40,6 +40,10 @@ export const getApi = (
       fetch<P.IUserResponse>('/account/signupTg', options),
 
     'messenger': {
+      'get': {
+        'name': () => fetch<string>('/account/messenger/get/name'),
+
+      },
       'link': {
         'get': () => fetch<Q.TAccountMessengerLinkGetResponse>('/account/messenger/link/get'),
 
