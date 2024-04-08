@@ -15,7 +15,7 @@ export const TreeMemberInvite: FC = () => {
     if (memberStatus === 'EMPTY') return;
     navigate.toNet(net!).treeMember(nodeId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [nodeId]);
+  }, [memberData]);
 
   return memberStatus === 'INVITED' ? (
     <FormContainer title="Cancel Invite">
