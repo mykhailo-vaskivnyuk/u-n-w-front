@@ -5,7 +5,6 @@ export const useCombineStyles = <T extends keyof any>(
   second?: Partial<Classes<T>>,
 ) => {
   if (!second) return first;
-  console.log(first, second);
   const combined = { ...first };
   Object.keys(combined).forEach((key) => {
     const cls = key as T;
