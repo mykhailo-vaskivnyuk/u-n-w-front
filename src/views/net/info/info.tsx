@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { FormContainer } from '@components/containers/form.container';
-import { app } from '@app/common/client/app';
+import { app } from '@client/app';
 import { Table } from '@components/table/table';
 
 export const NetInfo: FC = () => {

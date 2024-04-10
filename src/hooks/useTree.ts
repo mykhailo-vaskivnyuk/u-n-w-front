@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { IMember } from '@project-types/member.types';
+import { IMember } from '@client/types';
 import { app } from '@client/app';
 
 export const useTree = () => {

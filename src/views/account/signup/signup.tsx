@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { app } from '@app/common/client/app';
+import { app } from '@client/app';
 import { FormContainer } from '@components/containers/form.container';
 import { SignupForm } from '@components/forms/account/signup/signup';
 import { SignupTgForm } from '@components/forms/account/signup/signup.tg';

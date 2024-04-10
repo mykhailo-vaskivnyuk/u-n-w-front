@@ -19,9 +19,12 @@ export const Content: FC<PropsWithChildren> = ({ children }) => {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    el.classList.remove(animation);
     el.style.opacity = '0';
-    setTimeout(() => el.classList.add(animation), 0);
+    el.classList.remove(animation);
+    setTimeout(() => {
+      el.style.opacity = '1';
+      el.classList.add(animation);
+    }, 0);
   }, [animation, key]);
 
   return (

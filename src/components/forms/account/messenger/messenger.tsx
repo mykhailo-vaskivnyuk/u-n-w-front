@@ -3,7 +3,7 @@ import { MessagesMap } from '@constants/messages';
 import { Button } from '@components/buttons/button/button';
 import { modalService } from '@services/modal.service';
 import { useNavigateTo } from '@hooks/useNavigateTo';
-import { app } from '@app/common/client/app';
+import { app } from '@client/app';
 import { useStyles } from './messenger.styles';
 
 const showFail = () => modalService.showError(MessagesMap.MEMBER_INVITE_CREATE_FAIL);
