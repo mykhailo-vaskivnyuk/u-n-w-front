@@ -42,8 +42,8 @@ export const useMenuItems = () => {
   );
   const openNetMenu = useCallback(() => modalService.openMenu(netMenuItems), [netMenuItems]);
 
-  const showMainMenu = userStatus !== 'INSIDE_NET' || undefined;
-  const showNetMenu = USER_STATUS_MAP[userStatus] >= USER_STATUS_MAP.LOGGEDIN || undefined;
+  const showMainMenu = USER_STATUS_MAP[userStatus] < USER_STATUS_MAP.INVITING || undefined;
+  const showNetMenu = !showMainMenu || undefined;
 
   return {
     name,
