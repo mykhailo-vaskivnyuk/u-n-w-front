@@ -65,7 +65,7 @@ export const LoginForm = () => {
       validationSchema={LoginSchema}
       onSubmit={(values, actions) =>
         app.account
-          .loginOrSignup('login', values)
+          .login(values)
           .then((user) => {
             if (!user) {
               actions.setFieldValue(LoginField.PASSWORD, '');

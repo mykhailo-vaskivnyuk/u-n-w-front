@@ -29,6 +29,7 @@ const Signup: FC = () => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <Input type="text" label="Name" name={SignupField.NAME} />
       <Input type="text" label="Email" name={SignupField.EMAIL} />
       <div className={buttons}>
         <Button type="submit" onClick={() => {}} btnType="secondary">
@@ -48,11 +49,11 @@ export const SignupForm = () => {
 
   return (
     <FormikProvider
-      initialValues={{ email: '' }}
+      initialValues={{ name: '', email: '' }}
       validationSchema={SignupSchema}
       onSubmit={(values) => {
         app.account
-          .loginOrSignup('signup', values)
+          .signup(values)
           .then((user) => {
             if (!user) return showFail();
             showSuccess(values);

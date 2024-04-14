@@ -8,7 +8,7 @@ import { useUser } from '@hooks/useUser';
 import { app } from '@client/app';
 import { Input } from '@components/controls/input/input';
 import { Button } from '@components/buttons/button/button';
-import { AccountField, AccountFormValues } from './account.schema';
+import { AccountField, AccountFormValues, AccountSchema } from './account.schema';
 import { useStyles } from './account.styles';
 
 const FormikProvider = Formik<AccountFormValues>;
@@ -73,6 +73,7 @@ export const AccountForm = () => {
   return (
     <FormikProvider
       initialValues={getInitialValue(user)}
+      validationSchema={AccountSchema}
       onSubmit={(values, { setValues }) => {
         app.account
           .update(values)
