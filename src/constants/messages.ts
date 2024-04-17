@@ -7,7 +7,7 @@ export const MessagesMap = {
   NOT_CONFIRMED: `Ваш email ще не підтверджено. Лінк для його підтвердження був надісланий на %s.
     Для того щоб надіслати лінк ще раз - скористайтесь опцією 'УВІЙТИ ЧЕРЕЗ EMAIL'.`,
   RESTORE_LINK_SENT: 'Лінк для входу в акаунт відправлено на %s',
-  RESTORE_LINK_NOT_SENT: 'Не можливо надіслати лінк на %s',
+  RESTORE_LINK_NOT_SENT: 'Неможливо надіслати лінк на %s',
   ACCOUNT_UPDATED: 'Дані збережено',
   ACCOUNT_DELETED: 'Акаунт успішно видалено',
   ACCOUNT_NOT_DELETED: 'Не вдалося видалити акаунт',

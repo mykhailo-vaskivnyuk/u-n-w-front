@@ -10,7 +10,7 @@ export const useStyles = createUseStyles(
       color: palette.font.light,
       border: '1px solid transparent',
       borderRadius: vars.radius.S,
-      fontSize: vars.fontSize.S,
+      fontSize: 14,
       fontWeight: vars.fontWeight.semiBold,
       letterSpacing: vars.letterGap.XL,
     },

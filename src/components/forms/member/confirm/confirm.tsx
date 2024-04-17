@@ -36,6 +36,7 @@ export const MemberConfirmForm: FC = () => {
       <Button btnType="secondary" onClick={handleConfirm}>
         підтвердити
       </Button>
+      <div />
       <Button btnType="refuse" onClick={handleRefuse}>
         відмовити
       </Button>

@@ -3,7 +3,7 @@ import { Formik, useFormikContext } from 'formik';
 import { RoutesMap } from '@constants/router.constants';
 import { MessagesMap } from '@constants/messages';
 import { modalService } from '@services/modal.service';
-import { makeDynamicPathname } from '@utils/format.utils';
+import { makeUrl } from '@utils/format.utils';
 import { app } from '@client/app';
 import { Input } from '@components/controls/input/input';
 import { Button } from '@components/buttons/button/button';
@@ -52,9 +52,7 @@ export const MemberInviteCreateForm = () => {
         if (!net?.goal) return showNotGoal();
         app.net.member!.inviteCreate(values).then((token) => {
           if (!token) return showFail();
-          const { origin } = window.location;
-          const path = makeDynamicPathname(pathToInvite, token);
-          const url = `${origin}/#${path}`;
+          const url = makeUrl(pathToInvite, token);
           navigator.clipboard.writeText(url);
           return showSuccess();
         });

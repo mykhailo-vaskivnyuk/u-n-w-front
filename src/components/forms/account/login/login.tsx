@@ -43,14 +43,15 @@ const Login: FC = () => {
         <Button href={RoutesMap.ACCOUNT.OVERMAIL} btnType="primary">
           увійти через email
         </Button>
+        <Button href={RoutesMap.ACCOUNT.SIGNUP} btnType="primary">
+          створити акаунт
+        </Button>
+        <div />
         {tgHref && (
           <Button href={tgHref} btnType="telegram">
             увійти через telegram
           </Button>
         )}
-        <Button href={RoutesMap.ACCOUNT.SIGNUP} btnType="primary">
-          створити акаунт
-        </Button>
       </div>
     </form>
   );

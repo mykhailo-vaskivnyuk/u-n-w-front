@@ -48,6 +48,7 @@ export const NetInviteForm: FC = () => {
       <Button btnType="secondary" onClick={handleConfirm}>
         підтвердити
       </Button>
+      <div />
       <Button btnType="refuse" onClick={handleRefuse}>
         відмовитись
       </Button>

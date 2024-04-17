@@ -56,6 +56,7 @@ const Account: FC = () => {
         <Button type="submit" btnType="primary">
           save
         </Button>
+        <div />
         <Button type="button" btnType="secondary" onClick={handleDelete}>
           delete
         </Button>
