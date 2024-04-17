@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { NetViewKeys } from '@server/types/types';
+import { CHAT_NAME } from '@constants/dictionary';
 import { useStyles } from './chat.title.styles';
 
 interface ChatTitleProps {
@@ -8,7 +9,7 @@ interface ChatTitleProps {
 
 export const ChatTitle: FC<ChatTitleProps> = ({ netView }) => {
   const { container, root } = useStyles();
-  const title = `${netView} chat`;
+  const title = CHAT_NAME[netView];
   return (
     <div className={container}>
       <div className={root}>{title}</div>

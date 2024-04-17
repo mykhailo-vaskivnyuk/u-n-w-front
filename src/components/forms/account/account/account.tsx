@@ -49,9 +49,9 @@ const Account: FC = () => {
   return (
     <form onSubmit={handleSubmit}>
       <Input type="text" label="Email" name={AccountField.EMAIL} disabled />
-      <Input type="text" label="Name" name={AccountField.NAME} />
-      <Input type="text" label="Mobile" name={AccountField.MOBILE} />
-      <Input type="text" label="Password" name={AccountField.PASSWORD} />
+      <Input type="text" label="Ім'я" name={AccountField.NAME} />
+      <Input type="text" label="Мобільний" name={AccountField.MOBILE} />
+      <Input type="text" label="Пароль" name={AccountField.PASSWORD} />
       <div className={buttons}>
         <Button type="submit" btnType="primary">
           save

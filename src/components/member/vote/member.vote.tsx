@@ -35,7 +35,7 @@ export const MemberVote: FC<MemberDislikeProps> = (props) => {
       onClick={handleClick}
       aria-hidden="true"
     >
-      <span>{voteCount} VOTES</span>
+      <span>ГОЛОСІВ: {voteCount}</span>
     </div>
   );
 };

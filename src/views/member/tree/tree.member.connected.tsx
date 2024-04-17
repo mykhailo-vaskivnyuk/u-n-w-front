@@ -16,7 +16,7 @@ export const TreeMemberConnected: FC = () => {
   }, []);
 
   return (
-    <FormContainer title="Confirm or Refuse Invite">
+    <FormContainer title="Підтвердити запрошення">
       <MemberConfirmForm />
     </FormContainer>
   );

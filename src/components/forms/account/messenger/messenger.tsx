@@ -27,7 +27,7 @@ export const MessengerForm: FC = () => {
   return (
     <div className={buttons}>
       <Button type="button" btnType="primary" onClick={handleClick}>
-        connect
+        приєднатись
       </Button>
     </div>
   );

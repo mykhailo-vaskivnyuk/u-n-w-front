@@ -30,7 +30,7 @@ export const SendMessage: FC<SendMessageProps> = ({ netView }) => {
     <div className={root}>
       <textarea value={value} onChange={handleChange} />
       <button type="button" onClick={handleSend}>
-        SEND
+        ОК
       </button>
     </div>
   );

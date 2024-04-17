@@ -23,7 +23,7 @@ export const NetBoardMenu: FC<NetBoardMenuProps> = (props) => {
 
   return (
     <div className={root}>
-      <div className={title}>BOARD</div>
+      <div className={title}>ДОШКА</div>
       <ul className={section}>{itemsJsx}</ul>
     </div>
   );

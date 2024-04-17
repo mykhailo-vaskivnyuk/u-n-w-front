@@ -7,7 +7,7 @@ export const About: FC = () => {
 
   return (
     <div className={root}>
-      <div className={title}>ABOUT YOU & WORLD</div>
+      <div className={title}>ПРО YOU & WORLD</div>
       <p>
         Даний інструмент допомагає людині реалізувати своє творче бажання та досягти поставлену
         мету.

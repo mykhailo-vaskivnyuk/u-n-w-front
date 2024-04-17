@@ -21,7 +21,7 @@ export const ReadArea: FC<ReadAreaProps> = (props) => {
   const messagesJsx = messages.map(({ index, user_id, message }) => {
     const { user } = app.getState();
     const myOwn = user_id === user!.user_id;
-    const from = myOwn ? 'me' : membersMap.get(user_id)?.member_name || 'unknown';
+    const from = myOwn ? 'Я' : membersMap.get(user_id)?.member_name || 'Невідомий';
     return <ChatMessage key={index} index={index} from={from} myOwn={myOwn} message={message} />;
   });
 

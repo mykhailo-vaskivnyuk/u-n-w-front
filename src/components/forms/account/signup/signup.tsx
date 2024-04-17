@@ -29,7 +29,7 @@ const Signup: FC = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Input type="text" label="Name" name={SignupField.NAME} />
+      <Input type="text" label="Ім'я" name={SignupField.NAME} />
       <Input type="text" label="Email" name={SignupField.EMAIL} />
       <div className={buttons}>
         <Button type="submit" onClick={() => {}} btnType="secondary">

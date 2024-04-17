@@ -6,7 +6,7 @@ export const NetUser: FC = () => {
 
   return (
     <div className={root} aria-hidden="true">
-      <div>NET USER ROOT</div>
+      <div>Я</div>
     </div>
   );
 };

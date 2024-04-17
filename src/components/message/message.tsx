@@ -16,13 +16,13 @@ export const Message: FC<MessageProps> = (props) => {
 
   const confirmButton = onConfirm && (
     <Button btnType="secondary" onClick={onConfirm}>
-      yes
+      так
     </Button>
   );
 
   const refuseButton = onRefuse && (
     <Button btnType="refuse" onClick={onRefuse}>
-      no
+      ні
     </Button>
   );
 

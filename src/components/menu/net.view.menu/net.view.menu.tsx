@@ -6,6 +6,7 @@ import { useTree } from '@hooks/useTree';
 import { useCircle } from '@hooks/useCircle';
 import { getMenuItems } from '@utils/menu.utils';
 import { IconButton } from '@components/buttons/icon.button/icon.button';
+import { NET_VIEW_NAME } from '@constants/dictionary';
 import { useStyles } from '../net.submenu.styles';
 
 const NET_VIEW_MENU = {
@@ -31,7 +32,7 @@ export const NetViewMenu: FC<{ netView: NetViewEnum }> = ({ netView }) => {
 
   return (
     <div className={root}>
-      <div className={title}>{netView.toUpperCase()} VIEW</div>
+      <div className={title}>{NET_VIEW_NAME[netView].toUpperCase()}</div>
       <ul className={clsx(section)}>{itemsJsx}</ul>
     </div>
   );
