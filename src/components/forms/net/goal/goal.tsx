@@ -28,7 +28,7 @@ const NetGoal: FC = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <TextArea label="Net goal" name={NetGoalField.GOAL} disabled={!editable} />
+      <TextArea label="Мета спільноти" name={NetGoalField.GOAL} disabled={!editable} />
       <div className={buttons}>
         <Button
           type="submit"

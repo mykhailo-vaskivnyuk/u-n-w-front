@@ -30,7 +30,7 @@ const MemberInviteCreate: FC = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Input type="text" label="Member name" name={MemberInviteField.MEMBER_NAME} />
+      <Input type="text" label="І'мя" name={MemberInviteField.MEMBER_NAME} />
       <div className={buttons}>
         <Button type="submit" btnType="secondary">
           запросити

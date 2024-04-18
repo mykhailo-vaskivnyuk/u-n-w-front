@@ -25,7 +25,7 @@ const NetCreate: FC = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Input type="text" label="Name" name={NetCreateField.NAME} />
+      <Input type="text" label="Назва спільноти" name={NetCreateField.NAME} />
       <div className={buttons}>
         <Button type="submit" onClick={() => {}} btnType="secondary">
           створити

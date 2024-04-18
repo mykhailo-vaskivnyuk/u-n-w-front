@@ -54,11 +54,11 @@ const Account: FC = () => {
       <Input type="text" label="Пароль" name={AccountField.PASSWORD} />
       <div className={buttons}>
         <Button type="submit" btnType="primary">
-          save
+          зберегти
         </Button>
         <div />
         <Button type="button" btnType="secondary" onClick={handleDelete}>
-          delete
+          видалити
         </Button>
         <div />
       </div>

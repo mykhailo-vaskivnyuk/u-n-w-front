@@ -18,11 +18,11 @@ export const TreeMemberInvite: FC = () => {
   }, [memberData]);
 
   return memberStatus === 'INVITED' ? (
-    <FormContainer title="Cancel Invite">
+    <FormContainer title="Скасувати запрошення">
       <MemberInviteCancelForm />
     </FormContainer>
   ) : (
-    <FormContainer title="Invite Member">
+    <FormContainer title="Запросити до спіьноти">
       <MemberInviteCreateForm />
     </FormContainer>
   );
