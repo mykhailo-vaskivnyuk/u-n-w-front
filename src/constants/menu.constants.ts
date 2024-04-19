@@ -100,7 +100,7 @@ export const MENU_INSIDE_NET_ITEMS: IMenuItem[] = [
 export const MENU_TREE_ITEMS: IMenuItem[] = [
   {
     label: 'Інфо',
-    href: RoutesMap.NET.NET_ID.TREE.INDEX,
+    href: RoutesMap.NET.NET_ID.TREE.INFO,
     icon: ICONS.about,
     allowForUser: 'INSIDE_NET',
   },
@@ -115,7 +115,7 @@ export const MENU_TREE_ITEMS: IMenuItem[] = [
 export const MENU_CIRCLE_ITEMS: IMenuItem[] = [
   {
     label: 'Інфо',
-    href: RoutesMap.NET.NET_ID.CIRCLE.INDEX,
+    href: RoutesMap.NET.NET_ID.CIRCLE.INFO,
     icon: ICONS.about,
     allowForUser: 'INSIDE_NET',
   },

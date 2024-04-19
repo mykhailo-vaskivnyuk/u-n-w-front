@@ -27,6 +27,7 @@ export const RelativeRoutesMap = {
       BOARD: 'board',
       CIRCLE: {
         INDEX: 'circle',
+        INFO: 'info',
         USER: 'user',
         CHAT: 'chat',
         NODE_ID: {
@@ -37,6 +38,7 @@ export const RelativeRoutesMap = {
         INDEX: 'tree',
         USER: 'user',
         CHAT: 'chat',
+        INFO: 'info',
         NODE_ID: {
           INDEX: ':node_id',
           INVITE: 'invite',
