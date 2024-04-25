@@ -10,9 +10,9 @@ export const Main: FC = () => {
   const { netMenuItems } = useMenuItems();
   const classes = { root: menuRoot };
 
-  const { user_status: userStatus } = app.getState().user!;
-  const confirmed = userStatus !== 'NOT_CONFIRMED';
-  if (!confirmed) return <MainNotConfirmed />;
+  const { user_status: userStatus } = app.getState().user || {};
+  const notConfirmed = userStatus === 'NOT_CONFIRMED';
+  if (notConfirmed) return <MainNotConfirmed />;
 
   return (
     <div className={root}>
