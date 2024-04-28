@@ -39,10 +39,11 @@ export const getMenuItems = (menuItems: IMenuItem[]) => {
 };
 
 export const createNetMenuItems = (nets: T.INetsResponse, icon?: ICONS) => {
-  const { events } = app.getState();
+  const { events: eventsMap } = app.getState();
   const netMenuItems = nets.map(({ net_id, name }): IMenuItem => {
-    const { events: netEvents, childEventsCount } = events.get(net_id)!.state || {};
-    const eventsCount = netEvents.length + childEventsCount;
+    const { state: eventsState } = eventsMap.get(net_id) || {};
+    let eventsCount = eventsState?.events.length || 0;
+    eventsCount += eventsState?.childEventsCount || 0;
     return {
       label: name,
       href: makeDynamicPathname(NET_ID.INDEX, net_id),
