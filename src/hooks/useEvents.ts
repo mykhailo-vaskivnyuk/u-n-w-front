@@ -2,29 +2,23 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { IEvent, IEvents, NetViewKeys } from '@server/types/types';
 import { app } from '@client/app';
 import { modalService } from '@services/modal.service';
+import { EventsStore } from '@app/common/client/classes/events.store.class';
 
 export const useEvents = (netView?: NetViewKeys) => {
   const [events, setEvents] = useState<IEvents>([]);
   const currentEvent = useRef<IEvent | null>(null);
   const { net } = app.getState();
-  const { net_id: netId } = net || {};
-
-  const selectEvents = useCallback(
-    (event: IEvent) => {
-      const eventNetId = event.net_id;
-      if (!netView && !eventNetId) return true;
-      if (netView && netId === eventNetId) return true;
-      return false;
-    },
-    [netView, netId],
-  );
+  const { net_id: netId = 0 } = net || {};
 
   const handleEvents = useCallback(
-    (newEvents: IEvents) => {
-      const showEvents = newEvents.filter(selectEvents);
-      if (showEvents.length) setEvents(showEvents);
+    (eventsMap: Map<number, EventsStore>) => {
+      if (netView && !netId) return;
+      const eventsStore = eventsMap.get(netId);
+      if (!eventsStore) return;
+      const showEvents = eventsStore.state.events;
+      setEvents(showEvents);
     },
-    [selectEvents],
+    [netId, netView],
   );
 
   useEffect(() => {
