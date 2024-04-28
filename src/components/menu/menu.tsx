@@ -33,10 +33,10 @@ export const Menu: FC<MenuProps> = (props) => {
 
   return (
     <div className={root}>
+      {itemsJsx && <ul className={section}>{itemsJsx}</ul>}
       {parentItemsJsx && <ul className={clsx(section, clsParentItems)}>{parentItemsJsx}</ul>}
       {siblingItemsJsx && <ul className={section}>{siblingItemsJsx}</ul>}
       {childItemsJsx && <ul className={section}>{childItemsJsx}</ul>}
-      {itemsJsx && <ul className={section}>{itemsJsx}</ul>}
     </div>
   );
 };

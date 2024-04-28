@@ -1,5 +1,6 @@
 import React, { FC, FormEvent } from 'react';
 import { Formik, useFormikContext } from 'formik';
+import { MessagesMap } from '@constants/messages';
 import { modalService } from '@services/modal.service';
 import { app } from '@client/app';
 import { TextArea } from '@components/controls/textarea/textarea';
@@ -8,7 +9,7 @@ import { NetGoalField, NetGoalFormValues, NetGoalSchema } from './goal.schema';
 import { useStyles } from './goal.styles';
 
 const FormikProvider = Formik<NetGoalFormValues>;
-const showSuccess = () => modalService.showMessage('SUCCESS');
+const showSuccess = () => modalService.showMessage(MessagesMap.SUCCESS);
 const showFail = () => modalService.showError('FAIL');
 
 const NetGoal: FC = () => {

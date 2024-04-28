@@ -139,6 +139,13 @@ export const useCssBaseline = createUseStyles(
         outline: 'none',
         fontFamily: vars.font.main,
       },
+      /* =========================== animations ======================= */
+      '@keyframes light': {
+        '0%': { opacity: 0 },
+        '35%': { opacity: 1 },
+        '65%': { opacity: 1 },
+        '100%': { opacity: 0 },
+      },
     },
   },
   {

@@ -8,6 +8,7 @@ export const useStyles = createUseStyles(
       background: 'transparent',
       padding: 0,
       cursor: 'pointer',
+      textAlign: 'start',
     },
     withChildren: {
       ...mixins.size('auto'),

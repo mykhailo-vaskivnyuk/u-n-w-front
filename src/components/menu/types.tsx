@@ -8,6 +8,7 @@ export interface IMenuItem {
   icon: ICONS;
   allowForUser: UserStatusKeys | UserStatusKeys[];
   forTg?: boolean; // default: true
+  notification?: boolean;
 }
 
 export interface MenuItemProps extends IMenuItem {

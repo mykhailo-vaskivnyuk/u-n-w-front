@@ -35,4 +35,5 @@ export const MessagesMap = {
   NET_CONNECT_EXISTS: 'Ви вже є учасником цієї спільноти',
   NET_CONNECT_FAIL: 'Ви маєте бути учасником батьківської спільноти',
   BOARD_MESSAGE_SAVE_FAIL: 'Не вдалося зберегти повідомлення',
+  SUCCESS: 'Дані збережено',
 };

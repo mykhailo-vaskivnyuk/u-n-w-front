@@ -1,17 +1,17 @@
 import { createUseStyles } from 'react-jss';
 
 export const useStyles = createUseStyles(
-  ({ mixins, vars }) => ({
+  ({ vars }) => ({
     root: {
       height: '100%',
-      ...mixins.flexCenter,
       flexDirection: 'column',
       wordBreak: 'break-all',
-      textAlign: 'center',
     },
     menuRoot: {
       flex: '0 0 0',
       fontSize: vars.fontSize.XL,
+      width: '100%',
+      textAlign: 'center',
     },
   }),
   { name: 'Main' },

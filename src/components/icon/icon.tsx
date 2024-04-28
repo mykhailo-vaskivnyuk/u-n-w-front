@@ -49,6 +49,7 @@ export enum ICONS {
   menu = 'menu',
   message = 'message',
   net = 'net',
+  notification = 'notification',
   post = 'post',
   remove = 'remove',
   spinner = 'spinner',

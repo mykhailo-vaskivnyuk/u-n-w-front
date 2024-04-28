@@ -10,19 +10,29 @@ interface IconButtonProps {
   end?: boolean;
   iconPosition?: 'left' | 'right';
   className?: string;
+  classNameIcon?: string;
   onClick?: () => void;
 }
 
 export const IconButton: FC<PropsWithChildren<IconButtonProps>> = memo((props) => {
   const { root, withChildren } = useStyles();
-  const { icon, href, end = true, iconPosition = 'left', className, onClick, children } = props;
+  const {
+    icon,
+    href,
+    end = true,
+    iconPosition = 'left',
+    className,
+    classNameIcon,
+    onClick,
+    children,
+  } = props;
   const cls = clsx(root, { [withChildren]: children }, className);
 
   if (href) {
     return (
       <NavLink to={href} end={end} className={cls} onClick={onClick}>
         {iconPosition === 'right' && children}
-        <Icon icon={icon} />
+        <Icon icon={icon} className={classNameIcon} />
         {iconPosition === 'left' && children}
       </NavLink>
     );
@@ -31,7 +41,7 @@ export const IconButton: FC<PropsWithChildren<IconButtonProps>> = memo((props) =
   return (
     <button className={cls} type="button" onClick={onClick}>
       {iconPosition === 'right' && children}
-      <Icon icon={icon} />
+      <Icon icon={icon} className={classNameIcon} />
       {iconPosition === 'left' && children}
     </button>
   );

@@ -22,6 +22,14 @@ export const useStyles = createUseStyles(
     hidden: {
       display: 'none',
     },
+    icon: {
+      height: '100%',
+      color: palette.font.second,
+      animationName: 'light',
+      animationIterationCount: 'infinite',
+      animationTimingFunction: 'linear',
+      animationDuration: vars.transition.XL,
+    },
   }),
   { name: 'Header' },
 );
