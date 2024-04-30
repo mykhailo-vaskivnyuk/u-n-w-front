@@ -3,7 +3,7 @@ import { USER_STATUS_MAP } from '@server/types/types';
 import { MENU_ITEMS, MENU_NET_ITEMS } from '@constants/menu.constants';
 import { RoutesMap } from '@constants/router.constants';
 import { ROOT_TITLE } from '@constants/constants';
-import { getMenuItems, createNetMenuItems } from '@utils/menu.utils';
+import { getMenuItems, createNetMenuItems, getNetEvents } from '@utils/menu.utils';
 import { makeDynamicPathname } from '@utils/format.utils';
 import { modalService } from '@services/modal.service';
 import { useUser } from '@hooks/useUser';
@@ -26,9 +26,10 @@ export const useMenuItems = () => {
   const netMenuItems = useMemo(() => {
     const items = getMenuItems(MENU_NET_ITEMS);
     const { parentNets, siblingNets, childNets } = nets;
-    const parentItems = createNetMenuItems(parentNets, ICONS.arrowUp);
-    const siblingItems = createNetMenuItems(siblingNets, ICONS.arrowRight);
-    const childItems = createNetMenuItems(childNets, ICONS.arrowRight);
+    const { parentEvents, siblingEvents, childEvents } = getNetEvents();
+    const parentItems = createNetMenuItems(parentNets, parentEvents, ICONS.arrowUp);
+    const siblingItems = createNetMenuItems(siblingNets, siblingEvents, ICONS.arrowRight);
+    const childItems = createNetMenuItems(childNets, childEvents, ICONS.arrowRight);
     return { parentItems, siblingItems, childItems, items };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nets, user, eventsCount]);

@@ -38,19 +38,37 @@ export const getMenuItems = (menuItems: IMenuItem[]) => {
   return filteredMenuItems.length ? filteredMenuItems : undefined;
 };
 
-export const createNetMenuItems = (nets: T.INetsResponse, icon?: ICONS) => {
-  const { events: eventsMap } = app.getState();
-  const netMenuItems = nets.map(({ net_id, name }): IMenuItem => {
-    const { state: eventsState } = eventsMap.get(net_id) || {};
-    let eventsCount = eventsState?.events.length || 0;
-    eventsCount += eventsState?.childEventsCount || 0;
+export const getNetEvents = () => {
+  const { nets, net, events } = app.getState();
+  const { childNets, siblingNets, parentNets } = nets;
+  const childEvents = childNets.map(({ net_id }) => {
+    const netEvents = events.get(net_id)!;
+    return netEvents.getAllCount();
+  });
+  const siblingEvents = siblingNets.map(({ net_id }) => {
+    const netEvents = events.get(net_id)!;
+    if (net_id === net?.net_id) return netEvents.getCount();
+    return netEvents.getAllCount();
+  });
+  const parentEvents = parentNets.map(({ net_id }, i, arr) => {
+    const netEvents = events.get(net_id)!;
+    if (i === arr.length - 1) return netEvents.getCount();
+    const childNetId = arr[i + 1].net_id;
+    const childrenEvents = events.get(childNetId)!;
+    return netEvents.getAllCount() - childrenEvents.getAllCount();
+  });
+  return { childEvents, siblingEvents, parentEvents };
+};
+
+export const createNetMenuItems = (nets: T.INetsResponse, events: number[], icon?: ICONS) => {
+  const netMenuItems = nets.map(({ net_id, name }, i): IMenuItem => {
     return {
       label: name,
       href: makeDynamicPathname(NET_ID.INDEX, net_id),
       end: false,
       icon: icon || ICONS.home,
       allowForUser: 'LOGGEDIN',
-      notification: Boolean(eventsCount),
+      notification: Boolean(events[i]),
     };
   });
   return getMenuItems(netMenuItems);

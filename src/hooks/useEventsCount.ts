@@ -1,15 +1,13 @@
 import { useEffect, useState } from 'react';
 import { app } from '@client/app';
-import { EventsStore } from '@app/common/client/classes/events.store.class';
+import { EventStore } from '@app/common/client/classes/event.store.class';
 
 export const useEventsCount = () => {
   const [eventsCount, setEventsCount] = useState(0);
 
   useEffect(() => {
-    const handler = (events: Map<number, EventsStore>) => {
-      const eventsStore = events.get(0)!;
-      const { events: accountEvents, childEventsCount } = eventsStore.state;
-      const count = accountEvents.length + childEventsCount;
+    const handler = (events: Map<number, EventStore>) => {
+      const count = events.get(0)!.getAllCount();
       setEventsCount(count);
     };
     app.on('events', handler);

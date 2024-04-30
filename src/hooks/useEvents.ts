@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { IEvent, IEvents, NetViewKeys } from '@server/types/types';
 import { app } from '@client/app';
 import { modalService } from '@services/modal.service';
-import { EventsStore } from '@app/common/client/classes/events.store.class';
+import { EventStore } from '@app/common/client/classes/event.store.class';
 
 export const useEvents = (netView?: NetViewKeys) => {
   const [events, setEvents] = useState<IEvents>([]);
@@ -11,7 +11,7 @@ export const useEvents = (netView?: NetViewKeys) => {
   const { net_id: netId = 0 } = net || {};
 
   const handleEvents = useCallback(
-    (eventsMap: Map<number, EventsStore>) => {
+    (eventsMap: Map<number, EventStore>) => {
       if (netView && !netId) return;
       const eventsStore = eventsMap.get(netId);
       if (!eventsStore) return;
@@ -32,10 +32,10 @@ export const useEvents = (netView?: NetViewKeys) => {
     const [event] = events;
     if (!event) return;
     currentEvent.current = event;
-    const { event_id: eventId, message } = event;
+    const { message } = event;
     const handleClose = () => {
       currentEvent.current = null;
-      app.userEvents.confirm(eventId);
+      app.userEvents.confirm(event);
     };
     modalService.showMessage(message, undefined, undefined, handleClose);
   }, [events]);
