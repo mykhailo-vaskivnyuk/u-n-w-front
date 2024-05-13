@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import { useMenuItems } from '@hooks/useMenuItems';
-import { Menu } from '@components/menu/menu';
 import { app } from '@app/common/client/app';
+import { Menu } from '@components/menu/menu';
+import { Diagram } from '@views/diagram/diagram';
 import { MainNotConfirmed } from './main.not.confirmed';
 import { useStyles } from './main.styles';
 
@@ -16,7 +17,8 @@ export const Main: FC = () => {
 
   return (
     <div className={root}>
-      <Menu {...netMenuItems} classes={classes} />
+      {/* <Menu {...netMenuItems} classes={classes} /> */}
+      <Diagram />
     </div>
   );
 };
