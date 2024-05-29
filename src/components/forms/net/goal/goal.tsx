@@ -3,6 +3,8 @@ import { Formik, useFormikContext } from 'formik';
 import { MessagesMap } from '@constants/messages';
 import { modalService } from '@services/modal.service';
 import { app } from '@client/app';
+import { makeUrl } from '@utils/format.utils';
+import { InputSimple } from '@components/controls/input/input.simple';
 import { TextArea } from '@components/controls/textarea/textarea';
 import { Button } from '@components/buttons/button/button';
 import { NetGoalField, NetGoalFormValues, NetGoalSchema } from './goal.schema';
@@ -21,6 +23,7 @@ const NetGoal: FC = () => {
   const { goal, total_count_of_members: countOfMembers } = net!;
   const changed = goal !== values[NetGoalField.GOAL];
   const editable = parentNodeId === null && countOfMembers === 1;
+  const url = makeUrl('/net/wait/:token', net?.net_link || '');
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -29,6 +32,7 @@ const NetGoal: FC = () => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <InputSimple label="Запрошення" defaultValue={url} contentEditable={false} />
       <TextArea label="Мета спільноти" name={NetGoalField.GOAL} disabled={!editable} />
       <div className={buttons}>
         <Button
