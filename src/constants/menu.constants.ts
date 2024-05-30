@@ -36,6 +36,13 @@ export const MENU_ITEMS: IMenuItem[] = [
     forTg: false,
   },
   {
+    label: 'Запити на приєднання',
+    href: RoutesMap.ACCOUNT.WAIT,
+    icon: ICONS.home,
+    allowForUser: 'LOGGEDIN',
+    forTg: false,
+  },
+  {
     label: 'Палітра',
     href: RoutesMap.PALETTE,
     icon: ICONS.dev,

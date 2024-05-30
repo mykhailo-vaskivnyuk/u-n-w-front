@@ -12,6 +12,7 @@ export const RelativeRoutesMap = {
     CONFIRM: 'confirm/:token',
     RESTORE: 'restore/:token',
     MESSENGER: 'messenger',
+    WAIT: 'wait',
   },
   NET: {
     INDEX: 'net',
