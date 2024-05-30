@@ -9,7 +9,8 @@ import { Overmail } from '@views/account/overmail/overmail';
 import { Confirm } from '@views/account/confirm/confirm';
 import { Restore } from '@views/account/restore/restore';
 import { Messenger } from '@views/account/messenger/messenger';
-import { WaitForNets } from '@views/account/wait/wait';
+import { WaitNets } from '@views/account/wait/wait';
+import { WaitCreate } from '@components/wait/wait.create';
 
 export const AccountRouter = (
   <Route path={RelativeRoutesMap.ACCOUNT.INDEX}>
@@ -21,6 +22,9 @@ export const AccountRouter = (
     <Route path={RelativeRoutesMap.ACCOUNT.CONFIRM} element={<Confirm />} />
     <Route path={RelativeRoutesMap.ACCOUNT.RESTORE} element={<Restore />} />
     <Route path={RelativeRoutesMap.ACCOUNT.MESSENGER} element={<Messenger />} />
-    <Route path={RelativeRoutesMap.ACCOUNT.WAIT} element={<WaitForNets />} />
+    <Route path={RelativeRoutesMap.ACCOUNT.WAIT.INDEX}>
+      <Route path="" element={<WaitNets />} />
+      <Route path={RelativeRoutesMap.ACCOUNT.WAIT.CONNECT} element={<WaitCreate />} />
+    </Route>
   </Route>
 );
