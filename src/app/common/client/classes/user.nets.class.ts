@@ -64,14 +64,29 @@ export class UserNets {
     this.setNets(nets);
   }
 
-  async getWaitNets() {
+  async getWaitNets(inChain = false) {
     try {
-      await this.app.setStatus(AppStatus.LOADING);
+      !inChain && await this.app.setStatus(AppStatus.LOADING);
       this.waitNets = await this.app.api.user.nets.get.wait();
-      this.app.setStatus(AppStatus.READY);
+      !inChain && this.app.setStatus(AppStatus.READY);
       this.app.emit('waitNets', this.waitNets);
     } catch (e: any) {
+      if (inChain) throw e;
       this.app.setError(e);
+    }
+  }
+
+  async waitCreate(args: T.ITokenParams) {
+    try {
+      await this.app.setStatus(AppStatus.LOADING);
+      const result = await this.app.api.net.wait.connect(args);
+      const { error } = result || {};
+      if (!error) await this.getWaitNets(true);
+      this.app.setStatus(AppStatus.READY);
+      return result;
+    } catch (e: any) {
+      this.app.setError(e);
+      throw e;
     }
   }
 }

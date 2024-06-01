@@ -10,7 +10,7 @@ import { Confirm } from '@views/account/confirm/confirm';
 import { Restore } from '@views/account/restore/restore';
 import { Messenger } from '@views/account/messenger/messenger';
 import { WaitNets } from '@views/account/wait/wait';
-import { WaitCreate } from '@components/wait/wait.create';
+import { WaitCreate } from '@views/account/wait/wait.create';
 
 export const AccountRouter = (
   <Route path={RelativeRoutesMap.ACCOUNT.INDEX}>
@@ -24,7 +24,7 @@ export const AccountRouter = (
     <Route path={RelativeRoutesMap.ACCOUNT.MESSENGER} element={<Messenger />} />
     <Route path={RelativeRoutesMap.ACCOUNT.WAIT.INDEX}>
       <Route path="" element={<WaitNets />} />
-      <Route path={RelativeRoutesMap.ACCOUNT.WAIT.CONNECT} element={<WaitCreate />} />
+      <Route path={RelativeRoutesMap.ACCOUNT.WAIT.CREATE} element={<WaitCreate />} />
     </Route>
   </Route>
 );

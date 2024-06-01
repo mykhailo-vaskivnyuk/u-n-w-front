@@ -14,7 +14,7 @@ export const RelativeRoutesMap = {
     MESSENGER: 'messenger',
     WAIT: {
       INDEX: 'wait',
-      CONNECT: 'connect/:token',
+      CREATE: 'create/:token',
     },
   },
   NET: {
