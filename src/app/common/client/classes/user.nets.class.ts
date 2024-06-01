@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable import/no-cycle */
 import * as T from '../../server/types/types';
 import { AppStatus } from '../constants';
@@ -79,11 +80,23 @@ export class UserNets {
   async waitCreate(args: T.ITokenParams) {
     try {
       await this.app.setStatus(AppStatus.LOADING);
-      const result = await this.app.api.net.wait.connect(args);
+      const result = await this.app.api.net.wait.create(args);
       const { error } = result || {};
       if (!error) await this.getWaitNets(true);
       this.app.setStatus(AppStatus.READY);
       return result;
+    } catch (e: any) {
+      this.app.setError(e);
+      throw e;
+    }
+  }
+
+  async waitRemove(args: T.INetEnterParams) {
+    try {
+      await this.app.setStatus(AppStatus.LOADING);
+      await this.app.api.net.wait.remove(args);
+      await this.getWaitNets(true);
+      this.app.setStatus(AppStatus.READY);
     } catch (e: any) {
       this.app.setError(e);
       throw e;

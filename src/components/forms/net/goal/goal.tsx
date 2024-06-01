@@ -1,6 +1,7 @@
 import React, { FC, FormEvent } from 'react';
 import { Formik, useFormikContext } from 'formik';
 import { MessagesMap } from '@constants/messages';
+import { RoutesMap } from '@constants/router.constants';
 import { modalService } from '@services/modal.service';
 import { app } from '@client/app';
 import { makeUrl } from '@utils/format.utils';
@@ -9,6 +10,8 @@ import { TextArea } from '@components/controls/textarea/textarea';
 import { Button } from '@components/buttons/button/button';
 import { NetGoalField, NetGoalFormValues, NetGoalSchema } from './goal.schema';
 import { useStyles } from './goal.styles';
+
+const { CREATE: waitCreatePath } = RoutesMap.ACCOUNT.WAIT;
 
 const FormikProvider = Formik<NetGoalFormValues>;
 const showSuccess = () => modalService.showMessage(MessagesMap.SUCCESS);
@@ -23,7 +26,7 @@ const NetGoal: FC = () => {
   const { goal, total_count_of_members: countOfMembers } = net!;
   const changed = goal !== values[NetGoalField.GOAL];
   const editable = parentNodeId === null && countOfMembers === 1;
-  const url = makeUrl('/account/wait/connect/:token', net?.net_link || '');
+  const url = makeUrl(waitCreatePath, net?.net_link || '');
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();

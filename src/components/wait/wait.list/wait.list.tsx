@@ -3,17 +3,13 @@ import { useWaitNets } from '@hooks/useWaitNets';
 import { WaitItem } from '../wait.item/wait.item';
 import { useStyles } from './wait.list.styles';
 
-// const NETS = [
-//   { net_id: 1, name: 'Net name' },
-//   { net_id: 2, name: 'Країна твого бажання' },
-//   { net_id: 2, name: 'Країна твого бажання Країна твого бажання Країна твого бажання' },
-// ];
-
 export const WaitList: FC = () => {
   const { root, list } = useStyles();
-  const waitNets = useWaitNets();
+  const { waitNets, onRemove } = useWaitNets();
 
-  const itemsJsx = waitNets.map((item) => <WaitItem {...item} />);
+  const itemsJsx = waitNets.map((item) => (
+    <WaitItem key={item.net_id} {...item} onRemove={onRemove} />
+  ));
 
   return (
     <div className={root}>

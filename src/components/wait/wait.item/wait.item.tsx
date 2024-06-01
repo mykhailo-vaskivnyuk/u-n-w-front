@@ -5,9 +5,13 @@ import { IWaitNets } from '@app/common/server/types/net.types';
 import { OmitNull } from '@app/common/server/types/common.types';
 import { useStyles } from './wait.item.styles';
 
-export const WaitItem: FC<OmitNull<IWaitNets[number]>> = (props) => {
+interface WaitItemProps extends OmitNull<IWaitNets[number]> {
+  onRemove: (net_id: number) => void;
+}
+
+export const WaitItem: FC<WaitItemProps> = (props) => {
   const { root, button, icon } = useStyles();
-  const { net_id: netId, name } = props;
+  const { net_id: netId, name, onRemove } = props;
 
   return (
     <li className={root}>
@@ -18,6 +22,7 @@ export const WaitItem: FC<OmitNull<IWaitNets[number]>> = (props) => {
         icon={ICONS.remove}
         iconPosition="right"
         classNameIcon={icon}
+        onClick={() => onRemove(netId)}
       />
     </li>
   );
