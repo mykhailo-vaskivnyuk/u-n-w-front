@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { FormContainer } from '@components/containers/form.container';
-import { WaitCreateForm } from '@components/forms/account/wait/create';
+import { WaitCreateForm } from '@components/forms/account/wait.create/wait.create';
 
 export const WaitCreate: FC = () => {
   return (

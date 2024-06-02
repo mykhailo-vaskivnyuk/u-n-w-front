@@ -10,5 +10,5 @@ export const useStyles = createUseStyles(
       alignItems: 'end',
     },
   }),
-  { name: 'WaitCreateForm' },
+  { name: 'OvermailForm' },
 );
