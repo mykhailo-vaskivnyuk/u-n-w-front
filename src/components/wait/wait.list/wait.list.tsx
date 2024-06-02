@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { useWaitNets } from '@hooks/useWaitNets';
-import { WaitItem } from '../wait.item/wait.item';
+import { WaitItem } from './wait.item/wait.item';
 import { useStyles } from './wait.list.styles';
 
 export const WaitList: FC = () => {

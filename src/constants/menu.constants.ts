@@ -106,6 +106,12 @@ export const MENU_INSIDE_NET_ITEMS: IMenuItem[] = [
 
 export const MENU_TREE_ITEMS: IMenuItem[] = [
   {
+    label: 'Запити на вхід до спільноти',
+    href: RoutesMap.NET.NET_ID.TREE.WAITING,
+    icon: ICONS.account,
+    allowForUser: 'INSIDE_NET',
+  },
+  {
     label: 'Інфо',
     href: RoutesMap.NET.NET_ID.TREE.INFO,
     icon: ICONS.about,

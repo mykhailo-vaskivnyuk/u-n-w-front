@@ -43,6 +43,7 @@ export const RelativeRoutesMap = {
         USER: 'user',
         CHAT: 'chat',
         INFO: 'info',
+        WAITING: 'waiting',
         NODE_ID: {
           INDEX: ':node_id',
           INVITE: 'invite',
