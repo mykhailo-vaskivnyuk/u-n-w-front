@@ -12,6 +12,7 @@ const showFail = () => modalService.showError(MessagesMap.SIGNUP_FAIL);
 export const SignupTgForm = () => {
   const navigate = useNavigateTo();
   const { buttons } = useStyles();
+  const { tg } = app.getState();
 
   const handleSubmit = async () => {
     await app.account
@@ -30,9 +31,15 @@ export const SignupTgForm = () => {
           створити
         </Button>
         <div />
-        <Button href={RoutesMap.ACCOUNT.LOGIN} btnType="primary">
-          авторизуватись
-        </Button>
+        {tg ? (
+          <Button onClick={() => tg?.close()} btnType="refuse">
+            вийти
+          </Button>
+        ) : (
+          <Button href={RoutesMap.ACCOUNT.LOGIN} btnType="primary">
+            авторизуватись
+          </Button>
+        )}
       </div>
     </form>
   );
