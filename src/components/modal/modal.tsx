@@ -16,7 +16,7 @@ export const Modal: FC<PropsWithChildren<ModalProps>> = (props) => {
     classes,
   } = props;
   const baseClasses = useStyles();
-  const { root, backdrop, modal, closeBtn } = mergeClasses(baseClasses, classes);
+  const { root, backdrop, modal, closeBtn, backdropBtn } = mergeClasses(baseClasses, classes);
   const [state, setState] = useState<'closed' | 'opened' | 'closing'>('closed');
 
   const closeHandler = useCallback(
@@ -58,6 +58,9 @@ export const Modal: FC<PropsWithChildren<ModalProps>> = (props) => {
         {showCloseIcon && <Icon icon={ICONS.cross} onClick={closeHandler} className={closeBtn} />}
         {children}
       </div>
+      {closeOnBackdropClick && state === 'opened' && (
+        <Icon icon={ICONS.remove} onClick={onBackdropClickHandler} className={backdropBtn} />
+      )}
     </div>
   );
 };

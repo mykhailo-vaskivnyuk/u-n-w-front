@@ -14,8 +14,20 @@ export const useStyles = createUseStyles(
     },
     title: {
       fontWeight: vars.fontWeight.semiBold,
-      marginLeft: '50%',
-      transform: `translateX(calc(-50% - ${vars.gap.S}))`,
+      position: 'relative',
+      left: '50%',
+      transform: 'translateX(-50%)',
+      display: 'flex',
+      '& button': {
+        opacity: 0.5,
+      },
+      '& button.active': {
+        border: '1px solid',
+        borderColor: palette.light.main,
+        paddingRight: vars.gap.S,
+        paddingLeft: vars.gap.S,
+        opacity: 1,
+      },
     },
     section: {
       ...mixins.flexCenter,

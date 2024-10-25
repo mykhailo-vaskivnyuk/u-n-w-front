@@ -92,6 +92,17 @@ export const useStyles = createUseStyles(
       color: palette.font.dark,
       cursor: 'pointer',
     },
+
+    backdropBtn: {
+      position: 'relative',
+      left: '50%',
+      transform: 'translateX(-50%)',
+      color: palette.font.dark,
+      cursor: 'pointer',
+      width: 40,
+      height: 40,
+      marginTop: 150,
+    },
   }),
   { name: 'Modal' },
 );
