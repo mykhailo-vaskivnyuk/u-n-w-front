@@ -14,9 +14,10 @@ export const useStyles = createUseStyles(
     },
     title: {
       fontWeight: vars.fontWeight.semiBold,
-      position: 'relative',
-      left: '50%',
-      transform: 'translateX(-50%)',
+      // position: 'relative',
+      // left: '50%',
+      // transform: 'translateX(-50%)',
+
       display: 'flex',
       '& button': {
         opacity: 0.5,
@@ -27,6 +28,7 @@ export const useStyles = createUseStyles(
         paddingRight: vars.gap.S,
         paddingLeft: vars.gap.S,
         opacity: 1,
+        margin: 0,
       },
     },
     section: {
