@@ -2,7 +2,7 @@ import React, { FC, PropsWithChildren, useCallback, useEffect, useState } from '
 import clsx from 'clsx';
 import { mergeClasses } from '@styles/utils/mergeClasses';
 import { modalService } from '@services/modal.service';
-import { Icon, ICONS } from '@components/icon/icon';
+import { Icon } from '@components/icon/icon';
 import { ModalProps } from './modal.types';
 import { useStyles } from './modal.styles';
 
@@ -55,11 +55,11 @@ export const Modal: FC<PropsWithChildren<ModalProps>> = (props) => {
     <div className={clsx(root, state)}>
       <div className={backdrop} onClick={onBackdropClickHandler} aria-hidden="true" />
       <div className={modal} onTransitionEnd={closeEndHandler} onAnimationEnd={openEndHandler}>
-        {showCloseIcon && <Icon icon={ICONS.cross} onClick={closeHandler} className={closeBtn} />}
+        {showCloseIcon && <Icon icon="cross" onClick={closeHandler} className={closeBtn} />}
         {children}
       </div>
       {closeOnBackdropClick && state === 'opened' && (
-        <Icon icon={ICONS.remove} onClick={onBackdropClickHandler} className={backdropBtn} />
+        <Icon icon="remove" onClick={onBackdropClickHandler} className={backdropBtn} />
       )}
     </div>
   );

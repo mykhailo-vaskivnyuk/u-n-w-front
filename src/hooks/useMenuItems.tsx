@@ -8,7 +8,6 @@ import { makeDynamicPathname } from '@utils/format.utils';
 import { modalService } from '@services/modal.service';
 import { useUser } from '@hooks/useUser';
 import { useNet } from '@hooks/useNet';
-import { ICONS } from '@components/icon/icon';
 import { useEventsCount } from './useEventsCount';
 
 const { NET_ID } = RoutesMap.NET;
@@ -27,9 +26,9 @@ export const useMenuItems = () => {
     const items = getMenuItems(MENU_NET_ITEMS);
     const { parentNets, siblingNets, childNets } = nets;
     const { parentEvents, siblingEvents, childEvents } = getNetEvents();
-    const parentItems = createNetMenuItems(parentNets, parentEvents, ICONS.arrowUp);
-    const siblingItems = createNetMenuItems(siblingNets, siblingEvents, ICONS.arrowRight);
-    const childItems = createNetMenuItems(childNets, childEvents, ICONS.arrowRight);
+    const parentItems = createNetMenuItems(parentNets, parentEvents, 'arrowUp');
+    const siblingItems = createNetMenuItems(siblingNets, siblingEvents, 'arrowRight');
+    const childItems = createNetMenuItems(childNets, childEvents, 'arrowRight');
     return { parentItems, siblingItems, childItems, items };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nets, user, eventsCount]);

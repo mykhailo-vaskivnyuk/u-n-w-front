@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { RoutesMap } from '@constants/router.constants';
-import { ICONS } from '@components/icon/icon';
 import { IconButton } from '@components/buttons/icon.button/icon.button';
 import { Button } from '@components/buttons/button/button';
 import { useMenuItems } from '../../hooks/useMenuItems';
@@ -12,14 +11,14 @@ export const Header: FC = () => {
 
   return (
     <div className={root}>
-      {openMainMenu && <IconButton icon={ICONS.menu} onClick={openMainMenu} className={button} />}
-      {!openMainMenu && <IconButton icon={ICONS.home} href={RoutesMap.ROOT} className={button} />}
+      {openMainMenu && <IconButton icon="menu" onClick={openMainMenu} className={button} />}
+      {!openMainMenu && <IconButton icon="home" href={RoutesMap.ROOT} className={button} />}
       <Button href={href} btnType="text" className={titleButton}>
         {name}
       </Button>
       {openNetMenu && (
         <IconButton
-          icon={ICONS.net}
+          icon="net"
           onClick={openNetMenu}
           className={button}
           classNameIcon={eventsCount ? icon : undefined}

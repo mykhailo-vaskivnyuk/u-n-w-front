@@ -1,10 +1,10 @@
 import React, { useCallback, useMemo, CSSProperties, MouseEvent, useState } from 'react';
-import { createUseStyles as makeStyles } from 'react-jss';
+import { createUseStyles } from 'react-jss';
 import { ArrayMap } from '@utils/array.map.class';
 
 const MINIMUM_RIPPLE_SIZE = 50;
 
-export const useStyles = makeStyles(
+export const useStyles = createUseStyles(
   {
     '@global': {
       '@keyframes useRippleAnimation': {

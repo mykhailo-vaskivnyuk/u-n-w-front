@@ -1,5 +1,5 @@
 import { UserStatusKeys } from '@server/types/types';
-import { ICONS } from '@components/icon/icon';
+import { ICONS } from '@components/icon/icons';
 
 export interface IMenuItem {
   label: string;
