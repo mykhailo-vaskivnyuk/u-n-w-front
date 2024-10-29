@@ -21,7 +21,7 @@ export const useStyles = createUseStyles(
         background: palette.second.main,
         ...mixins.flexCenter,
       },
-    }
+    },
   }),
   { name: 'Table' },
 );

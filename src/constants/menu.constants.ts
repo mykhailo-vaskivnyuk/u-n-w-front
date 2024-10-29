@@ -72,16 +72,22 @@ export const MENU_INSIDE_NET_ITEMS: IMenuItem[] = [
     allowForUser: 'INVITING',
   },
   {
+    label: 'Правила',
+    href: RoutesMap.NET.NET_ID.RULES,
+    icon: 'dev',
+    allowForUser: 'INVITING',
+  },
+  {
     label: 'Інфо',
     href: RoutesMap.NET.NET_ID.INFO,
     icon: 'about',
-    allowForUser: ['INSIDE_NET'],
+    allowForUser: 'INSIDE_NET',
   },
   {
     label: 'Board',
     href: RoutesMap.NET.NET_ID.BOARD,
     icon: 'board',
-    allowForUser: ['INSIDE_NET'],
+    allowForUser: 'INSIDE_NET',
   },
   {
     label: 'Створити спільноту',
@@ -99,7 +105,7 @@ export const MENU_INSIDE_NET_ITEMS: IMenuItem[] = [
     label: 'Чат',
     href: RoutesMap.NET.NET_ID.CHAT,
     icon: 'post',
-    allowForUser: ['INSIDE_NET'],
+    allowForUser: 'INSIDE_NET',
   },
 ];
 

@@ -4,21 +4,21 @@ import arrowDown from './icons/arrow.down.svg?raw';
 import arrowLeft from './icons/arrow.left.svg?raw';
 import arrowRight from './icons/arrow.right.svg?raw';
 import arrowUp from './icons/arrow.up.svg?raw';
-import board  from './icons/board.svg?raw';
-import create  from './icons/create.svg?raw';
+import board from './icons/board.svg?raw';
+import create from './icons/create.svg?raw';
 import cross from './icons/cross.svg?raw';
-import dev  from './icons/dev.svg?raw';
+import dev from './icons/dev.svg?raw';
 import home from './icons/home.svg?raw';
-import login  from './icons/login.svg?raw';
-import logout  from './icons/logout.svg?raw';
-import menu  from './icons/menu.svg?raw';
-import message  from './icons/message.svg?raw';
+import login from './icons/login.svg?raw';
+import logout from './icons/logout.svg?raw';
+import menu from './icons/menu.svg?raw';
+import message from './icons/message.svg?raw';
 import net from './icons/net.svg?raw';
-import notification  from './icons/notification.svg?raw';
-import post  from './icons/post.svg?raw';
-import remove  from './icons/remove.svg?raw';
+import notification from './icons/notification.svg?raw';
+import post from './icons/post.svg?raw';
+import remove from './icons/remove.svg?raw';
 import spinner from './icons/spinner.svg?raw';
-import telegram  from './icons/telegram.svg?raw';
+import telegram from './icons/telegram.svg?raw';
 
 export const ICONS_MAP = {
   about,

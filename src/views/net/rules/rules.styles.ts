@@ -8,7 +8,7 @@ export const useStyles = createUseStyles(
       alignItems: 'strech',
       paddingBottom: vars.gap.L,
       color: palette.add.main,
-      fontSize: vars.fontSize.M - 3,
+      fontSize: vars.fontSize.M - 4,
       '& p': {
         marginTop: vars.gap.L,
         width: '100%',
@@ -17,18 +17,12 @@ export const useStyles = createUseStyles(
         },
       },
       '& ul': {
-        listStyleType: 'disc',
         paddingLeft: vars.gap.L,
       },
       '& li': {
-        listStyleType: 'disc',
+        listStyleType: 'decimal',
       },
     },
-    button: {
-      width: '50%',
-      marginTop: vars.gap.XL,
-      alignSelf: 'center',
-    },
   }),
-  { name: 'About' },
+  { name: 'Rules' },
 );

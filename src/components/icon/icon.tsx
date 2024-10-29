@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import React, { FC, SyntheticEvent, memo, PropsWithChildren } from 'react';
 import clsx from 'clsx';
 import { useStyles } from './icon.styles';
@@ -23,7 +24,7 @@ export const Icon: FC<PropsWithChildren<IconProps>> = memo(
         {...restProps}
         className={clsx('icon', classes.root, className, { raw })}
         dangerouslySetInnerHTML={{ __html: ICONS_MAP[icon] }}
-      ></i>
+      />
     );
   },
 );

@@ -8,6 +8,7 @@ import { NetInvite } from '@views/net/invite/invite';
 import { NetIdIndex } from '@views/net/net.id/net.id.index';
 import { NetId } from '@views/net/net.id/net.id';
 import { NetGoal } from '@views/net/goal/goal';
+import { NetRules } from '@views/net/rules/rules';
 import { NetInfo } from '@views/net/info/info';
 import { NetChat } from '@views/chat/net.chat';
 import { NetBoard } from '@views/net/board/board';
@@ -25,6 +26,7 @@ export const NetRouter = (
     <Route path={NET_ID.INDEX} element={<NetIdIndex />}>
       <Route path="" element={<NetId />} />
       <Route path={NET_ID.GOAL} element={<NetGoal />} />
+      <Route path={NET_ID.RULES} element={<NetRules />} />
       <Route path={NET_ID.INFO} element={<NetInfo />} />
       <Route path={NET_ID.CREATE} element={<NetCreate />} />
       <Route path={NET_ID.LEAVE} element={<NetLeave />} />
