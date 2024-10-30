@@ -1,4 +1,5 @@
 import { useCallback, useMemo } from 'react';
+import { useLocation } from 'react-router-dom';
 import { USER_STATUS_MAP } from '@server/types/types';
 import { MENU_ITEMS, MENU_NET_ITEMS } from '@constants/menu.constants';
 import { RoutesMap } from '@constants/router.constants';
@@ -16,6 +17,7 @@ export const useMenuItems = () => {
   const [user, userStatus] = useUser();
   const [net, nets] = useNet();
   const eventsCount = useEventsCount();
+  const location = useLocation();
 
   const { name = ROOT_TITLE, net_id: netId } = net || {};
 
@@ -50,6 +52,7 @@ export const useMenuItems = () => {
   return {
     name,
     href,
+    showBackButton: href !== location.pathname,
     netMenuItems,
     eventsCount,
     openMainMenu: showMainMenu && openMainMenu,
