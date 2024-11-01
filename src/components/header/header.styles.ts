@@ -18,12 +18,6 @@ export const useStyles = createUseStyles(
       height: 'auto',
       padding: 0,
       color: palette.font.light,
-      '& + button': {
-        marginLeft: vars.gap.M,
-      },
-      '&.back': {
-        color: palette.add.extraLight,
-      },
     },
     hidden: {
       display: 'none',

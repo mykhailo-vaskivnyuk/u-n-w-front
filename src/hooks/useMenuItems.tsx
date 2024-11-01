@@ -11,13 +11,13 @@ import { useUser } from '@hooks/useUser';
 import { useNet } from '@hooks/useNet';
 import { useEventsCount } from './useEventsCount';
 
-const { NET_ID } = RoutesMap.NET;
+const { ROOT, ACCOUNT, NET } = RoutesMap;
 
 export const useMenuItems = () => {
   const [user, userStatus] = useUser();
   const [net, nets] = useNet();
   const eventsCount = useEventsCount();
-  const location = useLocation();
+  const { pathname } = useLocation();
 
   const { name = ROOT_TITLE, net_id: netId } = net || {};
 
@@ -36,7 +36,7 @@ export const useMenuItems = () => {
   }, [nets, user, eventsCount]);
 
   const href = useMemo(
-    () => (netId ? makeDynamicPathname(NET_ID.INDEX, netId!) : RoutesMap.ROOT),
+    () => (netId ? makeDynamicPathname(NET.NET_ID.INDEX, netId!) : ROOT),
     [netId],
   );
 
@@ -45,6 +45,7 @@ export const useMenuItems = () => {
     [mainMenuItems],
   );
   const openNetMenu = useCallback(() => modalService.openMenu(netMenuItems), [netMenuItems]);
+  const showBackBtn = href !== pathname && pathname !== ACCOUNT.LOGIN;
 
   const showMainMenu = USER_STATUS_MAP[userStatus] < USER_STATUS_MAP.INVITING || undefined;
   const showNetMenu = !showMainMenu || undefined;
@@ -52,10 +53,10 @@ export const useMenuItems = () => {
   return {
     name,
     href,
-    showBackButton: href !== location.pathname,
     netMenuItems,
     eventsCount,
     openMainMenu: showMainMenu && openMainMenu,
     openNetMenu: showNetMenu && openNetMenu,
+    showBackBtn,
   };
 };
