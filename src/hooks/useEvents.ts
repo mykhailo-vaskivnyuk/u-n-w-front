@@ -8,17 +8,17 @@ export const useEvents = (netView?: NetViewKeys) => {
   const [events, setEvents] = useState<IEvents>([]);
   const currentEvent = useRef<IEvent | null>(null);
   const { net } = app.getState();
-  const { net_id: netId = 0 } = net || {};
+  const netId = netView ? net?.net_id : 0;
 
   const handleEvents = useCallback(
     (eventsMap: Map<number, EventStore>) => {
-      if (netView && !netId) return;
+      if (!netId) return;
       const eventsStore = eventsMap.get(netId);
       if (!eventsStore) return;
       const showEvents = eventsStore.state.events;
       setEvents(showEvents);
     },
-    [netId, netView],
+    [netId],
   );
 
   useEffect(() => {

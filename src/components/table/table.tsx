@@ -8,6 +8,7 @@ export const Table: FC<TableProps> = ({ items }) => {
   const { root, row } = useStyles();
 
   const itemsJsx = items.map(({ title, value }, i) => (
+    // eslint-disable-next-line react/no-array-index-key
     <div key={i} className={row}>
       <div>{title}</div>
       <div>{value}</div>

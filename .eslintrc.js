@@ -1,24 +1,17 @@
 module.exports = {
   extends: [
-    'airbnb', /* includes [ react, react-a11y, eslint-config-airbnb-base: [ 
-      best-practices, errors, node, style, variables, es6, imports, strict ]] */
-    'airbnb-typescript', /* overrides and extends [ eslint-config-airbnb-base: [ 
-      best-practices, errors, node, style, variables, es6, imports, strict ]] */
-    'airbnb/hooks', /* includes [ react-hooks ] */
-    'plugin:@typescript-eslint/recommended', /* implements additional rules for typescript linting */
+    'airbnb' /* includes [ react, react-a11y, eslint-config-airbnb-base: [ 
+      best-practices, errors, node, style, variables, es6, imports, strict ]] */,
+    'airbnb-typescript' /* overrides and extends [ eslint-config-airbnb-base: [ 
+      best-practices, errors, node, style, variables, es6, imports, strict ]] */,
+    'airbnb/hooks' /* includes [ react-hooks ] */,
+    'plugin:@typescript-eslint/recommended' /* implements additional rules for typescript linting */,
     // 'plugin:@typescript-eslint/recommended-requiring-type-checking', /* enhances typescript linting for type checking */
-    'plugin:prettier/recommended', /* extends [ eslint-config-prettier: [ 
+    'plugin:prettier/recommended' /* extends [ eslint-config-prettier: [ 
       prettier, @typescript-eslint, prettier/babel, prettier/flowtype, prettier/react, 
-      prettier/standard, prettier/unicorn, prettier/vue ]] */
+      prettier/standard, prettier/unicorn, prettier/vue ]] */,
   ],
-  plugins: [
-    'react', 
-    'react-hooks', 
-    'import', 
-    'jsx-a11y', 
-    'prettier', 
-    '@typescript-eslint'
-  ],
+  plugins: ['react', 'react-hooks', 'import', 'jsx-a11y', 'prettier', '@typescript-eslint'],
   env: {
     browser: true,
     node: true,
@@ -46,7 +39,7 @@ module.exports = {
         endOfLine: 'auto',
       },
     ],
-    "@typescript-eslint/lines-between-class-members": 'off',
+    '@typescript-eslint/lines-between-class-members': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
     'no-console': 'off',
     'react/prop-types': 'off',
