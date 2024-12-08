@@ -107,15 +107,15 @@ export const MENU_INSIDE_NET_ITEMS: IMenuItem[] = [
     icon: 'post',
     allowForUser: 'INSIDE_NET',
   },
+  {
+    label: 'Запити на вхід до спільноти',
+    href: RoutesMap.NET.NET_ID.WAITING,
+    icon: 'wait',
+    allowForUser: 'INSIDE_NET',
+  },
 ];
 
 export const MENU_TREE_ITEMS: IMenuItem[] = [
-  {
-    label: 'Запити на вхід до спільноти',
-    href: RoutesMap.NET.NET_ID.TREE.WAITING,
-    icon: 'account',
-    allowForUser: 'INSIDE_NET',
-  },
   {
     label: 'Інфо',
     href: RoutesMap.NET.NET_ID.TREE.INFO,

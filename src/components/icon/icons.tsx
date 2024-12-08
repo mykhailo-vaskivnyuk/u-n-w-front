@@ -19,6 +19,7 @@ import post from './icons/post.svg?raw';
 import remove from './icons/remove.svg?raw';
 import spinner from './icons/spinner.svg?raw';
 import telegram from './icons/telegram.svg?raw';
+import wait from './icons/wait.svg?raw';
 
 export const ICONS_MAP = {
   about,
@@ -42,6 +43,7 @@ export const ICONS_MAP = {
   remove,
   spinner,
   telegram,
+  wait,
 };
 
 export type ICONS = keyof typeof ICONS_MAP;

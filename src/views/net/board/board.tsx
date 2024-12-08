@@ -1,14 +1,14 @@
 /* eslint-disable react/no-danger */
 import React, { FC } from 'react';
-import { app } from '@client/app';
 import { NetBoardMenu } from '@components/menu/net.board.menu/net.board.menu';
+import { useNetBoardMessages } from '@hooks/useNetBoardMessages';
+import { useNetBoard } from '@hooks/useNetBoard';
 import { BoardMessage } from './board.message';
-import { useNetBoard } from '../../../hooks/useNetBoard';
 import { useStyles } from './board.styles';
 
 export const NetBoard: FC = () => {
   const { root } = useStyles();
-  const { boardMessages } = app.getState();
+  const boardMessages = useNetBoardMessages();
   const [handleFormOpen] = useNetBoard();
 
   const messagesJsx = boardMessages.map((v) => (
