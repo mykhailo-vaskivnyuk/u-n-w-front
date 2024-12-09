@@ -8,6 +8,7 @@ import board from './icons/board.svg?raw';
 import create from './icons/create.svg?raw';
 import cross from './icons/cross.svg?raw';
 import dev from './icons/dev.svg?raw';
+import goal from './icons/goal.svg?raw';
 import home from './icons/home.svg?raw';
 import login from './icons/login.svg?raw';
 import logout from './icons/logout.svg?raw';
@@ -17,6 +18,7 @@ import net from './icons/net.svg?raw';
 import notification from './icons/notification.svg?raw';
 import post from './icons/post.svg?raw';
 import remove from './icons/remove.svg?raw';
+import rules from './icons/rules.svg?raw';
 import spinner from './icons/spinner.svg?raw';
 import telegram from './icons/telegram.svg?raw';
 import wait from './icons/wait.svg?raw';
@@ -32,6 +34,7 @@ export const ICONS_MAP = {
   create,
   cross,
   dev,
+  goal,
   home,
   login,
   logout,
@@ -41,6 +44,7 @@ export const ICONS_MAP = {
   notification,
   post,
   remove,
+  rules,
   spinner,
   telegram,
   wait,

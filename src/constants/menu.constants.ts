@@ -37,7 +37,7 @@ export const MENU_ITEMS: IMenuItem[] = [
   {
     label: 'Запити на вхід',
     href: RoutesMap.ACCOUNT.WAIT.INDEX,
-    icon: 'home',
+    icon: 'wait',
     allowForUser: 'LOGGEDIN',
     forTg: false,
   },
@@ -68,13 +68,13 @@ export const MENU_INSIDE_NET_ITEMS: IMenuItem[] = [
   {
     label: 'Goal',
     href: RoutesMap.NET.NET_ID.GOAL,
-    icon: 'account',
+    icon: 'goal',
     allowForUser: 'INVITING',
   },
   {
     label: 'Правила',
     href: RoutesMap.NET.NET_ID.RULES,
-    icon: 'dev',
+    icon: 'rules',
     allowForUser: 'INVITING',
   },
   {
