@@ -12,7 +12,7 @@ export const useEvents = (netView?: NetViewKeys) => {
 
   const handleEvents = useCallback(
     (eventsMap: Map<number, EventStore>) => {
-      if (!netId) return;
+      if (netId === undefined) return;
       const eventsStore = eventsMap.get(netId);
       if (!eventsStore) return;
       const showEvents = eventsStore.state.events;
