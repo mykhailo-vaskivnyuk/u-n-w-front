@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { IconButton } from '@components/buttons/icon.button/icon.button';
-import { ICONS } from '@components/icon/icon';
 import { IWaitNets } from '@app/common/server/types/net.types';
 import { OmitNull } from '@app/common/server/types/common.types';
 import { useStyles } from './wait.item.styles';
@@ -19,7 +18,7 @@ export const WaitItem: FC<WaitItemProps> = (props) => {
       <IconButton
         key={netId}
         className={button}
-        icon={ICONS.remove}
+        icon="remove"
         iconPosition="right"
         classNameIcon={icon}
         onClick={() => onRemove(netId)}

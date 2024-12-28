@@ -1,0 +1,4 @@
+build
+src/app/local
+src/app/common/types.ts
+src/app/common/server

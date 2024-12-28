@@ -1,29 +1,26 @@
-import React, { FC, useEffect } from 'react';
-import { NetViewEnum } from '@server/types/types';
-import { vars } from '@styles/vars';
-import { useSwap } from '@hooks/useSwap';
-import { NetCircle } from '@views/net/net.view/net.circle';
-import { NetTree } from 'views/net/net.view/net.tree';
+import React, { FC, useCallback } from 'react';
+import clsx from 'clsx';
 import { app } from '@client/app';
+import { useSwap } from '@hooks/useSwap';
+import { useNetViewChange } from '@hooks/useNetViewChange';
+import { NetCircle } from '@views/net/net.view/net.circle';
+import { NetTree } from '@views/net/net.view/net.tree';
 import { useStyles } from './net.id.styles';
 
-const netViewStyle = {
-  tree: { left: 0 },
-  circle: { left: `calc(-100% - ${vars.gap.main}` },
-};
-const options = ['tree', 'circle'] as const;
-
 export const NetId: FC = () => {
-  const { netView: initialNetView } = app.getState();
   const { container, root } = useStyles();
-  const [netView, handlers] = useSwap<NetViewEnum>(options, initialNetView!);
-  const style = netViewStyle[netView];
+  const netView = useNetViewChange();
 
-  useEffect(() => app.net.setView(netView), [netView]);
+  const handleSwap = useCallback((value: boolean) => {
+    const view = value ? 'circle' : 'tree';
+    app.net.setView(view);
+  }, []);
+
+  const handlers = useSwap(handleSwap);
 
   return (
     <div className={container}>
-      <div className={root} style={style} {...handlers}>
+      <div className={clsx(root, netView === 'tree' ? 'tree' : 'circle')} {...handlers}>
         <NetTree />
         <NetCircle />
       </div>

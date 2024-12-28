@@ -1,6 +1,6 @@
-import { createUseStyles as makeStyles } from 'react-jss';
+import { createUseStyles } from 'react-jss';
 
-export const useStyles = makeStyles(
+export const useStyles = createUseStyles(
   {
     root: {
       width: 24,

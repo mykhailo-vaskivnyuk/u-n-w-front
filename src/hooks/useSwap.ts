@@ -1,12 +1,11 @@
-import { MouseEvent, TouchEvent, useCallback, useEffect, useRef, useState } from 'react';
+import { MouseEvent, TouchEvent, useCallback, useEffect, useRef } from 'react';
 
 const DIFF = 100;
 const isTouchEvent = (e: MouseEvent | TouchEvent): e is TouchEvent => {
   return 'changedTouches' in e;
 };
 
-export const useSwap = <T>(options: readonly [T, T], initialOption: T) => {
-  const [option, setOption] = useState<T>(initialOption);
+export const useSwap = (onSwap: (value: boolean) => void) => {
   const mousePosition = useRef<MouseEvent | TouchEvent | undefined>(undefined);
   const swapped = useRef(false);
   const element = useRef<HTMLDivElement>(null);
@@ -14,11 +13,11 @@ export const useSwap = <T>(options: readonly [T, T], initialOption: T) => {
   const defineSwap = useCallback(
     (xStart: number, xEnd: number, isMouseEvent = false) => {
       if (Math.abs(xStart - xEnd) < DIFF) return;
-      if (xStart - xEnd > DIFF) setOption(options[1]);
-      else if (xEnd - xStart > DIFF) setOption(options[0]);
+      if (xStart - xEnd > DIFF) onSwap(true);
+      else if (xEnd - xStart > DIFF) onSwap(false);
       isMouseEvent && (swapped.current = true);
     },
-    [options],
+    [onSwap],
   );
 
   const onMouseDown = useCallback((e: MouseEvent | TouchEvent) => {
@@ -66,5 +65,5 @@ export const useSwap = <T>(options: readonly [T, T], initialOption: T) => {
     element.current.addEventListener('click', onClick, { capture: false });
   }, [onClick]);
 
-  return [option, { onMouseDown, onMouseUp, onTouchStart, onTouchEnd, ref: element }] as const;
+  return { onMouseDown, onMouseUp, onTouchStart, onTouchEnd, ref: element };
 };

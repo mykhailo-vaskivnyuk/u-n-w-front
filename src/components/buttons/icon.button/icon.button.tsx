@@ -1,7 +1,8 @@
 import React, { FC, memo, PropsWithChildren } from 'react';
 import { NavLink } from 'react-router-dom';
 import clsx from 'clsx';
-import { Icon, ICONS } from '@components/icon/icon';
+import { Icon } from '@components/icon/icon';
+import { ICONS } from '@components/icon/icons';
 import { useStyles } from './icon.button.styles';
 
 interface IconButtonProps {

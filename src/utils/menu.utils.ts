@@ -2,7 +2,7 @@ import * as T from '@server/types/types';
 import { IMenuItem } from '@components/menu/types';
 import { RoutesMap } from '@constants/router.constants';
 import { IS_DEV } from '@constants/constants';
-import { ICONS } from '@components/icon/icon';
+import { ICONS } from '@components/icon/icons';
 import { app } from '@client/app';
 import { makeDynamicPathname } from './format.utils';
 
@@ -66,7 +66,7 @@ export const createNetMenuItems = (nets: T.INetsResponse, events: number[], icon
       label: name,
       href: makeDynamicPathname(NET_ID.INDEX, net_id),
       end: false,
-      icon: icon || ICONS.home,
+      icon: icon || 'home',
       allowForUser: 'LOGGEDIN',
       notification: Boolean(events[i]),
     };

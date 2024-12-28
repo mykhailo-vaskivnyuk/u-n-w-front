@@ -1,7 +1,7 @@
 import { createUseStyles } from 'react-jss';
 
 export const useStyles = createUseStyles(
-  ({ palette, vars, mixins }) => ({
+  ({ palette, vars }) => ({
     root: {
       display: 'flex',
       justifyContent: 'space-between',

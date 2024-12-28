@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Icon, ICONS } from '@components/icon/icon';
+import { Icon } from '@components/icon/icon';
 import { AppStatus } from '@client/constants';
 import { useAppStatus } from '@hooks/useAppStatus';
 import { useStyles } from './loading.styles';
@@ -28,7 +28,7 @@ export const Loading: FC = () => {
 
   return (
     <div className={root}>
-      <Icon icon={ICONS.spinner} className={icon} />
+      <Icon icon="spinner" className={icon} />
     </div>
   );
 };

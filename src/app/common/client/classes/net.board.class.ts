@@ -17,6 +17,7 @@ export class NetBoard {
 
   private setBoardMessages(messages: ITableBoardMessages[] = []) {
     this.boardMessages = messages;
+    this.app.emit('board', this.boardMessages);
   }
 
   async persist(args: Omit<IBoardSaveParams, 'node_id'>) {
@@ -29,13 +30,18 @@ export class NetBoard {
       if (!message) {
         if (!messageId) success = true;
         else {
-          success = await this.app.api.net.board
-            .remove({ message_id: messageId, node_id: nodeId });
+          success = await this.app.api.net.board.remove({
+            message_id: messageId,
+            node_id: nodeId,
+          });
         }
       } else {
-        success = await this.app.api.net.board
-          .save({ ...args, node_id: nodeId });
+        success = await this.app.api.net.board.save({
+          ...args,
+          node_id: nodeId,
+        });
       }
+      this.read();
       this.app.setStatus(AppStatus.READY);
       return success;
     } catch (e: any) {

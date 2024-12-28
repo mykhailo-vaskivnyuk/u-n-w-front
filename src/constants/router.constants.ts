@@ -24,11 +24,13 @@ export const RelativeRoutesMap = {
     NET_ID: {
       INDEX: ':net_id',
       GOAL: 'goal',
+      RULES: 'rules',
       INFO: 'info',
+      BOARD: 'board',
       CREATE: 'create',
       LEAVE: 'leave',
       CHAT: 'chat',
-      BOARD: 'board',
+      WAITING: 'waiting',
       CIRCLE: {
         INDEX: 'circle',
         INFO: 'info',
@@ -43,7 +45,6 @@ export const RelativeRoutesMap = {
         USER: 'user',
         CHAT: 'chat',
         INFO: 'info',
-        WAITING: 'waiting',
         NODE_ID: {
           INDEX: ':node_id',
           INVITE: 'invite',

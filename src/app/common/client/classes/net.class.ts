@@ -60,8 +60,7 @@ export class Net {
   findMember(nodeId: number) {
     const { netView } = this.app.getState();
     const { [netView!]: netViewData } = this.app.getState();
-    const memberPosition = netViewData
-      .findIndex((item) => item.node_id === nodeId);
+    const memberPosition = netViewData.findIndex((item) => item.node_id === nodeId);
     const member = netViewData[memberPosition];
     this.member = new Member(member, this.app, this as any);
     if (!member) this.app.setError(new HttpResponseError(404));
@@ -71,9 +70,9 @@ export class Net {
     if (this.userNet === userNet) return;
     this.userNet = userNet;
     if (userNet) {
-      await this.getUserData();
+      await this.getUserData(true);
       const { confirmed } = this.userNetData!;
-      confirmed && await this.board.read();
+      confirmed && (await this.board.read());
       await this.getCircle();
       await this.getTree();
       if (this.member) this.findMember(this.member.getMember().node_id);
@@ -89,15 +88,14 @@ export class Net {
     this.app.emit('net', userNet);
   }
 
-  private setUserNetData(
-    userNetData: T.IUserNetDataResponse | null = null,
-  ) {
+  private setUserNetData(userNetData: T.IUserNetDataResponse | null = null) {
     if (this.userNetData === userNetData) return;
     this.userNetData = userNetData;
   }
 
   setView(netView?: T.NetViewEnum) {
     this.netView = netView;
+    this.app.emit('netView', this.netView);
   }
 
   private setCircle(circle: IMember[] = []) {
@@ -131,7 +129,7 @@ export class Net {
 
   async enter(net_id: number, inChain = false) {
     try {
-      !inChain && await this.app.setStatus(AppStatus.LOADING);
+      !inChain && (await this.app.setStatus(AppStatus.LOADING));
       const net = await this.app.api.net.enter({ net_id });
       await this.setNet(net);
       !inChain && this.app.setStatus(AppStatus.READY);
@@ -146,7 +144,7 @@ export class Net {
 
   async getUserData(inChain = false) {
     try {
-      !inChain && await this.app.setStatus(AppStatus.LOADING);
+      !inChain && (await this.app.setStatus(AppStatus.LOADING));
       const net_id = this.userNet!.net_id;
       const userNetData = await this.app.api.user.net.getData({ net_id });
       await this.setUserNetData(userNetData);
@@ -193,8 +191,7 @@ export class Net {
     const result = await this.app.api.net.getCircle(net!);
     const circle: IMember[] = result.map((member, memberPosition) => {
       const memberStatus = getMemberStatus(member);
-      const memberName = this.memberActions
-        .getName('circle', member, memberPosition);
+      const memberName = this.memberActions.getName('circle', member, memberPosition);
       return { ...member, member_name: memberName, memberStatus };
     });
     this.setCircle(circle);
@@ -205,8 +202,7 @@ export class Net {
     const result = await this.app.api.net.getTree(net!);
     const tree: IMember[] = result.map((member, memberPosition) => {
       const memberStatus = getMemberStatus(member);
-      const memberName = this.memberActions
-        .getName('tree', member, memberPosition);
+      const memberName = this.memberActions.getName('tree', member, memberPosition);
       return { ...member, member_name: memberName, memberStatus };
     });
     this.setTree(tree);

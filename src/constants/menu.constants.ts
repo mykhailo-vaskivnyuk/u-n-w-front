@@ -1,57 +1,56 @@
 import { RoutesMap } from '@constants/router.constants';
 import { IMenuItem } from '@components/menu/types';
-import { ICONS } from '@components/icon/icon';
 
 export const MENU_ITEMS: IMenuItem[] = [
   {
     label: 'Про You & World',
     href: RoutesMap.ABOUT,
-    icon: ICONS.about,
+    icon: 'about',
     allowForUser: 'NOT_LOGGEDIN',
   },
   {
     label: 'Авторизуватись',
     href: RoutesMap.ACCOUNT.LOGIN,
-    icon: ICONS.login,
+    icon: 'login',
     allowForUser: ['NOT_LOGGEDIN'],
   },
   {
     label: 'Акаунт',
     href: RoutesMap.ACCOUNT.INDEX,
-    icon: ICONS.account,
+    icon: 'account',
     allowForUser: 'NOT_CONFIRMED',
   },
   {
     label: 'Вийти',
     href: RoutesMap.ACCOUNT.LOGOUT,
-    icon: ICONS.logout,
+    icon: 'logout',
     allowForUser: 'NOT_CONFIRMED',
     forTg: false,
   },
   {
     label: 'Месенджер',
     href: RoutesMap.ACCOUNT.MESSENGER,
-    icon: ICONS.telegram,
+    icon: 'telegram',
     allowForUser: 'LOGGEDIN',
     forTg: false,
   },
   {
     label: 'Запити на вхід',
     href: RoutesMap.ACCOUNT.WAIT.INDEX,
-    icon: ICONS.home,
+    icon: 'wait',
     allowForUser: 'LOGGEDIN',
     forTg: false,
   },
   {
     label: 'Палітра',
     href: RoutesMap.PALETTE,
-    icon: ICONS.dev,
+    icon: 'dev',
     allowForUser: 'DEV',
   },
   {
     label: 'Шаблон email',
     href: RoutesMap.MAIL,
-    icon: ICONS.dev,
+    icon: 'dev',
     allowForUser: 'DEV',
   },
 ];
@@ -60,7 +59,7 @@ export const MENU_NET_ITEMS: IMenuItem[] = [
   {
     label: 'Створити спільноту',
     href: RoutesMap.NET.CREATE,
-    icon: ICONS.create,
+    icon: 'create',
     allowForUser: ['LOGGEDIN'],
   },
 ];
@@ -69,58 +68,64 @@ export const MENU_INSIDE_NET_ITEMS: IMenuItem[] = [
   {
     label: 'Goal',
     href: RoutesMap.NET.NET_ID.GOAL,
-    icon: ICONS.account,
+    icon: 'goal',
+    allowForUser: 'INVITING',
+  },
+  {
+    label: 'Правила',
+    href: RoutesMap.NET.NET_ID.RULES,
+    icon: 'rules',
     allowForUser: 'INVITING',
   },
   {
     label: 'Інфо',
     href: RoutesMap.NET.NET_ID.INFO,
-    icon: ICONS.about,
-    allowForUser: ['INSIDE_NET'],
+    icon: 'about',
+    allowForUser: 'INSIDE_NET',
   },
   {
     label: 'Board',
     href: RoutesMap.NET.NET_ID.BOARD,
-    icon: ICONS.board,
-    allowForUser: ['INSIDE_NET'],
+    icon: 'board',
+    allowForUser: 'INSIDE_NET',
   },
   {
     label: 'Створити спільноту',
     href: RoutesMap.NET.NET_ID.CREATE,
-    icon: ICONS.create,
+    icon: 'create',
     allowForUser: 'INSIDE_NET',
   },
   {
     label: 'Покинути назавжди',
     href: RoutesMap.NET.NET_ID.LEAVE,
-    icon: ICONS.remove,
+    icon: 'remove',
     allowForUser: 'INVITING',
   },
   {
     label: 'Чат',
     href: RoutesMap.NET.NET_ID.CHAT,
-    icon: ICONS.post,
-    allowForUser: ['INSIDE_NET'],
+    icon: 'post',
+    allowForUser: 'INSIDE_NET',
+  },
+  {
+    label: 'Запити на вхід до спільноти',
+    href: RoutesMap.NET.NET_ID.WAITING,
+    icon: 'wait',
+    allowForUser: 'INSIDE_NET',
   },
 ];
 
 export const MENU_TREE_ITEMS: IMenuItem[] = [
   {
-    label: 'Запити на вхід до спільноти',
-    href: RoutesMap.NET.NET_ID.TREE.WAITING,
-    icon: ICONS.account,
-    allowForUser: 'INSIDE_NET',
-  },
-  {
     label: 'Інфо',
     href: RoutesMap.NET.NET_ID.TREE.INFO,
-    icon: ICONS.about,
+    icon: 'about',
     allowForUser: 'INSIDE_NET',
   },
   {
     label: 'Чат',
     href: RoutesMap.NET.NET_ID.TREE.CHAT,
-    icon: ICONS.post,
+    icon: 'post',
     allowForUser: 'INSIDE_NET',
   },
 ];
@@ -129,13 +134,13 @@ export const MENU_CIRCLE_ITEMS: IMenuItem[] = [
   {
     label: 'Інфо',
     href: RoutesMap.NET.NET_ID.CIRCLE.INFO,
-    icon: ICONS.about,
+    icon: 'about',
     allowForUser: 'INSIDE_NET',
   },
   {
     label: 'Чат',
     href: RoutesMap.NET.NET_ID.CIRCLE.CHAT,
-    icon: ICONS.post,
+    icon: 'post',
     allowForUser: 'INSIDE_NET',
   },
 ];
@@ -144,7 +149,7 @@ export const MENU_BOARD_ITEMS: IMenuItem[] = [
   {
     label: '',
     href: '',
-    icon: ICONS.message,
+    icon: 'message',
     allowForUser: 'INSIDE_NET',
   },
 ];

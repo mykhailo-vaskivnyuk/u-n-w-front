@@ -14,7 +14,13 @@ export const useStyles = createUseStyles(
       gridTemplateRows: '1fr',
       gap: vars.gap.main,
       position: 'relative',
-      transition: `${vars.transition.L} left ease-in`,
+      transition: `${vars.transition.normal} left ease-in`,
+      '&.tree': {
+        left: 0,
+      },
+      '&.circle': {
+        left: `calc(-100% - ${vars.gap.main})`,
+      },
     },
   }),
   { name: 'NetId' },

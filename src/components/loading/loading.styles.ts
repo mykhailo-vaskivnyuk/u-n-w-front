@@ -21,7 +21,7 @@ export const useStyles = createUseStyles(
       animationIterationCount: 'infinite',
       animationTimingFunction: 'linear',
       animationDuration: vars.transition.XXL,
-      '& path:first-child': {
+      '& g:first-child': {
         color: palette.font.second,
       },
     },

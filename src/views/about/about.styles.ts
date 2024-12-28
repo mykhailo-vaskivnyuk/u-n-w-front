@@ -5,35 +5,29 @@ export const useStyles = createUseStyles(
     root: {
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center',
-      paddingBottom: vars.gap.XL,
+      alignItems: 'strech',
+      paddingBottom: vars.gap.L,
+      color: palette.add.main,
+      fontSize: vars.fontSize.M - 3,
       '& p': {
-        color: palette.first.main,
         marginTop: vars.gap.L,
         width: '100%',
-        fontSize: vars.fontSize.M,
+        '&:first-child': {
+          marginTop: 0,
+        },
       },
       '& ul': {
         listStyleType: 'disc',
         paddingLeft: vars.gap.L,
-        color: palette.first.main,
-        fontSize: vars.fontSize.M,
       },
       '& li': {
         listStyleType: 'disc',
       },
     },
-    title: {
-      fontSize: vars.fontSize.XXL,
-      fontWeight: vars.fontWeight.bold,
-      color: palette.font.second,
-      '& + p': {
-        marginTop: vars.gap.XL,
-      },
-    },
     button: {
       width: '50%',
       marginTop: vars.gap.XL,
+      alignSelf: 'center',
     },
   }),
   { name: 'About' },

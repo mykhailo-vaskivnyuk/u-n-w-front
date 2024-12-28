@@ -17,7 +17,7 @@ export const useStyles = createUseStyles(
       display: 'none',
       '&.dislike': {
         color: palette.font.light,
-        background: palette.dark.main,
+        background: palette.first.dark,
       },
     },
     [MEMBER_STATUS_ENUM.ACTIVE]: {
