@@ -1,10 +1,9 @@
 import { Store } from '../store/store';
-import { ServiceErrorClass } from '../error/service.error';
 import { IPaginationState } from './pagination.types';
 import { PAGINATION_INITIAL_STATE } from './pagination.constants';
 
 export class Pagination extends Store<IPaginationState> {
-  constructor(public Error: ServiceErrorClass<any>) {
+  constructor(public Error: Store['Error']) {
     super(PAGINATION_INITIAL_STATE, Error);
     this.setTotal = this.setTotal.bind(this);
     this.setLimit = this.setLimit.bind(this);
@@ -12,26 +11,29 @@ export class Pagination extends Store<IPaginationState> {
     this.prevPage = this.prevPage.bind(this);
     this.toFirstPage = this.toFirstPage.bind(this);
     this.toLastPage = this.toLastPage.bind(this);
-    this.reset = this.reset.bind(this);
   }
 
   setState(state: Partial<IPaginationState>) {
-    this.$state = Object.assign(this.$state, state);
+    Object.assign(this.$state, state);
     const params = {} as IPaginationState;
     params.page = this.getPage();
     params.pageCount = this.getPageCount();
     params.range = this.getRange();
     params.isFirstPage = this.isFirstPage();
     params.isLastPage = this.isLastPage();
-    Object.assign(this.$state, params);
-    super.setState(this.$state);
+    super.setState(params);
   }
 
   setTotal(total: number) {
-    this.setState({ total });
-    const { limit } = this.$state;
-    const toPrevPage = total === limit * (this.getPage() - 1);
-    toPrevPage && this.prevPage();
+    const { offset, limit } = this.$state;
+    if (!total) {
+      this.setState({ total: 0, offset: 0 });
+    } else if (offset >= total) {
+      const newOffset = Math.ceil(total / limit) * limit - limit;
+      this.setState({ total, offset: newOffset });
+    } else {
+      this.setState({ total });
+    }
   }
 
   setLimit(limit: number) {
@@ -75,18 +77,9 @@ export class Pagination extends Store<IPaginationState> {
     this.setState({ offset });
   }
 
-  reset() {
-    Object.assign(this.$state, {
-      offset: 0,
-      page: 1,
-      range: { from: 0, to: this.$state.limit },
-      isFirstPage: true,
-    });
-  }
-
   private getPage() {
-    const { offset, limit } = this.$state;
-    return offset / limit + 1;
+    const { offset, limit, total } = this.$state;
+    return total && offset / limit + 1;
   }
 
   private getPageCount() {

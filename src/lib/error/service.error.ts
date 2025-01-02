@@ -1,11 +1,8 @@
-/* eslint-disable no-console */
 import { ErrorKey } from './error.types';
 import { ErrorClass } from './error';
 
-export const createServiceErrorClass = <T extends string>(ParentErrorClass: ErrorClass<any>) => {
+export const createServiceErrorClass = <T extends string>(ParentErrorClass: ErrorClass) => {
   return class ServiceError extends ParentErrorClass {
-    key: ErrorKey<T>;
-
     static from(e: unknown, key: ErrorKey<T> = 'UNKNOWN') {
       console.log(key, e);
       if (e instanceof ServiceError) {

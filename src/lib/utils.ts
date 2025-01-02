@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 export const isChanged = <T extends object>(keys: (keyof T)[], first: T | undefined, second: T) => {
   if (!keys.length || !first) {
     return true;
@@ -27,4 +26,10 @@ export const toConsole = (instance: object, ...args: any[]) => {
     log = args.shift().name;
   }
   console.log('%c %s %c %s', STYLE.whiteBlack, instanceOf, STYLE.grayOrange, log, ...args);
+};
+
+export const delay = (timeout: number) => {
+  return new Promise((rv) => {
+    setTimeout(rv, timeout);
+  });
 };

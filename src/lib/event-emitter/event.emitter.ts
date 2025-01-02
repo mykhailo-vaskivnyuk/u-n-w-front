@@ -3,7 +3,11 @@ export class EventEmitter {
 
   on(event: string, cb: (data: any) => void) {
     const events = this.events[event];
-    events ? events.push(cb) : (this.events[event] = [cb]);
+    if (events) {
+      events.push(cb);
+    } else {
+      this.events[event] = [cb];
+    }
     return () => this.off(event, cb);
   }
 

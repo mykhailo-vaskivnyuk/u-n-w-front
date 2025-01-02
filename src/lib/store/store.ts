@@ -3,7 +3,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { EventEmitter } from '../event-emitter/event.emitter';
-import { ErrorClass, ErrorInstance } from '../error/error';
+import { createErrorClass, ErrorClass, ErrorInstance } from '../error/error';
 import { ServiceErrorClass, ServiceErrorInstance } from '../error/service.error';
 import { isChanged, toConsole } from '../utils';
 import { IStatusProps, IFullState, StoreStatusKey } from './store.types';
@@ -13,8 +13,10 @@ export class Store<
   StatusKey extends string = string,
   ErrorKey extends string = string,
   FullState extends IFullState<State, StatusKey, ErrorKey> = IFullState<State, StatusKey, ErrorKey>,
-> extends EventEmitter {
+> {
   protected $state: State;
+
+  protected events = new EventEmitter();
 
   protected loading = false;
 
@@ -24,14 +26,13 @@ export class Store<
 
   protected ac: AbortController | null = null;
 
-  protected timer?: NodeJS.Timeout;
+  protected timer?: number;
 
   constructor(
     protected initialState: State,
-    public Error: ErrorClass<ErrorKey> | ServiceErrorClass<ErrorKey>,
+    public Error: ErrorClass<ErrorKey> | ServiceErrorClass<ErrorKey> = createErrorClass<ErrorKey>(),
     protected initialStatus: StoreStatusKey<StatusKey> = 'READY',
   ) {
-    super();
     this.$state = { ...this.initialState };
     this.status = initialStatus;
   }
@@ -44,7 +45,7 @@ export class Store<
     return { ...this.$state, ...this.statusProps } as FullState;
   }
 
-  private get statusProps() {
+  protected get statusProps() {
     const { loading, status, error } = this;
     return { loading, status, error };
   }
@@ -64,12 +65,10 @@ export class Store<
       this.error = error;
       statusChanged = true;
     }
-    if (Object.keys(otherProps)) {
-      this.$state = Object.assign(this.$state, otherProps);
-      this.emit('state', this.$state);
-    }
+    Object.assign(this.$state, otherProps);
+    this.events.emit('state', this.state);
     if (statusChanged) {
-      this.emit('status', this.statusProps);
+      this.events.emit('status', this.statusProps);
     }
   }
 
@@ -93,21 +92,20 @@ export class Store<
   ) {
     let curState = this.state;
 
-    const handler = (state: State) => {
-      const newState = { ...state, ...this.statusProps } as FullState;
+    const handler = (newState: FullState) => {
       const changed = isChanged(keys, curState, newState);
       curState = newState;
-      changed && cb(curState);
+      if (changed) cb(curState);
     };
 
-    const off = this.on('state', handler);
+    const off = this.events.on('state', handler);
     as?.addEventListener('abort', off);
-    emitStateOnInit && cb(curState);
+    if (emitStateOnInit) cb(curState);
 
     return off;
   }
 
-  useState(keys: (keyof FullState)[] = [], ...args: any[]) {
+  useState(keys: (keyof FullState)[] = [], ...args: unknown[]) {
     const [state, setState] = useState(() => this.state);
 
     this.debug(...args);
@@ -119,7 +117,7 @@ export class Store<
     return state;
   }
 
-  useStatus(keys: (keyof IStatusProps<StatusKey, ErrorKey>)[] = [], ...args: any[]) {
+  useStatus(keys: (keyof IStatusProps<StatusKey, ErrorKey>)[] = [], ...args: unknown[]) {
     const [state, setState] = useState(() => this.statusProps);
 
     this.debug(...args);
@@ -130,10 +128,10 @@ export class Store<
       const handler = (newStatusProps: IStatusProps<StatusKey, ErrorKey>) => {
         const changed = isChanged(keys, curStatusProps, newStatusProps);
         curStatusProps = newStatusProps;
-        changed && setState(curStatusProps);
+        if (changed) setState(curStatusProps);
       };
 
-      return this.on('status', handler);
+      return this.events.on('status', handler);
     }, [...keys]);
 
     return state as IStatusProps<StatusKey, ErrorKey>;
@@ -144,9 +142,15 @@ export class Store<
     as?: AbortSignal,
     emitStateOnInit = false,
   ): AsyncGenerator<FullState> {
-    const eventQueue: FullState[] = [];
-    let resolve: ((state?: FullState) => void) | undefined;
+    let resolve: ((state: FullState) => void) | undefined;
+    const setResolve = (rv: (state: FullState) => void) => {
+      resolve = (state: FullState) => {
+        resolve = undefined;
+        rv(state);
+      };
+    };
 
+    const eventQueue: FullState[] = [];
     const onState = (newState: FullState) => {
       if (resolve) {
         resolve(newState);
@@ -154,22 +158,16 @@ export class Store<
         eventQueue.push(newState);
       }
     };
-
     const off = this.subscribe(onState, keys, as, emitStateOnInit);
+
+    let aborted = false;
     const onAbort = () => {
+      aborted = true;
       off();
-      resolve?.();
+      resolve?.({} as FullState);
     };
     this.ac?.signal.addEventListener('abort', onAbort);
     as?.addEventListener('abort', onAbort);
-    const aborted = () => as?.aborted || this.ac?.signal.aborted;
-
-    const setResolve = (rv: (state?: FullState) => void) => {
-      resolve = (state?: FullState) => {
-        resolve = undefined;
-        rv(state);
-      };
-    };
 
     do {
       let newState = eventQueue.shift();
@@ -177,22 +175,19 @@ export class Store<
         yield newState;
       } else {
         newState = await new Promise(setResolve);
-        if (!newState) {
-          return;
-        }
-        if (aborted()) {
+        if (aborted) {
           return;
         }
         yield newState;
       }
-    } while (!aborted());
+    } while (!aborted);
   }
 
   useLoading(startDelay?: number, stopDelay?: number) {
     const [value, setValue] = useState(false);
 
     useEffect(() => {
-      let timer: NodeJS.Timeout | undefined;
+      let timer: number | undefined;
       const start = () => {
         setValue(true);
         timer = undefined;
@@ -205,12 +200,12 @@ export class Store<
       let handleStop = stop;
       if (startDelay) {
         handleStart = () => {
-          timer = setTimeout(start, startDelay, true) as any;
+          timer = setTimeout(start, startDelay, true);
         };
       }
       if (stopDelay) {
         handleStop = () => {
-          timer = setTimeout(stop, stopDelay, false) as any;
+          timer = setTimeout(stop, stopDelay, false);
         };
       }
       let prevLoading = false;
@@ -222,11 +217,13 @@ export class Store<
         clearTimeout(timer);
         if (timer) {
           timer = undefined;
+        } else if (this.loading) {
+          handleStart();
         } else {
-          this.loading ? handleStart() : handleStop();
+          handleStop();
         }
       };
-      return this.on('status', handler);
+      return this.events.on('status', handler);
     }, [startDelay, stopDelay]);
 
     return value;
@@ -237,7 +234,7 @@ export class Store<
     try {
       const stateSerialized = localStorage.getItem(key);
       return JSON.parse(stateSerialized || '{}');
-    } catch (e) {
+    } catch {
       return {} as FullState;
     }
   }
@@ -248,15 +245,16 @@ export class Store<
       const stateSerialized = JSON.stringify(this.state);
       localStorage.setItem(key, stateSerialized);
     } catch (e) {
-      throw this.Error.from(e);
+      this.debug(e);
     }
   }
 
-  debug(...args: any[]) {
+  debug(...args: unknown[]) {
     toConsole(this, ...args);
   }
 
   abort() {
+    this.setState({ loading: false } as FullState);
     if (!this.ac) {
       return;
     }
@@ -271,18 +269,21 @@ export class Store<
   clear(withStatus?: StoreStatusKey<StatusKey>) {
     clearTimeout(this.timer);
     this.abort();
-    const loading = false;
     const status = withStatus || this.initialStatus;
     const error = null;
-    this.setState({ ...this.initialState, loading, error, status });
+    this.setState({ ...this.initialState, error, status });
+  }
+
+  set toDispose(cb: () => void) {
+    this.events.once('dispose', cb);
   }
 
   dispose() {
     this.setState({ status: 'DISPOSE' } as Partial<FullState>);
-    this.emit('dispose', {});
+    this.events.emit('dispose', {});
     clearTimeout(this.timer);
     this.ac?.abort();
-    this.offAll();
+    this.events.offAll();
     this.saveToStorage();
   }
 }
