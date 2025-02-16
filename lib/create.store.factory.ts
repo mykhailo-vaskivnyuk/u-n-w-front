@@ -1,17 +1,19 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from 'react';
 import { Store } from './store/store';
 
 const storage = new Map<{ new (...args: any[]): any }, Map<string, any>>();
 
 export const createStoreFactory = <T extends Store>(Class: { new (...args: any[]): T }) => {
-  let stores = storage.get(Class);
+  let stores = storage.get(Class)!;
   if (!stores) {
     stores = new Map<string, T>();
     storage.set(Class, stores);
   }
 
   const createStore = (key: string, ...params: ConstructorParameters<typeof Class>) => {
-    let s = stores.get(key);
+    let s = stores.get(key) as T | undefined;
     if (!s) {
       s = new Class(...params);
       stores.set(key, s);
@@ -23,7 +25,7 @@ export const createStoreFactory = <T extends Store>(Class: { new (...args: any[]
     const [store] = useState(() => createStore(key, ...params));
 
     useEffect(() => {
-      store.init();
+      store.init().catch(() => {});
       return () => {
         stores.delete(key);
         store.dispose();
@@ -33,8 +35,8 @@ export const createStoreFactory = <T extends Store>(Class: { new (...args: any[]
     return store;
   };
 
-  const getStore = (key: string): T => {
-    return stores.get(key);
+  const getStore = (key: string): T | undefined => {
+    return stores.get(key) as T | undefined;
   };
 
   return { useStore, getStore };
